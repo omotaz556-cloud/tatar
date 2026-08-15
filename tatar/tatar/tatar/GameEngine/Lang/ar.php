@@ -3389,3 +3389,1146 @@ tz_def('ANL_GREAT', 'الكبرى');
 tz_def('ANL_CULTURE_POINTS_NEEDED', 'نقاط الثقافة المطلوبة للقرى الإضافية');
 tz_def('PUBLIC_MAIN_GOALS', 'الأهداف الرئيسية:');
 tz_def('PUBLIC_TERMS_SHORT', 'الشروط');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// PANOU DE ADMINISTRARE - sabloane (lot 1: home, server_info, online, users,
+// search, ban, notregistered, inactive, report, msg)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADM_HELLO', 'مرحبًا');
+tz_def('ADM_TOTAL_PLAYERS', 'إجمالي اللاعبين');
+tz_def('ADM_ONLINE_NOW', 'متصل الآن');
+tz_def('ADM_LAST_5_MIN', 'آخر 5 دقائق');
+tz_def('ADM_VILLAGES', 'القرى');
+tz_def('ADM_GOLD_IN_GAME', 'الذهب في اللعبة');
+tz_def('ADM_ACTIVE_BANS', 'الحظر النشط');
+tz_def('ADM_MANAGE', 'إدارة');
+tz_def('ADM_LAST_REGISTRATION', 'آخر تسجيل');
+tz_def('ADM_SERVER_CLOCK', 'ساعة السيرفر');
+tz_def('ADM_SERVER_TIMELINE', 'الجدول الزمني للسيرفر');
+tz_def('ADM_START_DATE', 'تاريخ البدء:');
+tz_def('ADM_NATARS_C', 'التتار:');
+tz_def('ADM_ARTEFACTS_C', 'القطع الأثرية:');
+tz_def('ADM_WW_PLANS_C', 'مخططات عجيبة الدنيا:');
+tz_def('ADM_SERVER_AGE', 'عمر السيرفر:');
+tz_def('ADM_NEXT_EVENT', 'الحدث القادم:');
+tz_def('ADM_LAST_5_ACTIONS', 'آخر 5 إجراءات إدارية');
+tz_def('ADM_VIEW_FULL_LOG', 'عرض السجل الكامل ←');
+tz_def('ADM_QUICK_ACTIONS', 'إجراءات سريعة');
+tz_def('ADM_QA_SEARCH', '🔍 البحث عن لاعب');
+tz_def('ADM_QA_BAN', '🔨 إدارة الحظر');
+tz_def('ADM_QA_MAP', '🗺 الخريطة');
+tz_def('ADM_QA_NATARS', '🏰 التتار');
+tz_def('ADM_QA_ADD_USER', '👤 إضافة مستخدم');
+tz_def('ADM_QA_SERVER_INFO', '⚙ معلومات السيرفر');
+tz_def('ADM_WORLD_INFO', '🌍 معلومات العالم');
+tz_def('ADM_REGISTERED_PLAYERS', 'اللاعبون المسجلون');
+tz_def('ADM_ACTIVE_PLAYERS', 'اللاعبون النشطون');
+tz_def('ADM_PLAYERS_ONLINE', 'اللاعبون المتصلون');
+tz_def('ADM_PLAYERS_BANNED', 'اللاعبون المحظورون');
+tz_def('ADM_VILLAGES_SETTLED', 'القرى المؤسسة');
+tz_def('ADM_TOTAL_POPULATION', 'إجمالي السكان');
+tz_def('ADM_PLAYER_DISTRIBUTION', '👥 توزيع اللاعبين');
+tz_def('ADM_SERVER_ECONOMY', '💰 اقتصاد السيرفر');
+tz_def('ADM_TOTAL_GOLD', 'إجمالي الذهب');
+tz_def('ADM_AVG_GOLD', 'متوسط الذهب لكل لاعب');
+tz_def('ADM_SERVER_STARTED', 'بدأ السيرفر');
+tz_def('ADM_UPTIME', 'مدة التشغيل');
+tz_def('ADM_TROOPS_ON_SERVER', '⚔️ القوات في السيرفر (القرى + التعزيزات)');
+tz_def('ADM_ONLINE_USERS_H', '🟢 المستخدمون المتصلون');
+tz_def('ADM_NO_ONLINE_USERS', 'لا يوجد مستخدمون متصلون في آخر 5 دقائق');
+tz_def('ADM_USERS_H', '👥 المستخدمون');
+tz_def('ADM_ALL', 'الكل');
+tz_def('ADM_ADMINS', 'المدراء');
+tz_def('ADM_NORMAL', 'عادي');
+tz_def('ADM_BANNED', 'محظور');
+tz_def('ADM_ONLINE', 'متصل');
+tz_def('ADM_ID', 'المعرف');
+tz_def('ADM_USERNAME', 'اسم المستخدم');
+tz_def('ADM_EMAIL', 'البريد الإلكتروني');
+tz_def('ADM_ACCESS', 'الصلاحية');
+tz_def('ADM_TRIBE', 'القبيلة');
+tz_def('ADM_GOLD', 'الذهب');
+tz_def('ADM_LAST_ACTIVITY', 'آخر نشاط');
+tz_def('ADM_PREV', '« السابق');
+tz_def('ADM_NEXT', 'التالي »');
+tz_def('ADM_SEARCH_PH', 'بحث...');
+tz_def('ADM_ADMIN_SEARCH', 'بحث الإدارة');
+tz_def('ADM_SEARCH_HINT', 'أدخل الاسم أو المعرف أو البريد أو الآي بي...');
+tz_def('ADM_SEARCH_BTN', 'بحث');
+tz_def('ADM_BAN_MANAGEMENT', 'إدارة الحظر');
+tz_def('ADM_ACTIVE_USER_BANS', 'حظر المستخدمين النشط');
+tz_def('ADM_ACTIVE_IP_BANS', 'حظر الآي بي النشط');
+tz_def('ADM_HISTORY_50', 'السجل (آخر 50)');
+tz_def('ADM_ADD_NEW_BAN', 'إضافة حظر جديد');
+tz_def('ADM_FOREVER', 'دائم');
+tz_def('ADM_BAN_USER', 'حظر المستخدم');
+tz_def('ADM_BAN_IP_ADDRESS', 'حظر عنوان الآي بي');
+tz_def('ADM_BAN_IP', 'حظر الآي بي');
+tz_def('ADM_BAN_HISTORY', 'سجل الحظر');
+tz_def('ADM_USER_ID', 'معرف المستخدم');
+tz_def('ADM_IPV4_OR_IPV6', 'IPv4 أو IPv6');
+tz_def('ADM_NOT_ACTIVATED_H', '✉️ اللاعبون غير المفعّلين');
+tz_def('ADM_ACTIVATION_CODE', 'كود التفعيل');
+tz_def('ADM_ACT2', 'Act2');
+tz_def('ADM_TIME', 'الوقت');
+tz_def('ADM_SEARCH_USER_EMAIL', 'ابحث باسم المستخدم أو البريد الإلكتروني...');
+tz_def('ADM_INACTIVE_USERS', 'المستخدمون غير النشطين');
+tz_def('ADM_DELETE_L', 'حذف');
+tz_def('ADM_BACK_TO_REPORTS', '← العودة إلى التقارير');
+tz_def('ADM_REPORT', 'التقرير');
+tz_def('ADM_VIEW_ARROW', 'عرض ←');
+tz_def('ADM_BACK_TO_MESSAGES', '← العودة إلى الرسائل');
+tz_def('ADM_SENT_TO', 'أُرسلت إلى');
+tz_def('ADM_MESSAGE', 'الرسالة');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// PANOU DE ADMINISTRARE - sabloane (lot 2: config, editServerSet, editNewFunctions,
+// editCronSet, editPlusSet, editLogSet, editNewsboxSet, editExtraSet)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADM_CRON_AUTOMATION', 'الجدولة والأتمتة (Cron)');
+tz_def('ADM_AUTOMATION_SOURCE', 'مصدر الأتمتة');
+tz_def('ADM_WHERE_THE_GAME_TICK_BATTLES_MOVEMENTS_TRAINI', 'من أين تتم معالجة نبضة اللعبة (المعارك، التحركات، التدريب، البناء). عند تشغيل مهمة الـcron، لا تعود صفحات اللاعبين تحمل عبء المعالجة.');
+tz_def('ADM_LAST_CRON_TICK', 'آخر نبضة cron');
+tz_def('ADM_WRITTEN_BY_CRON_PHP_ON_EVERY_TICK_INTO_GAMEE', 'تُكتب بواسطة cron.php في كل نبضة داخل GameEngine/Prevention/cron_active.txt. أقل من 90 ثانية يعني أن الـcron يعمل.');
+tz_def('ADM_INVOCATION_LENGTH', 'مدة الاستدعاء');
+tz_def('ADM_CRON_LOOP_SECONDS_HOW_LONG_ONE_CRON_PHP_INVO', 'CRON_LOOP_SECONDS - مدة استمرار تشغيل استدعاء واحد لملف cron.php. المضيفات التي تسمح بتشغيل cron كل 5 دقائق فقط تحصل بهذه الطريقة على نبضة كل دقيقة. 0 = نبضة واحدة لكل استدعاء.');
+tz_def('ADM_TICK_INTERVAL', 'فاصل النبضة');
+tz_def('ADM_CRON_TICK_SECONDS_HOW_OFTEN_AUTOMATION_RUNS', 'CRON_TICK_SECONDS - عدد مرات تشغيل الأتمتة داخل استدعاء واحد. تتوقع الأتمتة نفسها أن تعمل كل 60 ثانية تقريبًا.');
+tz_def('ADM_HTTP_TRIGGER_KEY', 'مفتاح تفعيل HTTP');
+tz_def('ADM_CRON_KEY_ONLY_NEEDED_TO_CALL_CRON_PHP_OVER_H', 'CRON_KEY - مطلوب فقط لاستدعاء cron.php عبر HTTP (خدمة cron خارجية). تشغيله من مهمة cron الخاصة بالسيرفر نفسه لا يستخدم هذا المفتاح. يُنشأ تلقائيًا عند التثبيت.');
+tz_def('ADM_NOT_SET', 'غير مضبوط');
+tz_def('ADM_SHOW', 'إظهار');
+tz_def('ADM_HTTP_TRIGGER_URL', 'رابط تفعيل HTTP');
+tz_def('ADM_OPTIONAL_USE_THIS_WITH_AN_EXTERNAL_CRON_SERV', 'اختياري. استخدم هذا مع خدمة cron خارجية إذا كان المضيف لا يستطيع تشغيل مهمة cron محلية. استدعاء HTTP واحد = نبضة واحدة.');
+tz_def('ADM_HIDDEN_USE_SHOW_ABOVE', 'مخفي &ndash; استخدم "إظهار" أعلاه');
+tz_def('ADM_DATABASE_CLEANUP', 'تنظيف قاعدة البيانات');
+tz_def('ADM_AUTOMATION_TRIMS_TABLES_THAT_WOULD_OTHERWISE', 'تقوم الأتمتة بتقليم الجداول التي كانت ستنمو بلا حدود. لا يتم حذف التقارير المؤرشفة أبدًا. القيمة 0 تعطّل القاعدة.');
+tz_def('ADM_LAST_CLEANUP_RUN', 'آخر تشغيل للتنظيف');
+tz_def('ADM_CLEANUP_RUNS_ONCE_PER_HOUR_FROM_AUTOMATION_A', 'يعمل التنظيف مرة واحدة كل ساعة من الأتمتة ويحذف على دفعات، لذا فإن أول تشغيل على سيرفر قديم يلحق بالمتراكم عبر عدة مرات.');
+tz_def('ADM_CRON_JOB_COMMAND', 'أمر مهمة cron');
+tz_def('ADM_ADD_THIS_IN_CPANEL_CRON_JOBS_THE_PATH_IS_DET', 'أضف هذا في cPanel &rarr; Cron Jobs. المسار مكتشف تلقائيًا من هذا التثبيت.');
+tz_def('ADM_CURRENT_STATUS', 'الحالة الحالية');
+tz_def('ADM_WHEN_THE_CRON_JOB_IS_NOT_RUNNING_THE_GAME_ST', 'عندما لا تعمل مهمة cron، تستمر اللعبة في العمل: تقوم صفحات اللاعبين بمعالجة النبضة، تمامًا كما كان الحال قبل إدخال الـcron.');
+tz_def('ADM_ADD_THIS_IN_CPANEL_CRON_JOBS_WRITING_TO_CRON', 'أضف هذا في cPanel &rarr; Cron Jobs. الكتابة إلى cron.log بدلًا من /dev/null تتيح لك رؤية الأخطاء إذا فشل التشغيل.');
+tz_def('ADM_SETTINGS', 'الإعدادات');
+tz_def('ADM_INVOCATION_LENGTH_SECONDS', 'مدة الاستدعاء (ثوانٍ)');
+tz_def('ADM_0_A_SINGLE_TICK_PER_INVOCATION_MAXIMUM_3300', '0 = نبضة واحدة لكل استدعاء. الحد الأقصى 3300 (55 دقيقة).');
+tz_def('ADM_TICK_INTERVAL_SECONDS', 'فاصل النبضة (ثوانٍ)');
+tz_def('ADM_HOW_OFTEN_AUTOMATION_RUNS_INSIDE_ONE_INVOCAT', 'عدد مرات تشغيل الأتمتة داخل استدعاء واحد. آلية الحماية الخاصة بالأتمتة تتوقع نحو 60 ثانية تقريبًا؛ تخفيض القيمة يزيد الحمل غالبًا دون معالجة أي جديد.');
+tz_def('ADM_RECOMMENDED_60_ALLOWED_RANGE_15_900', 'الموصى به: 60. النطاق المسموح 15&ndash;900.');
+tz_def('ADM_ONLY_NEEDED_WHEN_CALLING_CRON_PHP_OVER_HTTP', 'مطلوب فقط عند استدعاء cron.php عبر HTTP (مثلًا من خدمة cron خارجية). مهمة cron الخاصة بالسيرفر لا تستخدمه. إعادة التوليد تُبطل أي رابط قمت بضبطه في مكان آخر.');
+tz_def('ADM_GENERATE_A_NEW_KEY_ON_SAVE', 'توليد مفتاح جديد عند الحفظ');
+tz_def('ADM_RUNS_FROM_AUTOMATION_ONCE_PER_HOUR_ROWS_ARE', 'يعمل من الأتمتة مرة واحدة كل ساعة. تُحذف الصفوف على دفعات، لذا فإن أول تشغيل على سيرفر قديم يلحق بالمتراكم عبر عدة مرات.');
+tz_def('ADM_BATTLE_REPORTS_DAYS', 'تقارير المعارك (أيام)');
+tz_def('ADM_UNARCHIVED_REPORTS_OLDER_THAN_THIS_ARE_DELET', 'يتم حذف التقارير غير المؤرشفة الأقدم من هذا. لا يتم لمس التقارير التي أرشفها اللاعب أبدًا. القيمة 0 تعطّل القاعدة.');
+tz_def('ADM_0_KEEP_FOREVER', '0 = الاحتفاظ للأبد.');
+tz_def('ADM_CHAT_MESSAGES_DAYS', 'رسائل الدردشة (أيام)');
+tz_def('ADM_THE_CHAT_WINDOW_ONLY_EVER_SHOWS_THE_LAST_13', 'نافذة الدردشة تعرض فقط آخر 13 رسالة لكل تحالف، لذا لا يُستخدم السجل الأقدم في أي مكان في اللعبة.');
+tz_def('ADM_DELETED_MESSAGES_DAYS', 'الرسائل المحذوفة (أيام)');
+tz_def('ADM_ONLY_MESSAGES_DELETED_BY_BOTH_THE_SENDER_AND', 'يتم إزالة الرسائل التي حذفها كل من المرسل والمستلم فقط &mdash; ولم تعد مرئية لأي أحد في اللعبة. معطّل افتراضيًا.');
+tz_def('ADM_0_DISABLED_DEFAULT', '0 = معطّل (الافتراضي).');
+tz_def('ADM_NEW_MECHANICS_AND_FUNCTIONS', 'آليات ووظائف جديدة');
+tz_def('ADM_HERO_BASE_REGENERATION', 'التعافي الأساسي للبطل');
+tz_def('ADM_HIT_POINTS_THE_HERO_RECOVERS_PER_DAY_INDEPEN', 'نقاط الحياة التي يستعيدها البطل يوميًا، بغض النظر عن خاصية التعافي والعناصر المجهزة. القيمة 0 تعطّلها.');
+tz_def('ADM_HP_DAY', 'نقاط حياة / يوم');
+tz_def('ADM_HERO_EXCHANGE_RATES', 'أسعار صرف البطل');
+tz_def('ADM_RATES_OF_THE_EXCHANGE_OFFICE_IN_THE_AUCTION', 'أسعار مكتب الصرف في دار المزاد. الفرق بين الاتجاهين هو هامش الدار، لذا فإن التداول ذهابًا وإيابًا يخسر قيمة بدلًا من خلقها.');
+tz_def('ADM_EXCHANGE_OFFICE_IN_THE_AUCTION_HOUSE_KEEP_TH', 'مكتب الصرف في دار المزاد. حافظ على أن تكون القيمة الثانية أعلى من الأولى، وإلا يمكن للاعبين التداول ذهابًا وإيابًا لخلق ذهب من العدم.');
+tz_def('ADM_1_GOLD', '1 ذهب &rarr;');
+tz_def('ADM_SILVER_1_GOLD', 'فضة &rarr; 1 ذهب');
+tz_def('ADM_HERO_RESOURCE_PRODUCTION', 'إنتاج البطل من الموارد');
+tz_def('ADM_OF_ONE_TYPE', 'من نوع واحد');
+tz_def('ADM_DISPLAY_OASIS_IN_PROFILE', 'عرض الواحة في الملف الشخصي');
+tz_def('ADM_ENABLE_DISABLE_THE_DISPLAY_OF_OASES_OF_EACH', 'تفعيل (تعطيل) عرض واحات كل قرية في الملف الشخصي للاعب');
+tz_def('ADM_ALLIANCE_INVITATION_MESSAGE', 'رسالة دعوة التحالف');
+tz_def('ADM_ENABLE_DISABLE_SENDING_AN_IN_GAME_MESSAGE_TO', 'تفعيل (تعطيل) إرسال رسالة داخل اللعبة للاعب عند دعوته للتحالف');
+tz_def('ADM_NEW_ALLIANCE_EMBASSY_MECHANICS', 'آليات جديدة للتحالف والسفارة');
+tz_def('ADM_NEW_FORUM_POST_MESSAGE', 'رسالة موضوع منتدى جديد');
+tz_def('ADM_ENABLE_DISABLE_FORUM_SUBSCRIPTION_MESSAGES', 'تفعيل (تعطيل) رسائل اشتراك المنتدى');
+tz_def('ADM_TRIBES_IMAGES_IN_PROFILE', 'صور القبائل في الملف الشخصي');
+tz_def('ADM_ENABLE_DISABLE_DISPLAYING_IMAGES_OF_TRIBES', 'تفعيل (تعطيل) عرض صور القبائل');
+tz_def('ADM_ENABLE_DISABLE_DISPLAYING_IMAGES_OF_TRIBES_W', 'تفعيل (تعطيل) عرض صور القبائل مع وصف في الملف الشخصي للاعب');
+tz_def('ADM_NEW_TRIBE_HUNS', 'قبيلة جديدة: الهون');
+tz_def('ADM_ENABLE_DISABLE_THE_HUNS_TRIBE', 'تفعيل (تعطيل) قبيلة الهون');
+tz_def('ADM_ENABLE_DISABLE_TRIBE_HUNS', 'تفعيل (تعطيل) قبيلة الهون');
+tz_def('ADM_NEW_TRIBE_EGYPTIANS', 'قبيلة جديدة: المصريون');
+tz_def('ADM_ENABLE_DISABLE_THE_EGYPTIANS_TRIBE', 'تفعيل (تعطيل) قبيلة المصريين');
+tz_def('ADM_ENABLE_DISABLE_TRIBE_EGYPTIANS', 'تفعيل (تعطيل) قبيلة المصريين');
+tz_def('ADM_NEW_TRIBE_SPARTANS', 'قبيلة جديدة: الإسبرطيون');
+tz_def('ADM_ENABLE_DISABLE_THE_SPARTANS_TRIBE', 'تفعيل (تعطيل) قبيلة الإسبرطيين');
+tz_def('ADM_ENABLE_DISABLE_TRIBE_SPARTANS', 'تفعيل (تعطيل) قبيلة الإسبرطيين');
+tz_def('ADM_NEW_TRIBE_VIKINGS', 'قبيلة جديدة: الفايكنج');
+tz_def('ADM_ENABLE_DISABLE_THE_VIKINGS_TRIBE', 'تفعيل (تعطيل) قبيلة الفايكنج');
+tz_def('ADM_ENABLE_DISABLE_TRIBE_VIKINGS', 'تفعيل (تعطيل) قبيلة الفايكنج');
+tz_def('ADM_MHS_IMAGES_IN_PROFILE', 'صور المطاردين في الملف الشخصي');
+tz_def('ADM_ENABLE_DISABLE_DISPLAYING_IMAGES_OF_MULTIHUN', 'تفعيل (تعطيل) عرض صور المطاردين');
+tz_def('ADM_ENABLE_DISABLE_DISPLAYING_IMAGES_OF_MULTIHUN_2', 'تفعيل (تعطيل) عرض صور المطاردين مع وصف في ملفهم الشخصي');
+tz_def('ADM_DISPLAY_ARTIFACT_IN_PROFILE', 'عرض القطعة الأثرية في الملف الشخصي');
+tz_def('ADM_ENABLE_DISABLE_THE_DISPLAY_OF_THE_ARTIFACT', 'تفعيل (تعطيل) عرض القطعة الأثرية');
+tz_def('ADM_ENABLE_DISABLE_THE_DISPLAY_OF_THE_ARTIFACT_I', 'تفعيل (تعطيل) عرض القطعة الأثرية في الملف الشخصي للاعب، مقابل القرية المطابقة التي توجد بها');
+tz_def('ADM_DISPLAY_WOW_IN_PROFILE', 'عرض عجيبة الدنيا في الملف الشخصي');
+tz_def('ADM_ENABLE_DISABLE_THE_DISPLAY_OF_THE_WONDER', 'تفعيل (تعطيل) عرض عجيبة الدنيا');
+tz_def('ADM_ENABLE_DISABLE_THE_DISPLAY_OF_THE_WONDER_IN', 'تفعيل (تعطيل) عرض عجيبة الدنيا في الملف الشخصي للاعب، مقابل القرية المطابقة التي توجد بها');
+tz_def('ADM_VACATION_MODE', 'وضع الإجازة');
+tz_def('ADM_ENABLE_DISABLE_VACATION_MODE', 'تفعيل (تعطيل) وضع الإجازة');
+tz_def('ADM_ENABLE_DISABLE_VACATION_MODE_WILL_BE_DISPLAY', 'تفعيل (تعطيل) وضع الإجازة، سيُعرض أو يُخفى في قائمة الملف الشخصي للاعب');
+tz_def('ADM_CATAPULT_TARGETS', 'أهداف المنجنيق');
+tz_def('ADM_ENABLE_DISABLE_THE_DISPLAY_OF_CATAPULT_TARGE', 'تفعيل (تعطيل) عرض أهداف المنجنيق');
+tz_def('ADM_ENABLE_DISABLE_THE_DISPLAY_OF_THE_TARGETS_OF', 'تفعيل (تعطيل) عرض أهداف المنجنيقات في نقطة التجمع التي أرسلتها بنفسك');
+tz_def('ADM_MANUAL_ON_NATURE_AND_NATARS', 'دليل عن الطبيعة والتتار');
+tz_def('ADM_ENABLE_DISABLE_MANUAL_INFO', 'تفعيل (تعطيل) معلومات الدليل');
+tz_def('ADM_ENABLE_DISABLE_DISPLAYING_INFORMATION_IN_THE', 'تفعيل (تعطيل) عرض معلومات في الدليل عن قوات الطبيعة والتتار');
+tz_def('ADM_DIRECT_LINKS_PLACEMENT', 'موضع الروابط المباشرة');
+tz_def('ADM_LEFT_MENU_VS_RIGHT_MENU', 'القائمة اليسرى مقابل القائمة اليمنى');
+tz_def('ADM_IF_ENABLED_THEN_THE_DIRECT_LINKS_WILL_BE_PLA', 'إذا كان مفعّلًا، توضع الروابط المباشرة في القائمة اليسرى، وإذا كان معطّلًا توضع في القائمة اليمنى كما في نوفاتيرا الأصلية');
+tz_def('ADM_MEDAL_VETERAN_PLAYER', 'وسام اللاعب المخضرم');
+tz_def('ADM_3_YEARS', '3 سنوات');
+tz_def('ADM_ENABLE_DISABLE_MEDAL_ACHIEVED_FOR_PLAYING_3', 'تفعيل (تعطيل) الوسام الذي يُمنح عند اللعب 3 سنوات في نوفاتيرا');
+tz_def('ADM_MEDAL_VETERAN_PLAYER_5A', 'وسام اللاعب المخضرم 5أ');
+tz_def('ADM_5_YEARS', '5 سنوات');
+tz_def('ADM_ENABLE_DISABLE_MEDAL_ACHIEVED_FOR_PLAYING_5', 'تفعيل (تعطيل) الوسام الذي يُمنح عند اللعب 5 سنوات في نوفاتيرا');
+tz_def('ADM_MEDAL_VETERAN_PLAYER_10A', 'وسام اللاعب المخضرم 10أ');
+tz_def('ADM_10_YEARS', '10 سنوات');
+tz_def('ADM_ENABLE_DISABLE_MEDAL_ACHIEVED_FOR_PLAYING_10', 'تفعيل (تعطيل) الوسام الذي يُمنح عند اللعب 10 سنوات في نوفاتيرا');
+tz_def('ADM_SPECIAL_MEDALS', 'أوسمة خاصة');
+tz_def('ADM_ENABLE_DISABLE_SPECIAL_MEDALS_ARTIFACT_HERO', 'تفعيل (تعطيل) الأوسمة الخاصة (القطعة الأثرية، البطل، عجيبة الدنيا، السور، المخزن الكبير، إلخ)');
+tz_def('ADM_SERVER_MILESTONES', 'إنجازات السيرفر');
+tz_def('ADM_NOT_PRESENT_IN_CONFIG_PHP_YET_SAVING_THIS_FO', 'غير موجود بعد في config.php &mdash; حفظ هذا النموذج مرة واحدة سيضيفه (تكون القيمة False افتراضيًا حتى ذلك الحين).');
+tz_def('ADM_SERVER_MEDAL_RESET_TIMER', 'مؤقت إعادة ضبط أوسمة السيرفر');
+tz_def('ADM_ENABLE_DISABLE_THE_SERVER_MEDAL_RESET_TIMER', 'تفعيل (تعطيل) عنصر "مؤقت إعادة ضبط أوسمة السيرفر" في قائمة أفضل 10 لاعبين وأفضل 10 تحالفات');
+tz_def('ADM_T4_HERO_ITEMS_ADVENTURES_AUCTION', 'بطل T4 (العناصر، المغامرات، المزاد)');
+tz_def('ADM_ENABLE_DISABLE_THE_T4_HERO_ITEMS_ADVENTURES', 'تفعيل (تعطيل) نظام "بطل T4 (العناصر، المغامرات، المزاد)"');
+tz_def('ADM_REGISTRATION_BONUS_GOLD', 'ذهب مكافأة التسجيل');
+tz_def('ADM_GIVE_EVERY_NEWLY_REGISTERED_PLAYER_A_ONE_TIM', 'منح كل لاعب مسجَّل حديثًا مكافأة ذهب لمرة واحدة عند إنشاء الحساب');
+tz_def('ADM_REGISTRATION_BONUS_GOLD_AMOUNT', 'ذهب مكافأة التسجيل &ndash; الكمية');
+tz_def('ADM_HOW_MUCH_GOLD_EACH_NEW_PLAYER_RECEIVES_WHEN', 'كمية الذهب التي يحصل عليها كل لاعب جديد عند تفعيل المكافأة');
+tz_def('ADM_ENABLE_DISABLE_A_ONE_TIME_GOLD_BONUS_GRANTED', 'تفعيل (تعطيل) مكافأة ذهب لمرة واحدة تُمنح لكل لاعب مسجَّل حديثًا عند إنشاء الحساب (يتم تخطي الحسابات النظامية بمعرف &le;3). تُضبط الكمية في الحقل أدناه.');
+tz_def('ADM_HOW_MUCH_GOLD_EACH_NEW_PLAYER_RECEIVES_WHEN_2', 'كمية الذهب التي يحصل عليها كل لاعب جديد عندما يكون المفتاح أعلاه True. الافتراضي: 200.');
+tz_def('ADM_FOR_THIS_SETTING_YOU_CAN_FIND_MORE_INFORMATI', 'لهذا الإعداد، يمكنك إيجاد مزيد من المعلومات في الرابط:');
+tz_def('ADM_EDIT_CRON_AUTOMATION', 'تعديل الجدولة والأتمتة (Cron)');
+tz_def('ADM_EDIT_NEW_MECHANICS_AND_FUNCTIONS', 'تعديل الآليات والوظائف الجديدة');
+tz_def('ADM_ENGLISH', 'الإنجليزية');
+tz_def('ADM_FRENCH', 'الفرنسية');
+tz_def('ADM_ITALIAN', 'الإيطالية');
+tz_def('ADM_ROMANIAN', 'الرومانية');
+tz_def('ADM_SPANISH', 'الإسبانية');
+tz_def('ADM_CHINESE', 'الصينية');
+tz_def('ADM_SLOW', 'بطيء');
+tz_def('ADM_FAST', 'سريع');
+tz_def('ADM_2_HOURS', 'ساعتان');
+tz_def('ADM_3_HOURS', '3 ساعات');
+tz_def('ADM_5_HOURS', '5 ساعات');
+tz_def('ADM_8_HOURS', '8 ساعات');
+tz_def('ADM_10_HOURS', '10 ساعات');
+tz_def('ADM_12_HOURS', '12 ساعة');
+tz_def('ADM_16_HOURS', '16 ساعة');
+tz_def('ADM_20_HOURS', '20 ساعة');
+tz_def('ADM_24_HOURS_1_DAY', '24 ساعة (يوم واحد)');
+tz_def('ADM_48_HOURS_2_DAYS', '48 ساعة (يومان)');
+tz_def('ADM_72_HOURS_3_DAYS', '72 ساعة (3 أيام)');
+tz_def('ADM_120_HOURS_5_DAYS', '120 ساعة (5 أيام)');
+tz_def('ADM_TRUE', 'صحيح');
+tz_def('ADM_FALSE', 'خطأ');
+tz_def('ADM_YES', 'نعم');
+tz_def('ADM_NO', 'لا');
+tz_def('ADM_NOVATERRA_OFFICIAL', 'نوفاتيرا الرسمية');
+tz_def('ADM_NOVATERRA_EXTENDED', 'نوفاتيرا الموسّعة');
+tz_def('ADM_10_DEFAULT', '10 - افتراضي');
+tz_def('ADM_NONE', 'لا شيء');
+tz_def('ADM_1_DAY', 'يوم واحد');
+tz_def('ADM_2_DAYS', 'يومان');
+tz_def('ADM_3_DAYS', '3 أيام');
+tz_def('ADM_4_DAYS', '4 أيام');
+tz_def('ADM_5_DAYS', '5 أيام');
+tz_def('ADM_6_DAYS', '6 أيام');
+tz_def('ADM_7_DAYS', '7 أيام');
+tz_def('ADM_NONE_2', 'لا شيء');
+tz_def('ADM_CHRISTMAS', 'عيد الميلاد');
+tz_def('ADM_NEW_YEAR', 'رأس السنة');
+tz_def('ADM_EASTER', 'عيد الفصح');
+tz_def('ADM_ENABLE', 'تفعيل');
+tz_def('ADM_DISABLE', 'تعطيل');
+tz_def('ADM_SAVE', 'حفظ');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// PANOU DE ADMINISTRARE - sabloane (lot 3: player, editHero, editHeroT4,
+// playerheroinfo, village, troops, editVillage, editUser, deletion, editSitter)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADM_START', 'البداية');
+tz_def('ADM_END', 'النهاية');
+tz_def('ADM_DURATION', 'المدة');
+tz_def('ADM_REASON', 'السبب');
+tz_def('ADM_PLAYER', 'اللاعب:');
+tz_def('ADM_BASIC_INFO', '📝 معلومات أساسية');
+tz_def('ADM_HERO_NAME', 'اسم البطل');
+tz_def('ADM_HERO_UNIT', 'وحدة البطل');
+tz_def('ADM_HEALTH', '❤ الصحة');
+tz_def('ADM_EXPERIENCE', '✨ الخبرة');
+tz_def('ADM_CURRENT_STATS', '📈 الإحصائيات الحالية');
+tz_def('ADM_LEVEL', 'المستوى:');
+tz_def('ADM_OF', 'من');
+tz_def('ADM_FREE', '(متاح:');
+tz_def('ADM_OFFENCE', 'الهجوم:');
+tz_def('ADM_DEFENCE', 'الدفاع:');
+tz_def('ADM_OFF_BONUS', 'مكافأة الهجوم:');
+tz_def('ADM_DEF_BONUS', '| مكافأة الدفاع:');
+tz_def('ADM_REGEN', 'التعافي:');
+tz_def('ADM_RESOURCES', 'الموارد:');
+tz_def('ADM_ADD_POINTS', '⚔ إضافة نقاط');
+tz_def('ADM_ATTRIBUTE', 'الخاصية');
+tz_def('ADM_CURRENT', 'الحالي');
+tz_def('ADM_ADD', 'إضافة');
+tz_def('ADM_NEW', 'الجديد');
+tz_def('ADM_PRODUCED_RESOURCE', 'المورد المنتَج');
+tz_def('ADM_LEVEL_NOU', 'المستوى الجديد:');
+tz_def('ADM_BACK', '← رجوع');
+tz_def('ADM_SAVE_HERO', '💾 حفظ البطل');
+tz_def('ADM_CLASSIC_HERO_EDITOR', '&laquo; محرر البطل الكلاسيكي');
+tz_def('ADM_ACTION_COMPLETED', 'اكتمل الإجراء.');
+tz_def('ADM_ACTION_FAILED_CHECK_THE_VALUES_AND_TRY_AGAIN', 'فشل الإجراء (تحقق من القيم وأعد المحاولة).');
+tz_def('ADM_SILVER', 'الفضة');
+tz_def('ADM_SET_BALANCE', 'ضبط الرصيد');
+tz_def('ADM_GRANT_ITEM', 'منح عنصر');
+tz_def('ADM_QTY', 'الكمية:');
+tz_def('ADM_GRANT', 'منح');
+tz_def('ADM_ROW', 'الصف');
+tz_def('ADM_ITEM', 'العنصر');
+tz_def('ADM_SLOT', 'الخانة');
+tz_def('ADM_QTY_2', 'الكمية');
+tz_def('ADM_EQUIPPED', 'مجهّز');
+tz_def('ADM_DELETE', 'حذف');
+tz_def('ADM_AUCTION', 'المزاد');
+tz_def('ADM_ROLE', 'الدور');
+tz_def('ADM_PRICE', 'السعر');
+tz_def('ADM_ENDS', 'ينتهي');
+tz_def('ADM_CANCEL', 'إلغاء');
+tz_def('ADM_ADVENTURES', 'المغامرات');
+tz_def('ADM_RUNNING', 'جارية:');
+tz_def('ADM_OFFER', 'العرض');
+tz_def('ADM_DIFFICULTY', 'الصعوبة');
+tz_def('ADM_EXPIRES', 'تنتهي');
+tz_def('ADM_REMOVE', 'إزالة');
+tz_def('ADM_PLAYER_HEROES', 'أبطال اللاعب');
+tz_def('ADM_NONE_3', 'لا شيء &nbsp;&nbsp;');
+tz_def('ADM_ADD_HERO', 'إضافة بطل');
+tz_def('ADM_HERO_LEVEL', 'مستوى البطل');
+tz_def('ADM_STATUS', 'الحالة');
+tz_def('ADM_ALIVE', 'حي');
+tz_def('ADM_DEAD', 'ميت');
+tz_def('ADM_DETAILS', 'التفاصيل');
+tz_def('ADM_POINT', 'النقطة');
+tz_def('ADM_LEVEL_2', 'المستوى');
+tz_def('ADM_OFFENCE_2', 'الهجوم');
+tz_def('ADM_DEFENCE_2', 'الدفاع');
+tz_def('ADM_OFF_BONUS_2', 'مكافأة الهجوم');
+tz_def('ADM_DEF_BONUS_2', 'مكافأة الدفاع');
+tz_def('ADM_REGENERATION', 'التعافي');
+tz_def('ADM_RESOURCES_2', 'الموارد');
+tz_def('ADM_HEALTH_2', 'الصحة');
+tz_def('ADM_EDIT', 'تعديل');
+tz_def('ADM_T4_ITEMS_SILVER_AUCTIONS', 'عناصر / فضة / مزادات T4');
+tz_def('ADM_KILL', 'قتل');
+tz_def('ADM_REVIVE', 'إحياء');
+tz_def('ADM_VILLAGE_INFORMATION', 'معلومات القرية');
+tz_def('ADM_OWNER', 'المالك');
+tz_def('ADM_NAME', 'الاسم');
+tz_def('ADM_POPULATION', 'السكان');
+tz_def('ADM_COORDS', 'الإحداثيات');
+tz_def('ADM_FIELD', 'الحقل');
+tz_def('ADM_RES', 'المورد');
+tz_def('ADM_AMT', 'الكمية');
+tz_def('ADM_CAP', 'السعة');
+tz_def('ADM_PROD', 'الإنتاج');
+tz_def('ADM_WOOD', 'الخشب');
+tz_def('ADM_CLAY', 'الطين');
+tz_def('ADM_IRON', 'الحديد');
+tz_def('ADM_CROP', 'المحصول');
+tz_def('ADM_EXPANSION', 'التوسّع');
+tz_def('ADM_VILLAGE', 'القرية');
+tz_def('ADM_POP', 'السكان');
+tz_def('ADM_CP', 'نقاط الثقافة');
+tz_def('ADM_OASIS', 'الواحة');
+tz_def('ADM_LOY', 'الولاء');
+tz_def('ADM_BONUS', 'المكافأة');
+tz_def('ADM_TROOPS', 'القوات');
+tz_def('ADM_UPGRADES', 'الترقيات');
+tz_def('ADM_ARTIFACT', 'القطعة الأثرية');
+tz_def('ADM_RESOURCE_FIELDS', 'حقول الموارد');
+tz_def('ADM_BUILDINGS', 'المباني');
+tz_def('ADM_GID', 'GID');
+tz_def('ADM_LVL', 'المستوى');
+tz_def('ADM_VILLAGE_BUILD_LOG', 'سجل بناء القرية ←');
+tz_def('ADM_CHANGE', 'تغيير');
+tz_def('ADM_RENAME', 'إعادة تسمية');
+tz_def('ADM_SHOW_INSTRUCTIONS', 'عرض التعليمات');
+tz_def('ADM_RESOURCE_FIELDS_1_18', 'حقول الموارد (1-18)');
+tz_def('ADM_VILLAGE_CENTER_19_38', 'مركز القرية (19-38)');
+tz_def('ADM_MODIFY_BUILDINGS', 'تعديل المباني');
+tz_def('ADM_SAVE_CHANGES', 'حفظ التغييرات');
+tz_def('ADM_CURRENT_LAYOUT_PREVIEW', 'معاينة التخطيط الحالي');
+tz_def('ADM_VILLAGE_CENTER', 'مركز القرية');
+tz_def('ADM_EDIT_PLAYER', '✏️ تعديل اللاعب:');
+tz_def('ADM_ACCOUNT_DETAILS', '👤 تفاصيل الحساب');
+tz_def('ADM_USERNAME_2', '👤 اسم المستخدم');
+tz_def('ADM_SAVE_2', '💾 حفظ');
+tz_def('ADM_TRIBE_2', '⚔️ القبيلة');
+tz_def('ADM_1_ROMAN', '1. الروماني');
+tz_def('ADM_2_TEUTON', '2. التيوتوني');
+tz_def('ADM_3_GAUL', '3. الغالي');
+tz_def('ADM_4_NATURE', '4. الطبيعة');
+tz_def('ADM_5_NATARS', '5. التتار');
+tz_def('ADM_6_HUN', '6. الهوني');
+tz_def('ADM_7_EGYPTIAN', '7. المصري');
+tz_def('ADM_8_SPARTAN', '8. الإسبرطي');
+tz_def('ADM_9_VIKING', '9. الفايكنغي');
+tz_def('ADM_LOCATION', '📍 الموقع');
+tz_def('ADM_E_MAIL', '✉️ البريد الإلكتروني');
+tz_def('ADM_QUEST', '🎯 المهمة');
+tz_def('ADM_PROFILE_DESCRIPTION_LEFT', '📝 وصف الملف الشخصي (يسار)');
+tz_def('ADM_PROFILE_DESCRIPTION_RIGHT', '📄 وصف الملف الشخصي (يمين)');
+tz_def('ADM_SUPORT_BBCODE_FOLOSE_TE_ENTER_PENTRU_LINII_N', 'يدعم BBCode. استخدم Enter للأسطر الجديدة.');
+tz_def('ADM_MEDALS', '🏅 الأوسمة');
+tz_def('ADM_CATEGORY', 'الفئة');
+tz_def('ADM_RANK', 'الترتيب');
+tz_def('ADM_WEEK', 'الأسبوع');
+tz_def('ADM_BB_CODE', 'BB-Code');
+tz_def('ADM_BEGINNERS_PROTECTION', 'حماية المبتدئين');
+tz_def('ADM_SAVE_CHANGES_2', '💾 حفظ التغييرات');
+tz_def('ADM_GO_BACK_TO_PLAYER', '« العودة إلى اللاعب');
+tz_def('ADM_CHANGE_USERNAME', 'تغيير اسم المستخدم');
+tz_def('ADM_DELETE_PLAYER_PERMANENTLY', 'حذف اللاعب نهائيًا');
+tz_def('ADM_THIS_ACTION_CANNOT_BE_UNDONE', 'لا يمكن التراجع عن هذا الإجراء!');
+tz_def('ADM_PLAYER_TO_DELETE', '🗑️ اللاعب المراد حذفه');
+tz_def('ADM_PLUS_ENDS', 'ينتهي بلس');
+tz_def('ADM_WARNING', 'تحذير:');
+tz_def('ADM_PERMANENTLY', 'نهائيًا');
+tz_def('ADM_DELETED_THERE_IS_NO_RECOVERY', 'محذوف. لا يمكن الاسترجاع!');
+tz_def('ADM_CONFIRM_WITH_YOUR_ADMIN_PASSWORD', 'أكّد بكلمة مرور الأدمن الخاصة بك:');
+tz_def('ADM_CANCEL_2', '← إلغاء');
+tz_def('ADM_DELETE_PLAYER', '🗑️ حذف اللاعب');
+tz_def('ADM_EDIT_SITTERS', 'تعديل الجالسين:');
+tz_def('ADM_SITTER_SETTINGS', '⚙️ إعدادات الجالس');
+tz_def('ADM_USE_THE_PLAYER_S_UID_ENTER', '💡 استخدم معرّف اللاعب (UID). أدخل');
+tz_def('ADM_TO_DELETE_THE_SITTER_YOU_CAN_FIND_THE_UID_IN', 'لحذف الجالس. يمكنك إيجاد المعرّف في البحث.');
+tz_def('ADM_SITTER_1', '👤 الجالس 1');
+tz_def('ADM_SITTER_2', '👤 الجالس 2');
+tz_def('ADM_SAVE_SITTERS', '💾 حفظ الجالسين');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// PANOU DE ADMINISTRARE - sabloane (lot 4: gold, usergold, givePlus, givePlusRes,
+// punish, maintenance, resetServer, cleanban, massmessage, sysmessage)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADM_GOLD_MANAGEMENT', 'إدارة الذهب');
+tz_def('ADM_GIVE_EVERYONE_FREE_GOLD', 'منح الجميع ذهبًا مجانيًا');
+tz_def('ADM_THIS_GOLD_WILL_BE_ADDED_TO_ALL_ACTIVE_PLAYER', 'سيُضاف هذا الذهب إلى كل اللاعبين النشطين في السيرفر.');
+tz_def('ADM_GIVE_GOLD', 'منح الذهب');
+tz_def('ADM_GOLD_HAS_BEEN_SUCCESSFULLY_ADDED_TO_ALL_PLAY', '✓ تمت إضافة الذهب بنجاح لجميع اللاعبين!');
+tz_def('ADM_USER_GOLD', 'ذهب المستخدم');
+tz_def('ADM_GIVE_GOLD_TO_SPECIFIC_PLAYER', 'منح ذهب للاعب محدد');
+tz_def('ADM_ADD_GOLD_ONLY_FOR_SINGLE_ACCOUNT_AFTER_ID', 'إضافة الذهب لحساب واحد فقط (بواسطة المعرّف).');
+tz_def('ADM_AMOUNT_GOLD', 'كمية الذهب');
+tz_def('ADM_GOLD_LOCAL_ONLY_LABEL', 'محلي فقط (لا يُزامَن مع رصيد الذهب العابر للعوالم لهذا اللاعب)');
+tz_def('ADM_GOLD_SUCCESSFULLY_ADDED_FOR_USER', '✓ تمت إضافة الذهب بنجاح للمستخدم!');
+tz_def('ADM_PLUS_MANAGEMENT', 'إدارة بلس');
+tz_def('ADM_GIVE_EVERYONE_FREE_PLUS', 'منح الجميع بلس مجانًا');
+tz_def('ADM_ACTIVATE_NOVATERRA_PLUS_FOR_ALL_PLAYERS_ON_THE', 'تفعيل نوفاتيرا بلس لكل اللاعبين في السيرفر.');
+tz_def('ADM_DAYS', 'الأيام');
+tz_def('ADM_GIVE_PLUS', 'منح بلس');
+tz_def('ADM_PLUS_HAS_BEEN_SUCCESSFULLY_ACTIVATED_FOR_ALL', '✓ تم تفعيل بلس بنجاح لجميع اللاعبين!');
+tz_def('ADM_RESOURCE_BONUS', 'مكافأة الموارد');
+tz_def('ADM_GIVE_EVERYONE_RESOURCE_BONUS', 'منح الجميع مكافأة موارد');
+tz_def('ADM_ACTIVATE_A_25_BONUS_FOR_ALL_RESOURCES_FOR_AL', 'تفعيل مكافأة 25% لكل الموارد لجميع اللاعبين.');
+tz_def('ADM_DAYS_2', 'أيام');
+tz_def('ADM_GIVE_RESOURCE_BONUS', 'منح مكافأة الموارد');
+tz_def('ADM_RESOURCE_BONUSES_HAVE_BEEN_ACTIVATED_FOR_ALL', '✓ تم تفعيل مكافآت الموارد لجميع اللاعبين!');
+tz_def('ADM_PUNISH_PLAYER', 'معاقبة اللاعب');
+tz_def('ADM_OK', 'موافق');
+tz_def('ADM_DELETE_TROOPS', 'حذف القوات');
+tz_def('ADM_EMPTY_WAREHOUSES', 'إفراغ المخازن');
+tz_def('ADM_STARTED_BY', 'بدأه:');
+tz_def('ADM_UID', '(المعرّف:');
+tz_def('ADM_ENABLE_MAINTENANCE', 'تفعيل الصيانة');
+tz_def('ADM_DISABLE_MAINTENANCE', 'تعطيل الصيانة');
+tz_def('ADM_STOP', 'إيقاف');
+tz_def('ADM_SERVER_RESETTING', '⚠️ إعادة ضبط السيرفر');
+tz_def('ADM_WARNING_IRREVERSIBLE_ACTION', 'تحذير! إجراء لا يمكن التراجع عنه');
+tz_def('ADM_THIS_OPERATION_WILL_DELETE_ALL_DATA_PLAYERS', 'ستحذف هذه العملية كل البيانات: اللاعبين، المراقبات، التحالفات، التقارير. سيُعاد ضبط السيرفر للعبة جديدة.');
+tz_def('ADM_THIS_SERVER_WILL_BE_RESET_TO_CREATE_NEW_GAME', 'سيُعاد ضبط هذا السيرفر لإنشاء سيرفر لعبة جديد.');
+tz_def('ADM_CLICK_BUTTON', 'اضغط الزر');
+tz_def('ADM_RESET', 'إعادة ضبط');
+tz_def('ADM_TO_PROCEED', 'للمتابعة.');
+tz_def('ADM_PLEASE_WAIT_WHILE_THE_SERVER_IS_BEING_RESET', 'الرجاء الانتظار... جارٍ إعادة ضبط السيرفر');
+tz_def('ADM_BACK_2', '« رجوع');
+tz_def('ADM_RESET_SERVER', 'إعادة ضبط السيرفر');
+tz_def('ADM_CLEAR_BANLIST_DATA', 'مسح – بيانات - قائمة الحظر');
+tz_def('ADM_TRUNCATE', '(تفريغ الجدول TRUNCATE)');
+tz_def('ADM_CLEAN', 'تنظيف');
+tz_def('ADM_SEND_MESSAGE_TO_ALL_PLAYERS', 'إرسال رسالة لجميع اللاعبين');
+tz_def('ADM_CONFIRM', 'تأكيد:');
+tz_def('ADM_ARE_YOU_SURE_YOU_WANT_TO_SEND', 'هل أنت متأكد أنك تريد الإرسال؟');
+tz_def('ADM_SUBJECT', 'الموضوع:');
+tz_def('ADM_YES_SEND', '✓ نعم، أرسل');
+tz_def('ADM_SENDING_MESSAGES', 'جارٍ إرسال الرسائل...');
+tz_def('ADM_SUBJECT_2', 'الموضوع');
+tz_def('ADM_MESSAGE_COLOR', 'لون الرسالة');
+tz_def('ADM_MESSAGE_CONTENT', 'محتوى الرسالة');
+tz_def('ADM_CONTINUA', 'متابعة');
+tz_def('ADM_MASS_MESSAGE_SUCCESSFULLY_SENT_TO_ALL_PLAYER', '✓ تم إرسال الرسالة الجماعية بنجاح لجميع اللاعبين!');
+tz_def('ADM_EX_MAINTENANCE', 'مثال: صيانة');
+tz_def('ADM_BLACK_SAU_E67E22', 'black أو #e67e22');
+tz_def('ADM_WRITE_THE_MESSAGE_YOU_CAN_USE_URL_IMG', 'اكتب الرسالة... يمكنك استخدام [url][img]');
+tz_def('ADM_CONFIRMARE_SYSTEM_MESSAGE', 'تأكيد رسالة النظام');
+tz_def('ADM_COLOR', 'اللون:');
+tz_def('ADM_SEND_SYSTEM_MESSAGE', '✓ إرسال رسالة نظام');
+tz_def('ADM_SENDING_SYSTEM_MESSAGE', 'جارٍ إرسال رسالة النظام...');
+tz_def('ADM_COLOR_2', 'اللون');
+tz_def('ADM_CONTINUE', 'متابعة');
+tz_def('ADM_SYSTEM_MESSAGE_SENT_SUCCESSFULLY', '✓ تم إرسال رسالة النظام بنجاح');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// PANOU DE ADMINISTRARE - sabloane (lot 5: alliance, editAli, delAli, allymedals,
+// delallymedal, playermedals, delmedal, admin_log, debug_log, techlog)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADM_FOUNDER', '👑 المؤسس:');
+tz_def('ADM_MEMBERS', '👥 الأعضاء:');
+tz_def('ADM_POINTS', '🏆 النقاط:');
+tz_def('ADM_ALLIANCE_DETAILS', '📋 تفاصيل التحالف');
+tz_def('ADM_TAG', 'الشعار');
+tz_def('ADM_POINTS_2', 'النقاط');
+tz_def('ADM_CAPACITY', 'السعة');
+tz_def('ADM_ALLIANCE_POSITIONS', '🛡 مناصب التحالف');
+tz_def('ADM_EDIT_ALLIANCE', '✏ تعديل التحالف');
+tz_def('ADM_DELETE_2', '🗑 حذف');
+tz_def('ADM_ALLIANCE_DESCRIPTION', '📖 وصف التحالف');
+tz_def('ADM_ALLIANCE_NOTICE', '📢 إشعار التحالف');
+tz_def('ADM_PLAYER_2', 'اللاعب');
+tz_def('ADM_ALLIANCE_NEWS', '📰 أخبار التحالف');
+tz_def('ADM_EVENT', 'الحدث');
+tz_def('ADM_DIPLOMACY', '🤝 الدبلوماسية');
+tz_def('ADM_TYPE', 'النوع');
+tz_def('ADM_EDIT_ALLIANCE_2', '✏️ تعديل التحالف:');
+tz_def('ADM_BASIC_SETTINGS', '⚙️ الإعدادات الأساسية');
+tz_def('ADM_ALLIANCE_TAG_MAX_8', 'شعار التحالف (8 حروف كحد أقصى)');
+tz_def('ADM_ALLIANCE_NAME', 'اسم التحالف');
+tz_def('ADM_LEADER_FOUNDER', '👑 القائد (المؤسس)');
+tz_def('ADM_SCHIMB_FONDATORUL_ALIAN_EI', 'تغيير مؤسس التحالف');
+tz_def('ADM_MAX_MEMBERS', '👥 الحد الأقصى للأعضاء');
+tz_def('ADM_ALLIANCE_NOTICE_APARE_SUS', '📢 إشعار التحالف (يظهر أعلى الصفحة)');
+tz_def('ADM_ALLIANCE_DESCRIPTION_PAGINA_PUBLIC', '📖 وصف التحالف (الصفحة العامة)');
+tz_def('ADM_SAVE_ALLIANCE', '💾 حفظ التحالف');
+tz_def('ADM_MESAJ_SCURT_PENTRU_MEMBRI', 'رسالة قصيرة للأعضاء...');
+tz_def('ADM_DESCRIERE_LUNG_BBCODE_PERMIS', 'وصف طويل، يدعم BBCode...');
+tz_def('ADM_DELETE_ALLIANCE', '🗑 حذف التحالف');
+tz_def('ADM_ARE_YOU_SURE_YOU_WANT_TO_PERMANENTLY_DELETE', 'هل أنت متأكد أنك تريد الحذف نهائيًا؟:');
+tz_def('ADM_MEMBERS_2', 'الأعضاء:');
+tz_def('ADM_POINTS_3', '| النقاط:');
+tz_def('ADM_ALL_MEMBERS_WILL_BE_REMOVED_FROM_THE_ALLIANC', '⚠ سيُزال كل الأعضاء من التحالف، وستُحذف الصلاحيات والدبلوماسية والسجلات ومنتدى التحالف. هذا الإجراء لا رجعة فيه!');
+tz_def('ADM_YES_DELETE', 'نعم، احذف');
+tz_def('ADM_MEDAL', 'الوسام');
+tz_def('ADM_THIS_ALLIANCE_HAS_NO_MEDALS_YET', 'هذا التحالف ليس لديه أوسمة بعد');
+tz_def('ADM_AVERAGE_RANK', 'متوسط الترتيب');
+tz_def('ADM_DELETE_ALL', 'حذف الكل');
+tz_def('ADM_MEDAL_INFORMATION', 'معلومات الوسام');
+tz_def('ADM_MEDALS_2', 'الأوسمة');
+tz_def('ADM_MEDAL_WEEK_BY_WEEK', 'الوسام أسبوعًا بأسبوع');
+tz_def('ADM_CATEGORY_2', 'الفئة');
+tz_def('ADM_RANK_2', 'الترتيب');
+tz_def('ADM_WEEK_2', 'الأسبوع');
+tz_def('ADM_POINTS_4', 'النقاط');
+tz_def('ADM_MEDAL_2', 'الوسام');
+tz_def('ADM_THIS_PLAYER_HAS_NO_MEDALS_YET', 'هذا اللاعب ليس لديه أوسمة بعد');
+tz_def('ADM_UNIFIED_ADMIN_LOG_LAST_300_ACTIONS', '📋 سجل الإدارة الموحّد – آخر 300 إجراء');
+tz_def('ADM_CATEGORIE', 'الفئة');
+tz_def('ADM_DETALII', 'التفاصيل');
+tz_def('ADM_DATA', 'التاريخ');
+tz_def('ADM_DEBUG_ERROR_LOG', '🐞 سجل أخطاء التصحيح');
+tz_def('ADM_CAPTURE_IS', 'التسجيل حاليًا');
+tz_def('ADM_AUTO_OFF', 'الإيقاف التلقائي:');
+tz_def('ADM_LOG_SIZE', 'حجم السجل:');
+tz_def('ADM_TRANSPARENT_TO_PLAYERS_ERRORS_ARE_ONLY_WRITT', 'شفاف تمامًا للاعبين: تُكتب الأخطاء في ملف السجل فقط، ولا تظهر أبدًا داخل اللعبة، ولا يتأثر اللعب بها.');
+tz_def('ADM_CAPTURE_SETTINGS', 'إعدادات التسجيل');
+tz_def('ADM_WARNINGS', 'التحذيرات');
+tz_def('ADM_NOTICES', 'الملاحظات');
+tz_def('ADM_DEPRECATED', 'المهملة');
+tz_def('ADM_FATAL_ERRORS', 'الأخطاء الفادحة');
+tz_def('ADM_MAX_FILE_SIZE_MB', 'الحد الأقصى لحجم الملف (ميجابايت):');
+tz_def('ADM_AUTO_OFF_AFTER_HOURS_0_NEVER', 'الإيقاف التلقائي بعد (ساعات، 0 = أبدًا):');
+tz_def('ADM_SAVE_SETTINGS', 'حفظ الإعدادات');
+tz_def('ADM_BEYOND_THE_SIZE_CAP_THE_FILE_IS_ROTATED_TO_A', 'عند تجاوز الحد الأقصى للحجم، يُنقل الملف إلى نسخة');
+tz_def('ADM_BACKUP_SO_THE_TOTAL_VOLUME_STAYS_BOUNDED', 'احتياطية واحدة، بحيث يظل الحجم الإجمالي محدودًا.');
+tz_def('ADM_DOWNLOAD_FULL_LOG', '⬇ تحميل السجل الكامل');
+tz_def('ADM_CLEAR_LOG', '🗑 مسح السجل');
+tz_def('ADM_REFRESH', '↻ تحديث');
+tz_def('ADM_BACK_TO_VILLAGE', '← العودة إلى القرية');
+tz_def('ADM_RESEARCH_LOG', '— سجل البحث');
+tz_def('ADM_LATEST_200_SEARCHES', 'آخر 200 عملية بحث');
+tz_def('ADM_NO_REGISTERED_SEARCHES', 'لا توجد عمليات بحث مسجّلة.');
+tz_def('ADM_TECH', 'تقني');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// PANOU DE ADMINISTRARE - sabloane (lot 6: editAccess, editPassword, editProtection,
+// editPlus, editWeek, editOverall, editAdditional, results_player/alliances/villages)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADM_CHANGE_ACCESS', 'تغيير الصلاحية');
+tz_def('ADM_NORMAL_USER', 'مستخدم عادي');
+tz_def('ADM_MULTIHUNTER', 'مطارد الحسابات المتعددة');
+tz_def('ADM_GIVE_PLAYERS_FREE_GOLD', 'منح اللاعبين ذهبًا مجانيًا');
+tz_def('ADM_CHANGE_PASSWORD', 'تغيير كلمة المرور:');
+tz_def('ADM_THE_PASSWORD_IS_CHANGED_INSTANTLY_THE_PLAYER', 'تُغيَّر كلمة المرور فورًا. سيُسجَّل خروج اللاعب. لا يُرسَل أي بريد إلكتروني تلقائيًا.');
+tz_def('ADM_NEW_PASSWORD', 'كلمة المرور الجديدة');
+tz_def('ADM_GENERATE_SECURE_PASSWORD', '🎲 توليد كلمة مرور آمنة');
+tz_def('ADM_CHANGE_PASSWORD_2', '🔐 تغيير كلمة المرور');
+tz_def('ADM_INTRODU_PAROLA_NOU', 'أدخل كلمة المرور الجديدة');
+tz_def('ADM_SHOW_HIDE', 'إظهار/إخفاء');
+tz_def('ADM_PROTECTION', 'الحماية:');
+tz_def('ADM_CURRENT_STATUS_2', 'الحالة الحالية');
+tz_def('ADM_1_DAY_2', '+يوم واحد');
+tz_def('ADM_3_DAYS_2', '+3 أيام');
+tz_def('ADM_7_DAYS_2', '+7 أيام');
+tz_def('ADM_SET_TO_0_TO_REMOVE_PROTECTION_PROTECTION_IS', '💡 اضبطها على 0 لإزالة الحماية. تُضاف الحماية من وقت الحفظ.');
+tz_def('ADM_SAVE_PROTECTION', '💾 حفظ الحماية');
+tz_def('ADM_PLUS_BONUSES', '⭐ بلس والمكافآت:');
+tz_def('ADM_THE_VALUES_ADD_UP_PUT_5_TO_ADD_5_DAYS_5_TO_R', 'ℹ️ القيم تتراكم. ضع 5 لإضافة 5 أيام، -5 لإزالة 5 أيام.');
+tz_def('ADM_CURRENT_ACTIVE_BONUSES', '📊 المكافآت النشطة حاليًا');
+tz_def('ADM_ADD_REMOVE_DAYS', '➕ إضافة / إزالة أيام');
+tz_def('ADM_APPLY_BONUSES', '💾 تطبيق المكافآت');
+tz_def('ADM_WEEKLY_STATS', 'إحصائيات الأسبوع:');
+tz_def('ADM_ACESTEA_SUNT_PUNCTELE', '📊 هذه هي النقاط');
+tz_def('ADM_DIN_S_PT_M_NA_CURENT', 'من الأسبوع الحالي');
+tz_def('ADM_PENTRU_TOP_10_SE_RESETEAZ_AUTOMAT', 'لأفضل 10. تُعاد ضبطها تلقائيًا.');
+tz_def('ADM_ATTACK', 'الهجوم');
+tz_def('ADM_RAID', 'الغارة');
+tz_def('ADM_SAVE_WEEK', '💾 حفظ الأسبوع');
+tz_def('ADM_OVERALL_POINTS', 'النقاط الإجمالية:');
+tz_def('ADM_ACESTEA_SUNT_PUNCTELE_2', '🛡️ هذه هي النقاط');
+tz_def('ADM_TOTALE', 'الإجمالية');
+tz_def('ADM_DIN_STATISTICI_NU_CELE_S_PT_M_NALE_SE_ADUN_D', 'من الإحصائيات (وليست الأسبوعية). تُجمع من كل الهجمات.');
+tz_def('ADM_ATTACK_POINTS', 'نقاط الهجوم');
+tz_def('ADM_DEFENCE_POINTS', 'نقاط الدفاع');
+tz_def('ADM_SAVE_POINTS', '💾 حفظ النقاط');
+tz_def('ADM_EDIT_ADDITIONAL', '⚙️ تعديل إضافي:');
+tz_def('ADM_ACCOUNT_CONTROL', '🔐 التحكم في الحساب');
+tz_def('ADM_ACCESS_LEVEL', 'مستوى الصلاحية');
+tz_def('ADM_0_BANNED', '0 - محظور');
+tz_def('ADM_2_NORMAL_USER', '2 - مستخدم عادي');
+tz_def('ADM_8_MULTIHUNTER', '8 - مطارد الحسابات المتعددة');
+tz_def('ADM_9_ADMIN', '9 - أدمن');
+tz_def('ADM_VACATION_MODE_2', '🏖 وضع الإجازة');
+tz_def('ADM_0_DISABLED', '0 - معطّل');
+tz_def('ADM_1_ENABLED', '1 - مفعّل');
+tz_def('ADM_PROTECTION_2', '🛡️ الحماية');
+tz_def('ADM_ZILE', 'أيام');
+tz_def('ADM_SITTERS', '👥 الجالسون');
+tz_def('ADM_SITTER_1_UID', 'الجالس 1 (المعرّف)');
+tz_def('ADM_SITTER_2_UID', 'الجالس 2 (المعرّف)');
+tz_def('ADM_STATISTICS_POINTS', '📊 الإحصائيات والنقاط');
+tz_def('ADM_CULTURE_POINTS', '🏛️ نقاط الثقافة');
+tz_def('ADM_ATTACK_POINTS_2', '⚔️ نقاط الهجوم');
+tz_def('ADM_DEFENCE_POINTS_2', '🛡️ نقاط الدفاع');
+tz_def('ADM_RESOURCES_RAIDED', '💎 الموارد المنهوبة');
+tz_def('ADM_TOTAL_ATTACK', '⚔️ إجمالي الهجوم');
+tz_def('ADM_TOTAL_DEFENCE', '🛡️ إجمالي الدفاع');
+tz_def('ADM_GOLD_2', 'ذهب');
+tz_def('ADM_UID_2', 'المعرّف');
+tz_def('ADM_PLAYER_3', 'اللاعب');
+tz_def('ADM_VILLAGES_2', 'القرى');
+tz_def('ADM_POP_2', 'السكان');
+tz_def('ADM_AID', 'AID');
+tz_def('ADM_NAME_2', 'الاسم');
+tz_def('ADM_TAG_2', 'الشعار');
+tz_def('ADM_FOUNDER_2', 'المؤسس');
+tz_def('ADM_VILLAGE_NAME', 'اسم القرية');
+tz_def('ADM_OWNER_2', 'المالك');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// لوحة الأدمن - قوالب (الدفعة 7: التتار، الخريطة، مربع الخريطة، القطع الأثرية،
+// متجر الذهب، محرر المهام، الحسابات المتعددة، حماية الدفع، حظر التسجيل، خريطة الكثافة)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADM_WW_VILLAGES', '🏰 قرى عجائب الدنيا');
+tz_def('ADM_NUMBER', 'الرقم');
+tz_def('ADM_PLAYER_ID', 'معرّف اللاعب');
+tz_def('ADM_ADD_ARTIFACTS', '✨ إضافة قطع أثرية');
+tz_def('ADM_ICON', 'الأيقونة');
+tz_def('ADM_DELETED_ARTIFACTS', '🗑️ القطع الأثرية المحذوفة');
+tz_def('ADM_EFFECT', 'التأثير');
+tz_def('ADM_OLD_OWNER', 'المالك السابق');
+tz_def('ADM_OLD_VILLAGE', 'القرية السابقة');
+tz_def('ADM_ARTIFACTS_OVERVIEW', '📊 نظرة عامة على القطع الأثرية');
+tz_def('ADM_RESTORE', 'استعادة');
+tz_def('ADM_INTERACTIVE_WORLD_MAP_SEARCH_PLAYERS_VILLAGE', 'خريطة العالم التفاعلية – البحث عن اللاعبين والقرى والقطع الأثرية');
+tz_def('ADM_PLAYERS', 'اللاعبون');
+tz_def('ADM_ARTIFACTS', 'القطع الأثرية');
+tz_def('ADM_APPLY_FILTERS', 'تطبيق الفلاتر');
+tz_def('ADM_TRIBES', 'القبائل');
+tz_def('ADM_MULTIHUNTERS', 'مطاردو الحسابات المتعددة');
+tz_def('ADM_CHECK_EDIT_MAP_TILE', 'فحص وتعديل مربع الخريطة');
+tz_def('ADM_CHECK_TILE', 'فحص المربع');
+tz_def('ADM_AREA_OF_EFFECT', 'نطاق التأثير');
+tz_def('ADM_TIME_OF_CONQUER', 'وقت الاحتلال');
+tz_def('ADM_TIME_OF_ACTIVATION', 'وقت التفعيل');
+tz_def('ADM_RETURN_TO_NATARS', 'إعادة للتتار');
+tz_def('ADM_SHOP_PROMO_CODES', 'المتجر وأكواد العروض');
+tz_def('ADM_DIRECTLY', 'مباشرة.');
+tz_def('ADM_CREATE_A_CODE', 'إنشاء كود');
+tz_def('ADM_CODE', 'الكود');
+tz_def('ADM_MAX_USES_0', 'الحد الأقصى للاستخدام (0 = &infin;)');
+tz_def('ADM_EXPIRES_IN_DAYS_0_NEVER', 'ينتهي خلال (أيام، 0 = لا ينتهي)');
+tz_def('ADM_ONCE_PER_PLAYER', 'مرة واحدة لكل لاعب');
+tz_def('ADM_NOTE_OPTIONAL', 'ملاحظة (اختياري)');
+tz_def('ADM_CREATE', 'إنشاء');
+tz_def('ADM_CODES_ARE_CASE_INSENSITIVE_ALLOWED_CHARACTER', 'الأكواد غير حساسة لحالة الأحرف؛ المسموح: A-Z 0-9 . _ &ndash;');
+tz_def('ADM_NO_PROMO_CODES_YET', 'لا توجد أكواد عروض بعد.');
+tz_def('ADM_USES', 'مرات الاستخدام');
+tz_def('ADM_SCOPE', 'النطاق');
+tz_def('ADM_NOTE', 'ملاحظة');
+tz_def('ADM_RECENT_REDEMPTIONS', 'آخر عمليات الاستخدام');
+tz_def('ADM_NO_REDEMPTIONS_YET', 'لا توجد عمليات استخدام بعد.');
+tz_def('ADM_WHEN', 'الوقت');
+tz_def('ADM_REASON_CAMPAIGN', 'السبب / الحملة');
+tz_def('ADM_QUEST_2', 'المهمة');
+tz_def('ADM_EDITOR', 'المحرر');
+tz_def('ADM_QTYP_37', 'qtyp&nbsp;37');
+tz_def('ADM_GET', 'الحصول على');
+tz_def('ADM_EXTENDED', 'موسّعة');
+tz_def('ADM_EVERYONE_ELSE', '، البقية');
+tz_def('ADM_STANDARD', 'قياسية');
+tz_def('ADM_REWARD_VALUES_ARE_LIVE_VIA', 'قيم المكافآت مباشرة عبر');
+tz_def('ADM_FIXED', 'ثابتة');
+tz_def('ADM_STANDARD_QUEST_CORE25', 'قياسية (quest_core25)');
+tz_def('ADM_EXTENDED_QUEST_CORE', 'موسّعة (quest_core)');
+tz_def('ADM_ON', 'مفعّل');
+tz_def('ADM_PLUS_DAYS', 'بلس (أيام)');
+tz_def('ADM_REQ_LEVEL', 'المستوى&nbsp;المطلوب');
+tz_def('ADM_QUEST_HOVER', 'المهمة (تلميح)');
+tz_def('ADM_SAVE_ALL_CHANGES', 'حفظ كل التغييرات');
+tz_def('ADM_SAVES_EVERY_ROW_FOR_THE', 'يحفظ كل صف لنسخة');
+tz_def('ADM_VARIANT', 'المهام.');
+tz_def('ADM_RESET_THIS_VARIANT_TO_DEFAULTS', 'إعادة هذه النسخة للإعدادات الافتراضية');
+tz_def('ADM_MULTI_ACCOUNT', 'الحسابات المتعددة');
+tz_def('ADM_DETECTION', 'الكشف');
+tz_def('ADM_RISK_SCORE_NOT_PROOF', 'درجة خطورة، وليست إثباتًا');
+tz_def('ADM_WINDOW_DAYS', 'النافذة الزمنية (أيام)');
+tz_def('ADM_MIN_SCORE', 'الحد الأدنى للدرجة');
+tz_def('ADM_FOCUS_ON_UID_OPTIONAL', 'التركيز على معرّف مستخدم (اختياري)');
+tz_def('ADM_ANALYSE', 'تحليل');
+tz_def('ADM_NO_ACCOUNT_PAIRS_AT_OR_ABOVE_THE_CURRENT_SCO', 'لا توجد أزواج حسابات عند أو فوق درجة الخطورة الحالية.');
+tz_def('ADM_RISK', 'الخطورة');
+tz_def('ADM_ACCOUNT_A', 'الحساب أ');
+tz_def('ADM_ACCOUNT_B', 'الحساب ب');
+tz_def('ADM_WHY', 'السبب');
+tz_def('ADM_LOGIN_LOG', 'سجل الدخول');
+tz_def('ADM_FOCUS', 'تركيز');
+tz_def('ADM_RESET_2', 'إعادة تعيين');
+tz_def('ADM_DASHBOARD', 'لوحة التحكم');
+tz_def('ADM_PER_PLAYER', 'لكل لاعب');
+tz_def('ADM_7_DAY_RESOURCE_BALANCE', 'رصيد الموارد لـ7 أيام');
+tz_def('ADM_HOURS_OF_PROD_ALLOWED', 'ساعات الإنتاج المسموحة');
+tz_def('ADM_SHOW_2', 'عرض');
+tz_def('ADM_ALL_WITH_ACTIVITY', 'الكل مع النشاط');
+tz_def('ADM_OVER_LIMIT_ONLY', 'تجاوز الحد فقط');
+tz_def('ADM_WW_ARTEFACT_OVERRIDDEN', 'عجائب الدنيا / قطعة أثرية / تجاوز يدوي');
+tz_def('ADM_REFRESH_2', 'تحديث');
+tz_def('ADM_NO_INTER_PLAYER_TRANSFERS_RECORDED_IN_THIS_W', 'لا توجد تحويلات بين اللاعبين مسجّلة في هذه النافذة بعد.');
+tz_def('ADM_VILLAGES_POP', 'القرى / السكان');
+tz_def('ADM_PROD_H', 'الإنتاج/ساعة');
+tz_def('ADM_RECEIVED_7D', 'المستلَم (7 أيام)');
+tz_def('ADM_LIMIT', 'الحد');
+tz_def('ADM_USAGE', 'الاستخدام');
+tz_def('ADM_OVERRIDE', 'تجاوز يدوي');
+tz_def('ADM_AUTO', 'تلقائي');
+tz_def('ADM_CUSTOM_CAP', 'حد مخصص');
+tz_def('ADM_SAVE_3', 'حفظ');
+tz_def('ADM_REGISTRATION', 'التسجيل');
+tz_def('ADM_BLOCKLIST', 'قائمة الحظر');
+tz_def('ADM_BLOCK_NEW_REGISTRATIONS_BY_A_SPECIFIC', 'حظر التسجيلات الجديدة عن طريق');
+tz_def('ADM_USERNAME_3', 'اسم مستخدم');
+tz_def('ADM_A_SPECIFIC', '، محدد');
+tz_def('ADM_OR_A_WHOLE', '، أو');
+tz_def('ADM_E_MAIL_DOMAIN', 'نطاق بريد إلكتروني كامل');
+tz_def('ADM_ADD_A_BLOCK', 'إضافة حظر');
+tz_def('ADM_E_MAIL_ADDRESS', 'البريد الإلكتروني');
+tz_def('ADM_E_MAIL_DOMAIN_2', 'نطاق البريد الإلكتروني');
+tz_def('ADM_VALUE', 'القيمة');
+tz_def('ADM_ADD_BLOCK', 'إضافة الحظر');
+tz_def('ADM_DOMAIN_ENTER_JUST_THE_DOMAIN', 'النطاق: أدخل النطاق فقط (');
+tz_def('ADM_NO_REGISTRATION_BLOCKS_YET', 'لا توجد حظورات تسجيل بعد.');
+tz_def('ADM_ADDED', 'تمت الإضافة');
+tz_def('ADM_REASON_2', 'السبب');
+tz_def('ADM_REMOVE_2', 'إزالة');
+tz_def('ADM_WORLD_MAP', 'خريطة العالم');
+tz_def('ADM_HEATMAP', 'خريطة الكثافة');
+tz_def('ADM_GRID_RESOLUTION', 'دقة الشبكة');
+tz_def('ADM_INACTIVE_AFTER_DAYS', 'غير نشط بعد (أيام)');
+tz_def('ADM_REBUILD', 'إعادة بناء');
+tz_def('ADM_VILLAGE_DENSITY', 'كثافة القرى');
+tz_def('ADM_TRIBE_DENSITY', 'كثافة القبائل');
+tz_def('ADM_INACTIVITY', 'الخمول');
+tz_def('ADM_ATTACKS', 'الهجمات');
+tz_def('ADM_SUMMARY', 'الملخص');
+tz_def('ADM_PLAYER_VILLAGES', 'قرى اللاعبين');
+tz_def('ADM_INACTIVE_VILLAGES', 'القرى الخاملة');
+tz_def('ADM_ATTACKS_IN_FLIGHT', 'الهجمات الجارية');
+tz_def('ADM_LEGEND', 'وسيلة الإيضاح');
+tz_def('ADM_TRIBE_TOTALS', 'إجماليات القبائل');
+tz_def('ADM_NO_PLAYER_VILLAGES_FOUND', 'لم يتم العثور على قرى لاعبين.');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// لوحة الأدمن - قوالب (الدفعة 8 والأخيرة: باقي الـ26 قالبًا)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADM_404_FILE_NOT_FOUND', '404 - الملف غير موجود');
+tz_def('ADM_WE_LOOKED_404_TIMES_ALREADY_BUT_CAN_T_FIND_A', 'بحثنا 404 مرة بالفعل ولم نجد شيئًا، ولا حتى علامة X تدل على المكان.');
+tz_def('ADM_THIS_SYSTEM_IS_NOT_COMPLETE_YET_SO_THE_PAGE', 'هذا النظام لم يكتمل بعد. لذا فالصفحة على الأرجح غير موجودة.');
+tz_def('ADM_NOT_FOUND', 'غير موجود');
+tz_def('ADM_NEW_MESSAGE', 'رسالة جديدة');
+tz_def('ADM_TO', 'إلى');
+tz_def('ADM_RECIPIENT', 'المستلم');
+tz_def('ADM_SEND_MESSAGE', 'إرسال رسالة');
+tz_def('ADM_PLAYER_NOT_FOUND', 'اللاعب غير موجود.');
+tz_def('ADM_GO_BACK', 'رجوع');
+tz_def('ADM_MESSAGE_FROM_ADMIN', 'رسالة من الأدمن');
+tz_def('ADM_WRITE_YOUR_MESSAGE_HERE', 'اكتب رسالتك هنا...');
+tz_def('ADM_TROOP', 'الوحدة');
+tz_def('ADM_ARMOURY', 'الترسانة');
+tz_def('ADM_BLACKSMITH', 'الحدادة');
+tz_def('ADM_BACK_3', 'رجوع');
+tz_def('ADM_NOW', 'الآن:');
+tz_def('ADM_CREATE_USERS', '👤 إنشاء مستخدمين');
+tz_def('ADM_SUBMITTING_THIS_FORM_WILL_CREATE_NEW_USERS_A', 'إرسال هذا النموذج سينشئ مستخدمين و/أو قرى جدد على السيرفر!');
+tz_def('ADM_MANY_ACCOUNTS_1_VILLAGE', 'حسابات متعددة (قرية واحدة)');
+tz_def('ADM_1_ACCOUNT_MANY_VILLAGES', 'حساب واحد (قرى متعددة)');
+tz_def('ADM_BASE_NAME', 'الاسم الأساسي');
+tz_def('ADM_4_20_CHARACTERS_EX_FARM_5_FARM1_FARM5_SINGLE', '4-20 حرفًا. مثال: Farm | 5 → Farm1..Farm5. مثال حساب واحد: FarmLord | 5 قرى.');
+tz_def('ADM_WARNING_2', 'تحذير:');
+tz_def('ADM_LARGE_VALUES_MAY_FREEZE_THE_SERVER', 'القيم الكبيرة قد تجمّد السيرفر!');
+tz_def('ADM_HOW_MANY_ACCOUNTS', 'عدد الحسابات');
+tz_def('ADM_HOW_MANY_VILLAGES', 'عدد القرى');
+tz_def('ADM_1_200_SINGLE_ONLY', '1 - 200 (حساب واحد فقط)');
+tz_def('ADM_ENABLE_BEGINNER_PROTECTION', 'تفعيل حماية المبتدئين');
+tz_def('ADM_CREATE_2', '+ إنشاء');
+tz_def('ADM_ADD_VILLAGE', 'إضافة قرية');
+tz_def('ADM_COORDINATES_X_Y', 'الإحداثيات (X|Y)');
+tz_def('ADM_ADD_VILLAGE_2', 'إضافة قرية');
+tz_def('ADM_TO_ENSURE_THAT_YOU_WON_T_GET_BANNED_AGAIN_IN', 'لضمان عدم تعرضك للحظر مرة أخرى مستقبلًا، يجب قراءة القواعد بعناية:');
+tz_def('ADM_GAME_RULES', '» قواعد اللعبة');
+tz_def('ADM_TO_CONTINUE_PLAYING_CONTACT_THE_MULTIHUNTER', 'لمواصلة اللعب، تواصل مع مطارد الحسابات المتعددة وسوّ الأمر معه/معها');
+tz_def('ADM_WRITE_MESSAGE', '» كتابة رسالة');
+tz_def('ADM_HEED_THE_FOLLOWING_ADVICE_WHEN_WRITING_YOUR', 'انتبه للنصائح التالية عند كتابة رسالتك:');
+tz_def('ADM_THERE_IS_ALWAYS_A_REASON_FOR_A_BAN', '● دائمًا يوجد سبب للحظر.');
+tz_def('ADM_TRY_TO_THINK_ABOUT_POSSIBLE_REASONS_FOR_THIS', 'حاول التفكير في الأسباب المحتملة لهذا الحظر');
+tz_def('ADM_AND_PUT_THINGS_STRAIGHT_WITH_THE_MULTIHUNTER', 'وسوّ الأمر مع مطارد الحسابات المتعددة.');
+tz_def('ADM_MULTIHUNTERS_CAN_REVIEW_ENORMOUS_AMOUNTS_OF', '● يمكن لمطاردي الحسابات المتعددة مراجعة كميات هائلة من المعلومات حول الحسابات.');
+tz_def('ADM_STICK_TO_THE_TRUTH', 'التزم بالحقيقة');
+tz_def('ADM_AND_DO_NOT_MAKE_EXCUSES_TO_JUSTIFY_YOUR_VIOL', 'ولا تختلق أعذارًا لتبرير مخالفتك للقواعد.');
+tz_def('ADM_BE_COOPERATIVE_AND_INSIGHTFUL_THIS_MIGHT_RED', '● كن متعاونًا وواعيًا، فقد يقلل ذلك من العقوبة.');
+tz_def('ADM_CALM_AND_POLITE', 'هادئًا ومهذبًا');
+tz_def('ADM_WHILE_TALKING_TO_THE_MULTIHUNTER_AND_TELLING', 'أثناء التحدث مع مطارد الحسابات المتعددة وشرح وجهة نظرك له/لها.');
+tz_def('ADM_INCLUDES_RESOURCES_MAIN_BUILDING_RALLY_POINT', 'يشمل الموارد، المبنى الرئيسي، نقطة التجمع، المخزن، المخزن الغلال، السور، السوق، مقر الإقامة، الجنود (لترقية البطل)، وخبيئة واحدة.');
+tz_def('ADM_IF_THE_MULTIHUNTER_DOES_NOT_ANSWER_IMMEDIATE', '● إذا لم يرد مطارد الحسابات المتعددة فورًا، فهو على الأرجح غير متصل. لن يُحل الأمر بشكل أسرع بإرسال عدة رسائل، خاصة إذا لم يقرأ الرسالة الأولى بعد.');
+tz_def('ADM_IF_YOU_HAVE_REALLY_BEEN_BANNED_UNJUSTLY_TRY', '● إذا كنت قد تعرضت للحظر ظلمًا فعلًا، حاول أن تبقى');
+tz_def('ADM_RESOURCE', 'المورد');
+tz_def('ADM_AMOUNT', 'الكمية');
+tz_def('ADM_MAXIMUM_CAPACITY', 'السعة القصوى');
+tz_def('ADM_BACK_TO_VILLAGE_2', '← رجوع للقرية');
+tz_def('ADM_ADMIN_CONTROL', 'التحكم الإداري');
+tz_def('ADM_SERVER_ADMINISTRATION', 'إدارة السيرفر');
+tz_def('ADM_SECURE_ACCESS_TO_NOVATERRA_PANEL', 'دخول آمن للوحة Novaterra');
+tz_def('ADM_PASSWORD', 'كلمة المرور');
+tz_def('ADM_ACCESS_PANEL', 'دخول اللوحة');
+tz_def('ADM_ENTER_ADMIN_USERNAME', 'أدخل اسم مستخدم الأدمن');
+tz_def('ADM_ROMANS', 'الرومان');
+tz_def('ADM_TEUTONS', 'التيوتون');
+tz_def('ADM_GAULS', 'الغال');
+tz_def('ADM_RESET_GOLD_FOR_ALL_PLAYERS', 'إعادة تعيين الذهب لكل اللاعبين');
+tz_def('ADM_RESET_ALL_PLAYERS_GOLD', 'إعادة تعيين ذهب كل اللاعبين');
+tz_def('ADM_THIS_ACTION_WILL_SET_THE_GOLD_TO', 'هذا الإجراء سيضبط الذهب على');
+tz_def('ADM_FOR_ALL_PLAYERS_FROM_THE_SERVER', 'لكل اللاعبين في السيرفر.');
+tz_def('ADM_WARNING_THE_ACTION_IS_IRREVERSIBLE_MAKE_SURE', '⚠️ تحذير: هذا الإجراء لا يمكن التراجع عنه! تأكد من وجود نسخة احتياطية أولًا.');
+tz_def('ADM_RESET_GOLD_NOW', 'إعادة تعيين الذهب الآن');
+tz_def('ADM_ALL_PLAYERS_GOLD_HAS_BEEN_RESET', '✓ تم إعادة تعيين ذهب كل اللاعبين!');
+tz_def('ADM_RESET_ALL_PLAYERS_PLUS', 'إعادة تعيين بلس لكل اللاعبين');
+tz_def('ADM_THIS_ACTION_WILL_DISABLE_NOVATERRA_PLUS_FOR_AL', 'هذا الإجراء سيعطّل Novaterra Plus لكل اللاعبين.');
+tz_def('ADM_PLUS_IT_WILL_BE_SET_TO_0_DAYS_FOR_EVERYONE', '⚠️ سيتم ضبط بلس على 0 أيام للجميع.');
+tz_def('ADM_RESET_PLUS_NOW', 'إعادة تعيين بلس الآن');
+tz_def('ADM_PLUS_ALL_THE_PLAYERS_HAVE_BEEN_RESET', '✓ تم إعادة تعيين بلس لكل اللاعبين!');
+tz_def('ADM_RESET_ALL_RESOURCE_BONUSES', 'إعادة تعيين كل مكافآت الموارد');
+tz_def('ADM_THIS_ACTION_WILL_DISABLE_THE_25_BONUS_FOR_AL', 'هذا الإجراء سيعطّل مكافأة الـ25% لكل الموارد عند كل اللاعبين.');
+tz_def('ADM_ALL_RESOURCE_BONUSES_WILL_BE_SET_TO_0_DAYS', '⚠️ سيتم ضبط كل مكافآت الموارد على 0 أيام.');
+tz_def('ADM_RESET_RESOURCE_BONUS', 'إعادة تعيين مكافأة الموارد');
+tz_def('ADM_RESOURCE_BONUSES_HAVE_BEEN_RESET_FOR_ALL_PLA', '✓ تم إعادة تعيين مكافآت الموارد لكل اللاعبين!');
+tz_def('ADM_IGM_REPORTS_LOOKUP', 'بحث في الرسائل الداخلية / التقارير');
+tz_def('ADM_IGM_BY_ID', 'رسالة داخلية بالمعرّف');
+tz_def('ADM_GO', 'انتقال');
+tz_def('ADM_REPORT_BY_ID', 'تقرير بالمعرّف');
+tz_def('ADM_ENTER_MESSAGE_ID', 'أدخل معرّف الرسالة...');
+tz_def('ADM_ENTER_REPORT_ID', 'أدخل معرّف التقرير...');
+tz_def('ADM_SITTER_1_2', 'الجالس 1');
+tz_def('ADM_SITTER_2_2', 'الجالس 2');
+tz_def('ADM_CULTURE_POINTS_2', 'نقاط الثقافة');
+tz_def('ADM_ATTACK_POINTS_THIS_WEEK', 'نقاط الهجوم (هذا الأسبوع)');
+tz_def('ADM_DEFENCE_POINTS_THIS_WEEK', 'نقاط الدفاع (هذا الأسبوع)');
+tz_def('ADM_RESOURCES_RAIDED_THIS_WEEK', 'الموارد المنهوبة (هذا الأسبوع)');
+tz_def('ADM_TOTAL_ATTACK_POINTS', 'إجمالي نقاط الهجوم');
+tz_def('ADM_TOTAL_DEFENCE_POINTS', 'إجمالي نقاط الدفاع');
+tz_def('ADM_EDIT_PLAYER_ADDITIONAL_INFO', 'تعديل معلومات اللاعب الإضافية');
+tz_def('ADM_THE_ACCOUNT_WILL_BE_DELETED_IN', 'سيتم حذف الحساب خلال');
+tz_def('ADM_CANCEL_3', '✖ إلغاء');
+tz_def('ADM_CANCEL_DELETION', 'إلغاء الحذف');
+tz_def('ADM_DESCRIPTION', 'الوصف');
+tz_def('ADM_AGE', 'العمر');
+tz_def('ADM_GENDER', 'الجنس');
+tz_def('ADM_LOCATION_2', 'الموقع');
+tz_def('ADM_LAST_IP', 'آخر IP');
+tz_def('ADM_LANGUAGE', 'اللغة');
+tz_def('ADM_BAN_USER_2', '&raquo; حظر المستخدم');
+tz_def('ADM_SEND_MESSAGE_2', '&raquo; إرسال رسالة');
+tz_def('ADM_EDIT_PLUS_RES_BONUS', '&raquo; تعديل بلس ومكافأة الموارد');
+tz_def('ADM_EDIT_SITTERS_2', '&raquo; تعديل الجالسين');
+tz_def('ADM_EDIT_PROTECTION', '&raquo; تعديل الحماية');
+tz_def('ADM_EDIT_PASSWORD', '&raquo; تعديل كلمة المرور');
+tz_def('ADM_EDIT_OVERALL_OFF_DEF', '&raquo; تعديل إجمالي الهجوم والدفاع');
+tz_def('ADM_EDIT_WEEKLY_OFF_DEF_RAID', '&raquo; تعديل الهجوم والدفاع والنهب الأسبوعي');
+tz_def('ADM_USER_LOGIN_LOG', '&raquo; سجل دخول المستخدم');
+tz_def('ADM_USER_ILLEGAL_LOG', '&raquo; سجل مخالفات المستخدم');
+tz_def('ADM_RECOUNT_POPULATION', 'إعادة احتساب السكان');
+tz_def('ADM_EMAIL_2', 'البريد الإلكتروني');
+tz_def('ADM_IP', 'IP');
+tz_def('ADM_TRIBE_3', 'القبيلة:');
+tz_def('ADM_VILLAGES_3', 'القرى:');
+tz_def('ADM_POP_3', 'السكان:');
+tz_def('ADM_COORDS_2', 'الإحداثيات:');
+tz_def('ADM_ILLEGALS_LOG', '🚨 سجل المخالفات:');
+tz_def('ADM_DETECTED_OFFENCES', 'المخالفات المكتشفة');
+tz_def('ADM_BACK_TO_PLAYER', '← رجوع للاعب');
+tz_def('ADM_LOGIN_LOG_2', '🔐 سجل الدخول:');
+tz_def('ADM_RECENT_LOGIN_ATTEMPTS', 'محاولات الدخول الأخيرة');
+tz_def('ADM_LOG_ID', 'معرّف السجل');
+tz_def('ADM_IP_ADDRESS', 'عنوان IP');
+tz_def('ADM_INFO', 'معلومات');
+tz_def('ADM_BUILD_LOG', '— سجل البناء');
+tz_def('ADM_LATEST_200_ACTION', 'آخر 200 إجراء');
+tz_def('ADM_NO_ACTION_RECORDED_YET', 'لا يوجد إجراء مسجّل بعد.');
+tz_def('ADM_POPULATION_2', 'السكان');
+tz_def('ADM_COORDINATES', 'الإحداثيات');
+tz_def('ADM_TROOPS_2', 'الجنود');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// لوحة الأدمن - نصوص طويلة ومتعددة الأسطر (التنظيف الأخير)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADM_E_MAIL_ADDRESS_2', 'البريد الإلكتروني');
+tz_def('ADM_E_G_AN_OBSCENE_USERNAME_OR_THE_ENTIRE', '(مثال: اسم مستخدم مسيء، أو نطاق بريد إلكتروني كامل');
+tz_def('ADM_DOMAIN_MATCHING_IS_EXACT_AND_CASE_INSENSITIV', 'المطابقة دقيقة وغير حساسة لحالة الأحرف. الحسابات الحالية لا تتأثر — فقط التسجيلات الجديدة.');
+tz_def('ADM_WITH_OR_WITHOUT_THE_LEADING_E_MAIL_THE_FULL', ')، مع أو بدون علامة "@" في البداية. البريد الإلكتروني: العنوان الكامل. اسم المستخدم: الاسم بالضبط.');
+tz_def('ADM_SILVER_2', 'فضة &nbsp;|&nbsp;');
+tz_def('ADM_OF_EACH', 'من كل &nbsp;|&nbsp;');
+tz_def('ADM_HOURLY_RESOURCES_PRODUCED_BY_EACH_POINT_THE', 'الموارد التي تُنتَج كل ساعة من كل نقطة استثمرها البطل في خاصية الموارد، في القرية التي يوجد بها البطل. يختار اللاعبون بحرية بين توزيعها على الموارد الأربعة أو تركيزها على مورد واحد.');
+tz_def('ADM_HOURLY_RESOURCES_PER_POINT_INVESTED_IN_THE_H', 'الموارد بالساعة لكل نقطة مستثمرة في خاصية موارد البطل. القيمة الأولى تُطبَّق عند توزيع اللاعب للمكافأة على الموارد الأربعة، والثانية عند تركيزها على مورد واحد. تتناسب كلتاهما مع سرعة السيرفر.');
+tz_def('ADM_HIT_POINTS_THE_HERO_RECOVERS_PER_DAY_ON_TOP', 'نقاط الصحة التي يستعيدها البطل يوميًا بالإضافة إلى النقاط المستثمرة في خاصية التجدد وأي عناصر مجهّزة. بدونها، لن يشفى البطل الذي لا يملك نقاط تجدد أبدًا وسيموت في النهاية أثناء المغامرات. تتناسب مع سرعة السيرفر. القيمة 0 تعطّلها.');
+tz_def('ADM_HOW_LONG_ONE_CRON_PHP_INVOCATION_KEEPS_WORKI', 'المدة التي يستمر فيها استدعاء واحد لـ cron.php في العمل. معظم الاستضافات المشتركة تسمح بتشغيل cron كل 5 دقائق فقط، بينما تتوقع الأتمتة تشغيله كل دقيقة تقريبًا — لذا يقوم الاستدعاء الواحد بتشغيل عدة دورات متتالية. استخدم 300 لجدولة "*/5". اضبط القيمة على 0 فقط إذا كانت استضافتك تسمح بتشغيل cron كل دقيقة.');
+tz_def('ADM_ENABLE_DISABLE_IF_A_PLAYER_LEAVES_AT_LEAST_O', 'تفعيل (تعطيل) إذا ترك لاعب رسالة واحدة على الأقل في موضوع بالمنتدى، سيتلقى رسائل داخل اللعبة عند ظهور رسائل جديدة في نفس الموضوع (أي أنه "مشترك" فيه تقنيًا)');
+tz_def('ADM_ENABLE_DISABLE_THE_SERVER_MILESTONES_WIDGET', 'تفعيل (تعطيل) أداة "إنجازات السيرفر" (أول لاعب يؤسس قرية ثانية، يصل لـ1000 نسمة، يستولي على قطعة أثرية، يحتل عجيبة دنيا، يحتل مخطط بناء عجيبة دنيا، يؤسس تحالفًا، أو يحتل قرية من لاعب آخر) والتي تظهر أعلى صفحة الإحصائيات » عام');
+tz_def('ADM_CREATE_PROMO_VOUCHER_CODES_PLAYERS_REDEEM_FO', 'إنشاء أكواد عروض / قسائم يستبدلها اللاعبون بذهب في صفحة بلس. حدد كمية ذهب ثابتة، وحد استخدام إجمالي اختياري، وهل يمكن لكل لاعب استخدامه مرة واحدة، وتاريخ انتهاء اختياري. لمكافأة لمرة واحدة لصائد أخطاء، أنشئ كودًا بحد استخدام أقصى 1 — أو استخدم');
+tz_def('ADM_DENSITY_OVERLAYS_ON_THE_WORLD_GRID_TO_HELP_W', 'طبقات كثافة على شبكة العالم للمساعدة في التوازن عند البدء: أماكن تجمع القرى، القبائل المسيطرة على منطقة، أماكن تواجد اللاعبين الخاملين (مناطق ميتة / أماكن جيدة للبدء)، وأماكن سقوط الهجمات حاليًا. الشمال (+y) للأعلى.');
+tz_def('ADM_HEURISTIC_CORRELATION_OF_ACCOUNT_PAIRS_BY_SH', 'ربط استدلالي لأزواج الحسابات عبر عنوان IP المشترك، الشبكة الفرعية، بصمة الجهاز/المتصفح (User-Agent)، تداخل أوقات الدخول، وتدفق تحويل الموارد. هذه');
+tz_def('ADM_USE_IT_TO_PRIORITISE_WHICH_PAIRS_A_HUMAN_SHO', '&mdash; استخدمها لتحديد أولوية الأزواج التي يجب على مشرف بشري التحقق منها. لا يُحظر أي شيء تلقائيًا.');
+tz_def('ADM_ROW_CAP_REACHED_WHILE_SCANNING_LOGIN_HISTORY', 'تم الوصول للحد الأقصى للصفوف أثناء فحص سجل الدخول (النافذة الزمنية كبيرة / السيرفر مزدحم جدًا). النتائج لا تزال صالحة لكن قد تكون غير مكتملة — ضيّق النافذة الزمنية لتغطية كاملة.');
+tz_def('ADM_RECEIVED_FROM_OTHER_PLAYERS_VERSUS_AN_AUTOMA', '(مستلَم من لاعبين آخرين) مقابل حد تلقائي مشتق من إنتاج اللاعب بالساعة (');
+tz_def('ADM_OF_PRODUCTION_PER_WINDOW_WW_VILLAGES_AND_ART', 'من الإنتاج لكل نافذة زمنية). قرى عجائب الدنيا وقرى القطع الأثرية تُصنَّف كاستثناءات إمداد. اضبط تجاوزًا يدويًا لاستثناء لاعب (عجيبة دنيا / موثوق) أو لمنحه حدًا مخصصًا. لا يُحظر شيء تلقائيًا — هذه أداة رؤية وتحكم لمشرف بشري.');
+tz_def('ADM_THE_7_DAY_BALANCE_FILLS_IN_AS_MERCHANT_DELIV', 'يمتلئ رصيد الـ7 أيام تدريجيًا مع معالجة توصيلات التجار بين اللاعبين المختلفين بعد نشر هذه الميزة.');
+tz_def('ADM_EDIT_THE_REWARD_EACH_QUEST_GRANTS_WOOD_CLAY', 'تعديل المكافأة التي تمنحها كل مهمة (خشب / طين / حديد / محصول / ذهب / أيام بلس) ومستوى المتطلب (مثل مستوى المبنى الرئيسي لمهام البناء). القيم مأخوذة من الإعدادات الافتراضية المرفقة، فلا يتغير شيء حتى تعدّلها. نسختا المهام لهما مهام ومكافآت مختلفة — اختر النسخة التي يستخدمها سيرفرك (اللاعبون على');
+tz_def('ADM_IN_THE_QUEST_TEMPLATES_QUESTS_MARKED', 'في قوالب المهام. المهام المعلّمة بـ');
+tz_def('ADM_KEEP_THEIR_ORIGINAL_HARDCODED_LOGIC_CONDITIO', 'تحتفظ بمنطقها الأصلي الثابت (مكافآت شرطية، مطالبات إنجازات ذرية، آليات خاصة) ولا تتأثر بالتعديلات هنا. أرقام المكافآت الظاهرة داخل نص كل مهمة على الشاشة هي نصوص قوالب منفصلة — التعديلات هنا تغيّر ما يُمنح فعليًا؛ حدّث نصوص لغة المهام إذا أردت أن تطابق المعاينة.');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// مكافآت التحالف (نقل T4)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ALLYBONUS_TAB', 'المكافآت');
+tz_def('ALLYBONUS_RECRUITMENT', 'التجنيد');
+tz_def('ALLYBONUS_PHILOSOPHY', 'الفلسفة');
+tz_def('ALLYBONUS_METALLURGY', 'المعادن');
+tz_def('ALLYBONUS_COMMERCE', 'التجارة');
+tz_def('ALLYBONUS_LEVEL', 'المستوى');
+tz_def('ALLYBONUS_NEXT', 'التالي');
+tz_def('ALLYBONUS_MAXED', 'مفتوح بالكامل');
+tz_def('ALLYBONUS_UNLOCKING', 'جاري فتح المستوى');
+tz_def('ALLYBONUS_DONATE', 'تبرّع');
+tz_def('ALLYBONUS_TRIPLE', 'مضاعفة هذا التبرع ثلاث مرات');
+tz_def('ALLYBONUS_DAILY_LEFT', 'المتبقي من حد تبرعك اليومي');
+tz_def('ALLYBONUS_CONTRIBUTORS', 'المساهمات');
+tz_def('ALLYBONUS_MEMBER', 'العضو');
+tz_def('ALLYBONUS_TOTAL', 'إجمالي التبرع');
+tz_def('ALLYBONUS_MSG_OK', 'تم التبرع بالموارد.');
+tz_def('ALLYBONUS_MSG_UPGRADING', 'يتم حاليًا فتح هذه المكافأة؛ التبرعات متوقفة مؤقتًا.');
+tz_def('ALLYBONUS_MSG_LIMIT', 'هذا سيتجاوز حد تبرعك اليومي.');
+tz_def('ALLYBONUS_MSG_RESOURCES', 'لا توجد موارد كافية في هذه القرية.');
+tz_def('ALLYBONUS_MSG_NOGOLD', 'لا يوجد ذهب كافٍ لمضاعفة هذا التبرع ثلاث مرات.');
+tz_def('ALLYBONUS_MSG_NOALLY', 'أنت لست في تحالف.');
+tz_def('ALLYBONUS_MSG_INVALID', 'تبرع غير صالح.');
+tz_def('ALLYBONUS_HINT', 'نوع المورد لا يهم، فقط الكمية الإجمالية. أثناء فتح مستوى معين، لا يمكن لتلك المكافأة استقبال تبرعات.');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// لوحة الأدمن - حزمة الرسوميات ومكافآت التحالف
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADM_SERVER_GRAPHIC_PACK', 'حزمة رسوميات السيرفر');
+tz_def('ADM_SERVER_GRAPHIC_PACK_TIP', 'حزمة الرسوميات التي يراها كل لاعب افتراضيًا، تُقرأ من مجلد gpack/.');
+tz_def('ADM_PLAYER_GRAPHIC_PACKS', 'حزم رسوميات اللاعبين');
+tz_def('ADM_PLAYER_GRAPHIC_PACKS_TIP', 'عند التفعيل، يمكن للاعبين تحديد حزمة رسوميات خاصة بهم من الملف الشخصي (الملف الشخصي ← الرسوميات). عند التعطيل، يرى الجميع حزمة السيرفر.');
+tz_def('ADM_ALLIANCE_BONUSES', 'مكافآت التحالف');
+tz_def('ADM_ALLIANCE_BONUSES_TIP', 'مكافآت تحالف T4: يتبرع الأعضاء بالموارد لفتح التجنيد، الفلسفة، المعادن، والتجارة.');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// مكافآت التحالف - وصف كل مكافأة
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ALLYBONUS_RECRUITMENT_DESC', 'يسرّع تدريب الجنود في كل مبنى منتج للجنود. يتضاعف مع خوذات البطل.');
+tz_def('ALLYBONUS_PHILOSOPHY_DESC', 'يزيد إنتاج نقاط الثقافة من المباني وخوذات البطل. احتفالات دار المدينة لا تتأثر.');
+tz_def('ALLYBONUS_METALLURGY_DESC', 'يزيد قوة الهجوم والدفاع لجنودك، إضافة إلى ترقيات الحدادة.');
+tz_def('ALLYBONUS_COMMERCE_DESC', 'يزيد ما يمكن أن يحمله كل تاجر. يتضاعف مع مكتب التجارة.');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// الإحصائيات الرسومية (Novaterra Plus)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('PLUSSTATS_TITLE', 'إحصائيات رسومية');
+tz_def('PLUSSTATS_INTRO', 'تطور حسابك عبر الزمن.');
+tz_def('PLUSSTATS_RANK', 'الترتيب');
+tz_def('PLUSSTATS_POP', 'السكان');
+tz_def('PLUSSTATS_ARMY', 'قوة الجيش (استهلاك المحصول بالساعة)');
+tz_def('PLUSSTATS_VILLAGES', 'القرى');
+tz_def('PLUSSTATS_TROOPS', 'الجنود');
+tz_def('PLUSSTATS_UPKEEP', 'استهلاك المحصول بالساعة');
+tz_def('PLUSSTATS_METRIC', 'المقياس');
+tz_def('PLUSSTATS_NOW', 'الآن');
+tz_def('PLUSSTATS_CHANGE', 'التغيّر');
+tz_def('PLUSSTATS_NODATA', 'لا توجد بيانات كافية بعد');
+tz_def('PLUSSTATS_WAIT', 'يتم حاليًا تسجيل حسابك. تظهر الرسوم البيانية بمجرد وجود لقطتين على الأقل.');
+tz_def('PLUSSTATS_NEEDPLUS', 'الإحصائيات الرسومية ميزة حصرية لـ Novaterra Plus. فعّل بلس لترى تطور حسابك.');
+tz_def('PLUSSTATS_DISABLED', 'الإحصائيات الرسومية غير مفعّلة على هذا السيرفر.');
+tz_def('PLUSSTATS_FOOT', 'تُقاس قوة الجيش باستهلاك المحصول، وهو مقياس الوزن الخاص باللعبة: يحسب الوحدة القوية بقيمة أكبر من الضعيفة. الجنود المرابطون عند لاعبين آخرين لا يزالون محسوبين لك.');
+tz_def('ADM_PLUS_STATISTICS', 'إحصائيات بلس الرسومية');
+tz_def('ADM_PLUS_STATISTICS_TIP', 'يسجّل الترتيب، السكان، القرى، والجيش لكل لاعب، حتى يرى لاعبو بلس تطور حسابهم. التبويب يظهر فقط مع حساب بلس مفعّل.');
+tz_def('ADM_PLUS_STATISTICS_INTERVAL', 'الفاصل الزمني للقطات الإحصائيات (ساعات)');
+tz_def('ADM_PLUS_STATISTICS_INTERVAL_TIP', 'عدد المرات التي تُؤخذ فيها لقطة. على السيرفر السريع يمثل اليوم قدرًا كبيرًا من اللعب، لذا تعطي بضع ساعات منحنى مقروء.');
+tz_def('ADM_PLUS_STATISTICS_KEEP', 'مدة الاحتفاظ بسجل الإحصائيات (أيام)');
+tz_def('ADM_PLUS_STATISTICS_KEEP_TIP', 'القيمة 0 تحتفظ بكل شيء، حتى يرى اللاعبون السجل الكامل لحسابهم منذ بدء التسجيل.');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// مكافآت التحالف - التوفر للأعضاء الجدد
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ALLYBONUS_YOURLEVEL', 'مستواك');
+tz_def('ALLYBONUS_UNLOCKS_IN', 'الفتح التالي خلال');
+tz_def('ALLYBONUS_NEWMEMBER', 'يحصل الأعضاء الجدد على وصول للمستويات الأعلى تدريجيًا: المستوى 2 بعد 24 ساعة في التحالف، المستوى 3 بعد 48 ساعة، وهكذا.');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// التقارير - فلتر حسب نتيجة المعركة
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('TZ_RPT_ALL_RESULTS', 'كل النتائج');
+tz_def('TZ_RPT_F_WON_NOLOSS', 'فوز بدون خسائر');
+tz_def('TZ_RPT_F_WON_LOSS', 'فوز مع خسائر');
+tz_def('TZ_RPT_F_LOST', 'خسارة');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// البطل - إجمالي التجدد (الأساس + العناصر)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('TZ_HERO_REGEN_TOTAL', 'تجدد الصحة');
+tz_def('TZ_HERO_REGEN_BASE', 'أساسي');
+tz_def('TZ_HERO_REGEN_ITEMS', 'من العناصر');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// عجيبة الدنيا الخاصة بالتتار
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('TZ_WW_NATARS', 'التتار');
+tz_def('CONF_SERV_NATARS_WW_START_DELAY', 'بداية عجيبة دنيا التتار');
+tz_def('CONF_SERV_NATARS_WW_START_DELAY_TOOLTIP', 'عدد الأيام بعد ظهور مخططات البناء التي يبدأ فيها التتار ببناء عجيبة دنياهم الخاصة. يتناسب مع سرعة السيرفر. القيمة 0 تعطّله.');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// المحاكي - المكافآت الخاصة المضمّنة تلقائيًا
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('TZ_WS_APPLIED', 'مضمّن تلقائيًا في هذه المحاكاة:');
+tz_def('TZ_WS_ITEM_STRENGTH', 'قوة المعدات');
+tz_def('TZ_WS_ITEM_UNIT', 'مكافأة السلاح');
+tz_def('TZ_WS_VS_NATARS', 'ضد التتار');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// رسالة النظام - معاينة
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADM_PREVIEW', 'معاينة');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// قواعد التسجيل (إعدادات السيرفر)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('CONF_SERV_USRNM_MIN', 'الحد الأدنى لطول اسم المستخدم');
+tz_def('CONF_SERV_USRNM_MAX', 'الحد الأقصى لطول اسم المستخدم');
+tz_def('CONF_SERV_PW_MIN', 'الحد الأدنى لطول كلمة المرور');
+tz_def('CONF_SERV_USRNM_SPECIAL', 'السماح بـ . - _ في أسماء المستخدمين');
+tz_def('CONF_SERV_USRNM_SPECIAL_TOOLTIP', 'عند التفعيل (True)، يمكن أن تحتوي أسماء المستخدمين على نقطة أو شرطة أو شرطة سفلية، ومسافات مفردة بين الكلمات. عند التعطيل (False)، يُقبَل فقط الحروف والأرقام.');
+tz_def('CONF_SERV_REGRULES_TOOLTIP', 'القواعد التي تُفحَص عند تسجيل اللاعب. تغييرها لا يؤثر على الحسابات الحالية.');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// الإحصائيات - قسم التحالف
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('PLUSSTATS_ALLIANCE', 'تحالفك');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// البطل - عناوين الأعمدة في صفحة العناصر
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('HERO_COL_TYPE', 'النوع');
+tz_def('HERO_COL_IMAGE', 'الصورة');
+tz_def('HERO_COL_NAME', 'اسم العنصر');
+tz_def('HERO_COL_TIER', 'الفئة (المكافأة)');
+tz_def('HERO_COL_ACTION', 'الإجراء');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// عجيبة الدنيا - نمط لكل قبيلة
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADM_WW_IMAGE', 'عجيبة الدنيا الخاصة بكل قبيلة');
+tz_def('ADM_WW_IMAGE_TIP', 'كل قبيلة ترى عمل عجيبة الدنيا الفني الخاص بها، سواء على خريطة القرية أو صفحة البناء. القبائل التي لا تملك عملًا فنيًا على القرص تحتفظ بالصورة الأصلية بغض النظر عن هذا الإعداد.');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// عجيبة الدنيا - القرية لا يمكن أن تصبح العاصمة
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('TZ_WW_NO_CAPITAL', 'قرية عجيبة الدنيا لا يمكن أن تصبح عاصمتك.');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// مكافآت التحالف - التبرع بما يتجاوز متطلبات المستوى الأخير
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ALLYBONUS_MSG_OVERMAX', 'هذا هو المستوى الأخير: يمكنك التبرع بحد أقصى %s موارد إضافية.');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// اللاعبون المحميون من الهجمات
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADM_PROTECTED_PLAYERS', 'اللاعبون المحميون');
+tz_def('ADM_PROTECTED_PLAYERS_TIP', 'أسماء لاعبين مفصولة بفواصل لا يمكن مهاجمتهم أو نهبهم من أي أحد. التعزيزات ما زالت مسموحة. اتركه فارغًا للتعطيل.');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// مكوّن البطل في الشريط العلوي
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('HERO_HEADER_AT_HOME',   'البطل في المنزل');
+tz_def('HERO_HEADER_DEAD',      'البطل ميت');
+tz_def('HERO_HEADER_TRAINING',  'البطل قيد التدريب');
+tz_def('HERO_HEADER_NOHERO',    'لا يوجد بطل بعد');
+tz_def('HERO_HEADER_ADVENTURE', 'البطل في مغامرة');
+tz_def('HERO_HEADER_ATTACK',    'البطل مع الجيش');
+tz_def('HERO_HEADER_REINFORCE', 'البطل يقوم بالتعزيز');
+tz_def('HERO_HEADER_IN',        'في');
+tz_def('HERO_HEADER_RETURN_ADV',  'البطل عائد من المغامرة');
+tz_def('HERO_HEADER_RETURN_HOME', 'البطل عائد إلى المنزل');
+tz_def('HERO_HEADER_PER_HOUR',    'في الساعة');
+tz_def('TZ_HEALTH',             'الصحة');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// صلاحيات الجالس
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('SITTER_P_ATTACK', 'إرسال هجمات');
+tz_def('SITTER_P_RAID',   'إرسال غارات');
+tz_def('SITTER_P_REINF',  'إرسال تعزيزات');
+tz_def('SITTER_P_RES',    'إرسال موارد للاعبين آخرين');
+tz_def('SITTER_P_GOLD',   'إنفاق الذهب');
+tz_def('SITTER_P_DENIED', 'صلاحيات الجالس لديك لا تسمح بهذا الإجراء.');
+tz_def('SITTER_P_HINT',        'صلاحيات الجالس الجديد:');
+tz_def('SITTER_P_NOT_SITTING', 'أنت لست جالسًا على أي حساب.');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// تخفيضات وقت التدريب (الثكنة / الإسطبل)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('TRAIN_BONUS_ARTIFACT', 'مكافأة القطعة الأثرية');
+tz_def('TRAIN_BONUS_HERO',     'مكافأة البطل');
+tz_def('TRAIN_BONUS_ALLIANCE', 'مكافأة التحالف');
+tz_def('TRAIN_BONUS_FINAL',    'وقت التدريب');
