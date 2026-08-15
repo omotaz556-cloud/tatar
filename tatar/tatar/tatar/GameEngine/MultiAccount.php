@@ -64,6 +64,12 @@ class MultiAccount
     /** Max pairs returned to the UI. */
     const MAX_PAIRS = 150;
 
+    /** Default auto-ban score threshold (used only if the settings row is missing). */
+    const DEFAULT_AUTO_BAN_SCORE = 90;
+
+    /** In-request cache for getSettings(), same pattern as FeedingSystem::$settingsCache. */
+    private static $settingsCache = null;
+
     /* ---- DB plumbing --------------------------------------------------- */
 
     /** Resolve the raw mysqli link from whatever context we run in. */
@@ -103,6 +109,115 @@ class MultiAccount
             KEY `login_time` (`login_time`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8";
         @mysqli_query($link, $sql);
+
+        // Single-row settings table (id=1), same lazy-schema pattern as
+        // FeedingSystem::ensureSchema() / feeding_settings.
+        @mysqli_query($link, "CREATE TABLE IF NOT EXISTS `" . TB_PREFIX . "mad_settings` (
+            `id`              int(11)    NOT NULL DEFAULT 1,
+            `enabled`         tinyint(1) NOT NULL DEFAULT 0,
+            `auto_ban`        tinyint(1) NOT NULL DEFAULT 0,
+            `auto_ban_score`  int(11)    NOT NULL DEFAULT " . self::DEFAULT_AUTO_BAN_SCORE . ",
+            PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8");
+
+        @mysqli_query($link, "INSERT IGNORE INTO `" . TB_PREFIX . "mad_settings`
+            (`id`, `enabled`, `auto_ban`, `auto_ban_score`) VALUES (1, 0, 0, "
+            . self::DEFAULT_AUTO_BAN_SCORE . ")");
+
+        // Audit log of pairs already auto-banned, so applyAutoBan() never
+        // re-processes (or re-logs) the same pair twice.
+        @mysqli_query($link, "CREATE TABLE IF NOT EXISTS `" . TB_PREFIX . "mad_autoban_log` (
+            `id`        int(11) NOT NULL AUTO_INCREMENT,
+            `uid_a`     int(11) NOT NULL,
+            `uid_b`     int(11) NOT NULL,
+            `score`     int(11) NOT NULL DEFAULT 0,
+            `banned_at` int(11) NOT NULL DEFAULT 0,
+            PRIMARY KEY (`id`),
+            UNIQUE KEY `pair` (`uid_a`, `uid_b`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8");
+    }
+
+    /* ---- Settings (admin panel toggles) --------------------------------- */
+
+    /**
+     * @return array{enabled:bool, auto_ban:bool, auto_ban_score:int}
+     */
+    public static function getSettings()
+    {
+        if (self::$settingsCache !== null) {
+            return self::$settingsCache;
+        }
+
+        $default = ['enabled' => false, 'auto_ban' => false, 'auto_ban_score' => self::DEFAULT_AUTO_BAN_SCORE];
+
+        $link = self::link();
+        if (!$link) {
+            return self::$settingsCache = $default;
+        }
+        self::ensureSchema();
+
+        $res = @mysqli_query($link, "SELECT `enabled`, `auto_ban`, `auto_ban_score`
+                                      FROM `" . TB_PREFIX . "mad_settings` WHERE `id` = 1 LIMIT 1");
+        $row = $res ? mysqli_fetch_assoc($res) : null;
+        if (!$row) {
+            return self::$settingsCache = $default;
+        }
+
+        return self::$settingsCache = [
+            'enabled'        => ((int) $row['enabled']) === 1,
+            'auto_ban'       => ((int) $row['auto_ban']) === 1,
+            'auto_ban_score' => max(1, min(100, (int) $row['auto_ban_score'])),
+        ];
+    }
+
+    public static function isEnabled()
+    {
+        return self::getSettings()['enabled'];
+    }
+
+    public static function isAutoBanEnabled()
+    {
+        return self::getSettings()['auto_ban'];
+    }
+
+    public static function autoBanScore()
+    {
+        return self::getSettings()['auto_ban_score'];
+    }
+
+    /**
+     * Update the admin-configurable toggles. Called only from
+     * GameEngine/Admin/Mods/multiAccountSettings.php.
+     *
+     * @return bool success
+     */
+    public static function saveSettings($enabled, $autoBan, $autoBanScore)
+    {
+        $link = self::link();
+        if (!$link) {
+            return false;
+        }
+        self::ensureSchema();
+
+        $enabled = $enabled ? 1 : 0;
+        $autoBan = $autoBan ? 1 : 0;
+        $score   = max(1, min(100, (int) $autoBanScore));
+
+        $stmt = mysqli_prepare(
+            $link,
+            "UPDATE `" . TB_PREFIX . "mad_settings`
+             SET `enabled` = ?, `auto_ban` = ?, `auto_ban_score` = ?
+             WHERE `id` = 1"
+        );
+        if (!$stmt) {
+            return false;
+        }
+        mysqli_stmt_bind_param($stmt, 'iii', $enabled, $autoBan, $score);
+        $ok = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+        self::$settingsCache = null; // invalidate cache
+        return (bool) $ok;
     }
 
     /* ---- Data collection (called at login) ----------------------------- */
@@ -182,9 +297,16 @@ class MultiAccount
         $link = self::link();
         if (!$link) {
             return ['pairs' => [], 'scanned' => ['login_log' => 0, 'mad_session' => 0],
-                    'window_days' => self::WINDOW_DAYS, 'truncated' => false];
+                    'window_days' => self::WINDOW_DAYS, 'truncated' => false, 'disabled' => false];
         }
         self::ensureSchema();
+
+        // If the admin has switched detection OFF, skip all scanning/scoring
+        // entirely and report the disabled state so the UI can show it.
+        if (!self::isEnabled()) {
+            return ['pairs' => [], 'scanned' => ['login_log' => 0, 'mad_session' => 0],
+                    'window_days' => self::WINDOW_DAYS, 'truncated' => false, 'disabled' => true];
+        }
 
         $days     = isset($opts['days']) ? max(1, (int) $opts['days']) : self::WINDOW_DAYS;
         $minScore = isset($opts['min_score']) ? (int) $opts['min_score'] : self::MIN_REPORT_SCORE;
@@ -282,7 +404,184 @@ class MultiAccount
             'scanned'     => ['login_log' => $scannedLogin, 'mad_session' => $scannedMad],
             'window_days' => $days,
             'truncated'   => $truncated,
+            'disabled'    => false,
         ];
+    }
+
+    /* ---- Auto-ban -------------------------------------------------------- */
+
+    /**
+     * Ban both accounts of any pair whose score has reached the configured
+     * auto-ban threshold, using the CURRENT default-window scoring.
+     *
+     * Deliberately kept OUT of riskPairs() itself: riskPairs() stays a pure,
+     * read-only scoring pass (documented behaviour, relied upon elsewhere).
+     * This method is the only place that can actually write a ban, and it
+     * is only ever invoked from the admin Mod that saves/loads the multiacc
+     * page (see GameEngine/Admin/Mods/multiAccountSettings.php and the
+     * multiacc.tpl page load) — i.e. it runs when an admin/multihunter visits
+     * the page, not as a background job. See MultiAccount.php class docblock
+     * / the gap-analysis note for the cron follow-up.
+     *
+     * Ban attribution uses uid 0 ("System") rather than $_SESSION, so this
+     * still works correctly if it is later wired into a cron/background
+     * context that has no admin session.
+     *
+     * @return array List of pairs that were newly auto-banned in this call
+     *                (each: uid_a, name_a, uid_b, name_b, score).
+     */
+    public static function applyAutoBan()
+    {
+        $link = self::link();
+        if (!$link) {
+            return [];
+        }
+        self::ensureSchema();
+
+        if (!self::isEnabled() || !self::isAutoBanEnabled()) {
+            return [];
+        }
+        $threshold = self::autoBanScore();
+
+        $data = self::riskPairs(['min_score' => $threshold]);
+        if (empty($data['pairs'])) {
+            return [];
+        }
+
+        $newlyBanned = [];
+        foreach ($data['pairs'] as $p) {
+            if ($p['score'] < $threshold) {
+                continue;
+            }
+            $a = min((int) $p['uid_a'], (int) $p['uid_b']);
+            $b = max((int) $p['uid_a'], (int) $p['uid_b']);
+
+            // Skip a pair we've already auto-banned before (idempotent).
+            $chk = mysqli_prepare($link,
+                "SELECT id FROM `" . TB_PREFIX . "mad_autoban_log` WHERE uid_a = ? AND uid_b = ? LIMIT 1");
+            if (!$chk) {
+                continue;
+            }
+            mysqli_stmt_bind_param($chk, 'ii', $a, $b);
+            mysqli_stmt_execute($chk);
+            mysqli_stmt_store_result($chk);
+            $already = mysqli_stmt_num_rows($chk) > 0;
+            mysqli_stmt_close($chk);
+            if ($already) {
+                continue;
+            }
+
+            if (self::banAccount($a, 0, 'Auto-ban: multi-account risk score ' . $p['score'] . '/100')
+                && self::banAccount($b, 0, 'Auto-ban: multi-account risk score ' . $p['score'] . '/100')) {
+
+                $ins = mysqli_prepare($link,
+                    "INSERT IGNORE INTO `" . TB_PREFIX . "mad_autoban_log`
+                     (uid_a, uid_b, score, banned_at) VALUES (?,?,?,?)");
+                if ($ins) {
+                    $now = time();
+                    mysqli_stmt_bind_param($ins, 'iiii', $a, $b, $p['score'], $now);
+                    mysqli_stmt_execute($ins);
+                    mysqli_stmt_close($ins);
+                }
+                $newlyBanned[] = $p;
+            }
+        }
+
+        return $newlyBanned;
+    }
+
+    /**
+     * Ban a single account by inserting/reactivating its row in `banlist`
+     * (the table actually used by the ban system — see
+     * GameEngine/Admin/Mods/mainteneceBan.php), and writes an admin_log row.
+     * $adminUid = 0 is used for system/auto actions ("System").
+     *
+     * A permanent ban is modelled the same way the rest of the codebase
+     * would model "indefinite": a far-future `end` timestamp, since
+     * `banlist` has no separate "permanent" flag.
+     */
+    public static function banAccount($uid, $adminUid, $reason)
+    {
+        $link = self::link();
+        if (!$link) {
+            return false;
+        }
+        $uid = (int) $uid;
+        if ($uid <= 3) {
+            return false; // never touch system accounts
+        }
+
+        $nameRes = mysqli_query($link, "SELECT username FROM `" . TB_PREFIX . "users` WHERE id = " . $uid);
+        $nameRow = $nameRes ? mysqli_fetch_assoc($nameRes) : null;
+        if (!$nameRow) {
+            return false; // account does not exist
+        }
+        $username = $nameRow['username'];
+
+        $now         = time();
+        $farFuture   = $now + (10 * 365 * 86400); // ~10 years, effectively permanent
+        $reasonEsc   = mysqli_real_escape_string($link, (string) $reason);
+        $usernameEsc = mysqli_real_escape_string($link, (string) $username);
+
+        // `banlist` has no UNIQUE key on uid (verified against struct.sql),
+        // so "ON DUPLICATE KEY UPDATE" would not reliably catch an existing
+        // active ban row for this uid. Check first, then UPDATE or INSERT —
+        // avoids creating duplicate active rows for the same account.
+        $existing = mysqli_query($link,
+            "SELECT id FROM `" . TB_PREFIX . "banlist` WHERE uid = " . $uid . " AND active = 1 LIMIT 1");
+        $existingRow = $existing ? mysqli_fetch_assoc($existing) : null;
+
+        if ($existingRow) {
+            $ok = mysqli_query($link,
+                "UPDATE `" . TB_PREFIX . "banlist`
+                 SET reason = '" . $reasonEsc . "', time = " . $now . ", end = " . $farFuture . ",
+                     admin = " . (int) $adminUid . ", active = 1
+                 WHERE id = " . (int) $existingRow['id']);
+        } else {
+            $ok = mysqli_query($link,
+                "INSERT INTO `" . TB_PREFIX . "banlist` (uid, name, reason, time, end, admin, active)
+                 VALUES (" . $uid . ", '" . $usernameEsc . "', '" . $reasonEsc . "', " . $now . ", " . $farFuture . ", " . (int) $adminUid . ", 1)");
+        }
+
+        if ($ok) {
+            self::adminLog((int) $adminUid, 'Multi-Account: banned uid ' . $uid . ' (' . $username . ') — ' . $reason);
+        }
+        return (bool) $ok;
+    }
+
+    /** Unban a single account (deactivate its active banlist row(s)), with an admin_log entry. */
+    public static function unbanAccount($uid, $adminUid, $reason = 'manual unban')
+    {
+        $link = self::link();
+        if (!$link) {
+            return false;
+        }
+        $uid = (int) $uid;
+        if ($uid <= 3) {
+            return false;
+        }
+
+        $now = time();
+        $ok = mysqli_query($link,
+            "UPDATE `" . TB_PREFIX . "banlist` SET active = 0, end = " . $now . "
+             WHERE uid = " . $uid . " AND active = 1");
+
+        if ($ok) {
+            self::adminLog((int) $adminUid, 'Multi-Account: unbanned uid ' . $uid . ' — ' . $reason);
+        }
+        return (bool) $ok;
+    }
+
+    /** Shared admin_log writer, same INSERT pattern used by pushOverride.php etc. */
+    private static function adminLog($adminUid, $text)
+    {
+        $link = self::link();
+        if (!$link) {
+            return;
+        }
+        $logMsg = mysqli_real_escape_string($link, (string) $text);
+        @mysqli_query($link,
+            "INSERT INTO `" . TB_PREFIX . "admin_log` VALUES (0, " . (int) $adminUid . ", '" . $logMsg . "', " . time() . ")");
     }
 
     /** Fold one login event into all aggregates + indices. */

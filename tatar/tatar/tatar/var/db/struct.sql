@@ -1230,6 +1230,40 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%mad_session` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `%prefix%mad_settings`
+-- (Multi-Account Detection: single-row admin toggles - enabled/auto-ban/threshold)
+--
+
+CREATE TABLE IF NOT EXISTS `%PREFIX%mad_settings` (
+ `id` int(11) NOT NULL DEFAULT 1,
+ `enabled` tinyint(1) NOT NULL DEFAULT 0,
+ `auto_ban` tinyint(1) NOT NULL DEFAULT 0,
+ `auto_ban_score` int(11) NOT NULL DEFAULT 90,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT IGNORE INTO `%PREFIX%mad_settings` (`id`, `enabled`, `auto_ban`, `auto_ban_score`) VALUES (1, 0, 0, 90);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `%prefix%mad_autoban_log`
+-- (Multi-Account Detection: audit log of pairs already auto-banned, prevents re-processing)
+--
+
+CREATE TABLE IF NOT EXISTS `%PREFIX%mad_autoban_log` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `uid_a` int(11) NOT NULL,
+ `uid_b` int(11) NOT NULL,
+ `score` int(11) NOT NULL DEFAULT 0,
+ `banned_at` int(11) NOT NULL DEFAULT 0,
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `pair` (`uid_a`,`uid_b`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `%prefix%resource_transfer_log`
 -- (Push Protection: completed cross-player marketplace deliveries)
 --
