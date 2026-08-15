@@ -3067,6 +3067,27 @@ tz_def('ADM_FS_BADGE_SELF', 'Player');
 tz_def('ADM_FS_REMOVE', 'Remove');
 tz_def('ADM_FS_CONFIRM_REMOVE', 'Remove this link?');
 
+tz_def('ADMIN_RELATED_ACCOUNT_PROTECTION', 'Related Account Protection');
+tz_def('ADM_RAP_INTRO', 'Lets an admin manually mark two accounts on this world as "related" (same owner, same device, or otherwise confirmed to be the same person). Raiding is BLOCKED in both directions between any related pair - the raid still resolves normally, but yields zero resource loot. This is independent from Multi-Account Detection, which only scores suspicious pairs for manual review, and from Linked Accounts (Feeding), which does the opposite (removes the raid cap between accounts a player opts in).');
+tz_def('ADM_RAP_PRIORITY_NOTE', 'If the same pair is ALSO declared as "linked" under Linked Accounts (Feeding), this protection always wins: raiding is blocked regardless of any feeding settings for that pair.');
+tz_def('ADM_RAP_SETTINGS_TITLE', 'Settings');
+tz_def('ADM_RAP_SETTINGS_DESC', 'Turn raid-blocking for related pairs on or off. This does not remove any relations you have already added - it only controls whether they are currently enforced.');
+tz_def('ADM_RAP_ENABLED', 'Enabled');
+tz_def('ADM_RAP_DISABLED', 'Disabled');
+tz_def('ADM_RAP_SAVE', 'Save');
+tz_def('ADM_RAP_ADD_TITLE', 'Mark Accounts as Related');
+tz_def('ADM_RAP_ADD_DESC', 'Mark two accounts by username as related. This is admin-only - players cannot self-service this, and direction does not matter (raiding is blocked both ways).');
+tz_def('ADM_RAP_USERNAME_A', 'Account');
+tz_def('ADM_RAP_USERNAME_B', 'Related account');
+tz_def('ADM_RAP_REASON', 'Reason (optional)');
+tz_def('ADM_RAP_RELATE_BTN', 'Mark as Related');
+tz_def('ADM_RAP_ALL_TITLE', 'All Related Pairs');
+tz_def('ADM_RAP_NO_RELATIONS', 'No accounts marked as related yet.');
+tz_def('ADM_RAP_ADDED', 'Added');
+tz_def('ADM_RAP_BADGE_BLOCKED', 'Raiding Blocked');
+tz_def('ADM_RAP_REMOVE', 'Remove');
+tz_def('ADM_RAP_CONFIRM_REMOVE', 'Remove this relation? Raiding between these accounts will no longer be blocked.');
+
 // Player-facing side (see spieler.php / feeding.tpl)
 tz_def('FS_PLAYER_TITLE', 'Linked Accounts');
 tz_def('FS_PLAYER_INTRO', 'You can link your own alternate account(s) on this world so you can raid them freely for practice or resource sharing, without the usual warehouse/cranny loot cap.');

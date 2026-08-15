@@ -2070,6 +2070,20 @@ trait AutomationBattleResolution {
             $def_bonus = ($targettribe == 3) ? 2 : 1;
             $to_owner = $database->getVillageField($data['to'], "owner");
 
+            // RelatedAccountProtection: admin-declared related pairs are
+            // BLOCKED from raiding each other's resources, regardless of
+            // direction (see GameEngine/RelatedAccountProtection.php
+            // docblock). This check runs FIRST and, if it matches, wins
+            // over FeedingSystem unconditionally - protection always beats
+            // any raid allowance, even if the same pair is also declared
+            // as a FeedingSystem "linked" pair. When blocked, the raid
+            // yields zero resource loot (full cranny/warehouse protection
+            // is treated as 100% effective); troop combat still resolves
+            // normally.
+            $isBlockedRaid = $attackerUid > 0
+                && class_exists('RelatedAccountProtection')
+                && RelatedAccountProtection::isBlockedPair($attackerUid, $to_owner);
+
             // FeedingSystem: an admin-capped, opt-in gameplay allowance
             // (separate feature from MultiAccount.php's anti-cheat
             // detection - see GameEngine/FeedingSystem.php docblock). When
@@ -2077,17 +2091,12 @@ trait AutomationBattleResolution {
             // their own linked/fed accounts, cranny/warehouse loot
             // protection is skipped entirely for this raid so the full
             // stock becomes lootable (capped only by carry capacity).
-            $isFeedingRaid = $attackerUid > 0
+            // Only evaluated if RelatedAccountProtection did not already
+            // block the raid above.
+            $isFeedingRaid = !$isBlockedRaid
+                && $attackerUid > 0
                 && class_exists('FeedingSystem')
                 && FeedingSystem::isLinkedPair($attackerUid, $to_owner);
-
-            if ($isFeedingRaid) {
-                $crannySpy  = 0;
-                $cranny_eff = 0;
-            } else {
-                $crannySpy = $database->getArtifactsValueInfluence($to_owner, $data['to'], 7, $cranny * $def_bonus);
-                $cranny_eff = $crannySpy * $atk_bonus;
-            }
 
             // work out available resources.
             $this->updateRes($data['to']);
@@ -2098,6 +2107,25 @@ trait AutomationBattleResolution {
             $totiron = $villageData['iron'];
             $totwood = $villageData['wood'];
             $totcrop = $villageData['crop'];
+
+            if ($isBlockedRaid) {
+                // Full protection: nothing lootable from a related account.
+                // A plain cranny value could still leave stock above cranny
+                // capacity lootable, so use the actual current stock (the
+                // highest single resource amount) as the "cranny" shown to
+                // the attacker - avclay/aviron/avwood/avcrop below are
+                // clamped to 0 regardless of village stock size, and the
+                // scout report still displays a normal, plausible number
+                // rather than an obviously synthetic one.
+                $crannySpy  = max($totclay, $totiron, $totwood, $totcrop);
+                $cranny_eff = $crannySpy;
+            } elseif ($isFeedingRaid) {
+                $crannySpy  = 0;
+                $cranny_eff = 0;
+            } else {
+                $crannySpy = $database->getArtifactsValueInfluence($to_owner, $data['to'], 7, $cranny * $def_bonus);
+                $cranny_eff = $crannySpy * $atk_bonus;
+            }
         }else{
             $cranny_eff = 0;
 

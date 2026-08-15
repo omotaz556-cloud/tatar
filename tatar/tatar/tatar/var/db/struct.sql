@@ -1264,6 +1264,40 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%mad_autoban_log` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `%prefix%related_accounts`
+-- (Related Account Protection: admin-declared pairs BLOCKED from raiding
+--  each other; undirected — always stored with uid_a < uid_b)
+--
+
+CREATE TABLE IF NOT EXISTS `%PREFIX%related_accounts` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `uid_a` int(11) NOT NULL,
+ `uid_b` int(11) NOT NULL,
+ `added` int(11) NOT NULL DEFAULT 0,
+ `added_by` int(11) NOT NULL DEFAULT 0,
+ `reason` varchar(255) NOT NULL DEFAULT '',
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `pair` (`uid_a`,`uid_b`),
+ KEY `uid_a` (`uid_a`),
+ KEY `uid_b` (`uid_b`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `%prefix%related_protection_settings`
+-- (Related Account Protection: single-row admin toggle - enabled/disabled)
+--
+
+CREATE TABLE IF NOT EXISTS `%PREFIX%related_protection_settings` (
+ `id` int(11) NOT NULL DEFAULT 1,
+ `enabled` tinyint(1) NOT NULL DEFAULT 0,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `%prefix%resource_transfer_log`
 -- (Push Protection: completed cross-player marketplace deliveries)
 --

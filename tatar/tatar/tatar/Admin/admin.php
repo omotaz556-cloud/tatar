@@ -96,7 +96,7 @@ function admin_validated_page(string $raw): string
         'server_info', 'online', 'notregistered', 'inactive', 'report',
         'message', 'massmessage', 'sysmessage', 'map', 'map_tile', 'natars',
         'search', 'ban', 'maintenance', 'cleanban', 'gold', 'usergold',
-        'centralGold', 'xtatarGold', 'feedingSystem',
+        'centralGold', 'xtatarGold', 'feedingSystem', 'relatedAccountProtection',
         'maintenenceResetGold', 'delmedal', 'delallymedal', 'givePlus',
         'maintenenceResetPlus', 'givePlusRes', 'maintenenceResetPlusBonus',
         'addUsers', 'users', 'admin_log', 'config', 'debug_log',
@@ -268,6 +268,10 @@ if ($page !== '') {
 
         case 'feedingSystem':
             $subpage = ADMIN_FEEDING_SYSTEM;
+            break;
+
+        case 'relatedAccountProtection':
+            $subpage = ADMIN_RELATED_ACCOUNT_PROTECTION;
             break;
 
         case 'maintenenceResetGold':
@@ -896,6 +900,7 @@ body.app #menu li.sub ul li a:hover{color:#d97706!important}
                         <li class="sub"><a href="#"><?php echo ADMIN_FEEDING_SYSTEM; ?></a>
                             <ul>
                                 <li><a href="?p=feedingSystem"><?php echo ADMIN_FEEDING_SYSTEM; ?></a></li>
+                                <li><a href="?p=relatedAccountProtection"><?php echo ADMIN_RELATED_ACCOUNT_PROTECTION; ?></a></li>
                             </ul>
                         </li>
                         <li class="sub"><a href="#"><?php echo ADMIN_PLUS_RES_BONUS; ?></a>
