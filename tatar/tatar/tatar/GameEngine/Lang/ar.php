@@ -1522,6 +1522,13 @@ tz_def('Q25_26_DESC', 'حان الوقت مجددًا لتوسيع ركائز ا
 tz_def('Q25_26_ORDER', 'الأمر:</p>وسّع جميع حقول الموارد إلى المستوى 2.');
 tz_def('Q25_26_RESP', 'تهانينا! قريتك تنمو وتزدهر...');
 
+// GOLD / GOLD_IMG must be defined before first use below (originally defined much
+// later in this file, around the old line 1771-1772, which caused a fatal
+// "Undefined constant GOLD_IMG" error on PHP 8.3). Moved here, directly above
+// their first use, with no change to the translated text or definitions.
+tz_def('GOLD', 'ذهب');
+tz_def('GOLD_IMG', '<img src=\"/img/x.gif\" class=\"gold\" alt=\"'.GOLD.'\" title=\"'.GOLD.'\">');
+
 tz_def('Q25_27', 'المهمة 23: الأصدقاء.');
 tz_def('Q25_27_DESC', 'من الصعب على اللاعب المنفرد منافسة المهاجمين. من مصلحتك أن يحبك جيرانك.<br><br>والأفضل من ذلك أن تلعب مع أصدقاء. هل تعلم أنه يمكنك كسب '.GOLD_IMG.' بدعوة الأصدقاء؟');
 tz_def('Q25_27_ORDER', 'الأمر:</p>كم من '.GOLD_IMG.' تكسب مقابل دعوة صديق؟');
@@ -1767,9 +1774,6 @@ tz_def('X_MAS', 'عيد ميلاد مجيد');
 tz_def('NEW_YEAR', 'سنة جديدة سعيدة');
 tz_def('EASTER', 'عيد فصح سعيد');
 if(!defined('PEACE')) tz_def('PEACE', 'سلام');
-
-tz_def('GOLD', 'ذهب');
-tz_def('GOLD_IMG', '<img src=\"/img/x.gif\" class=\"gold\" alt=\"'.GOLD.'\" title=\"'.GOLD.'\">');
 
 //Admin setting - Admin/Templates/config.tpl & editServerSet.tpl
 tz_def('EDIT_BACK', 'رجوع');
