@@ -3,8 +3,8 @@
 **آخر تحديث:** 2026-08-15
 
 ## الحالة
-- مفاتيح مترجمة: 1345 من 3923
-- نسبة الإنجاز: ~34.3%
+- مفاتيح مترجمة: 2037 من 3923
+- نسبة الإنجاز: ~51.9%
 
 ## الأقسام المكتملة بالكامل
 - القائمة الرئيسية (MAIN MENU / MENU)
@@ -24,19 +24,30 @@
 - رموز تقارير المعارك (RC_*): كل رسائل المنجنيق، الكبش، غزو القرى، البطل، تقرير الاستطلاع، الأسرى، عودة القوات
 - رسائل النظام/التحالف (MSG_*): كل رسائل الدعوة، المغادرة، حل التحالف، تغيير القائد، تفكيك التحالف، وإشعارات أخبار التحالف
 - GOLD / GOLD_IMG
+- لوحة الأدمن - قسم config.tpl & editServerSet.tpl بالكامل (78 مفتاح: اسم السيرفر، السرعة، سرعة القوات، سعات التخزين/التاجر/المخبأ/الفخ، ظهور التتار وعجائب الدنيا، حجم الخريطة، حماية المبتدئين، التسجيل، المهام، الأوسمة، نظام السلام، حزمة الرسوميات، إلخ)
+- لوحة الأدمن - باقي أقسام config.tpl بالكامل (92 مفتاح): editPlusSet (باقات الذهب المدفوعة PayPal)، editLogSet (سجلات البناء/التقنيات/الدخول/الذهب/الأدمن/الحروب/السوق/المخالفات)، editNewsboxSet (صناديق الأخبار الثلاثة)، SQL Settings (الاتصال بقاعدة البيانات)، editExtraSet (حد صندوق الرسائل)، editAdminInfo (معلومات المسؤول)
+- قسم i18n etape 2 الكامل (445 مفتاح): مهام البرنامج التعليمي (Task 1-27)، المنتدى والدردشة، الإحالة (Referral/REF-Link)، رموز BBCode، مناطق UTC، تنسيقات التاريخ، حزم PayPal A-E، أفضل اللاعبين/التحالفات لكل قبيلة (Huns/Egyptians/Spartans/Vikings included)
+- قسم Server Milestones (12 مفتاح): إنجازات السيرفر (أول قرية ثانية، أول قطعة أثرية، أول عجيبة دنيا، إلخ)
+- قسم قواعد اللعبة والبرنامج التعليمي الطويل (lot suivant، 65 مفتاح): نصوص القوانين والشروط، مدراء الحساب (Sitters)، الحسابات المتعددة، حذف الحساب، أسئلة شائعة عن الذهب/Plus
 
 ## الأقسام المتبقية (لسه إنجليزي، fallback تلقائي)
 - أوصاف الوحدات التفصيلية لباقي القبائل (MANUAL_UDESC) — لم تُترجم بعد
-- لوحة الأدمن بالكامل (config.tpl, editServerSet, editPlusSet, editLogSet, editNewsboxSet, SQL Settings, editExtraSet, editAdminInfo) — الجزء الأضخم المتبقي (يبدأ عند سطر ~1759 في en.php)
-- عدة أقسام i18n لاحقة (etape 2 ابتداءً من سطر ~1983 و~2108، reliquat ~2527، reports ~2557-2789، manual ~2601-2743، battle report token layer ~2743-2789)
+- بقية أقسام i18n المتفرقة — تبدأ عند سطر ~2523 في en.php (composites/Simulateur، reliquat، reports، manual pages، battle report token layer)
 - قصص الـ Lore الأخرى المتبقية
+- القسم الضخم جدًا لقوالب لوحة الأدمن (PANOU DE ADMINISTRARE - templates) من سطر ~2972 حتى قرب نهاية الملف
 - الأقسام الأخيرة من الملف: بونصات التحالف، إحصائيات جرافيك، مينيونات العالم، إلخ (من سطر ~4337 حتى نهاية en.php عند 4530)
 
 ## آلية العمل
 أي مفتاح غير مترجم يظهر بالإنجليزي تلقائيًا (loader.php يدمج الإنجليزي كـfallback) — لا يوجد نص فارغ أو معطل في أي مرحلة.
 
 ## ملاحظة للمتابعة (نقطة التوقف بدقة)
-القسم التالي غير المترجم هو:
-`//Admin setting - Admin/Templates/config.tpl & editServerSet.tpl` الذي يبدأ عند السطر ~1759 في en.php (أول مفتاح فيه: `EDIT_BACK`).
+تم الانتهاء الكامل من:
+- كل أقسام لوحة الأدمن التابعة لـ config.tpl (config.tpl، editServerSet، editPlusSet، editLogSet، editNewsboxSet، SQL Settings، editExtraSet، editAdminInfo) — الأسطر ~1759-1941
+- قسم i18n etape 2 الأول والثاني (lot suivant) بالكامل — الأسطر ~1983-2440
+- قسم Server Milestones — الأسطر ~2442-2454
+- قسم قواعد اللعبة الطويل (lot suivant الثاني) — الأسطر ~2456-2521
 
-هذا هو أضخم قسم متبقٍ (يمتد من ~1759 إلى ~1983 تقريبًا لأول جزء منه، ثم تستمر أقسام لوحة الأدمن والـ i18n المتفرقة حتى قرب نهاية الملف).
+القسم التالي غير المترجم يبدأ عند السطر **2523** في en.php:
+`// ===== i18n composites (Simulateur) =====` (يبدأ بـ TZ_NUMBER، TZ_LVL)
+
+بعده تستمر أقسام i18n المتفرقة: reliquat multi-lignes ~2527، reliquat final ~2544، task A (re-wired reverted templates) ~2548، reports section (noticeClass tooltips) ~2557، report topic connectors ~2576، settler reports ~2586، player profile page ~2592، manual overview ~2601، manual building pages ~2612، manual new-features ~2708، battle report token layer ~2743-2789، display-time report topics ~2789-2972، ثم قسم ضخم جدًا من لوحة الأدمن (عناوين القوائم والصفحات وقوالب الأدمن الكاملة PANOU DE ADMINISTRARE) من سطر ~2972 حتى قرب نهاية الملف عند السطر 4530.
