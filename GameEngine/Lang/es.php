@@ -2137,6 +2137,7 @@ tz_def('TZ_CENTRE', 'Centre:');
 tz_def('TZ_CHANGE_NAME', 'Change name');
 tz_def('TZ_CHANGE_YOUR_VILLAGE_S_NAME_TO_SOME', 'Change your village\'s name to something nice.');
 tz_def('TZ_CHINESE', 'Chinese');
+tz_def('TZ_ARABIC', 'Árabe');
 tz_def('TZ_CLAY_25_5_GOLD', 'Clay +25% (5 gold)');
 tz_def('TZ_CLOSED_FORUM', 'Closed Forum');
 tz_def('TZ_CLOSE_ADRESSBOOK', 'close adressbook');

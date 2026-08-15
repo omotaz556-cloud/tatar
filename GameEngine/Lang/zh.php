@@ -1979,6 +1979,7 @@ tz_def('TZ_IRON_25_5_GOLD', '铁 +25%（5 金币）');
 tz_def('TZ_ISO_YY_MM_DD_24H', 'ISO (yy/mm/dd 24h)');
 tz_def('TZ_ITALIAN', '意大利语');
 tz_def('TZ_SPANISH', '西班牙语');
+tz_def('TZ_ARABIC', '阿拉伯语');
 tz_def('TZ_I_ACTIVATED_PLUS_BUT_PRODUCTION_DI', '我激活了 Plus，但产量没有增加。');
 tz_def('TZ_JOIN_AN_ALLIANCE', '加入联盟');
 tz_def('TZ_JOIN_AN_ALLIANCE_OR_FOUND_ONE_ON_Y', '加入联盟或自己创建一个。');

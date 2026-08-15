@@ -174,6 +174,7 @@
 					'zh' => 'Chinese',
 					'fr' => 'French',
 					'it' => 'Italian',
+					'ar' => 'Arabic',
 					];
 					$userLang = $user['lang'] ?? 'en';
 						echo htmlspecialchars($langMap[$userLang] ?? strtoupper($userLang));
