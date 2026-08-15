@@ -20,7 +20,7 @@
 ## --------------------------------------------------------------------------- ##
 ##  Contact        : (see project maintainer)                                 ##
 ##  Project        : Novaterra                                                  ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 #################################################################################
 
 trait AutomationCleanup {

@@ -11,7 +11,7 @@
 ##  Contact        : (see project maintainer)                                 ##
 ##  Project        : Novaterra                                                  ##
 ##  URLs:          : https://novaterra.example                                      ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 ## --------------------------------------------------------------------------- ##
 ##  License        : Novaterra Project                                          ##
 ##  Copyright      : Novaterra (c) 2010-2026. All rights reserved.              ##
@@ -30,7 +30,7 @@ $packages = [
 ];
 
 $currency = defined('PAYPAL_CURRENCY') ? PAYPAL_CURRENCY : 'EUR';
-$payEmail = defined('PAYPAL_EMAIL') ? PAYPAL_EMAIL : 'novgorodschi@icloud.com';
+$payEmail = (defined('PAYPAL_EMAIL') && PAYPAL_EMAIL !== '@') ? PAYPAL_EMAIL : ADMIN_EMAIL;
 ?>
 <table class="rate_details lang_ltr lang_de" cellpadding="1" cellspacing="1">
 	<thead><tr><th colspan="2"><?php echo GOLD_SHOP; ?></th></tr></thead>

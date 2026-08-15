@@ -11,7 +11,7 @@
 ##  Contact        : (see project maintainer)                                 ##
 ##  Project        : Novaterra                                                  ##
 ##  URLs:          : https://novaterra.example                                      ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 ## --------------------------------------------------------------------------- ##
 ##  License        : Novaterra Project                                          ##
 ##  Copyright      : Novaterra (c) 2010-2026. All rights reserved.              ##
@@ -26,14 +26,14 @@ $pkg = [
 ];
 $price = str_replace(',', '.', $pkg['price']);
 $currency = defined('PAYPAL_CURRENCY') ? PAYPAL_CURRENCY : 'EUR';
-$email = defined('PAYPAL_EMAIL') ? PAYPAL_EMAIL : 'novgorodschi@icloud.com';
+$email = (defined('PAYPAL_EMAIL') && PAYPAL_EMAIL !== '@') ? PAYPAL_EMAIL : ADMIN_EMAIL;
 ?>
 <table class="rate_details lang_ltr lang_de" cellpadding="1" cellspacing="1">
     <thead><tr><th colspan="2"><?php echo TZ_PAYPAL_PACKAGE_A; ?></th></tr></thead>
     <tbody>
     <tr>
         <td class="pic">
-            <img src="img/bezahlung/paypal.jpg" style="width:99px;height:99px;" alt="<?php echo PACKAGE_A; ?>">
+            <img src="img/bezahlung/payment_generic.png" style="width:99px;height:99px;" alt="<?php echo PACKAGE_A; ?>">
             <div>Gold: <?= $pkg['gold'] ?><br>Cost: <?= $pkg['price'] ?> <?= $currency ?><br><?php echo TZ_WAIT_24H; ?></div>
         </td>
         <td class="desc">

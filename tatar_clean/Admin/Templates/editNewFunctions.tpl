@@ -11,7 +11,7 @@
 ## --------------------------------------------------------------------------- ##
 ##  Contact        : (see project maintainer)                                 ##
 ##  Project        : Novaterra                                                  ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 ## --------------------------------------------------------------------------- ##
 ##  License        : Novaterra Project                                          ##
 ##  Copyright      : Novaterra (c) 2010-2025. All rights reserved.              ##
@@ -86,7 +86,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
                     </td>
                 </tr>
                 <tr>
-                    <td class="b"><?php echo ADM_NEW_ALLIANCE_EMBASSY_MECHANICS; ?><em class="tooltip">?<span class="classic"><?php echo ADM_FOR_THIS_SETTING_YOU_CAN_FIND_MORE_INFORMATI; ?><a href="https://github.com/YOUR-ORG/Novaterra/wiki/New-Alliance-&-Embassy-Mechanics" target="_blank">https://github.com</a></span></em></td>
+                    <td class="b"><?php echo ADM_NEW_ALLIANCE_EMBASSY_MECHANICS; ?><em class="tooltip">?<span class="classic"><?php echo ADM_FOR_THIS_SETTING_YOU_CAN_FIND_MORE_INFORMATI; ?><a href="https://github.com/omotaz556-cloud/tatar/wiki/New-Alliance-&-Embassy-Mechanics" target="_blank">https://github.com</a></span></em></td>
                     <td>
                         <select name="new_functions_embassy_mechanics">
                             <option value="True" <?php if(NEW_FUNCTIONS_EMBASSY_MECHANICS == true) echo "selected";?>><?php echo ADM_TRUE; ?></option>

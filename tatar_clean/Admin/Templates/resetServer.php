@@ -11,7 +11,7 @@
 ## --------------------------------------------------------------------------- ##
 ##  Contact        : (see project maintainer)                                 ##
 ##  Project        : Novaterra                                                  ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 ## --------------------------------------------------------------------------- ##
 ##  License        : GPLv3 (derived from TravianZ; see project LICENSE)       ##
 ##  Copyright      : Novaterra mods (c) 2010-2025; base engine (c) TravianZ authors (GPLv3). ##

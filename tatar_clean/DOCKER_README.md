@@ -14,7 +14,7 @@ This guide will help you set up Novaterra using Docker and Docker Compose for ea
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR-ORG/Novaterra.git
+git clone https://github.com/omotaz556-cloud/tatar.git
 cd Novaterra
 ```
 
@@ -309,7 +309,7 @@ docker compose up -d --build
 ## Support
 
 For issues and questions:
-- GitHub Issues: https://github.com/YOUR-ORG/Novaterra/issues
+- GitHub Issues: https://github.com/omotaz556-cloud/tatar/issues
 - Gitter Chat: https://gitter.im/Novaterra-V8/Lobby
 
 ## License

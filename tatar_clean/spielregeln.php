@@ -9,7 +9,7 @@
 ##  License        : GPLv3 (derived from TravianZ; see project LICENSE)       ##
 ##  Copyright      : Novaterra mods (c) 2010-2026; base engine (c) TravianZ authors (GPLv3). ##
 ##  URLs:          http://novaterra.example                		           ##
-##  Source code:   https://github.com/YOUR-ORG/Novaterra		                   ##
+##  Source code:   https://github.com/omotaz556-cloud/tatar		                ##
 ##                                                                             ##
 #################################################################################
 
@@ -56,7 +56,7 @@ AccessLogger::logRequest();
 
 		<td><a href="anleitung.php"><span><?php echo PUBLIC_MANUAL; ?></span></a></td>
 
-		<td><a href="https://github.com/YOUR-ORG/Novaterra/discussions" target="_blank"><span><?php echo FORUM; ?></span></a></td>
+		<td><a href="https://github.com/omotaz556-cloud/tatar/discussions" target="_blank"><span><?php echo FORUM; ?></span></a></td>
 
 
 

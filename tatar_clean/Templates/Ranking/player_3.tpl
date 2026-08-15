@@ -10,7 +10,7 @@
 ##  License:       Novaterra Project                                            ##
 ##  Copyright:     Novaterra (c) 2010-2013. All rights reserved.                ##
 ##  URLs:          http://novaterra.example 				       	 		   ##
-##  Source code:   http://github.com/YOUR-ORG/Novaterra/         	       	   ##
+##  Source code:   http://github.com/omotaz556-cloud/tatar/         	       	   ##
 ##                                                                             ##
 #################################################################################
 if (!is_numeric($_SESSION['search'])) {

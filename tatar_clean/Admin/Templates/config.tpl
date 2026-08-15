@@ -12,7 +12,7 @@
 ## --------------------------------------------------------------------------- ##
 ##  Contact        : (see project maintainer)                                 ##
 ##  Project        : Novaterra                                                  ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 ## --------------------------------------------------------------------------- ##
 ##  License        : Novaterra Project                                          ##
 ##  Copyright      : Novaterra (c) 2010-2025. All rights reserved.              ##
@@ -249,7 +249,7 @@ $cronKeyMasked = ($cronKey === '')
     <tr><td class="b"><?php echo SERV_VARIABLE ?></td><td class="b"><?php echo SERV_VALUE ?></td></tr>
     <tr><td><?php echo ADM_DISPLAY_OASIS_IN_PROFILE; ?><em class="tooltip">?<span class="classic"><?php echo ADM_ENABLE_DISABLE_THE_DISPLAY_OF_OASES_OF_EACH; ?></span></em></td><td><?php echo NEW_FUNCTIONS_OASIS ? "<span class='badge green'>Enabled</span>" : "<span class='badge red'>Disabled</span>"; ?></td></tr>
     <tr><td><?php echo ADM_ALLIANCE_INVITATION_MESSAGE; ?><em class="tooltip">?<span class="classic"><?php echo ADM_ENABLE_DISABLE_SENDING_AN_IN_GAME_MESSAGE_TO; ?></span></em></td><td><?php echo NEW_FUNCTIONS_ALLIANCE_INVITATION ? "<span class='badge green'>Enabled</span>" : "<span class='badge red'>Disabled</span>"; ?></td></tr>
-    <tr><td><?php echo ADM_NEW_ALLIANCE_EMBASSY_MECHANICS; ?><em class="tooltip">?<span class="classic">https://github.com/YOUR-ORG/Novaterra/wiki/New-Alliance-&-Embassy-Mechanics</span></em></td><td><?php echo NEW_FUNCTIONS_EMBASSY_MECHANICS ? "<span class='badge green'>Enabled</span>" : "<span class='badge red'>Disabled</span>"; ?></td></tr>
+    <tr><td><?php echo ADM_NEW_ALLIANCE_EMBASSY_MECHANICS; ?><em class="tooltip">?<span class="classic">https://github.com/omotaz556-cloud/tatar/wiki/New-Alliance-&-Embassy-Mechanics</span></em></td><td><?php echo NEW_FUNCTIONS_EMBASSY_MECHANICS ? "<span class='badge green'>Enabled</span>" : "<span class='badge red'>Disabled</span>"; ?></td></tr>
     <tr><td><?php echo ADM_NEW_FORUM_POST_MESSAGE; ?><em class="tooltip">?<span class="classic"><?php echo ADM_ENABLE_DISABLE_FORUM_SUBSCRIPTION_MESSAGES; ?></span></em></td><td><?php echo NEW_FUNCTIONS_FORUM_POST_MESSAGE ? "<span class='badge green'>Enabled</span>" : "<span class='badge red'>Disabled</span>"; ?></td></tr>
     <tr><td><?php echo ADM_TRIBES_IMAGES_IN_PROFILE; ?><em class="tooltip">?<span class="classic"><?php echo ADM_ENABLE_DISABLE_DISPLAYING_IMAGES_OF_TRIBES; ?></span></em></td><td><?php echo NEW_FUNCTIONS_TRIBE_IMAGES ? "<span class='badge green'>Enabled</span>" : "<span class='badge red'>Disabled</span>"; ?></td></tr>
     <tr><td><?php echo ADM_NEW_TRIBE_HUNS; ?><em class="tooltip">?<span class="classic"><?php echo ADM_ENABLE_DISABLE_THE_HUNS_TRIBE; ?></span></em></td><td><?php echo (defined('NEW_FUNCTION_TRIBE_HUNS') && NEW_FUNCTION_TRIBE_HUNS) ? "<span class='badge green'>Enabled</span>" : "<span class='badge red'>Disabled</span>"; ?></td></tr>

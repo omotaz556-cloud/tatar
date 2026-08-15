@@ -108,7 +108,7 @@ AccessLogger::logRequest();
             <tr>
                 <td><a href="tutorial.php"><span><?php echo TUTORIAL; ?></span></a></td>
                 <td><a href="anleitung.php"><span><?php echo PUBLIC_MANUAL; ?></span></a></td>
-                <td><a href="https://github.com/YOUR-ORG/Novaterra/discussions" target="_blank"><span><?php echo FORUM; ?></span></a></td>
+                <td><a href="https://github.com/omotaz556-cloud/tatar/discussions" target="_blank"><span><?php echo FORUM; ?></span></a></td>
                 <td><a href="index.php?signup"><span><?php echo PUBLIC_REGISTER; ?></span></a></td>
                 <td><a href="index.php?login"><span><?php echo LOGIN; ?></span></a></td>
             </tr>
@@ -142,8 +142,8 @@ AccessLogger::logRequest();
                 - Maintain community-driven development<br/><br/>
 
                 <b>Source Code:</b><br/>
-                <a href="https://github.com/YOUR-ORG/Novaterra" target="_blank">
-                    https://github.com/YOUR-ORG/Novaterra
+                <a href="https://github.com/omotaz556-cloud/tatar" target="_blank">
+                    https://github.com/omotaz556-cloud/tatar
                 </a><br/><br/>
 
                 <b>Disclaimer:</b><br/>

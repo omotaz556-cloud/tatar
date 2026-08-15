@@ -13,7 +13,7 @@ $start_timer = $generator->pageLoadTimeStart();
 ##  Contact        : (see project maintainer)                                 ##
 ##  Project        : Novaterra                                                  ##
 ##  URLs:          : https://novaterra.example                                      ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 ## --------------------------------------------------------------------------- ##
 ##  License        : GPLv3 (derived from TravianZ; see project LICENSE)       ##
 ##  Copyright      : Novaterra mods (c) 2010-2026; base engine (c) TravianZ authors (GPLv3). ##
@@ -142,7 +142,7 @@ if (isset($packages[$amount]) && $amount > 0) {
 
                 <p>Please verify the information.<br>It will let us know if the data is incorrect.</p>
                 <p>Please mail your username, package, order time and email used to 
-                <a href="mailto:<?php echo defined('PAYPAL_EMAIL') ? PAYPAL_EMAIL : 'novgorodschi@icloud.com'; ?>">our billing address</a>.</p>
+                <a href="mailto:<?php echo (defined('PAYPAL_EMAIL') && PAYPAL_EMAIL !== '@') ? PAYPAL_EMAIL : ADMIN_EMAIL; ?>">our billing address</a>.</p>
 
             <?php } else { 
                 // --- ISTORIC NORMAL CU FILTRU ---

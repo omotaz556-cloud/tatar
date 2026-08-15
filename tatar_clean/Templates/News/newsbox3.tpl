@@ -56,7 +56,7 @@
         <b>
             <u>
                 <?php echo TZ_DOWNLOAD_FROM; ?>
-                <a href="https://github.com/YOUR-ORG/Novaterra/archive/master.zip" target="_blank">
+                <a href="https://github.com/omotaz556-cloud/tatar/archive/master.zip" target="_blank">
                     <?php echo TZ_GITHUB; ?>
                 </a>
             </u>

@@ -1,9 +1,9 @@
 # Novaterra
 
-[![Maintenance](https://img.shields.io/maintenance/yes/2026.svg)](https://github.com/YOUR-ORG/Novaterra)
-[![GitHub Release](https://img.shields.io/github/release/Shadowss/Novaterra/all.svg)](https://github.com/YOUR-ORG/Novaterra)
-[![GitHub contributors](https://img.shields.io/github/contributors/Shadowss/Novaterra.svg)](https://github.com/YOUR-ORG/Novaterra)
-[![license](https://img.shields.io/github/license/Shadowss/Novaterra.svg)](https://github.com/YOUR-ORG/Novaterra)
+[![Maintenance](https://img.shields.io/maintenance/yes/2026.svg)](https://github.com/omotaz556-cloud/tatar)
+[![GitHub Release](https://img.shields.io/github/release/Shadowss/Novaterra/all.svg)](https://github.com/omotaz556-cloud/tatar)
+[![GitHub contributors](https://img.shields.io/github/contributors/Shadowss/Novaterra.svg)](https://github.com/omotaz556-cloud/tatar)
+[![license](https://img.shields.io/github/license/Shadowss/Novaterra.svg)](https://github.com/omotaz556-cloud/tatar)
 
 Novaterra is an open-source browser strategy game inspired by classic Novaterra-like gameplay.
 
@@ -252,7 +252,7 @@ Miscellaneous
 ## Quick Start (Docker)
 
 ```bash
-git clone https://github.com/YOUR-ORG/Novaterra.git
+git clone https://github.com/omotaz556-cloud/tatar.git
 cd Novaterra
 cp .env.example .env
 docker compose up -d
@@ -446,8 +446,8 @@ Repository references:
 
 ## Community and Support
 
-- Issues: https://github.com/YOUR-ORG/Novaterra/issues
-- Wiki: https://github.com/YOUR-ORG/Novaterra/wiki
+- Issues: https://github.com/omotaz556-cloud/tatar/issues
+- Wiki: https://github.com/omotaz556-cloud/tatar/wiki
 - Chat: https://gitter.im/Novaterra-V8/Lobby
 
 ## Credits

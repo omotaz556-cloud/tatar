@@ -14,7 +14,7 @@ if (!function_exists('tz_def')) {
 //                                Modified , added , fixed , implementd  by: Shadow and ronix       //
 //                                                                             						//
 //  					URLs:           https://novaterra.example                                        //
-//                 						https://github.com/YOUR-ORG/Novaterra                        //
+//                 						https://github.com/omotaz556-cloud/tatar                        //
 //                                                                             						//
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 									//                         //

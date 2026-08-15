@@ -12,7 +12,7 @@
 ##  Contact        : (see project maintainer)                                 ##
 ##  Project        : Novaterra                                                  ##
 ##  Test Server    : https://novaterra.example                                      ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 ## --------------------------------------------------------------------------- ##
 ##  License        : Novaterra Project                                          ##
 ##  Copyright      : Novaterra (c) 2010-2026. All rights reserved.              ##

@@ -11,7 +11,7 @@
 ##  Contact        : (see project maintainer)                                 ##
 ##  Project        : Novaterra                                                  ##
 ##  URLs:          : https://novaterra.example                                      ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 ## --------------------------------------------------------------------------- ##
 ##  License        : Novaterra Project                                          ##
 ##  Copyright      : Novaterra (c) 2010-2026. All rights reserved.              ##
@@ -24,7 +24,7 @@ $uid = (int)$session->uid;
 $gold = defined('PLUS_PACKAGE_D_GOLD') ? PLUS_PACKAGE_D_GOLD : 1000;
 $price = defined('PLUS_PACKAGE_D_PRICE') ? str_replace(',', '.', PLUS_PACKAGE_D_PRICE) : '19.99';
 $currency = defined('PAYPAL_CURRENCY') ? PAYPAL_CURRENCY : 'EUR';
-$paypal = defined('PAYPAL_EMAIL') ? PAYPAL_EMAIL : 'novgorodschi@icloud.com';
+$paypal = (defined('PAYPAL_EMAIL') && PAYPAL_EMAIL !== '@') ? PAYPAL_EMAIL : ADMIN_EMAIL;
 $base = rtrim(HOMEPAGE,'/');
 ?>
 <table class="rate_details" cellpadding="1" cellspacing="1">
@@ -32,7 +32,7 @@ $base = rtrim(HOMEPAGE,'/');
     <tbody>
     <tr>
         <td class="pic">
-            <img src="img/bezahlung/paypal.jpg" style="width:99px;height:99px;" alt="<?php echo PACKAGE_D; ?>">
+            <img src="img/bezahlung/payment_generic.png" style="width:99px;height:99px;" alt="<?php echo PACKAGE_D; ?>">
             <div>Gold: <?= $gold ?><br>Cost: <?= $price ?> <?= $currency ?><br><?php echo TZ_WAIT_INSTANT; ?></div>
         </td>
         <td class="desc">

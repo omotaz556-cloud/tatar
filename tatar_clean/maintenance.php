@@ -15,7 +15,7 @@ $start_timer = $generator->pageLoadTimeStart();
 ##  Contact        : (see project maintainer)                                 ##
 ##  Project        : Novaterra                                                  ##
 ##  URLs:          : https://novaterra.example                                      ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 ## --------------------------------------------------------------------------- ##
 ##  License        : GPLv3 (derived from TravianZ; see project LICENSE)       ##
 ##  Copyright      : Novaterra mods (c) 2010-2026; base engine (c) TravianZ authors (GPLv3). ##
@@ -86,7 +86,7 @@ if($maintenance['active'] == 1 && $session->access < 9){
 				<?php include("Templates/menu.tpl"); ?>
 				<div id="content" class="village2" style="font-size: 20pt;text-align: center">
 					<p><b>Presently, the server is not available due to maintenance.</b></p>
-					<img src="img/lol.PNG">
+					<img src="img/maintenance.png">
 					<p><b>This take a few minutes. In the meantime you can drink a coffee.</b></p>
 				</div>
 				<br /><br /><br /><br /><div id="side_info">

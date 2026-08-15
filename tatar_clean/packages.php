@@ -11,7 +11,7 @@ $start_timer = $generator->pageLoadTimeStart();
 ##  License        : GPLv3 (derived from TravianZ; see project LICENSE)       ##
 ##  Copyright      : Novaterra mods (c) 2010-2026; base engine (c) TravianZ authors (GPLv3). ##
 ##  URLs:          http://novaterra.example                		           ##
-##  Source code:   https://github.com/YOUR-ORG/Novaterra		                   ##
+##  Source code:   https://github.com/omotaz556-cloud/tatar		                ##
 ##                                                                             ##
 #################################################################################
 

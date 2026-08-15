@@ -8,7 +8,7 @@
 ##  Copyright      : Novaterra mods (c) 2010-2026; base engine (c) TravianZ authors (GPLv3). ##
 ##                                                                             ##
 ##  URLs:          https://novaterra.example                                        ##
-##                 https://github.com/YOUR-ORG/Novaterra                        ##
+##                 https://github.com/omotaz556-cloud/tatar                     ##
 ##                                                                             ##
 #################################################################################
 

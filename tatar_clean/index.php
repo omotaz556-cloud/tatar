@@ -14,7 +14,7 @@ use App\Utils\AccessLogger;
 ##  Contact        : (see project maintainer)                                 ##
 ##  Project        : Novaterra                                                  ##
 ##  URLs:          : https://novaterra.example                                      ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 ## --------------------------------------------------------------------------- ##
 ##  License        : GPLv3 (derived from TravianZ; see project LICENSE)       ##
 ##  Copyright      : Novaterra mods (c) 2010-2026; base engine (c) TravianZ authors (GPLv3). ##
@@ -93,7 +93,7 @@ AccessLogger::logRequest();
 				<tr>
 					<td><a href="tutorial.php"><span><?php echo TUTORIAL; ?></span></a></td>
 					<td><a href="anleitung.php"><span><?php echo $lang['index'][0][2]; ?></span></a></td>
-					<td><a href="https://github.com/YOUR-ORG/Novaterra/discussions" target="_blank"><span><?php echo FORUM; ?></span></a></td>
+					<td><a href="https://github.com/omotaz556-cloud/tatar/discussions" target="_blank"><span><?php echo FORUM; ?></span></a></td>
 					<td><a href="?signup" class="signup_link mark"><span><?php echo $lang['register']; ?></span></a></td>
 					<td><a href="?login" class="login_link"><span><?php echo LOGIN; ?></span></a></td>
 				</tr>

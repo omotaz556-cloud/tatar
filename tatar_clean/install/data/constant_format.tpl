@@ -11,7 +11,7 @@
 ##  Refactored by: Shadow                                                      ##
 ##  				                                                           ##
 ##  URLs:          https://novaterra.example                                        ##
-##                 https://github.com/YOUR-ORG/Novaterra                        ##
+##                 https://github.com/omotaz556-cloud/tatar                     ##
 #################################################################################
 
 //////////////////////////////////
@@ -602,7 +602,7 @@ $requse = 0;
 ##  Refactored by: Shadow                                                      ##
 ##                                                                             ##
 ##  URLs:          https://novaterra.example                                        ##
-##                 https://github.com/YOUR-ORG/Novaterra                        ##
+##                 https://github.com/omotaz556-cloud/tatar                     ##
 #################################################################################
 
 ?>

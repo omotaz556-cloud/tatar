@@ -11,7 +11,7 @@
 ##  Contact        : (see project maintainer)                                 ##
 ##  Project        : Novaterra                                                  ##
 ##  URLs:          : https://novaterra.example                                      ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 ## --------------------------------------------------------------------------- ##
 ##  License        : Novaterra Project                                          ##
 ##  Copyright      : Novaterra (c) 2010-2026. All rights reserved.              ##
@@ -24,7 +24,7 @@ $uid = (int)$session->uid;
 $gold = defined('PLUS_PACKAGE_B_GOLD')? PLUS_PACKAGE_B_GOLD : 120;
 $price = defined('PLUS_PACKAGE_B_PRICE')? str_replace(',', '.', PLUS_PACKAGE_B_PRICE) : '4.99';
 $currency = defined('PAYPAL_CURRENCY')? PAYPAL_CURRENCY : 'EUR';
-$paypal = defined('PAYPAL_EMAIL')? PAYPAL_EMAIL : 'novgorodschi@icloud.com';
+$paypal = (defined('PAYPAL_EMAIL') && PAYPAL_EMAIL !== '@') ? PAYPAL_EMAIL : ADMIN_EMAIL;
 
 // link-uri pentru IPN
 $notify = rtrim(HOMEPAGE,'/'). '/paypal_ipn.php';
@@ -36,7 +36,7 @@ $cancel = rtrim(HOMEPAGE,'/'). '/plus.php?id=1&cancel=1';
     <tbody>
     <tr>
         <td class="pic">
-            <img src="img/bezahlung/paypal.jpg" style="width:99px;height:99px;" alt="<?php echo PACKAGE_B; ?>" />
+            <img src="img/bezahlung/payment_generic.png" style="width:99px;height:99px;" alt="<?php echo PACKAGE_B; ?>" />
             <div>Gold: <?= $gold?><br>Cost: <?= $price?> <?= $currency?><br><?php echo TZ_WAIT_INSTANT_AFTER_IPN; ?></div>
         </td>
         <td class="desc">

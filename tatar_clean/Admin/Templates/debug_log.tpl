@@ -35,7 +35,7 @@
 ##  Filename       : debug_log.tpl                                             ##
 ##  Type           : Admin Panel Frontend (Debug Error Log)                   ##
 ##  Project        : Novaterra                                                  ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 ##  License        : Novaterra Project                                          ##
 ##  Copyright      : Novaterra (c) 2010-2026. All rights reserved.             ##
 ## --------------------------------------------------------------------------- ##

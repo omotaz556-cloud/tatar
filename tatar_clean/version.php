@@ -14,7 +14,7 @@ $start_timer = $generator->pageLoadTimeStart();
 ##  Contact        : (see project maintainer)                                 ##
 ##  Project        : Novaterra                                                  ##
 ##  Test Server    : https://novaterra.example                                      ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 ## --------------------------------------------------------------------------- ##
 ##  License        : GPLv3 (derived from TravianZ; see project LICENSE)       ##
 ##  Copyright      : Novaterra mods (c) 2010-2026; base engine (c) TravianZ authors (GPLv3). ##
@@ -218,7 +218,7 @@ echo '<div class="developer-card" style="
     </a>
 
     <!-- GitHub -->
-    <a href="https://github.com/YOUR-ORG/Novaterra/archive/master.zip" target="_blank" style="text-decoration:none; flex:1;">
+    <a href="https://github.com/omotaz556-cloud/tatar/archive/master.zip" target="_blank" style="text-decoration:none; flex:1;">
         <div style="
             background: #f0f0f0;
             border-radius: 12px;

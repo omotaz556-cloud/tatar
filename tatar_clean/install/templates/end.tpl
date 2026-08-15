@@ -12,7 +12,7 @@
 ## --------------------------------------------------------------------------- ##
 ##  Contact        : (see project maintainer)                                 ##
 ##  Project        : Novaterra                                                  ##
-##  GitHub         : https://github.com/YOUR-ORG/Novaterra                      ##
+##  GitHub         : https://github.com/omotaz556-cloud/tatar                   ##
 ## --------------------------------------------------------------------------- ##
 ##  License        : Novaterra Project                                          ##
 ##  Copyright      : Novaterra (c) 2010-2025. All rights reserved.              ##
@@ -54,8 +54,8 @@ include("../GameEngine/config.php"); $time=time(); @rename("../install/","../ins
     </div>
   </div>
   <div style="text-align:center;margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-    <a class="btn" style="background:#0f172a;" href="https://github.com/YOUR-ORG/Novaterra" target="_blank">GitHub</a>
-    <a class="btn" style="background:#16a34a;" href="https://github.com/YOUR-ORG/Novaterra/wiki" target="_blank">Documentation</a>
+    <a class="btn" style="background:#0f172a;" href="https://github.com/omotaz556-cloud/tatar" target="_blank">GitHub</a>
+    <a class="btn" style="background:#16a34a;" href="https://github.com/omotaz556-cloud/tatar/wiki" target="_blank">Documentation</a>
     <a class="btn" style="background:#64748b;" href="<?php echo defined('ADMIN_EMAIL') ? 'mailto:' . ADMIN_EMAIL : '#'; ?>">Contact Support</a>
   </div>
 </div>

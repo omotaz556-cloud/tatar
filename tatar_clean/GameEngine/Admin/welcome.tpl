@@ -10,7 +10,7 @@ The taskmaster will help you on your way to establishing your empire with advice
 <li>You have to heed the <a href="rules.php">game rules</a></li>
 <li>Information concerning troops and buildings can be found in the <a href="#" onClick="return Popup(0,0);">instructions</a></li>
 <li>Problems? Check the <a href="http://t3.answers.novaterra.example" target="_blank">Novaterra Answers</a> first!</li>
-<li>No solution? Try asking in the <a href="https://github.com/YOUR-ORG/Novaterra">Forum</a></li>
+<li>No solution? Try asking in the <a href="https://github.com/omotaz556-cloud/tatar">Forum</a></li>
 <li>Tried everything to no avail? Write an answer to this message to contact the Support</li>
 </ul>
 
