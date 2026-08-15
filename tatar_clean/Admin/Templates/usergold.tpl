@@ -72,7 +72,14 @@ $id = $_SESSION['id'];
         <label><?php echo ADM_AMOUNT_GOLD; ?></label>
         <input type="number" name="gold" value="20" min="1" max="999999" required>
       </div>
-      
+
+      <?php if (class_exists('CentralGold') && CentralGold::isConfigured()) { ?>
+      <div class="field full" style="flex-direction:row;align-items:center;gap:8px">
+        <input type="checkbox" name="local_only" value="1" id="ug_local_only" style="width:auto">
+        <label for="ug_local_only" style="font-weight:normal"><?php echo ADM_GOLD_LOCAL_ONLY_LABEL; ?></label>
+      </div>
+      <?php } ?>
+
       <button type="submit">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg><?php echo ADM_GIVE_GOLD; ?></button>
     </form>

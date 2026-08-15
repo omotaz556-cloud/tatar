@@ -24,10 +24,16 @@ csrf_verify();
 
 include_once("../../config.php");
 include_once("../../Database.php");
+include_once("../../CentralGold.php");
 
 $admid  = (int)($_POST['admid'] ?? 0);
 $id     = (int)($_POST['id'] ?? 0);
 $amount = (int)($_POST['gold'] ?? 0);
+// Admin-granted gold is treated as PAID gold (it stands in for a real
+// purchase/refund the admin is applying by hand), so per the client brief
+// it must be portable across worlds too. Default ON; an admin who really
+// wants a world-local-only adjustment can pass local_only=1.
+$localOnly = ((string) ($_POST['local_only'] ?? '0') === '1');
 
 if($id <= 0 || $amount == 0){
     header("Location: ../../../Admin/admin.php?p=usergold");
@@ -42,8 +48,32 @@ if(!$acc || $acc['access'] != 9) admin_deny('You must be signed in as an adminis
 // 1. UPDATE GOLD
 mysqli_query($GLOBALS["link"], "UPDATE ".TB_PREFIX."users SET gold = gold + $amount WHERE id = $id") or die(mysqli_error($GLOBALS["link"]));
 
+// 1b. Mirror into the cross-world paid-gold ledger (see GameEngine/CentralGold.php)
+// so this grant follows the player if they register on another Novaterra world
+// with the same email. Fails soft: if central gold isn't configured, or the
+// player has no email on file yet, the local grant above still stands — this
+// world just won't be able to offer portability for it.
+$userRow = mysqli_fetch_assoc(mysqli_query($GLOBALS["link"],
+    "SELECT username, email FROM ".TB_PREFIX."users WHERE id = $id"));
+if ($userRow && !$localOnly && class_exists('CentralGold') && CentralGold::isConfigured()
+    && !empty($userRow['email'])) {
+    if ($amount > 0) {
+        CentralGold::credit($userRow['email'], $userRow['username'], $id, $amount,
+            'admin_grant', 'Admin gift by ' . ($acc['username'] ?? ''), $admid);
+    } else {
+        // Negative amount = admin deduction. debit() never takes the central
+        // balance below zero; if the player's central balance is lower than
+        // the local deduction (e.g. they already spent central gold on
+        // another world), it simply debits what's available rather than
+        // failing the whole request — the local users.gold change above is
+        // authoritative for this world either way.
+        CentralGold::debit($userRow['email'], $userRow['username'], $id, abs($amount),
+            'admin_deduct', 'Admin deduction by ' . ($acc['username'] ?? ''), $admid);
+    }
+}
+
 // 2. ADMIN LOG
-$name = mysqli_fetch_assoc(mysqli_query($GLOBALS["link"], "SELECT username FROM ".TB_PREFIX."users WHERE id = $id"))['username'];
+$name = $userRow['username'] ?? '';
 $name = mysqli_real_escape_string($GLOBALS["link"], $name);
 mysqli_query($GLOBALS["link"], "INSERT INTO ".TB_PREFIX."admin_log VALUES (0, $admid, 'Added <b>$amount</b> gold to user <a href=\'admin.php?p=player&uid=$id\'>$name</a>', ".time().")");
 

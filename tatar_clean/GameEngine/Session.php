@@ -271,6 +271,12 @@ function __construct() {
             $_SERVER['HTTP_USER_AGENT'] ?? ''
         );
 
+        // X-Tatar activity gold: award this player's first-login-of-the-day
+        // points (see GameEngine/XTatarGold.php). No-ops completely if the
+        // feature is disabled from the admin panel, so this is always safe
+        // to call unconditionally.
+        XTatarGold::awardDailyLogin($dbarray['id']);
+
         if ($dbarray['id'] == 1) {
             header("Location: nachrichten.php");
             exit;

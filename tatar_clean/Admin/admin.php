@@ -96,7 +96,7 @@ function admin_validated_page(string $raw): string
         'server_info', 'online', 'notregistered', 'inactive', 'report',
         'message', 'massmessage', 'sysmessage', 'map', 'map_tile', 'natars',
         'search', 'ban', 'maintenance', 'cleanban', 'gold', 'usergold',
-        'centralGold',
+        'centralGold', 'xtatarGold',
         'maintenenceResetGold', 'delmedal', 'delallymedal', 'givePlus',
         'maintenenceResetPlus', 'givePlusRes', 'maintenenceResetPlusBonus',
         'addUsers', 'users', 'admin_log', 'config', 'debug_log',
@@ -260,6 +260,10 @@ if ($page !== '') {
 
         case 'centralGold':
             $subpage = ADMIN_CENTRAL_GOLD;
+            break;
+
+        case 'xtatarGold':
+            $subpage = ADM_XG_TITLE;
             break;
 
         case 'maintenenceResetGold':
@@ -881,6 +885,7 @@ body.app #menu li.sub ul li a:hover{color:#d97706!important}
                                 <li><a href="?p=usergold"><?php echo ADMIN_GIVE_FREE_GOLD_TO_SPECIFIC_USER; ?></a></li>
                                 <li><a href="?p=goldShop"><?php echo ADMIN_GOLD_SHOP_PROMO_CODES; ?></a></li>
                                 <li><a href="?p=centralGold"><?php echo ADMIN_CENTRAL_GOLD; ?></a></li>
+                                <li><a href="?p=xtatarGold"><?php echo ADM_XG_TITLE; ?></a></li>
                                 <li><a href="?p=maintenenceResetGold"><?php echo ADMIN_RESET_GOLD; ?></a></li>
                             </ul>
                         </li>

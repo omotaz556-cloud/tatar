@@ -3641,6 +3641,7 @@ tz_def('ADM_USER_GOLD', 'Or du joueur');
 tz_def('ADM_GIVE_GOLD_TO_SPECIFIC_PLAYER', 'Offrir de l\'or à un joueur précis');
 tz_def('ADM_ADD_GOLD_ONLY_FOR_SINGLE_ACCOUNT_AFTER_ID', 'Ajouter de l\'or à un seul compte (par ID).');
 tz_def('ADM_AMOUNT_GOLD', 'Quantité d\'or');
+tz_def('ADM_GOLD_LOCAL_ONLY_LABEL', 'Local uniquement (ne pas synchroniser avec le solde d\'or multi-mondes de ce joueur)');
 tz_def('ADM_GOLD_SUCCESSFULLY_ADDED_FOR_USER', '✓ Or ajouté au joueur avec succès !');
 tz_def('ADM_PLUS_MANAGEMENT', 'Gestion du Plus');
 tz_def('ADM_GIVE_EVERYONE_FREE_PLUS', 'Offrir le Plus à tous');

@@ -3438,6 +3438,7 @@ tz_def('ADM_USER_GOLD', 'Aurul jucatorului');
 tz_def('ADM_GIVE_GOLD_TO_SPECIFIC_PLAYER', 'Ofera aur unui anumit jucator');
 tz_def('ADM_ADD_GOLD_ONLY_FOR_SINGLE_ACCOUNT_AFTER_ID', 'Adauga aur unui singur cont (dupa ID).');
 tz_def('ADM_AMOUNT_GOLD', 'Cantitate de aur');
+tz_def('ADM_GOLD_LOCAL_ONLY_LABEL', 'Doar local (nu sincroniza cu soldul de aur multi-lume al acestui jucator)');
 tz_def('ADM_GOLD_SUCCESSFULLY_ADDED_FOR_USER', '✓ Aur adaugat cu succes jucatorului!');
 tz_def('ADM_PLUS_MANAGEMENT', 'Administrarea Plus');
 tz_def('ADM_GIVE_EVERYONE_FREE_PLUS', 'Ofera Plus tuturor');

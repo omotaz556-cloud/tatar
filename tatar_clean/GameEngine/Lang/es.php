@@ -3696,6 +3696,7 @@ tz_def('ADM_USER_GOLD', 'User Gold');
 tz_def('ADM_GIVE_GOLD_TO_SPECIFIC_PLAYER', 'Give Gold to Specific Player');
 tz_def('ADM_ADD_GOLD_ONLY_FOR_SINGLE_ACCOUNT_AFTER_ID', 'Add gold only for single account (after ID).');
 tz_def('ADM_AMOUNT_GOLD', 'Amount Gold');
+tz_def('ADM_GOLD_LOCAL_ONLY_LABEL', 'Solo local (no sincronizar con el saldo de oro multi-mundo de este jugador)');
 tz_def('ADM_GOLD_SUCCESSFULLY_ADDED_FOR_USER', '✓ Gold successfully added for user!');
 tz_def('ADM_PLUS_MANAGEMENT', 'Plus Management');
 tz_def('ADM_GIVE_EVERYONE_FREE_PLUS', 'Give Everyone Free Plus');
