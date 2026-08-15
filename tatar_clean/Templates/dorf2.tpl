@@ -174,6 +174,8 @@ for ($t = 19; $t <= 39; $t++) {
     }
 
     echo '<area href="build.php?id=' . $t . '"
+                data-ajax-build="1"
+                data-field-id="' . $t . '"
                 title="' . safeHTML($title) . '"
                 coords="' . safeHTML($coords[$t]) . '"
                 shape="poly" />';

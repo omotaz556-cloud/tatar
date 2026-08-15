@@ -87,7 +87,15 @@ switch ($bindicate) {
     case 9:
         $href = $session->access == BANNED? 'banned.php' : (($id <= 18)? "dorf1.php?a=$id&c=$session->checker" : "dorf2.php?a=$id&c=$session->checker");
         $lvl = $bindicate == 8? $village->resarray['f'.$id] + 1 : $village->resarray['f'.$id] + ($loopsame > 0? 2 : 1);
-        echo '<a class="build" href="'.$href.'">'.UPGRADE_LEVEL.' '.$lvl.'.</a>';
+        // data-ajax-build: intercepted by new2.js to submit without a full
+        // page reload when the popup is open. href stays a valid full URL
+        // so the link still works normally if JS fails or the page is
+        // opened directly (progressive enhancement, not a hard dependency).
+        if ($session->access != BANNED) {
+            echo '<a class="build" href="'.$href.'" data-ajax-build="1" data-field-id="'.(int)$id.'">'.UPGRADE_LEVEL.' '.$lvl.'.</a>';
+        } else {
+            echo '<a class="build" href="'.$href.'">'.UPGRADE_LEVEL.' '.$lvl.'.</a>';
+        }
         if ($bindicate == 9) echo ' <span class="none">'.WAITING.'</span>';
         break;
 }

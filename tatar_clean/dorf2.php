@@ -35,6 +35,24 @@ if(isset($_GET['newdid'])) {
 }
 else $building->procBuild($_GET);
 
+/**
+ * AJAX SUBMIT MODE - see dorf1.php for full explanation. Same
+ * mechanism, needed here too since buildings 19+ upgrade through
+ * dorf2.php?a=X&c=checker instead of dorf1.php.
+ */
+if (
+    isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+    strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest' &&
+    isset($_GET['a'])
+) {
+    header('Content-Type: application/json; charset=UTF-8');
+    echo json_encode([
+        'error'   => false,
+        'fieldId' => (int) $_GET['a'],
+    ]);
+    exit;
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -100,6 +118,7 @@ if(!NEW_FUNCTIONS_DISPLAY_LINKS) {
 <?php
 include("Templates/footer.tpl");
 include("Templates/res.tpl");
+include("Templates/BuildPopup.tpl");
 ?>
 <div id="stime">
 <div id="ltime">

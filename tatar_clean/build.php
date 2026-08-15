@@ -312,6 +312,102 @@ if(isset($_GET['mode']) && $_GET['mode'] == 'troops' && isset($_GET['cancel']) &
     exit();
 }
 
+/**
+ * AJAX FRAGMENT MODE (build popup)
+ *
+ * Cerut de client: sa nu mai fie nevoie de reload complet de pagina la
+ * fiecare upgrade de camp ("dublare" - deschide camp -> reload -> apasa
+ * upgrade -> reload inapoi la dorf1/dorf2 -> trebuie sa dai click pe camp
+ * din nou pentru urmatorul upgrade).
+ *
+ * IMPORTANT: build.php este DOAR o pagina de afisare - nu apeleaza
+ * procBuild() si nu modifica nimic in baza de date (verificat explicit,
+ * grep pe procBuild in acest fisier nu gaseste nimic). Actiunea reala de
+ * upgrade se intampla in dorf1.php/dorf2.php (?a=X&c=checker), care au
+ * propriul lor branch AJAX separat (vezi comentariul "AJAX SUBMIT MODE"
+ * la inceputul acelor fisiere). Fluxul din JS (new2.js) este in 2 pasi:
+ *   1. submitUpgrade() -> dorf1.php sau dorf2.php (?a=X) - face upgrade-ul
+ *   2. loadBuildFragment() -> build.php?id=X (acest branch) - reafiseaza
+ *      popup-ul cu starea noua
+ *
+ * Cand request-ul vine cu X-Requested-With: XMLHttpRequest, procesam
+ * exact acelasi flux de afisare ca mai jos (nimic din logica existenta
+ * nu se schimba), dar in loc sa printam documentul HTML complet,
+ * capturam DOAR fragmentul din interiorul #content (acelasi include-uri
+ * ca la linia ~363 mai jos) si il intoarcem ca JSON, impreuna cu
+ * checker-ul curent (necesar pentru urmatorul submit din popup) si un
+ * HTML proaspat pentru bara de resurse (#res) si coada de constructie
+ * (#building_contract), ca sa poata fi injectate direct in popup-ul
+ * deschis peste dorf1/dorf2, fara reload.
+ */
+$isAjaxFragment = (
+    isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+    strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+);
+
+if ($isAjaxFragment) {
+
+    if (!(isset($_GET['id']) || isset($_GET['gid']) || $route == 1 || isset($_POST['routeid']) || isset($_GET['buildingFinish']))) {
+        header('Content-Type: application/json; charset=UTF-8');
+        echo json_encode(['error' => true, 'redirect' => 'dorf2.php?id=39']);
+        exit;
+    }
+
+    if (isset($_GET['s']) && !ctype_digit($_GET['s'])) $_GET['s'] = null;
+    if (isset($_GET['t']) && !ctype_digit($_GET['t'])) $_GET['t'] = null;
+    if (!ctype_digit($_GET['id'])) $_GET['id'] = 1;
+
+    $id = $_GET['id'];
+
+    ob_start();
+
+    if ($_GET['id'] == 99 && $village->resarray['f99t'] == 40) {
+        include("Templates/Build/ww.tpl");
+    } elseif ($village->resarray['f'.$_GET['id'].'t'] == 0 && $_GET['id'] >= 19) {
+        include("Templates/Build/avaliable.tpl");
+    } else {
+        if (isset($_GET['t'])) {
+            if ($_GET['t'] == 1) $_SESSION['loadMarket'] = 1;
+            include("Templates/Build/".$village->resarray['f'.$_GET['id'].'t']."_".$_GET['t'].".tpl");
+        } elseif (isset($_GET['s'])) {
+            include("Templates/Build/".$village->resarray['f'.$_GET['id'].'t']."_".$_GET['s'].".tpl");
+        } else {
+            include("Templates/Build/".$village->resarray['f'.$_GET['id'].'t'].".tpl");
+        }
+
+        if (isset($_GET['buildingFinish']) && $_GET['buildingFinish'] == 1 && $session->gold >= 2) {
+            // finishAll() face proprii ei redirect/exit - nu se potriveste cu
+            // modul fragment (nu poate intoarce JSON), asa ca il lasam sa
+            // curga pe fluxul normal (non-AJAX) in acest caz specific.
+            ob_end_clean();
+            $building->finishAll("build.php?gid=".$_GET['id']."&ty=".$_GET['ty']);
+            exit;
+        }
+    }
+
+    $fragmentHtml = ob_get_clean();
+
+    ob_start();
+    include("Templates/res.tpl");
+    $resHtml = ob_get_clean();
+
+    ob_start();
+    if ($building->NewBuilding) {
+        include("Templates/Building.tpl");
+    }
+    $queueHtml = ob_get_clean();
+
+    header('Content-Type: application/json; charset=UTF-8');
+    echo json_encode([
+        'error'   => false,
+        'html'    => $fragmentHtml,
+        'res'     => $resHtml,
+        'queue'   => $queueHtml,
+        'checker' => $session->checker,
+    ]);
+    exit;
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>

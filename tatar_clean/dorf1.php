@@ -43,6 +43,31 @@ if(isset($_GET['newdid'])) {
 	exit;
 } 
 else $building->procBuild($_GET);
+
+/**
+ * AJAX SUBMIT MODE (build popup upgrade action)
+ *
+ * The upgrade link in Templates/Build/upgrade.tpl points here
+ * (dorf1.php?a=X&c=checker) because procBuild() above is what
+ * actually performs the upgrade (upgradeBuilding()). Normally this
+ * page then renders the full village view below - but when called
+ * from the build popup via AJAX, the player never sees this page;
+ * we just need to confirm the submit succeeded and tell the popup
+ * which field to reload (build.php?id=X, in fragment mode) to show
+ * the new state. No HTML is rendered in this branch.
+ */
+if (
+    isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+    strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest' &&
+    isset($_GET['a'])
+) {
+    header('Content-Type: application/json; charset=UTF-8');
+    echo json_encode([
+        'error'   => false,
+        'fieldId' => (int) $_GET['a'],
+    ]);
+    exit;
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -115,6 +140,7 @@ if(!NEW_FUNCTIONS_DISPLAY_LINKS) {
 <?php
 include("Templates/footer.tpl");
 include("Templates/res.tpl");
+include("Templates/BuildPopup.tpl");
 ?>
 <div id="stime">
 <div id="ltime">

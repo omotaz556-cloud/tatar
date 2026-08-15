@@ -311,7 +311,64 @@ class Building {
 	*****************************************/
 
 	private function redirect($fieldId) {
+
+    /**
+     * AJAX-aware redirect (fix pentru "dublare" - vezi build.php si
+     * dorf1.php/dorf2.php pentru explicatia completa a popup-ului AJAX).
+     *
+     * Aceasta metoda e punctul unic prin care upgradeBuilding(),
+     * constructBuilding() etc. redirecteaza dupa succes SAU dupa un
+     * early-exit (coada plina, camp la nivel maxim etc.) - 7 locuri de
+     * apel in total. Fara acest fix, orice succes de upgrade ar fi
+     * trimis ca redirect HTTP brut catre popup-ul AJAX, care asteapta
+     * JSON - JS-ul are deja un fallback (recade pe navigare normala),
+     * dar experienta nu ar fi cea AJAX intentionata pe cazul cel mai
+     * comun (upgrade reusit).
+     *
+     * Cand cererea vine cu X-Requested-With: XMLHttpRequest, intoarcem
+     * acelasi JSON pe care dorf1.php/dorf2.php il produc pentru submit-ul
+     * de upgrade normal, ca popup-ul sa poata reincarca fragmentul
+     * build.php?id=X fara reload, indiferent care dintre cele 7 cai a
+     * declansat acest redirect.
+     */
+    if (
+        isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+        strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+    ) {
+        header('Content-Type: application/json; charset=UTF-8');
+        echo json_encode([
+            'error'   => false,
+            'fieldId' => (int) $fieldId,
+        ]);
+        exit;
+    }
+
     header('Location: '.($fieldId >= 19 ? 'dorf2.php' : 'dorf1.php'));
+    exit;
+}
+
+	/**
+	 * Same AJAX-aware treatment as redirect() above, for the early-exit
+	 * paths inside constructBuilding() (new building on an empty slot)
+	 * that raise a raw 'Location: dorf2.php' header directly instead of
+	 * going through redirect(). fieldId isn't tracked at these call
+	 * sites, so on the AJAX path we report success without one; the
+	 * popup's JS only uses fieldId to know which field to reload, and
+	 * these are all "couldn't build" early exits with nothing new to
+	 * show anyway.
+	 */
+	private function ajaxSafeDorf2Redirect() {
+
+    if (
+        isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+        strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+    ) {
+        header('Content-Type: application/json; charset=UTF-8');
+        echo json_encode(['error' => false]);
+        exit;
+    }
+
+    header('Location: dorf2.php');
     exit;
 }
 
@@ -793,8 +850,7 @@ class Building {
         // early exit
         if (in_array($bindicate, array(1, 2, 3, 10, 11))) {
 
-            header('Location: dorf2.php');
-            exit;
+            $this->ajaxSafeDorf2Redirect();
         }
 
         $loop = ($bindicate == 9 ? 1 : 0);
@@ -916,8 +972,7 @@ class Building {
 
         if ($this->allocated >= $this->maxConcurrent) {
 
-            header('Location: dorf2.php');
-            exit;
+            $this->ajaxSafeDorf2Redirect();
         }
 
         $buildField = $fieldId;
@@ -958,8 +1013,7 @@ class Building {
         // early exit
         if (!$this->meetRequirement($gid)) {
 
-            header('Location: dorf2.php');
-            exit;
+            $this->ajaxSafeDorf2Redirect();
         }
 
         $level = $this->db->getResourceLevel($this->vil->wid);

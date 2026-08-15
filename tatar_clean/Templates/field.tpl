@@ -139,6 +139,8 @@ for ($i = 1; $i <= 18; $i++) {
     }
 
     echo '<area href="build.php?id=' . $i . '"
+                data-ajax-build="1"
+                data-field-id="' . $i . '"
                 coords="' . safeHTML($coorarray[$i]) . '"
                 shape="circle"
                 title="' . safeHTML($title) . '" />' . "\r\n";
