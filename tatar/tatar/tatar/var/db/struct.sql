@@ -1298,6 +1298,31 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%related_protection_settings` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `%prefix%related_transfer_violations`
+-- (Related Account Protection: log of every marketplace send BLOCKED
+--  because sender+recipient are a declared related pair. Item 4 of the
+--  gap analysis - full-block log, not a rate-limit log, since related
+--  pairs get zero transfer allowance, never a reduced one.)
+--
+
+CREATE TABLE IF NOT EXISTS `%PREFIX%related_transfer_violations` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `from_uid` int(11) NOT NULL DEFAULT 0,
+ `to_uid` int(11) NOT NULL DEFAULT 0,
+ `from_vref` int(11) NOT NULL DEFAULT 0,
+ `to_vref` int(11) NOT NULL DEFAULT 0,
+ `wood` int(11) NOT NULL DEFAULT 0,
+ `clay` int(11) NOT NULL DEFAULT 0,
+ `iron` int(11) NOT NULL DEFAULT 0,
+ `crop` int(11) NOT NULL DEFAULT 0,
+ `time` int(11) NOT NULL DEFAULT 0,
+ PRIMARY KEY (`id`),
+ KEY `pair_time` (`from_uid`,`to_uid`,`time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `%prefix%resource_transfer_log`
 -- (Push Protection: completed cross-player marketplace deliveries)
 --

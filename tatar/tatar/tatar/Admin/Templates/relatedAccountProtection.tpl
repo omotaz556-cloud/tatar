@@ -24,6 +24,7 @@ include_once(__DIR__ . '/../../GameEngine/RelatedAccountProtection.php');
 $msg       = isset($_GET['msg']) ? (string) $_GET['msg'] : '';
 $rapSettings = RelatedAccountProtection::getSettings();
 $relations = RelatedAccountProtection::listAll(300);
+$transferViolations = RelatedAccountProtection::listTransferViolations(300);
 ?>
 <style>
 .rap-wrap{color:#e2e8f0;font-family:Verdana,Arial,sans-serif;font-size:12px;padding:6px 4px 26px;}
@@ -147,6 +148,40 @@ $relations = RelatedAccountProtection::listAll(300);
                                 <button type="submit" class="rap-del-btn"><?php echo ADM_RAP_REMOVE; ?></button>
                             </form>
                         </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <!-- Blocked marketplace transfer attempts between related accounts -->
+    <div class="rap-card" style="padding:0;">
+        <div style="padding:14px 16px 0;">
+            <h3><?php echo ADM_RAP_TRANSFERS_TITLE; ?></h3>
+            <p class="rap-desc"><?php echo ADM_RAP_TRANSFERS_DESC; ?></p>
+        </div>
+        <?php if (empty($transferViolations)): ?>
+            <div class="rap-empty"><?php echo ADM_RAP_NO_TRANSFER_VIOLATIONS; ?></div>
+        <?php else: ?>
+            <div class="rap-scroll">
+            <table class="rap-table">
+                <thead>
+                    <tr>
+                        <th><?php echo ADM_RAP_USERNAME_A; ?></th>
+                        <th><?php echo ADM_RAP_USERNAME_B; ?></th>
+                        <th><?php echo ADM_RAP_ATTEMPTED_AMOUNT; ?></th>
+                        <th><?php echo ADM_RAP_ADDED; ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($transferViolations as $row): ?>
+                    <tr>
+                        <td><?php echo e($row['username_from']); ?></td>
+                        <td><?php echo e($row['username_to']); ?></td>
+                        <td class="num"><?php echo number_format($row['total']); ?></td>
+                        <td class="num" style="color:#94a3b8;"><?php echo $row['time'] ? date('Y-m-d H:i', (int) $row['time']) : '&ndash;'; ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

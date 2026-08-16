@@ -1061,6 +1061,7 @@ tz_def('ARRIVAL_IN', 'Arrival in');
 tz_def('NO_COORDINATES_SELECTED', 'No Coordinates selected');
 tz_def('CANNOT_SEND_RESOURCES', 'You cannot send resources to the same village');
 tz_def('BANNED_CANNOT_SEND_RESOURCES', 'Player is Banned. You cannot send resources to him');
+tz_def('RELATED_ACCOUNT_TRANSFER_BLOCKED', 'Resource transfers between these two accounts are not allowed.');
 tz_def('RESOURCES_NO_SELECTED', 'Resources not selected');
 tz_def('ENTER_COORDINATES', 'Enter coordinates or village name');
 tz_def('TOO_FEW_MERCHANTS', 'Too few merchants');
@@ -3068,8 +3069,8 @@ tz_def('ADM_FS_REMOVE', 'Remove');
 tz_def('ADM_FS_CONFIRM_REMOVE', 'Remove this link?');
 
 tz_def('ADMIN_RELATED_ACCOUNT_PROTECTION', 'Related Account Protection');
-tz_def('ADM_RAP_INTRO', 'Lets an admin manually mark two accounts on this world as "related" (same owner, same device, or otherwise confirmed to be the same person). Raiding is BLOCKED in both directions between any related pair - the raid still resolves normally, but yields zero resource loot. This is independent from Multi-Account Detection, which only scores suspicious pairs for manual review, and from Linked Accounts (Feeding), which does the opposite (removes the raid cap between accounts a player opts in).');
-tz_def('ADM_RAP_PRIORITY_NOTE', 'If the same pair is ALSO declared as "linked" under Linked Accounts (Feeding), this protection always wins: raiding is blocked regardless of any feeding settings for that pair.');
+tz_def('ADM_RAP_INTRO', 'Lets an admin manually mark two accounts on this world as "related" (same owner, same device, or otherwise confirmed to be the same person). Both raiding AND marketplace resource transfers are BLOCKED in both directions between any related pair - raids still resolve normally but yield zero resource loot, and marketplace sends between the pair are refused outright. This is independent from Multi-Account Detection, which only scores suspicious pairs for manual review, and from Linked Accounts (Feeding), which does the opposite (removes the raid cap between accounts a player opts in).');
+tz_def('ADM_RAP_PRIORITY_NOTE', 'If the same pair is ALSO declared as "linked" under Linked Accounts (Feeding), this protection always wins: raiding is blocked regardless of any feeding settings for that pair. Marketplace transfers between a related pair are always blocked with no partial limit, daily cap, or cooldown - the allowance is zero.');
 tz_def('ADM_RAP_SETTINGS_TITLE', 'Settings');
 tz_def('ADM_RAP_SETTINGS_DESC', 'Turn raid-blocking for related pairs on or off. This does not remove any relations you have already added - it only controls whether they are currently enforced.');
 tz_def('ADM_RAP_ENABLED', 'Enabled');
@@ -3087,6 +3088,10 @@ tz_def('ADM_RAP_ADDED', 'Added');
 tz_def('ADM_RAP_BADGE_BLOCKED', 'Raiding Blocked');
 tz_def('ADM_RAP_REMOVE', 'Remove');
 tz_def('ADM_RAP_CONFIRM_REMOVE', 'Remove this relation? Raiding between these accounts will no longer be blocked.');
+tz_def('ADM_RAP_TRANSFERS_TITLE', 'Blocked Transfer Attempts');
+tz_def('ADM_RAP_TRANSFERS_DESC', 'Marketplace resource sends that were refused because the sender and recipient are a declared related pair. Related pairs always get zero transfer allowance - there is no partial limit to log against.');
+tz_def('ADM_RAP_NO_TRANSFER_VIOLATIONS', 'No blocked transfer attempts recorded yet.');
+tz_def('ADM_RAP_ATTEMPTED_AMOUNT', 'Attempted amount');
 
 // Player-facing side (see spieler.php / feeding.tpl)
 tz_def('FS_PLAYER_TITLE', 'Linked Accounts');

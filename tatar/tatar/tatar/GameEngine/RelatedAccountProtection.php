@@ -106,6 +106,25 @@ class RelatedAccountProtection
 
         @mysqli_query($link, "INSERT IGNORE INTO `" . TB_PREFIX . "related_protection_settings`
             (`id`, `enabled`) VALUES (1, 0)");
+
+        // Item 4 (Resource Transfer Protection): log of every marketplace
+        // send blocked because sender+recipient are a related pair. Related
+        // pairs get a full block (zero allowance), never a reduced limit,
+        // so this is a block log rather than a rate/limit log.
+        @mysqli_query($link, "CREATE TABLE IF NOT EXISTS `" . TB_PREFIX . "related_transfer_violations` (
+            `id`        int(11) NOT NULL AUTO_INCREMENT,
+            `from_uid`  int(11) NOT NULL DEFAULT 0,
+            `to_uid`    int(11) NOT NULL DEFAULT 0,
+            `from_vref` int(11) NOT NULL DEFAULT 0,
+            `to_vref`   int(11) NOT NULL DEFAULT 0,
+            `wood`      int(11) NOT NULL DEFAULT 0,
+            `clay`      int(11) NOT NULL DEFAULT 0,
+            `iron`      int(11) NOT NULL DEFAULT 0,
+            `crop`      int(11) NOT NULL DEFAULT 0,
+            `time`      int(11) NOT NULL DEFAULT 0,
+            PRIMARY KEY (`id`),
+            KEY `pair_time` (`from_uid`, `to_uid`, `time`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
     }
 
     /** Normalise a pair so uid_a is always the smaller id. */
@@ -343,5 +362,109 @@ class RelatedAccountProtection
              WHERE uid_a = " . $a . " AND uid_b = " . $b . " LIMIT 1"
         );
         return $res && mysqli_num_rows($res) > 0;
+    }
+
+    /* ---- Resource-transfer protection (item 4 of the gap analysis) ------- */
+
+    /**
+     * Marketplace-transfer counterpart of isBlockedPair(). Related pairs get
+     * a full, permanent block on sending resources to each other - there is
+     * no "reduced limit", "daily cap", or "cooldown" concept here, since the
+     * product decision is zero transfer allowance, exactly like the raid
+     * loot block above. Direction does not matter, same reasoning as
+     * isBlockedPair(): stops resource extraction between the two accounts
+     * regardless of which one is sending.
+     *
+     * This is intentionally just an alias of isBlockedPair() - kept as a
+     * separate, clearly-named method so the call site in Market.php reads
+     * as "is this a related-account transfer" rather than reusing a raid-
+     * specific name, and so the two concerns can diverge later without
+     * touching Market.php again.
+     */
+    public static function isBlockedTransferPair($uidA, $uidB)
+    {
+        return self::isBlockedPair($uidA, $uidB);
+    }
+
+    /**
+     * Log one marketplace send that was blocked because sender+recipient
+     * are a declared related pair. Best-effort; never throws (mirrors
+     * PushProtection::logTransfer()'s fail-soft style) so a logging issue
+     * can never block or break the send flow that calls this.
+     */
+    public static function logBlockedTransfer($fromUid, $toUid, $fromVref, $toVref,
+        $wood, $clay, $iron, $crop, $time = 0)
+    {
+        try {
+            $link = self::link();
+            if (!$link) {
+                return;
+            }
+            self::ensureSchema();
+
+            $fromUid  = (int) $fromUid;
+            $toUid    = (int) $toUid;
+            $fromVref = (int) $fromVref;
+            $toVref   = (int) $toVref;
+            $wood = (int) $wood; $clay = (int) $clay; $iron = (int) $iron; $crop = (int) $crop;
+            $time = $time > 0 ? (int) $time : time();
+
+            $stmt = mysqli_prepare($link,
+                "INSERT INTO `" . TB_PREFIX . "related_transfer_violations`
+                 (from_uid, to_uid, from_vref, to_vref, wood, clay, iron, crop, `time`)
+                 VALUES (?,?,?,?,?,?,?,?,?)");
+            if (!$stmt) {
+                return;
+            }
+            mysqli_stmt_bind_param($stmt, 'iiiiiiiii',
+                $fromUid, $toUid, $fromVref, $toVref, $wood, $clay, $iron, $crop, $time);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+        } catch (\Throwable $e) {
+            // never break the market send flow
+        }
+    }
+
+    /**
+     * Recent blocked-transfer attempts, joined with both usernames, for the
+     * Admin panel (same shape/purpose as listAll() above but for transfer
+     * attempts instead of declared relations).
+     */
+    public static function listTransferViolations($limit = 300)
+    {
+        $link = self::link();
+        if (!$link) {
+            return [];
+        }
+        self::ensureSchema();
+
+        $limit = max(1, (int) $limit);
+        $sql = "SELECT v.id, v.from_uid, v.to_uid, v.wood, v.clay, v.iron, v.crop, v.`time`,
+                       ua.username AS username_from, ub.username AS username_to
+                FROM `" . TB_PREFIX . "related_transfer_violations` v
+                LEFT JOIN `" . TB_PREFIX . "users` ua ON ua.id = v.from_uid
+                LEFT JOIN `" . TB_PREFIX . "users` ub ON ub.id = v.to_uid
+                ORDER BY v.`time` DESC
+                LIMIT " . $limit;
+        $res = mysqli_query($link, $sql);
+        $out = [];
+        if ($res) {
+            while ($row = mysqli_fetch_assoc($res)) {
+                $out[] = [
+                    'id'            => (int) $row['id'],
+                    'from_uid'      => (int) $row['from_uid'],
+                    'to_uid'        => (int) $row['to_uid'],
+                    'username_from' => (string) ($row['username_from'] ?? '(deleted)'),
+                    'username_to'   => (string) ($row['username_to'] ?? '(deleted)'),
+                    'wood'          => (int) $row['wood'],
+                    'clay'          => (int) $row['clay'],
+                    'iron'          => (int) $row['iron'],
+                    'crop'          => (int) $row['crop'],
+                    'total'         => (int) $row['wood'] + (int) $row['clay'] + (int) $row['iron'] + (int) $row['crop'],
+                    'time'          => (int) $row['time'],
+                ];
+            }
+        }
+        return $out;
     }
 }

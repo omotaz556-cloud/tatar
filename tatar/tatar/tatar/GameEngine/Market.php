@@ -242,6 +242,47 @@ class Market
         return $sendTotal > PushProtection::remainingAllowance($toOwner);
     }
 
+    /**
+     * Related Account Protection: resource-transfer counterpart of the
+     * raid-loot block in AutomationBattleResolution::resolveResourcesAfterBattle().
+     * Admin-declared related pairs get a full, permanent block on sending
+     * resources to each other via the marketplace - zero allowance, no
+     * partial limit, no cooldown (product decision: same "always wins"
+     * treatment as the raid block). Checked BEFORE the general
+     * PushProtection limit below, same priority order used for raids.
+     *
+     * Logs every blocked attempt to related_transfer_violations (best-
+     * effort, never throws) so the admin panel can show a history of
+     * attempted transfers between related accounts, same as the raid side
+     * already logs nothing lost (loot is simply zero) but this path needs
+     * an explicit log since the send is refused outright rather than
+     * silently zeroed.
+     */
+    private function isRelatedAccountTransfer($database, $fromWid, $toWid, array $resource)
+    {
+        if (!class_exists('RelatedAccountProtection')) {
+            return false; // engine not deployed -> no enforcement
+        }
+
+        $fromOwner = (int) $database->getVillageField($fromWid, 'owner');
+        $toOwner   = (int) $database->getVillageField($toWid, 'owner');
+
+        if ($fromOwner === $toOwner || $fromOwner <= 3 || $toOwner <= 3) {
+            return false; // own transfer or system account -> never blocked here
+        }
+
+        if (!RelatedAccountProtection::isBlockedTransferPair($fromOwner, $toOwner)) {
+            return false;
+        }
+
+        RelatedAccountProtection::logBlockedTransfer(
+            $fromOwner, $toOwner, (int) $fromWid, (int) $toWid,
+            (int) $resource[0], (int) $resource[1], (int) $resource[2], (int) $resource[3]
+        );
+
+        return true;
+    }
+
     private function sendResource($post)
     {
         global $database, $village, $session, $generator, $logging, $form;
@@ -346,6 +387,18 @@ class Market
             ($post['send3'] > 1 && !$session->goldclub)
         ) {
             $form->addError('error', INVALID_MERCHANTS_REPETITION);
+        } elseif (
+            $this->isRelatedAccountTransfer($database, $village->wid, $id, $resource)
+        ) {
+            // Related Account Protection: sender and recipient are an
+            // admin-declared related pair - transfers between them are
+            // always blocked, checked before the general push-protection
+            // limit below. Uses a language constant when available, else a
+            // clear English fallback (add RELATED_ACCOUNT_TRANSFER_BLOCKED
+            // to your Lang files to localise).
+            $form->addError('error', defined('RELATED_ACCOUNT_TRANSFER_BLOCKED')
+                ? RELATED_ACCOUNT_TRANSFER_BLOCKED
+                : 'Resource transfers between these two accounts are not allowed.');
         } elseif (
             $this->exceedsPushLimit($database, $village->wid, $id, $resource)
         ) {
