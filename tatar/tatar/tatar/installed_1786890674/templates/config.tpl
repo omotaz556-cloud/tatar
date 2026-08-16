@@ -86,11 +86,23 @@ $dbPrefix = $_SESSION['install_random_prefix'];
 <input type="hidden" name="subconst" value="1">
 
 <div class="card">
-  <span class="f10 c">SERVER RELATED</span>
+  <span class="f10 c"><?=t('server_related')?></span>
   <div class="grid-2" style="margin-top:8px;">
-    <div><label>Server name</label><input class="input" name="servername" id="servername" value="Novaterra"></div>
-    <div><label>Timezone</label>
+    <div><label><?=t('server_name')?></label><input class="input" name="servername" id="servername" value="Novaterra"></div>
+    <div><label><?=t('timezone')?></label>
       <select class="input" name="tzone" onchange="refresh(this.value)">
+        <optgroup label="<?=install_is_rtl()?'الشرق الأوسط':'Middle East'?>">
+        <option value="15,Asia/Riyadh" <?=$tz==15?'selected':''?>><?=install_is_rtl()?'السعودية (الرياض)':'Saudi Arabia (Riyadh)'?></option>
+        <option value="16,Asia/Dubai" <?=$tz==16?'selected':''?>><?=install_is_rtl()?'الإمارات (دبي)':'UAE (Dubai)'?></option>
+        <option value="17,Asia/Kuwait" <?=$tz==17?'selected':''?>><?=install_is_rtl()?'الكويت':'Kuwait'?></option>
+        <option value="18,Asia/Qatar" <?=$tz==18?'selected':''?>><?=install_is_rtl()?'قطر':'Qatar'?></option>
+        <option value="19,Asia/Bahrain" <?=$tz==19?'selected':''?>><?=install_is_rtl()?'البحرين':'Bahrain'?></option>
+        <option value="20,Asia/Amman" <?=$tz==20?'selected':''?>><?=install_is_rtl()?'الأردن (عمّان)':'Jordan (Amman)'?></option>
+        <option value="21,Africa/Cairo" <?=$tz==21?'selected':''?>><?=install_is_rtl()?'مصر (القاهرة)':'Egypt (Cairo)'?></option>
+        <option value="22,Asia/Baghdad" <?=$tz==22?'selected':''?>><?=install_is_rtl()?'العراق (بغداد)':'Iraq (Baghdad)'?></option>
+        <option value="23,Asia/Beirut" <?=$tz==23?'selected':''?>><?=install_is_rtl()?'لبنان (بيروت)':'Lebanon (Beirut)'?></option>
+        </optgroup>
+        <optgroup label="<?=install_is_rtl()?'أخرى':'Other'?>">
         <option value="1,Africa/Dakar" <?=$tz==1?'selected':''?>>Africa</option>
         <option value="2,America/New_York" <?=$tz==2?'selected':''?>>America</option>
         <option value="13,America/Sao_Paulo" <?=$tz==13?'selected':''?>>Brazil</option>
@@ -105,11 +117,12 @@ $dbPrefix = $_SESSION['install_random_prefix'];
         <option value="10,Europe/Bratislava" <?=$tz==10?'selected':''?>>Europe (Bratislava)</option>
         <option value="11,Indian/Maldives" <?=$tz==11?'selected':''?>>Indian</option>
         <option value="12,Pacific/Fiji" <?=$tz==12?'selected':''?>>Pacific</option>
+        </optgroup>
       </select>
     </div>
-    <div><label>Server speed</label><input class="input" name="speed" id="speed" value="1"></div>
-    <div><label>Troop speed</label><input class="input" name="incspeed" id="incspeed" value="1"></div>
-    <div><label>Evasion speed</label><input class="input" name="evasionspeed" id="evasionspeed" value="1"></div>
+    <div><label><?=t('server_speed')?></label><input class="input" name="speed" id="speed" value="1"></div>
+    <div><label><?=t('troop_speed')?></label><input class="input" name="incspeed" id="incspeed" value="1"></div>
+    <div><label><?=t('evasion_speed')?></label><input class="input" name="evasionspeed" id="evasionspeed" value="1"></div>
     <div><label>Trader capacity</label><input class="input" name="tradercap" id="tradercap" value="1"></div>
     <div><label>Cranny capacity</label><input class="input" name="crannycap" id="crannycap" value="1"></div>
     <div><label>Trapper capacity</label><input class="input" name="trappercap" id="trappercap" value="1"></div>
@@ -120,8 +133,9 @@ $dbPrefix = $_SESSION['install_random_prefix'];
         <option value="250">250x250</option><option value="300">300x300</option><option value="350">350x350</option><option value="400">400x400</option>
       </select>
     </div>
-    <div><label>Language</label>
-      <select class="input" name="lang"><option value="en" selected>English</option><option value="fr">French</option><option value="it">Italian</option><option value="es">Spanish</option><option value="ro">Romanian</option><option value="zh">Chinese</option><option value="ar">Arabic</option></select>
+    <div><label><?=install_is_rtl()?'لغة اللعبة الافتراضية':'Default game language'?></label>
+      <select class="input" name="lang"><option value="ar" selected>Arabic — العربية</option><option value="en">English</option><option value="fr">French</option><option value="it">Italian</option><option value="es">Spanish</option><option value="ro">Romanian</option><option value="zh">Chinese</option></select>
+      <div style="font-size:11px;color:#94a3b8;margin-top:4px;"><?=install_is_rtl()?'هذه هي اللغة الافتراضية للاعبين عند التسجيل. أي لاعب يقدر يغيّرها لاحقًا من صفحة إعداداته الشخصية.':'This is the default language for players at registration. Each player can change it later from their own profile settings.'?></div>
     </div>
     <div><label>Beginners protection</label>
       <select class="input" name="beginner">
@@ -135,7 +149,7 @@ $dbPrefix = $_SESSION['install_random_prefix'];
 
 <div class="grid-2">
   <div class="card">
-    <span class="f10 c">NATARS & MAP</span>
+    <span class="f10 c"><?=t('natars_map')?></span>
     <div style="margin-top:12px;display:grid;gap:10px;">
       <div><label>Natars Units Multiplier</label><input class="input" name="natars_units" id="natars_units" value="100"></div>
       <div><label>Natars Spawn (days)</label><input class="input" name="natars_spawn_time" id="natars_spawn_time" value="260"></div>
@@ -146,7 +160,7 @@ $dbPrefix = $_SESSION['install_random_prefix'];
     </div>
   </div>
   <div class="card">
-    <span class="f10 c">OASIS & STORAGE</span>
+    <span class="f10 c"><?=t('oasis_storage')?></span>
     <div style="margin-top:12px;display:grid;gap:10px;">
       <div><label>Wood multiplier</label><input class="input" name="oasis_wood_multiplier" id="oasis_wood_multiplier" value="40"></div>
       <div><label>Clay multiplier</label><input class="input" name="oasis_clay_multiplier" id="oasis_clay_multiplier" value="40"></div>
@@ -160,7 +174,7 @@ $dbPrefix = $_SESSION['install_random_prefix'];
 
 <div class="grid-2">
   <div class="card">
-    <span class="f10 c">SQL RELATED</span>
+    <span class="f10 c"><?=t('sql_related')?></span>
     <div style="margin-top:12px;display:grid;gap:10px;">
       <div><label>Hostname</label><input class="input" name="sserver" id="sserver" value="<?=htmlspecialchars($dbHost, ENT_QUOTES, 'UTF-8')?>"></div>
       <div><label>Port</label><input class="input" name="sport" id="sport" value="<?=htmlspecialchars($dbPort, ENT_QUOTES, 'UTF-8')?>"></div>
@@ -172,7 +186,7 @@ $dbPrefix = $_SESSION['install_random_prefix'];
     </div>
   </div>
   <div class="card">
-    <span class="f10 c">SERVER URLS</span>
+    <span class="f10 c"><?=t('server_urls')?></span>
     <div style="margin-top:12px;display:grid;gap:10px;">
       <div><label>Server</label><input class="input" name="server" id="homepage" value="http://<?=$_SERVER['HTTP_HOST']?>/"></div>
       <div><label>Domain</label><input class="input" name="domain" id="homepage" value="http://<?=$_SERVER['HTTP_HOST']?>/"></div>
@@ -187,7 +201,7 @@ $dbPrefix = $_SESSION['install_random_prefix'];
 </div>
 
 <div class="card">
-  <span class="f10 c">NEW MECHANICS AND FUNCTIONS</span>
+  <span class="f10 c"><?=t('new_mechanics')?></span>
 	<div class="grid-1" style="margin-top:12px;display:flex;flex-direction:column;gap:10px;">
 <?php
 $mechs = [
@@ -237,7 +251,7 @@ foreach($mechs as $k => $l){
 </div>
 
 <div class="card">
-  <span class="f10 c">PLUS GOLD PACKAGES</span>
+  <span class="f10 c"><?=t('plus_packages')?></span>
   <div class="grid-2" style="margin-top:12px;">
     <div><label>PayPal Email</label><input class="input" name="paypal-email" id="paypal-email" value="@"></div>
     <div><label>Currency</label><input class="input" name="paypal-currency" id="paypal-currency" value="EUR"></div>
@@ -258,7 +272,7 @@ foreach($mechs as $k => $l){
 
 <div class="grid-2">
   <div class="card">
-    <span class="f10 c">NEWSBOX OPTIONS</span>
+    <span class="f10 c"><?=t('newsbox_options')?></span>
     <div style="margin-top:12px;display:grid;gap:10px;">
       <div><label>Newsbox 1</label><select class="input" name="box1"><option value="true">Enabled</option><option value="false" selected>Disabled</option></select></div>
       <div><label>Newsbox 2</label><select class="input" name="box2"><option value="true">Enabled</option><option value="false" selected>Disabled</option></select></div>
@@ -266,7 +280,7 @@ foreach($mechs as $k => $l){
     </div>
   </div>
   <div class="card">
-    <span class="f10 c">LOG RELATED (You should disable them)</span>
+    <span class="f10 c"><?=t('log_related')?></span>
     <div style="margin-top:12px;display:grid;gap:10px;">
       <div><label>Log Building</label><select class="input" name="log_build"><option value="true">Yes</option><option value="false" selected>No</option></select></div>
       <div><label>Log Tech</label><select class="input" name="log_tech"><option value="true">Yes</option><option value="false" selected>No</option></select></div>
@@ -281,7 +295,7 @@ foreach($mechs as $k => $l){
 </div>
 
 <div class="card">
-  <span class="f10 c">EXTRA OPTIONS</span>
+  <span class="f10 c"><?=t('extra_options')?></span>
   <div class="grid-2" style="margin-top:12px;">
     <div><label>Quest</label><select class="input" name="quest"><option value="true" selected>Yes</option><option value="false">No</option></select></div>
     <div><label>Quest Type</label><select class="input" name="qtype"><option value="25" selected>Official Novaterra</option><option value="37">Novaterra Extended</option></select></div>
@@ -298,7 +312,7 @@ foreach($mechs as $k => $l){
 </div>
 
 <div class="card">
-  <span class="f10 c">CRON &amp; AUTOMATION</span>
+  <span class="f10 c"><?=t('cron_automation')?></span>
   <div class="grid-2" style="margin-top:12px;">
     <div><label>Cron invocation length (sec)</label><select class="input" name="cron_loop">
         <option value="300" selected>300 - cron every 5 min (default)</option>
@@ -355,6 +369,6 @@ foreach($mechs as $k => $l){
 </div>
 
 <div style="text-align:center;margin:18px 0;">
-  <button class="btn" type="submit" name="Submit" id="Submit">Save Configuration →</button>
+  <button class="btn" type="submit" name="Submit" id="Submit"><?=t('save_config')?></button>
 </div>
 </form>
