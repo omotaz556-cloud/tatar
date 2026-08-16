@@ -26,7 +26,7 @@ require_once __DIR__ . "/GameEngine/Lang/loader.php";
 tz_load_language(LANG);
 ?>
 
-<html>
+<html <?php echo tz_html_dir_attrs(); ?>>
 	<head>
 	<title><?php echo SERVER_NAME; ?> - Manual</title>
 		<link rel="shortcut icon" href="favicon.ico"/>

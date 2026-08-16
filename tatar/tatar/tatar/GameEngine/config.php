@@ -101,11 +101,11 @@ define('HERO_RES_PER_POINT_ONE', 10);
 //////////////////////////////////
 
 // ***** Name
-define("SERVER_NAME","admin");
+define("SERVER_NAME","Novaterra");
 
 // ***** Time zone added by ronix
 // Defines server time zone.
-define("TIMEZONE","Europe/Bucharest");
+define("TIMEZONE","Asia/Riyadh");
 date_default_timezone_set(TIMEZONE);
 
 // ***** Started
@@ -133,6 +133,26 @@ define("SERVER_LANG", "ar");
 if (session_status() !== PHP_SESSION_ACTIVE) { @session_start(); }
 $__user_lang = isset($_SESSION['lang']) ? preg_replace('/[^a-z_]/', '', strtolower((string) $_SESSION['lang'])) : '';
 define("LANG", ($__user_lang !== '' && is_file(__DIR__ . "/Lang/" . $__user_lang . ".php")) ? $__user_lang : SERVER_LANG);
+
+// ***** RTL support
+// List of languages that must render right-to-left. Used by tz_html_dir_attrs()
+// below so every page's <html> tag gets the correct dir/lang attributes instead
+// of always defaulting to LTR regardless of the selected language.
+if (!function_exists('tz_is_rtl_lang')) {
+    function tz_is_rtl_lang($langCode = null) {
+        $rtlLangs = ['ar', 'he', 'fa', 'ur'];
+        $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
+        return in_array($langCode, $rtlLangs, true);
+    }
+}
+if (!function_exists('tz_html_dir_attrs')) {
+    // Echo this inside the html tag: dir/lang attributes for the page.
+    function tz_html_dir_attrs($langCode = null) {
+        $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
+        $dir = tz_is_rtl_lang($langCode) ? 'rtl' : 'ltr';
+        return 'lang="' . htmlspecialchars($langCode, ENT_QUOTES) . '" dir="' . $dir . '"';
+    }
+}
 
 // ***** Speed
 // Choose your server speed. NOTICE: Higher speed, more likely

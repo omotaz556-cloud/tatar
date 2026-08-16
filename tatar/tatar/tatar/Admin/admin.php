@@ -663,7 +663,7 @@ if (!headers_sent()) {
 }
 
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html <?php echo tz_html_dir_attrs(); ?>>
     <head>
         <link rel="shortcut icon" href="favicon.ico"/>
         <title>Admin Panel - <?php echo e($subpage); ?></title>

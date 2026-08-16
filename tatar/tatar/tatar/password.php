@@ -43,7 +43,7 @@ if (!isset($_REQUEST['npw'])) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html <?php echo tz_html_dir_attrs(); ?>>
 <head>
     <title><?php echo SERVER_NAME; ?> - Forgotten Password</title>
     <link rel="shortcut icon" href="favicon.ico"/>

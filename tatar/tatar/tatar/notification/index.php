@@ -15,7 +15,7 @@ tz_load_language(LANG);
 if (T4_COMING == true) {
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo LANG; ?>">
+<html <?php echo tz_html_dir_attrs(); ?>>
 <head>
 	<meta charset="UTF-8" />
 	<meta http-equiv="cache-control" content="max-age=0" />

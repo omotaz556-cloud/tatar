@@ -783,7 +783,7 @@ tz_def('WHAT_IS', SERVER_NAME.' is one of the most popular browser games in the 
 tz_def('REGISTER_FOR_FREE', 'Register here for free!');
 tz_def('LATEST_GAME_WORLD', 'Latest game world');
 tz_def('LATEST_GAME_WORLD2', 'Register on the latest<br>game world and enjoy<br>the advantages of<br>being one of the<br>first players.');
-tz_def('PLAY_NOW', 'Play '.SERVER_NAME.' now');
+tz_def('PLAY_NOW', 'Play now');
 tz_def('LEARN_MORE', 'Learn more <br>about '.SERVER_NAME.'!');
 tz_def('LEARN_MORE2', 'Now with a revolutionised<br>server system, completely new<br>graphics <br>This clone is The Shiz!');
 tz_def('COMUNITY', 'Community');
@@ -4604,3 +4604,10 @@ tz_def('TRAIN_BONUS_ARTIFACT', 'Artifact bonus');
 tz_def('TRAIN_BONUS_HERO',     'Hero bonus');
 tz_def('TRAIN_BONUS_ALLIANCE', 'Alliance bonus');
 tz_def('TRAIN_BONUS_FINAL',    'Training time');
+
+// Missing constants found referenced with defined()-guard fallbacks in templates
+// (Templates/Profile/graphic.tpl, Templates/Build/37_hero.tpl) but never defined
+// in either language file — added so both languages show real translated text.
+tz_def('TZ_ACTIVE', 'Active');
+tz_def('TZ_HERO_LEVEL', 'Hero level');
+tz_def('TZ_POINTS', 'Points');
