@@ -110,6 +110,7 @@ function admin_validated_page(string $raw): string
         'villagelog', 'techlog', 'msg',
         'alliance', 'editAli', 'delAli','editNewFunctions',
         'multiacc',
+        'multiaccPlayer',
         'pushprot',
         'blockReg',
         'heatmap',
@@ -191,6 +192,10 @@ if ($page !== '') {
 
         case 'multiacc':
             $subpage = ADMIN_MULTI_ACCOUNT_DETECTION;
+            break;
+
+        case 'multiaccPlayer':
+            $subpage = ADM_MAD_PLAYER_DASHBOARD;
             break;
 
         case 'pushprot':

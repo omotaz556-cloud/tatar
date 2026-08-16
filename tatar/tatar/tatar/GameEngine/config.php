@@ -46,7 +46,7 @@ define('CRON_TICK_SECONDS', 60);
 // Key used to access cron.php via HTTP (wget/curl or an external cron service).
 // Command-line execution (e.g. a cPanel cron job) does NOT require it.
 // Automatically generated during installation and preserved when saving configuration settings from the ACP.
-define('CRON_KEY', 'fd4ee2a95f70411dd0a07908fa94a677a2f6b0dc0a993f4c');
+define('CRON_KEY', 'ea1c653b4a7a0602ff1556d500a47687ca096e985e88ed3d');
 
 //////////////////////////////////
 // *****  DATABASE CLEANUP  *****//
@@ -101,7 +101,7 @@ define('HERO_RES_PER_POINT_ONE', 10);
 //////////////////////////////////
 
 // ***** Name
-define("SERVER_NAME","Novaterra");
+define("SERVER_NAME","admin");
 
 // ***** Time zone added by ronix
 // Defines server time zone.
@@ -110,11 +110,11 @@ date_default_timezone_set(TIMEZONE);
 
 // ***** Started
 // Defines when has server started.
-define("COMMENCE","1786889566");
+define("COMMENCE","1786890622");
 
 // ***** Server Start Date / Time
 define("START_DATE", "16.08.2026");
-define("START_TIME", "17:12");
+define("START_TIME", "17:22");
 
 // ***** Language
 // SERVER_LANG is the DEFAULT language of the server (chosen at install / in
@@ -129,7 +129,7 @@ define("START_TIME", "17:12");
 // strictly sanitized to [a-z_] (no path traversal) and the target file MUST
 // exist, otherwise we fall back to the server default. This prevents Local
 // File Inclusion via a crafted session value.
-define("SERVER_LANG", "en");
+define("SERVER_LANG", "ar");
 if (session_status() !== PHP_SESSION_ACTIVE) { @session_start(); }
 $__user_lang = isset($_SESSION['lang']) ? preg_replace('/[^a-z_]/', '', strtolower((string) $_SESSION['lang'])) : '';
 define("LANG", ($__user_lang !== '' && is_file(__DIR__ . "/Lang/" . $__user_lang . ".php")) ? $__user_lang : SERVER_LANG);
@@ -138,7 +138,7 @@ define("LANG", ($__user_lang !== '' && is_file(__DIR__ . "/Lang/" . $__user_lang
 // Choose your server speed. NOTICE: Higher speed, more likely
 // to have some bugs. Lower speed, most likely no major bugs.
 // Values: 1 (normal), 3 (3x speed) etc...
-define("SPEED", "1");
+define("SPEED", "100");
 
 // ***** World size
 // Defines world size. NOTICE: DO NOT EDIT!!
@@ -183,7 +183,7 @@ define("AUTH_EMAIL",false);
 
 // ***** Troop Speed
 // Values: 1 (normal), 3 (3x speed) etc...
-define("INCREASE_SPEED","1");
+define("INCREASE_SPEED","10");
 
 // ***** Evasion Speed
 define("EVASION_SPEED","1");
@@ -226,7 +226,7 @@ define("QTYPE",25);
 // 3600*24 = 1 day
 // 3600*24*3 = 3 days
 // You can choose any value you want!
-define("PROTECTION","43200");
+define("PROTECTION","86400");
 
 // ***** Enable WW Statistics
 define("WW",false);
@@ -443,7 +443,7 @@ define("SQL_PASS", "novaterrapass");
 define("SQL_DB", "novaterra");
 
 // ***** Database - Table Prefix
-define("TB_PREFIX", "s34cc_");
+define("TB_PREFIX", "s1973_");
 
 // ***** Database type
 // 0 = MYSQL
@@ -500,16 +500,16 @@ define("INCLUDE_ADMIN", false);
 ////////////////////////////////////
 
 // ***** Admin Email
-define("ADMIN_EMAIL", "%AEMAIL%");
+define("ADMIN_EMAIL", "admin@admin.com");
 
 // ***** Admin Name
-define("ADMIN_NAME", "%ANAME%");
+define("ADMIN_NAME", "admin");
 
 // ***** Show Support Messages in Admin
 define("ADMIN_RECEIVE_SUPPORT_MESSAGES", true);
 
 // ***** Allow Admin accounts to be raided and attacked
-define("ADMIN_ALLOW_INCOMING_RAIDS", false);
+define("ADMIN_ALLOW_INCOMING_RAIDS", true);
 
 /////////////////////////////////////////////////
 //   ****  NEW MECHANICS AND FUNCTIONS  ****   //
@@ -533,13 +533,13 @@ define("NEW_FUNCTIONS_MEDAL_10YEAR", false);
 define("NEW_FUNCTIONS_SPECIAL_MEDALS_SYSTEM", false);
 define("NEW_FUNCTIONS_MILESTONES", false);
 define("NEW_FUNCTIONS_MEDAL_RESET", false);
-define("NEW_FUNCTIONS_HERO_T4", false);
+define("NEW_FUNCTIONS_HERO_T4", true);
 define("NEW_FUNCTION_TRIBE_HUNS", false);
 define("NEW_FUNCTION_TRIBE_EGIPTEANS", false);
 define("NEW_FUNCTION_TRIBE_SPARTANS", false);
 define("NEW_FUNCTION_TRIBE_VIKINGS", false);
-define("NEW_FUNCTION_REGISTRATION_GOLD", false);
-define("NEW_FUNCTION_REGISTRATION_GOLD_VALUE", 200);
+define("NEW_FUNCTION_REGISTRATION_GOLD", true);
+define("NEW_FUNCTION_REGISTRATION_GOLD_VALUE", 6000);
 
 //////////////////////////////////////////
 //   ****  DO NOT EDIT SETTINGS  ****   //
@@ -584,9 +584,9 @@ define("PAGE_ACCESS_LOG_FILENAME", 'access.log'); // filename ONLY, no path!
 ////////////////////////////////////////////
 //   ****  DOMAIN/SERVER SETTINGS  ****   //
 ////////////////////////////////////////////
-define("DOMAIN", "http://localhost:8080/");
-define("HOMEPAGE", "http://localhost:8080/");
-define("SERVER", "http://localhost:8080/");
+define("DOMAIN", "http://floppy-impose-buffer-hitting.trycloudflare.com/");
+define("HOMEPAGE", "http://floppy-impose-buffer-hitting.trycloudflare.com/");
+define("SERVER", "http://floppy-impose-buffer-hitting.trycloudflare.com/");
 
 $requse = 0;
 

@@ -212,6 +212,7 @@ $pairs = $data['pairs'];
                         <div class="mad-score" style="color:<?php echo $barColor; ?>;"><?php echo (int)$p['score']; ?></div>
                         <span class="badge <?php echo $cls; ?>"><?php echo e($p['label']); ?></span>
                         <div class="mad-bar"><i style="width:<?php echo (int)$p['score']; ?>%;background:<?php echo $barColor; ?>;"></i></div>
+                        <a href="admin.php?p=multiaccPlayer&uid=<?php echo (int)$p['uid_a']; ?>&other=<?php echo (int)$p['uid_b']; ?>" style="display:inline-block;margin-top:6px;font-size:10px;color:#f59e0b;text-decoration:none;font-weight:bold;">&#8594; <?php echo ADM_MAD_VIEW_PAIR; ?></a>
                     </td>
                     <td class="mad-acc">
                         <a href="admin.php?p=player&uid=<?php echo (int)$p['uid_a']; ?>"><?php echo e($p['name_a']); ?></a>
