@@ -499,3 +499,55 @@ this.timer=this.hide.delay(this.options.hideDelay,this,b);this.fireForParent(c,b
 if((g[d[h]]+f[h]-b[h])>c[h]-this.options.windowPadding[h]){g[d[h]]=e.page[h]-this.options.offset[h]-f[h];}}this.tip.setStyles(g);},fill:function(b,c){if(typeof c=="string"){b.set("html",c);
 }else{b.adopt(c);}},show:function(b){if(!this.tip){document.id(this);}this.fireEvent("show",[this.tip,b]);},hide:function(b){if(!this.tip){document.id(this);
 }this.fireEvent("hide",[this.tip,b]);}});})();
+
+/* ---------------------------------------------------------------------
+ * domready fallback (added post-2009 browser fix)
+ * -----------------------------------------------------------------------
+ * MooTools 1.2.4's own domready detection (a few lines above this file)
+ * branches on Browser.Engine.trident / Browser.Engine.webkit, a user-agent
+ * sniffing scheme from 2009 that no longer reliably matches current
+ * browsers. When none of those branches fire the way MooTools expects,
+ * Browser.loaded can end up never set to true and window.fireEvent(
+ * "domready") / document.fireEvent("domready") never run — so every
+ * window.addEvent('domready', ...) handler in new2.js (and any other
+ * script on the page) silently never executes. This is what breaks the
+ * "Click here to play" / signup / login overlay buttons on the landing
+ * page: their click handler is registered too late (or never), so
+ * $('signup_layer') / $('login_layer') isn't wired up when the user
+ * clicks.
+ *
+ * Fix: use the standard, always-reliable DOMContentLoaded event (with a
+ * readyState check for the case where it already fired) as an
+ * independent, redundant trigger for the exact same "domready" event
+ * MooTools already defines. Browser.loaded guards against firing twice
+ * if MooTools' own detection *did* work correctly on a given browser.
+ * Nothing here replaces or modifies MooTools' existing detection code -
+ * this only adds a second, modern path to the same outcome.
+ */
+(function () {
+	function triggerDomReady() {
+		if (typeof Browser !== 'undefined' && Browser.loaded) {
+			return;
+		}
+		if (typeof Browser !== 'undefined') {
+			Browser.loaded = true;
+		}
+		if (window.fireEvent) {
+			window.fireEvent('domready');
+		}
+		if (document.fireEvent) {
+			document.fireEvent('domready');
+		}
+	}
+
+	if (document.readyState === 'complete' || document.readyState === 'interactive') {
+		// DOM is already parsed (script ran late / async) - fire on the
+		// next tick so any addEvent('domready', ...) calls later in the
+		// same script file have already run and registered their handlers.
+		setTimeout(triggerDomReady, 0);
+	} else {
+		document.addEventListener('DOMContentLoaded', triggerDomReady, false);
+	}
+	// Absolute fallback: the standard 'load' event always fires eventually.
+	window.addEventListener('load', triggerDomReady, false);
+})();
