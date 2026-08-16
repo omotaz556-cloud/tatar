@@ -82,10 +82,21 @@ $transferViolations = RelatedAccountProtection::listTransferViolations(300);
                     <input type="radio" name="enabled" value="0" <?php echo !$rapSettings['enabled'] ? 'checked' : ''; ?>>
                     <?php echo ADM_RAP_DISABLED; ?>
                 </label>
+            </div>
+
+            <div class="rap-toggle-row" style="margin-top:12px;padding-top:12px;border-top:1px solid #1f2937;">
+                <label class="rap-radio">
+                    <input type="checkbox" name="auto_ban_on_attempt" value="1" <?php echo $rapSettings['auto_ban_on_attempt'] ? 'checked' : ''; ?>>
+                    <strong><?php echo ADM_RAP_AUTOBAN_TITLE; ?></strong>
+                </label>
                 <div class="rap-settings-row" style="margin:0;">
                     <button type="submit"><?php echo ADM_RAP_SAVE; ?></button>
                 </div>
             </div>
+            <p class="rap-desc" style="margin:6px 0 0;max-width:760px;"><?php echo ADM_RAP_AUTOBAN_DESC; ?></p>
+            <?php if ($rapSettings['enabled'] && $rapSettings['auto_ban_on_attempt']): ?>
+                <div class="rap-note" style="margin-top:10px;"><?php echo ADM_RAP_AUTOBAN_ACTIVE_NOTE; ?></div>
+            <?php endif; ?>
         </form>
     </div>
 

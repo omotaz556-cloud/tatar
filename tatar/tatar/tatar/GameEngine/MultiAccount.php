@@ -581,9 +581,25 @@ class MultiAccount
             $prevAccess = USER; // already banned elsewhere; restore to a sane default later
         }
 
-        $now         = time();
-        $farFuture   = $now + (10 * 365 * 86400); // ~10 years, effectively permanent
-        $reasonEsc   = mysqli_real_escape_string($link, (string) $reason);
+        $now       = time();
+        $farFuture = $now + (10 * 365 * 86400); // ~10 years, effectively permanent
+
+        // `banlist`.`reason` is varchar(30) (see struct.sql). Truncate here,
+        // centrally, so every caller (applyAutoBan(), banAttacker() via
+        // RelatedAccountProtection, manual admin bans, etc.) is protected
+        // without each one needing to remember the column limit. Confirmed
+        // by an actual integration test: without this, the INSERT/UPDATE
+        // below throws under mysqli's default exception-reporting mode
+        // (PHP 8.1+), and callers that wrap this in a try/catch (like
+        // RelatedAccountProtection::banAttacker()) end up silently
+        // swallowing the failure and returning false with NO ban applied
+        // and no visible error anywhere.
+        // Plain substr() (byte-based), not mb_substr(): mbstring is not
+        // guaranteed to be installed, and this matches the existing
+        // pattern used in RelatedAccountProtection::addRelation()
+        // (substr((string)$reason, 0, 255)).
+        $reason      = substr((string) $reason, 0, 30);
+        $reasonEsc   = mysqli_real_escape_string($link, $reason);
         $usernameEsc = mysqli_real_escape_string($link, (string) $username);
 
         // `banlist` has no UNIQUE key on uid (verified against struct.sql),
