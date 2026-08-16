@@ -477,6 +477,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%banlist` (
   `end` int(11) UNSIGNED DEFAULT NULL,
   `admin` int(11) DEFAULT NULL,
   `active` tinyint(1) UNSIGNED DEFAULT NULL,
+  `prev_access` tinyint(3) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `active-end` (`active`,`end`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1292,6 +1293,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%related_accounts` (
 CREATE TABLE IF NOT EXISTS `%PREFIX%related_protection_settings` (
  `id` int(11) NOT NULL DEFAULT 1,
  `enabled` tinyint(1) NOT NULL DEFAULT 0,
+ `auto_ban_on_attempt` tinyint(1) NOT NULL DEFAULT 0,
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

@@ -4152,3 +4152,33 @@ tz_def('TRAIN_BONUS_ARTIFACT', 'Bonus artefact');
 tz_def('TRAIN_BONUS_HERO',     'Bonus erou');
 tz_def('TRAIN_BONUS_ALLIANCE', 'Bonus alianta');
 tz_def('TRAIN_BONUS_FINAL',    'Timp instruire');
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// PROTECTIA CONTURILOR LEGATE (panou admin)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADMIN_RELATED_ACCOUNT_PROTECTION', 'Protectia Conturilor Legate');
+tz_def('ADM_RAP_INTRO', 'Permite unui administrator sa marcheze manual doua conturi de pe aceasta lume ca fiind "legate" (acelasi proprietar, acelasi dispozitiv, sau confirmate altfel ca apartinand aceleiasi persoane). Atat jefuirea CAT si transferurile de resurse prin piata sunt BLOCATE in ambele directii intre orice pereche legata - raidurile se rezolva normal dar nu produc prada, iar trimiterile prin piata intre pereche sunt refuzate direct. Aceasta este independenta de Detectia Multi-Cont, care doar puncteaza perechile suspecte pentru revizuire manuala, si de Conturile Legate (Hranire), care face opusul.');
+tz_def('ADM_RAP_PRIORITY_NOTE', 'Daca aceeasi pereche este declarata SI "legata" in Conturi Legate (Hranire), aceasta protectie castiga intotdeauna: jefuirea este blocata indiferent de setarile de hranire pentru acea pereche. Transferurile prin piata intre o pereche legata sunt intotdeauna blocate, fara limita partiala, plafon zilnic sau timp de asteptare - alocarea este zero.');
+tz_def('ADM_RAP_SETTINGS_TITLE', 'Setari');
+tz_def('ADM_RAP_SETTINGS_DESC', 'Activeaza sau dezactiveaza blocarea jefuirii pentru perechile legate. Aceasta nu elimina relatiile deja adaugate - controleaza doar daca sunt aplicate in prezent.');
+tz_def('ADM_RAP_ENABLED', 'Activat');
+tz_def('ADM_RAP_DISABLED', 'Dezactivat');
+tz_def('ADM_RAP_SAVE', 'Salveaza');
+tz_def('ADM_RAP_ADD_TITLE', 'Marcheaza Conturi ca Legate');
+tz_def('ADM_RAP_ADD_DESC', 'Marcheaza doua conturi dupa numele de utilizator ca fiind legate. Doar pentru administratori - jucatorii nu pot face asta singuri, iar directia nu conteaza (jefuirea este blocata in ambele sensuri).');
+tz_def('ADM_RAP_USERNAME_A', 'Cont');
+tz_def('ADM_RAP_USERNAME_B', 'Cont legat');
+tz_def('ADM_RAP_REASON', 'Motiv (optional)');
+tz_def('ADM_RAP_RELATE_BTN', 'Marcheaza ca Legate');
+tz_def('ADM_RAP_ALL_TITLE', 'Toate Perechile Legate');
+tz_def('ADM_RAP_NO_RELATIONS', 'Niciun cont marcat ca legat inca.');
+tz_def('ADM_RAP_ADDED', 'Adaugat');
+tz_def('ADM_RAP_BADGE_BLOCKED', 'Jefuire Blocata');
+tz_def('ADM_RAP_REMOVE', 'Elimina');
+tz_def('ADM_RAP_CONFIRM_REMOVE', 'Elimini aceasta relatie? Jefuirea intre aceste conturi nu va mai fi blocata.');
+tz_def('ADM_RAP_TRANSFERS_TITLE', 'Incercari de Transfer Blocate');
+tz_def('ADM_RAP_TRANSFERS_DESC', 'Trimiteri de resurse prin piata refuzate deoarece expeditorul si destinatarul formeaza o pereche declarata legata. Perechile legate au intotdeauna alocare zero pentru transfer - nu exista limita partiala de inregistrat.');
+tz_def('ADM_RAP_NO_TRANSFER_VIOLATIONS', 'Nicio incercare de transfer blocata inregistrata inca.');
+tz_def('ADM_RAP_ATTEMPTED_AMOUNT', 'Suma incercata');
+tz_def('ADM_RAP_AUTOBAN_TITLE', 'Ban Automat la Incercare');
+tz_def('ADM_RAP_AUTOBAN_DESC', 'Daca este activat, orice incercare de jefuire sau transfer prin piata intre o pereche legata declarata - chiar daca este deja blocata si nu produce nimic - baneaza imediat doar contul atacator sau expeditor (niciodata tinta), inca de la prima incercare. Nu are efect cat timp Protectia Conturilor Legate de mai sus este dezactivata.');
+tz_def('ADM_RAP_AUTOBAN_ACTIVE_NOTE', 'Ban Automat la Incercare este ACTIVAT: orice incercare de jefuire sau transfer impotriva uneia dintre perechile de mai jos va bana imediat contul atacator/expeditor.');

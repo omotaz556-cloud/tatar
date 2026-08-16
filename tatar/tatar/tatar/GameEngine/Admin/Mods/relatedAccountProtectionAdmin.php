@@ -11,6 +11,7 @@
 ## --------------------------------------------------------------------------- ##
 ##  Handles the admin actions for the related-account raid-blocking system:   ##
 ##    - toggle the feature on/off                                             ##
+##    - toggle Auto-Ban on Attempt on/off                                     ##
 ##    - manually declare/remove a related (blocked) pair by username          ##
 ##  All actions simply call the existing RelatedAccountProtection class; no   ##
 ##  new game logic lives in this file.                                        ##
@@ -79,12 +80,14 @@ $do  = $_POST['do'] ?? '';
 $msg = '';
 
 if ($do === 'save_settings') {
-    $enabled = ((string) ($_POST['enabled'] ?? '0') === '1');
+    $enabled          = ((string) ($_POST['enabled'] ?? '0') === '1');
+    $autoBanOnAttempt = ((string) ($_POST['auto_ban_on_attempt'] ?? '0') === '1');
 
-    $ok = RelatedAccountProtection::saveSettings($enabled);
+    $ok = RelatedAccountProtection::saveSettings($enabled, $autoBanOnAttempt);
     if ($ok) {
         $msg = 'Related Account Protection settings saved.';
-        rap_admin_log($admid, 'Related Account Protection: settings updated — enabled=' . ($enabled ? '1' : '0'));
+        rap_admin_log($admid, 'Related Account Protection: settings updated — enabled=' . ($enabled ? '1' : '0')
+            . ', auto_ban_on_attempt=' . ($autoBanOnAttempt ? '1' : '0'));
     } else {
         $msg = 'Could not save settings (database error).';
     }

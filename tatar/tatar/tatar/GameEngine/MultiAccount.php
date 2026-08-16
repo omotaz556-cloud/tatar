@@ -135,6 +135,48 @@ class MultiAccount
             PRIMARY KEY (`id`),
             UNIQUE KEY `pair` (`uid_a`, `uid_b`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8");
+
+        self::ensureBanlistPrevAccessColumn();
+    }
+
+    /**
+     * `banlist` predates this feature and has no `prev_access` column on
+     * older installs. banAccount() needs it to know what to restore
+     * users.access to on unban (see banAccount()/unbanAccount() below), so
+     * add it lazily here rather than requiring a manual migration.
+     * MySQL 8 / MariaDB 10.5+ support "ADD COLUMN IF NOT EXISTS" directly;
+     * older servers fall back to an information_schema check.
+     */
+    private static function ensureBanlistPrevAccessColumn()
+    {
+        $link = self::link();
+        if (!$link) {
+            return;
+        }
+
+        $added = @mysqli_query(
+            $link,
+            "ALTER TABLE `" . TB_PREFIX . "banlist`
+             ADD COLUMN IF NOT EXISTS `prev_access` tinyint(3) DEFAULT NULL"
+        );
+        if ($added) {
+            return; // server supports IF NOT EXISTS - done
+        }
+
+        // Fallback for older MySQL/MariaDB without "IF NOT EXISTS" support.
+        $check = @mysqli_query(
+            $link,
+            "SELECT 1 FROM information_schema.columns
+             WHERE table_schema = DATABASE()
+               AND table_name = '" . TB_PREFIX . "banlist'
+               AND column_name = 'prev_access' LIMIT 1"
+        );
+        if ($check && mysqli_num_rows($check) === 0) {
+            @mysqli_query(
+                $link,
+                "ALTER TABLE `" . TB_PREFIX . "banlist` ADD COLUMN `prev_access` tinyint(3) DEFAULT NULL"
+            );
+        }
     }
 
     /* ---- Settings (admin panel toggles) --------------------------------- */
@@ -491,10 +533,22 @@ class MultiAccount
     }
 
     /**
-     * Ban a single account by inserting/reactivating its row in `banlist`
-     * (the table actually used by the ban system — see
-     * GameEngine/Admin/Mods/mainteneceBan.php), and writes an admin_log row.
-     * $adminUid = 0 is used for system/auto actions ("System").
+     * Ban a single account: inserts/reactivates its row in `banlist` (audit
+     * trail — see GameEngine/Admin/Mods/mainteneceBan.php for the same
+     * table) AND sets `users.access = BANNED` so the ban is actually
+     * enforced. $adminUid = 0 is used for system/auto actions ("System").
+     *
+     * IMPORTANT — fixes a real enforcement gap: `Session::isBanned()` only
+     * ever checks `users.access == BANNED`; nothing in the codebase wrote
+     * to `users.access` from `banlist` before this. A `banlist` row alone
+     * (the previous behaviour of this method) was recorded but did NOT
+     * stop the player from logging in and playing normally. Both writes
+     * now happen together so a ban is real, not just logged.
+     *
+     * Refuses to ban an account currently at MULTIHUNTER (8) or ADMIN (9)
+     * access — an auto-ban path should never be able to lock out staff.
+     * The account's pre-ban access is stored in `banlist.prev_access` so
+     * unbanAccount() can restore it exactly rather than assuming USER (2).
      *
      * A permanent ban is modelled the same way the rest of the codebase
      * would model "indefinite": a far-future `end` timestamp, since
@@ -506,17 +560,26 @@ class MultiAccount
         if (!$link) {
             return false;
         }
+        self::ensureSchema(); // lazy-adds banlist.prev_access on older installs
         $uid = (int) $uid;
         if ($uid <= 3) {
             return false; // never touch system accounts
         }
 
-        $nameRes = mysqli_query($link, "SELECT username FROM `" . TB_PREFIX . "users` WHERE id = " . $uid);
+        $nameRes = mysqli_query($link, "SELECT username, access FROM `" . TB_PREFIX . "users` WHERE id = " . $uid);
         $nameRow = $nameRes ? mysqli_fetch_assoc($nameRes) : null;
         if (!$nameRow) {
             return false; // account does not exist
         }
-        $username = $nameRow['username'];
+        $username   = $nameRow['username'];
+        $prevAccess = (int) $nameRow['access'];
+
+        if ($prevAccess >= MULTIHUNTER) {
+            return false; // never auto-ban staff (multihunter/admin) accounts
+        }
+        if ($prevAccess === BANNED) {
+            $prevAccess = USER; // already banned elsewhere; restore to a sane default later
+        }
 
         $now         = time();
         $farFuture   = $now + (10 * 365 * 86400); // ~10 years, effectively permanent
@@ -532,6 +595,8 @@ class MultiAccount
         $existingRow = $existing ? mysqli_fetch_assoc($existing) : null;
 
         if ($existingRow) {
+            // Already actively banned — keep the original prev_access (don't
+            // overwrite it with BANNED from a prior ban), just refresh reason/end.
             $ok = mysqli_query($link,
                 "UPDATE `" . TB_PREFIX . "banlist`
                  SET reason = '" . $reasonEsc . "', time = " . $now . ", end = " . $farFuture . ",
@@ -539,26 +604,46 @@ class MultiAccount
                  WHERE id = " . (int) $existingRow['id']);
         } else {
             $ok = mysqli_query($link,
-                "INSERT INTO `" . TB_PREFIX . "banlist` (uid, name, reason, time, end, admin, active)
-                 VALUES (" . $uid . ", '" . $usernameEsc . "', '" . $reasonEsc . "', " . $now . ", " . $farFuture . ", " . (int) $adminUid . ", 1)");
+                "INSERT INTO `" . TB_PREFIX . "banlist` (uid, name, reason, time, end, admin, active, prev_access)
+                 VALUES (" . $uid . ", '" . $usernameEsc . "', '" . $reasonEsc . "', " . $now . ", " . $farFuture . ", " . (int) $adminUid . ", 1, " . $prevAccess . ")");
         }
 
         if ($ok) {
+            // The actual enforcement write — see docblock above.
+            mysqli_query($link, "UPDATE `" . TB_PREFIX . "users` SET access = " . BANNED . " WHERE id = " . $uid);
             self::adminLog((int) $adminUid, 'Multi-Account: banned uid ' . $uid . ' (' . $username . ') — ' . $reason);
         }
         return (bool) $ok;
     }
 
-    /** Unban a single account (deactivate its active banlist row(s)), with an admin_log entry. */
+    /**
+     * Unban a single account: deactivates its active banlist row(s) AND
+     * restores `users.access` to what it was before the ban (from
+     * `banlist.prev_access`), rather than leaving it at BANNED — the
+     * counterpart fix to banAccount() above. Falls back to USER (2) if no
+     * prev_access is on record (e.g. a row from before this column existed).
+     */
     public static function unbanAccount($uid, $adminUid, $reason = 'manual unban')
     {
         $link = self::link();
         if (!$link) {
             return false;
         }
+        self::ensureSchema();
         $uid = (int) $uid;
         if ($uid <= 3) {
             return false;
+        }
+
+        $prevRes = mysqli_query($link,
+            "SELECT prev_access FROM `" . TB_PREFIX . "banlist`
+             WHERE uid = " . $uid . " AND active = 1 ORDER BY id DESC LIMIT 1");
+        $prevRow = $prevRes ? mysqli_fetch_assoc($prevRes) : null;
+        $restoreAccess = ($prevRow && $prevRow['prev_access'] !== null)
+            ? (int) $prevRow['prev_access']
+            : USER;
+        if ($restoreAccess >= MULTIHUNTER) {
+            $restoreAccess = USER; // safety net — never restore to staff level from this path
         }
 
         $now = time();
@@ -567,6 +652,7 @@ class MultiAccount
              WHERE uid = " . $uid . " AND active = 1");
 
         if ($ok) {
+            mysqli_query($link, "UPDATE `" . TB_PREFIX . "users` SET access = " . $restoreAccess . " WHERE id = " . $uid);
             self::adminLog((int) $adminUid, 'Multi-Account: unbanned uid ' . $uid . ' — ' . $reason);
         }
         return (bool) $ok;

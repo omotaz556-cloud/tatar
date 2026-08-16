@@ -32,6 +32,17 @@
  * which system was configured more recently. See isBlockedPair() and its
  * call site in AutomationBattleResolution::resolveResourcesAfterBattle().
  *
+ * Auto-Ban on Attempt (optional, off by default): when enabled via
+ * `related_protection_settings.auto_ban_on_attempt`, a BLOCKED raid or
+ * transfer attempt between a declared related pair does not just get
+ * refused — it immediately bans the attacking/sending account only (not
+ * the target), on the very first attempt, no strike counter. This reuses
+ * MultiAccount::banAccount() (see its docblock for how a ban is actually
+ * enforced) so there is exactly one ban mechanism in the codebase. See
+ * banAttacker() below and its call sites in
+ * AutomationBattleResolution::resolveResourcesAfterBattle() and
+ * Market::isRelatedAccountTransfer().
+ *
  * Scope: local to a single world's database only (unlike CentralGold).
  * A "related accounts" pair only ever makes sense between two accounts on
  * the same world, so there is no cross-world concept here.
@@ -99,13 +110,16 @@ class RelatedAccountProtection
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
 
         @mysqli_query($link, "CREATE TABLE IF NOT EXISTS `" . TB_PREFIX . "related_protection_settings` (
-            `id`      int(11) NOT NULL DEFAULT 1,
-            `enabled` tinyint(1) NOT NULL DEFAULT 0,
+            `id`                  int(11) NOT NULL DEFAULT 1,
+            `enabled`             tinyint(1) NOT NULL DEFAULT 0,
+            `auto_ban_on_attempt` tinyint(1) NOT NULL DEFAULT 0,
             PRIMARY KEY (`id`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
 
         @mysqli_query($link, "INSERT IGNORE INTO `" . TB_PREFIX . "related_protection_settings`
-            (`id`, `enabled`) VALUES (1, 0)");
+            (`id`, `enabled`, `auto_ban_on_attempt`) VALUES (1, 0, 0)");
+
+        self::ensureAutoBanColumn();
 
         // Item 4 (Resource Transfer Protection): log of every marketplace
         // send blocked because sender+recipient are a related pair. Related
@@ -127,6 +141,46 @@ class RelatedAccountProtection
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
     }
 
+    /**
+     * `related_protection_settings` predates the Auto-Ban on Attempt
+     * feature on installs that already ran the CREATE TABLE above without
+     * this column. Same lazy-migration pattern as
+     * MultiAccount::ensureBanlistPrevAccessColumn() — try the modern
+     * "IF NOT EXISTS" syntax first, fall back to an information_schema
+     * check for older MySQL/MariaDB.
+     */
+    private static function ensureAutoBanColumn()
+    {
+        $link = self::link();
+        if (!$link) {
+            return;
+        }
+
+        $added = @mysqli_query(
+            $link,
+            "ALTER TABLE `" . TB_PREFIX . "related_protection_settings`
+             ADD COLUMN IF NOT EXISTS `auto_ban_on_attempt` tinyint(1) NOT NULL DEFAULT 0"
+        );
+        if ($added) {
+            return;
+        }
+
+        $check = @mysqli_query(
+            $link,
+            "SELECT 1 FROM information_schema.columns
+             WHERE table_schema = DATABASE()
+               AND table_name = '" . TB_PREFIX . "related_protection_settings'
+               AND column_name = 'auto_ban_on_attempt' LIMIT 1"
+        );
+        if ($check && mysqli_num_rows($check) === 0) {
+            @mysqli_query(
+                $link,
+                "ALTER TABLE `" . TB_PREFIX . "related_protection_settings`
+                 ADD COLUMN `auto_ban_on_attempt` tinyint(1) NOT NULL DEFAULT 0"
+            );
+        }
+    }
+
     /** Normalise a pair so uid_a is always the smaller id. */
     private static function orderPair($uidA, $uidB)
     {
@@ -138,7 +192,7 @@ class RelatedAccountProtection
     /* ---- Settings (admin panel) ------------------------------------------ */
 
     /**
-     * @return array{enabled:bool}
+     * @return array{enabled:bool, auto_ban_on_attempt:bool}
      */
     public static function getSettings()
     {
@@ -146,7 +200,7 @@ class RelatedAccountProtection
             return self::$settingsCache;
         }
 
-        $default = ['enabled' => false];
+        $default = ['enabled' => false, 'auto_ban_on_attempt' => false];
 
         $link = self::link();
         if (!$link) {
@@ -154,7 +208,7 @@ class RelatedAccountProtection
         }
         self::ensureSchema();
 
-        $res = @mysqli_query($link, "SELECT `enabled`
+        $res = @mysqli_query($link, "SELECT `enabled`, `auto_ban_on_attempt`
                                       FROM `" . TB_PREFIX . "related_protection_settings` WHERE `id` = 1 LIMIT 1");
         $row = $res ? mysqli_fetch_assoc($res) : null;
         if (!$row) {
@@ -162,7 +216,8 @@ class RelatedAccountProtection
         }
 
         return self::$settingsCache = [
-            'enabled' => ((int) $row['enabled']) === 1,
+            'enabled'             => ((int) $row['enabled']) === 1,
+            'auto_ban_on_attempt' => ((int) ($row['auto_ban_on_attempt'] ?? 0)) === 1,
         ];
     }
 
@@ -172,12 +227,24 @@ class RelatedAccountProtection
     }
 
     /**
-     * Update the admin-configurable setting. Called only from the Admin
+     * Auto-Ban on Attempt is meaningless without the base protection being
+     * on (there would be nothing to attempt against), so this also
+     * requires isEnabled() — same "both must be on" pattern MultiAccount
+     * uses for isEnabled()+isAutoBanEnabled().
+     */
+    public static function isAutoBanOnAttemptEnabled()
+    {
+        $s = self::getSettings();
+        return $s['enabled'] && $s['auto_ban_on_attempt'];
+    }
+
+    /**
+     * Update the admin-configurable settings. Called only from the Admin
      * panel Mod (see GameEngine/Admin/Mods/relatedAccountProtectionAdmin.php).
      *
      * @return bool success
      */
-    public static function saveSettings($enabled)
+    public static function saveSettings($enabled, $autoBanOnAttempt = null)
     {
         $link = self::link();
         if (!$link) {
@@ -187,16 +254,33 @@ class RelatedAccountProtection
 
         $enabled = $enabled ? 1 : 0;
 
-        $stmt = mysqli_prepare(
-            $link,
-            "UPDATE `" . TB_PREFIX . "related_protection_settings`
-             SET `enabled` = ?
-             WHERE `id` = 1"
-        );
-        if (!$stmt) {
-            return false;
+        // Backward-compatible: callers that only pass $enabled keep the
+        // auto-ban flag as-is instead of resetting it.
+        if ($autoBanOnAttempt === null) {
+            $stmt = mysqli_prepare(
+                $link,
+                "UPDATE `" . TB_PREFIX . "related_protection_settings`
+                 SET `enabled` = ?
+                 WHERE `id` = 1"
+            );
+            if (!$stmt) {
+                return false;
+            }
+            mysqli_stmt_bind_param($stmt, 'i', $enabled);
+        } else {
+            $autoBanOnAttempt = $autoBanOnAttempt ? 1 : 0;
+            $stmt = mysqli_prepare(
+                $link,
+                "UPDATE `" . TB_PREFIX . "related_protection_settings`
+                 SET `enabled` = ?, `auto_ban_on_attempt` = ?
+                 WHERE `id` = 1"
+            );
+            if (!$stmt) {
+                return false;
+            }
+            mysqli_stmt_bind_param($stmt, 'ii', $enabled, $autoBanOnAttempt);
         }
-        mysqli_stmt_bind_param($stmt, 'i', $enabled);
+
         $ok = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 
@@ -362,6 +446,56 @@ class RelatedAccountProtection
              WHERE uid_a = " . $a . " AND uid_b = " . $b . " LIMIT 1"
         );
         return $res && mysqli_num_rows($res) > 0;
+    }
+
+    /* ---- Auto-Ban on Attempt ----------------------------------------------- */
+
+    /**
+     * Auto-Ban on Attempt: called from a call site AFTER a raid or transfer
+     * has already been identified as blocked (isBlockedPair() /
+     * isBlockedTransferPair() returned true). Bans ONLY the attacking or
+     * sending account ($attackerUid) — never the target — immediately, on
+     * the first attempt, with no strike counter.
+     *
+     * No-op unless isAutoBanOnAttemptEnabled() is true, so a call site can
+     * call this unconditionally right after a block without an extra
+     * settings check of its own.
+     *
+     * Reuses MultiAccount::banAccount() rather than duplicating ban logic —
+     * see that method's docblock for exactly what a ban does (banlist row +
+     * users.access = BANNED). Attribution uses uid 0 ("System"), same
+     * pattern as MultiAccount::applyAutoBan(), since this fires from
+     * gameplay code with no admin session in context.
+     *
+     * Fails soft (returns false, never throws) on any issue — a ban
+     * failure must never interrupt the raid/transfer flow that already
+     * decided to block the resources.
+     *
+     * @param int    $attackerUid uid of the attacking/sending account only.
+     * @param string $context     Short label for the reason text, e.g.
+     *                            'raid' or 'transfer'.
+     * @return bool True if a new ban was applied.
+     */
+    public static function banAttacker($attackerUid, $context = 'attempt')
+    {
+        try {
+            if (!self::isAutoBanOnAttemptEnabled()) {
+                return false;
+            }
+            if (!class_exists('MultiAccount')) {
+                return false; // engine not deployed -> no enforcement
+            }
+
+            $attackerUid = (int) $attackerUid;
+            if ($attackerUid <= 3) {
+                return false;
+            }
+
+            $reason = 'Auto-banned: attempted ' . $context . ' against a declared related account';
+            return (bool) MultiAccount::banAccount($attackerUid, 0, $reason);
+        } catch (\Throwable $e) {
+            return false; // never break the raid/transfer flow that called this
+        }
     }
 
     /* ---- Resource-transfer protection (item 4 of the gap analysis) ------- */

@@ -280,6 +280,12 @@ class Market
             (int) $resource[0], (int) $resource[1], (int) $resource[2], (int) $resource[3]
         );
 
+        // Auto-Ban on Attempt (optional, off by default): a blocked
+        // transfer attempt immediately bans the sender only, on the first
+        // attempt. No-op unless the admin has turned this on (see
+        // RelatedAccountProtection::banAttacker() docblock).
+        RelatedAccountProtection::banAttacker($fromOwner, 'transfer');
+
         return true;
     }
 

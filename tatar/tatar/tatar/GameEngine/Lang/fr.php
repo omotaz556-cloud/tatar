@@ -4357,3 +4357,33 @@ tz_def('TRAIN_BONUS_ARTIFACT', 'Bonus artefact');
 tz_def('TRAIN_BONUS_HERO',     'Bonus héros');
 tz_def('TRAIN_BONUS_ALLIANCE', 'Bonus alliance');
 tz_def('TRAIN_BONUS_FINAL',    'Temps d’entraînement');
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// PROTECTION DES COMPTES LIÉS (panneau admin)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADMIN_RELATED_ACCOUNT_PROTECTION', 'Protection des Comptes Liés');
+tz_def('ADM_RAP_INTRO', 'Permet à un administrateur de marquer manuellement deux comptes de ce monde comme "liés" (même propriétaire, même appareil, ou confirmés comme étant la même personne). Le pillage ET les transferts de ressources sur le marché sont BLOQUÉS dans les deux sens entre toute paire liée - les raids se résolvent normalement mais ne rapportent aucun butin, et les envois du marché entre la paire sont refusés purement et simplement. Ceci est indépendant de la Détection Multi-Comptes, qui ne fait que noter les paires suspectes pour révision manuelle, et des Comptes Liés (Alimentation), qui fait l\'inverse.');
+tz_def('ADM_RAP_PRIORITY_NOTE', 'Si la même paire est AUSSI déclarée "liée" dans Comptes Liés (Alimentation), cette protection l\'emporte toujours : le pillage est bloqué quels que soient les réglages d\'alimentation pour cette paire. Les transferts du marché entre une paire liée sont toujours bloqués, sans limite partielle, plafond quotidien ni délai - l\'allocation est nulle.');
+tz_def('ADM_RAP_SETTINGS_TITLE', 'Paramètres');
+tz_def('ADM_RAP_SETTINGS_DESC', 'Active ou désactive le blocage du pillage pour les paires liées. Cela ne supprime pas les relations déjà ajoutées - cela contrôle seulement si elles sont actuellement appliquées.');
+tz_def('ADM_RAP_ENABLED', 'Activé');
+tz_def('ADM_RAP_DISABLED', 'Désactivé');
+tz_def('ADM_RAP_SAVE', 'Enregistrer');
+tz_def('ADM_RAP_ADD_TITLE', 'Marquer des Comptes comme Liés');
+tz_def('ADM_RAP_ADD_DESC', 'Marque deux comptes par nom d\'utilisateur comme liés. Réservé aux administrateurs - les joueurs ne peuvent pas le faire eux-mêmes, et le sens n\'a pas d\'importance (le pillage est bloqué dans les deux sens).');
+tz_def('ADM_RAP_USERNAME_A', 'Compte');
+tz_def('ADM_RAP_USERNAME_B', 'Compte lié');
+tz_def('ADM_RAP_REASON', 'Raison (facultatif)');
+tz_def('ADM_RAP_RELATE_BTN', 'Marquer comme Liés');
+tz_def('ADM_RAP_ALL_TITLE', 'Toutes les Paires Liées');
+tz_def('ADM_RAP_NO_RELATIONS', 'Aucun compte marqué comme lié pour le moment.');
+tz_def('ADM_RAP_ADDED', 'Ajouté');
+tz_def('ADM_RAP_BADGE_BLOCKED', 'Pillage Bloqué');
+tz_def('ADM_RAP_REMOVE', 'Supprimer');
+tz_def('ADM_RAP_CONFIRM_REMOVE', 'Supprimer cette relation ? Le pillage entre ces comptes ne sera plus bloqué.');
+tz_def('ADM_RAP_TRANSFERS_TITLE', 'Tentatives de Transfert Bloquées');
+tz_def('ADM_RAP_TRANSFERS_DESC', 'Envois de ressources du marché refusés car l\'expéditeur et le destinataire forment une paire déclarée liée. Les paires liées ont toujours une allocation de transfert nulle - il n\'y a pas de limite partielle à enregistrer.');
+tz_def('ADM_RAP_NO_TRANSFER_VIOLATIONS', 'Aucune tentative de transfert bloquée enregistrée pour le moment.');
+tz_def('ADM_RAP_ATTEMPTED_AMOUNT', 'Montant tenté');
+tz_def('ADM_RAP_AUTOBAN_TITLE', 'Bannissement Automatique à la Tentative');
+tz_def('ADM_RAP_AUTOBAN_DESC', 'Si activé, toute tentative de pillage ou de transfert de marché entre une paire liée déclarée - même déjà bloquée et sans aucun gain - bannit immédiatement uniquement le compte attaquant ou expéditeur (jamais la cible), dès la première tentative. Sans effet tant que la Protection des Comptes Liés ci-dessus est désactivée.');
+tz_def('ADM_RAP_AUTOBAN_ACTIVE_NOTE', 'Le Bannissement Automatique à la Tentative est ACTIVÉ : toute tentative de pillage ou de transfert contre l\'une des paires ci-dessous bannira immédiatement le compte attaquant/expéditeur.');

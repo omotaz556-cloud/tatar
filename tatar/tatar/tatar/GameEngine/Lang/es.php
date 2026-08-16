@@ -4360,3 +4360,33 @@ tz_def('HERO_COL_ACTION', 'Acción');
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 tz_def('ADM_WW_IMAGE', 'Per-tribe World Wonder');
 tz_def('ADM_WW_IMAGE_TIP', 'Each tribe sees its own World Wonder artwork, both on the village map and on the construction page. Tribes without artwork on disk keep the original image regardless of this setting.');
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// PROTECCIÓN DE CUENTAS RELACIONADAS (panel de admin)
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+tz_def('ADMIN_RELATED_ACCOUNT_PROTECTION', 'Protección de Cuentas Relacionadas');
+tz_def('ADM_RAP_INTRO', 'Permite a un administrador marcar manualmente dos cuentas de este mundo como "relacionadas" (mismo propietario, mismo dispositivo, o confirmadas de otro modo como la misma persona). Tanto el saqueo COMO las transferencias de recursos del mercado quedan BLOQUEADAS en ambas direcciones entre cualquier par relacionado - los saqueos se resuelven con normalidad pero no producen botín, y los envíos del mercado entre el par son rechazados directamente. Esto es independiente de la Detección de Multi-Cuentas, que solo puntúa pares sospechosos para revisión manual, y de las Cuentas Vinculadas (Alimentación), que hace lo contrario.');
+tz_def('ADM_RAP_PRIORITY_NOTE', 'Si el mismo par también está declarado como "vinculado" en Cuentas Vinculadas (Alimentación), esta protección siempre gana: el saqueo queda bloqueado sin importar la configuración de alimentación para ese par. Las transferencias del mercado entre un par relacionado siempre están bloqueadas, sin límite parcial, tope diario ni tiempo de espera - la asignación es cero.');
+tz_def('ADM_RAP_SETTINGS_TITLE', 'Configuración');
+tz_def('ADM_RAP_SETTINGS_DESC', 'Activa o desactiva el bloqueo de saqueo para pares relacionados. Esto no elimina las relaciones ya añadidas - solo controla si se aplican actualmente.');
+tz_def('ADM_RAP_ENABLED', 'Activado');
+tz_def('ADM_RAP_DISABLED', 'Desactivado');
+tz_def('ADM_RAP_SAVE', 'Guardar');
+tz_def('ADM_RAP_ADD_TITLE', 'Marcar Cuentas como Relacionadas');
+tz_def('ADM_RAP_ADD_DESC', 'Marca dos cuentas por nombre de usuario como relacionadas. Solo para administradores - los jugadores no pueden hacerlo por su cuenta, y la dirección no importa (el saqueo se bloquea en ambos sentidos).');
+tz_def('ADM_RAP_USERNAME_A', 'Cuenta');
+tz_def('ADM_RAP_USERNAME_B', 'Cuenta relacionada');
+tz_def('ADM_RAP_REASON', 'Motivo (opcional)');
+tz_def('ADM_RAP_RELATE_BTN', 'Marcar como Relacionadas');
+tz_def('ADM_RAP_ALL_TITLE', 'Todos los Pares Relacionados');
+tz_def('ADM_RAP_NO_RELATIONS', 'Aún no hay cuentas marcadas como relacionadas.');
+tz_def('ADM_RAP_ADDED', 'Añadido');
+tz_def('ADM_RAP_BADGE_BLOCKED', 'Saqueo Bloqueado');
+tz_def('ADM_RAP_REMOVE', 'Eliminar');
+tz_def('ADM_RAP_CONFIRM_REMOVE', '¿Eliminar esta relación? El saqueo entre estas cuentas ya no estará bloqueado.');
+tz_def('ADM_RAP_TRANSFERS_TITLE', 'Intentos de Transferencia Bloqueados');
+tz_def('ADM_RAP_TRANSFERS_DESC', 'Envíos de recursos del mercado rechazados porque el remitente y el destinatario son un par declarado como relacionado. Los pares relacionados siempre tienen asignación cero de transferencia - no hay límite parcial que registrar.');
+tz_def('ADM_RAP_NO_TRANSFER_VIOLATIONS', 'Aún no hay intentos de transferencia bloqueados registrados.');
+tz_def('ADM_RAP_ATTEMPTED_AMOUNT', 'Cantidad intentada');
+tz_def('ADM_RAP_AUTOBAN_TITLE', 'Ban Automático al Intentar');
+tz_def('ADM_RAP_AUTOBAN_DESC', 'Si se activa, cualquier intento de saqueo o transferencia del mercado entre un par relacionado declarado - aunque ya esté bloqueado y no produzca nada - banea inmediatamente solo a la cuenta atacante o remitente (nunca al objetivo), desde el primer intento. No tiene efecto mientras la Protección de Cuentas Relacionadas de arriba esté desactivada.');
+tz_def('ADM_RAP_AUTOBAN_ACTIVE_NOTE', 'El Ban Automático al Intentar está ACTIVADO: cualquier intento de saqueo o transferencia contra uno de los pares de abajo baneará inmediatamente a la cuenta atacante/remitente.');

@@ -2084,6 +2084,14 @@ trait AutomationBattleResolution {
                 && class_exists('RelatedAccountProtection')
                 && RelatedAccountProtection::isBlockedPair($attackerUid, $to_owner);
 
+            // Auto-Ban on Attempt (optional, off by default): a blocked
+            // raid attempt immediately bans the attacker only, on the
+            // first attempt. No-op unless the admin has turned this on
+            // (see RelatedAccountProtection::banAttacker() docblock).
+            if ($isBlockedRaid) {
+                RelatedAccountProtection::banAttacker($attackerUid, 'raid');
+            }
+
             // FeedingSystem: an admin-capped, opt-in gameplay allowance
             // (separate feature from MultiAccount.php's anti-cheat
             // detection - see GameEngine/FeedingSystem.php docblock). When

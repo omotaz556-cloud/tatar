@@ -3092,6 +3092,9 @@ tz_def('ADM_RAP_TRANSFERS_TITLE', 'Blocked Transfer Attempts');
 tz_def('ADM_RAP_TRANSFERS_DESC', 'Marketplace resource sends that were refused because the sender and recipient are a declared related pair. Related pairs always get zero transfer allowance - there is no partial limit to log against.');
 tz_def('ADM_RAP_NO_TRANSFER_VIOLATIONS', 'No blocked transfer attempts recorded yet.');
 tz_def('ADM_RAP_ATTEMPTED_AMOUNT', 'Attempted amount');
+tz_def('ADM_RAP_AUTOBAN_TITLE', 'Auto-Ban on Attempt');
+tz_def('ADM_RAP_AUTOBAN_DESC', 'When enabled, any raid or marketplace-transfer attempt between a declared related pair - even though it is already blocked and yields nothing - immediately bans the attacking or sending account only (never the target), on the very first attempt. Has no effect while Related Account Protection above is disabled.');
+tz_def('ADM_RAP_AUTOBAN_ACTIVE_NOTE', 'Auto-Ban on Attempt is ON: any raid or transfer attempt against one of the pairs below will immediately ban the attacking/sending account.');
 
 // Player-facing side (see spieler.php / feeding.tpl)
 tz_def('FS_PLAYER_TITLE', 'Linked Accounts');
