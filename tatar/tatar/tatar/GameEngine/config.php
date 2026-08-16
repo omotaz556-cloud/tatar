@@ -46,7 +46,7 @@ define('CRON_TICK_SECONDS', 60);
 // Key used to access cron.php via HTTP (wget/curl or an external cron service).
 // Command-line execution (e.g. a cPanel cron job) does NOT require it.
 // Automatically generated during installation and preserved when saving configuration settings from the ACP.
-define('CRON_KEY', 'ea1c653b4a7a0602ff1556d500a47687ca096e985e88ed3d');
+define('CRON_KEY', '26b6e3eb510170fc3d59ad92c46ff3f21abc8daaa2e27df9');
 
 //////////////////////////////////
 // *****  DATABASE CLEANUP  *****//
@@ -110,11 +110,11 @@ date_default_timezone_set(TIMEZONE);
 
 // ***** Started
 // Defines when has server started.
-define("COMMENCE","1786890622");
+define("COMMENCE","1786897804");
 
 // ***** Server Start Date / Time
 define("START_DATE", "16.08.2026");
-define("START_TIME", "17:22");
+define("START_TIME", "19:29");
 
 // ***** Language
 // SERVER_LANG is the DEFAULT language of the server (chosen at install / in
@@ -134,31 +134,11 @@ if (session_status() !== PHP_SESSION_ACTIVE) { @session_start(); }
 $__user_lang = isset($_SESSION['lang']) ? preg_replace('/[^a-z_]/', '', strtolower((string) $_SESSION['lang'])) : '';
 define("LANG", ($__user_lang !== '' && is_file(__DIR__ . "/Lang/" . $__user_lang . ".php")) ? $__user_lang : SERVER_LANG);
 
-// ***** RTL support
-// List of languages that must render right-to-left. Used by tz_html_dir_attrs()
-// below so every page's <html> tag gets the correct dir/lang attributes instead
-// of always defaulting to LTR regardless of the selected language.
-if (!function_exists('tz_is_rtl_lang')) {
-    function tz_is_rtl_lang($langCode = null) {
-        $rtlLangs = ['ar', 'he', 'fa', 'ur'];
-        $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
-        return in_array($langCode, $rtlLangs, true);
-    }
-}
-if (!function_exists('tz_html_dir_attrs')) {
-    // Echo this inside the html tag: dir/lang attributes for the page.
-    function tz_html_dir_attrs($langCode = null) {
-        $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
-        $dir = tz_is_rtl_lang($langCode) ? 'rtl' : 'ltr';
-        return 'lang="' . htmlspecialchars($langCode, ENT_QUOTES) . '" dir="' . $dir . '"';
-    }
-}
-
 // ***** Speed
 // Choose your server speed. NOTICE: Higher speed, more likely
 // to have some bugs. Lower speed, most likely no major bugs.
 // Values: 1 (normal), 3 (3x speed) etc...
-define("SPEED", "100");
+define("SPEED", "1");
 
 // ***** World size
 // Defines world size. NOTICE: DO NOT EDIT!!
@@ -203,7 +183,7 @@ define("AUTH_EMAIL",false);
 
 // ***** Troop Speed
 // Values: 1 (normal), 3 (3x speed) etc...
-define("INCREASE_SPEED","10");
+define("INCREASE_SPEED","1");
 
 // ***** Evasion Speed
 define("EVASION_SPEED","1");
@@ -246,7 +226,7 @@ define("QTYPE",25);
 // 3600*24 = 1 day
 // 3600*24*3 = 3 days
 // You can choose any value you want!
-define("PROTECTION","86400");
+define("PROTECTION","43200");
 
 // ***** Enable WW Statistics
 define("WW",false);
@@ -463,7 +443,7 @@ define("SQL_PASS", "novaterrapass");
 define("SQL_DB", "novaterra");
 
 // ***** Database - Table Prefix
-define("TB_PREFIX", "s1973_");
+define("TB_PREFIX", "sa969_");
 
 // ***** Database type
 // 0 = MYSQL
@@ -520,7 +500,7 @@ define("INCLUDE_ADMIN", false);
 ////////////////////////////////////
 
 // ***** Admin Email
-define("ADMIN_EMAIL", "admin@admin.com");
+define("ADMIN_EMAIL", "omotaz323@gmail.com");
 
 // ***** Admin Name
 define("ADMIN_NAME", "admin");
@@ -553,13 +533,13 @@ define("NEW_FUNCTIONS_MEDAL_10YEAR", false);
 define("NEW_FUNCTIONS_SPECIAL_MEDALS_SYSTEM", false);
 define("NEW_FUNCTIONS_MILESTONES", false);
 define("NEW_FUNCTIONS_MEDAL_RESET", false);
-define("NEW_FUNCTIONS_HERO_T4", true);
+define("NEW_FUNCTIONS_HERO_T4", false);
 define("NEW_FUNCTION_TRIBE_HUNS", false);
 define("NEW_FUNCTION_TRIBE_EGIPTEANS", false);
 define("NEW_FUNCTION_TRIBE_SPARTANS", false);
 define("NEW_FUNCTION_TRIBE_VIKINGS", false);
-define("NEW_FUNCTION_REGISTRATION_GOLD", true);
-define("NEW_FUNCTION_REGISTRATION_GOLD_VALUE", 6000);
+define("NEW_FUNCTION_REGISTRATION_GOLD", false);
+define("NEW_FUNCTION_REGISTRATION_GOLD_VALUE", 200);
 
 //////////////////////////////////////////
 //   ****  DO NOT EDIT SETTINGS  ****   //
@@ -604,9 +584,9 @@ define("PAGE_ACCESS_LOG_FILENAME", 'access.log'); // filename ONLY, no path!
 ////////////////////////////////////////////
 //   ****  DOMAIN/SERVER SETTINGS  ****   //
 ////////////////////////////////////////////
-define("DOMAIN", "http://floppy-impose-buffer-hitting.trycloudflare.com/");
-define("HOMEPAGE", "http://floppy-impose-buffer-hitting.trycloudflare.com/");
-define("SERVER", "http://floppy-impose-buffer-hitting.trycloudflare.com/");
+define("DOMAIN", "http://localhost:8080/");
+define("HOMEPAGE", "http://localhost:8080/");
+define("SERVER", "http://localhost:8080/");
 
 $requse = 0;
 
@@ -625,4 +605,17 @@ $requse = 0;
 ##                 https://github.com/omotaz556-cloud/tatar                     ##
 #################################################################################
 
-?>
+if (!function_exists('tz_is_rtl_lang')) {
+    function tz_is_rtl_lang($langCode = null) {
+        $rtlLangs = ['ar', 'he', 'fa', 'ur'];
+        $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
+        return in_array($langCode, $rtlLangs, true);
+    }
+}
+if (!function_exists('tz_html_dir_attrs')) {
+    function tz_html_dir_attrs($langCode = null) {
+        $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
+        $dir = tz_is_rtl_lang($langCode) ? 'rtl' : 'ltr';
+        return 'lang="' . htmlspecialchars($langCode, ENT_QUOTES) . '" dir="' . $dir . '"';
+    }
+}

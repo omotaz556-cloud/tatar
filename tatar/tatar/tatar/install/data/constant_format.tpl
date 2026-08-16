@@ -605,4 +605,18 @@ $requse = 0;
 ##                 https://github.com/omotaz556-cloud/tatar                     ##
 #################################################################################
 
+if (!function_exists('tz_is_rtl_lang')) {
+    function tz_is_rtl_lang($langCode = null) {
+        $rtlLangs = ['ar', 'he', 'fa', 'ur'];
+        $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
+        return in_array($langCode, $rtlLangs, true);
+    }
+}
+if (!function_exists('tz_html_dir_attrs')) {
+    function tz_html_dir_attrs($langCode = null) {
+        $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
+        $dir = tz_is_rtl_lang($langCode) ? 'rtl' : 'ltr';
+        return 'lang="' . htmlspecialchars($langCode, ENT_QUOTES) . '" dir="' . $dir . '"';
+    }
+}
 ?>
