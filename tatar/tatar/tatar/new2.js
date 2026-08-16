@@ -54,7 +54,12 @@ window.addEvent('domready', function() {
 		if (typeof(event) !== 'undefined') {
 			event.stop();
 		}
-		$('signup_layer').fireEvent('show');
+		var signupLayer = $('signup_layer');
+		if (!signupLayer) {
+			console.warn('[DEBUG] signup_layer not found');
+			return;
+		}
+		signupLayer.fireEvent('show');
 	});
 
 	//Login Buttons
@@ -62,7 +67,12 @@ window.addEvent('domready', function() {
 		if (typeof(event) !== 'undefined') {
 			event.stop();
 		}
-		$('login_layer').fireEvent('show');
+		var loginLayer = $('login_layer');
+		if (!loginLayer) {
+			console.warn('[DEBUG] login_layer not found');
+			return;
+		}
+		loginLayer.fireEvent('show');
 	});
 
 	//Login Buttons

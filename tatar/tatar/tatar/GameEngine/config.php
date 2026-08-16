@@ -5,8 +5,8 @@
 ##  Filename       config.php                                                  ##
 ##  Version        11.0 Full Refactor & Security                               ##
 ##  Developed by:  Dzoki and Dixie Edited by Advocaite                         ##
-##  License        : GPLv3 (derived from TravianZ; see project LICENSE)       ##
-##  Copyright      : Novaterra mods (c) 2013-2026; base engine (c) TravianZ authors (GPLv3). ##
+##  License:       Novaterra Project                                            ##
+##  Copyright:     Novaterra (c) 2013-2026. All rights reserved.                ##
 ##  Modified by:   Shadow and ronix                                            ##
 ##  Refactored by: Shadow                                                      ##
 ##  				                                                           ##
@@ -46,7 +46,7 @@ define('CRON_TICK_SECONDS', 60);
 // Key used to access cron.php via HTTP (wget/curl or an external cron service).
 // Command-line execution (e.g. a cPanel cron job) does NOT require it.
 // Automatically generated during installation and preserved when saving configuration settings from the ACP.
-define('CRON_KEY', '8e9ce6c862c1a18301a55534ea64937a7d38d2a8b1c1e028');
+define('CRON_KEY', 'fd4ee2a95f70411dd0a07908fa94a677a2f6b0dc0a993f4c');
 
 //////////////////////////////////
 // *****  DATABASE CLEANUP  *****//
@@ -110,11 +110,11 @@ date_default_timezone_set(TIMEZONE);
 
 // ***** Started
 // Defines when has server started.
-define("COMMENCE","1786717859");
+define("COMMENCE","1786889566");
 
 // ***** Server Start Date / Time
-define("START_DATE", "14.08.2026");
-define("START_TIME", "17:30");
+define("START_DATE", "16.08.2026");
+define("START_TIME", "17:12");
 
 // ***** Language
 // SERVER_LANG is the DEFAULT language of the server (chosen at install / in
@@ -443,7 +443,7 @@ define("SQL_PASS", "novaterrapass");
 define("SQL_DB", "novaterra");
 
 // ***** Database - Table Prefix
-define("TB_PREFIX", "secf0_");
+define("TB_PREFIX", "s34cc_");
 
 // ***** Database type
 // 0 = MYSQL
@@ -500,16 +500,16 @@ define("INCLUDE_ADMIN", false);
 ////////////////////////////////////
 
 // ***** Admin Email
-define("ADMIN_EMAIL", "omotaz323@gmail.com"); // set your own admin email via the install wizard
+define("ADMIN_EMAIL", "%AEMAIL%");
 
 // ***** Admin Name
-define("ADMIN_NAME", "admin");
+define("ADMIN_NAME", "%ANAME%");
 
 // ***** Show Support Messages in Admin
 define("ADMIN_RECEIVE_SUPPORT_MESSAGES", true);
 
 // ***** Allow Admin accounts to be raided and attacked
-define("ADMIN_ALLOW_INCOMING_RAIDS", true);
+define("ADMIN_ALLOW_INCOMING_RAIDS", false);
 
 /////////////////////////////////////////////////
 //   ****  NEW MECHANICS AND FUNCTIONS  ****   //
@@ -534,10 +534,10 @@ define("NEW_FUNCTIONS_SPECIAL_MEDALS_SYSTEM", false);
 define("NEW_FUNCTIONS_MILESTONES", false);
 define("NEW_FUNCTIONS_MEDAL_RESET", false);
 define("NEW_FUNCTIONS_HERO_T4", false);
-define("NEW_FUNCTION_TRIBE_HUNS", true);
-define("NEW_FUNCTION_TRIBE_EGIPTEANS", true);
-define("NEW_FUNCTION_TRIBE_SPARTANS", true);
-define("NEW_FUNCTION_TRIBE_VIKINGS", true);
+define("NEW_FUNCTION_TRIBE_HUNS", false);
+define("NEW_FUNCTION_TRIBE_EGIPTEANS", false);
+define("NEW_FUNCTION_TRIBE_SPARTANS", false);
+define("NEW_FUNCTION_TRIBE_VIKINGS", false);
 define("NEW_FUNCTION_REGISTRATION_GOLD", false);
 define("NEW_FUNCTION_REGISTRATION_GOLD_VALUE", 200);
 
@@ -596,8 +596,8 @@ $requse = 0;
 ##  Filename       config.php                                                  ##
 ##  Version        11.0 Full Refactor & Security                               ##
 ##  Developed by:  Dzoki and Dixie Edited by Advocaite                         ##
-##  License        : GPLv3 (derived from TravianZ; see project LICENSE)       ##
-##  Copyright      : Novaterra mods (c) 2013-2026; base engine (c) TravianZ authors (GPLv3). ##
+##  License:       Novaterra Project                                            ##
+##  Copyright:     Novaterra (c) 2013-2026. All rights reserved.                ##
 ##  Modified by:   Shadow and ronix                                            ##
 ##  Refactored by: Shadow                                                      ##
 ##                                                                             ##

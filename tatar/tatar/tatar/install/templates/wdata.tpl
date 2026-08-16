@@ -49,7 +49,6 @@ $autoStartCroppers = isset($_GET['startCroppers']) && $_GET['startCroppers'] ===
     </div>
   </div>
 </form>
-<script><?php include('wdata_js_here_if_needed'); ?></script>
 <!-- păstrezi scriptul tău JS de mai jos exact cum era -->
 <script>
 (function () {
