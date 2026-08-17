@@ -19,7 +19,8 @@
 #################################################################################
 
 ?>
-<div id="content" class="plus">
+<?php $plusRtl = function_exists('tz_is_rtl_lang') && tz_is_rtl_lang(); ?>
+<div id="content" class="plus<?php echo $plusRtl ? ' lang_rtl' : ' lang_ltr'; ?>" dir="<?php echo $plusRtl ? 'rtl' : 'ltr'; ?>">
 <h1><?php echo TZ_NOVATERRA_NAME; ?> <font color="#71D000">P</font><font color="#FF6F0F">l</font><font color="#71D000">u</font><font color="#FF6F0F">s</font></h1>
 <div id="textmenu">
 <?php

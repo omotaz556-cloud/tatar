@@ -52,28 +52,29 @@ if (isset($_POST['redeem_code']) && class_exists('GoldShop')) {
 <html <?php echo tz_html_dir_attrs(); ?>>
 <head>
 	<title><?php
-	echo SERVER_NAME . ' &raquo; &raquo; &raquo; PLUS ';
+    $plusArabic = function_exists('tz_is_rtl_lang') && tz_is_rtl_lang();
+	echo SERVER_NAME . ' &raquo; &raquo; &raquo; ' . ($plusArabic ? 'بلس' : 'PLUS') . ' ';
 
 	if (!empty($_GET['id'])) {
 	    switch ($_GET['id']) {
 	        case '2':
-	            echo 'Advantages';
+	            echo $plusArabic ? 'المزايا' : 'Advantages';
 	            break;
 
 	        case '3':
-	            echo 'Gold';
+	            echo $plusArabic ? 'الذهب' : 'Gold';
 	            break;
 
 	        case '4':
-	            echo 'FAQ';
+	            echo $plusArabic ? 'الأسئلة الشائعة' : 'FAQ';
 	            break;
 
 	        case '5':
-	            echo 'Earn Gold';
+	            echo $plusArabic ? 'اكسب ذهبًا' : 'Earn Gold';
 	            break;
 	    }
 	} else {
-	    echo 'Tariffs';
+	    echo $plusArabic ? 'الأسعار' : 'Tariffs';
 	}
 	?></title>
 	<link rel="shortcut icon" href="favicon.ico"/>

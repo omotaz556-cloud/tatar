@@ -36,6 +36,20 @@
  */
 
 $plusUid = (int) $session->uid;
+$plusRtl = function_exists('tz_is_rtl_lang') && tz_is_rtl_lang();
+$plusText = $plusRtl ? array(
+    'remaining' => 'المتبقي', 'until' => 'حتى', 'seconds' => 'ثانية',
+    'days' => 'أيام', 'hours' => 'ساعات', 'noGold' => 'لا تملك ذهبًا حاليًا.',
+    'functions' => 'ميزات بلس', 'ended' => 'انتهت ميزة بلس.',
+    'get' => 'احصل على بلس', 'code' => 'استبدل رمز ذهب',
+    'enter' => 'أدخل الرمز', 'redeem' => 'استبدال'
+) : array(
+    'remaining' => 'Remaining', 'until' => 'until', 'seconds' => 'secs',
+    'days' => 'Days', 'hours' => 'Hours', 'noGold' => "You currently don't own gold.",
+    'functions' => 'Plus functions', 'ended' => 'Your PLUS advantage has ended.',
+    'get' => 'Get PLUS', 'code' => 'Redeem a gold code',
+    'enter' => 'Enter code', 'redeem' => 'Redeem'
+);
 
 $plusRes = mysqli_query(
     $database->dblink,
@@ -85,10 +99,11 @@ if (!function_exists('formatRemainingTime')) {
         $mins = intdiv($remaining, 60);
         $secs = $remaining % 60;
 
-        return 'Remaining: <b>' . $days . '</b> ' . DAYS
+        global $plusText;
+        return $plusText['remaining'] . ': <b>' . $days . '</b> ' . DAYS
              . ' <b>' . $hours . '</b> ' . HOURS
              . ' <b>' . $mins . '</b> ' . MINS
-             . ' <b>' . $secs . '</b> secs (until ' . date('H:i:s', (int) $endTimestamp) . ')';
+             . ' <b>' . $secs . '</b> ' . $plusText['seconds'] . ' (' . $plusText['until'] . ' ' . date('H:i:s', (int) $endTimestamp) . ')';
     }
 }
 
@@ -134,18 +149,18 @@ $plusBonuses = array(
 
 $plusIsBanned  = (defined('BANNED') && $session->access == BANNED);
 $plusDuration  = (PLUS_PRODUCTION >= 86400)
-    ? (PLUS_PRODUCTION / 86400) . ' Days'
-    : (PLUS_PRODUCTION / 3600) . ' Hours';
+    ? (PLUS_PRODUCTION / 86400) . ' ' . $plusText['days']
+    : (PLUS_PRODUCTION / 3600) . ' ' . $plusText['hours'];
 
 if ((int) $golds['gold'] === 0) {
-    echo "<p>You currently don't own gold.</p>";
+    echo '<p>' . $plusText['noGold'] . '</p>';
 } else {
     echo '<p>' . CURRENT_HAVE . ' <b>' . (int) $golds['gold'] . '</b> ' . GOLD . '</p>';
 }
 ?>
 <table class="plusFunctions" cellpadding="1" cellspacing="1">
     <thead>
-        <tr><th colspan="5">Plus function</th></tr>
+        <tr><th colspan="5"><?php echo $plusText['functions']; ?></th></tr>
         <tr>
             <td></td>
             <td><?php echo DESCRIPTION; ?></td>
@@ -164,9 +179,9 @@ if ((int) $golds['gold'] === 0) {
                 <?php echo ACCOUNT; ?><br />
                 <span class="run"><?php
                     if ($plusJustExpired) {
-                        echo 'Your PLUS advantage has ended.<br>';
+                        echo $plusText['ended'] . '<br>';
                     } elseif ((int) $golds['plus'] === 0) {
-                        echo 'get PLUS<br>';
+                        echo $plusText['get'] . '<br>';
                     } else {
                         echo "<font color='#B3B3B3' size='1'>"
                            . formatRemainingTime($golds['plus'], $date2) . '</font>';
@@ -174,7 +189,7 @@ if ((int) $golds['gold'] === 0) {
                 ?></span>
             </td>
             <td class="dur"><?php
-                echo (PLUS_TIME >= 86400) ? (PLUS_TIME / 86400) . ' Days' : (PLUS_TIME / 3600) . ' Hours';
+                echo (PLUS_TIME >= 86400) ? (PLUS_TIME / 86400) . ' ' . $plusText['days'] : (PLUS_TIME / 3600) . ' ' . $plusText['hours'];
             ?></td>
             <td class="cost"><img src="img/x.gif" class="gold" />10</td>
             <td class="act"><?php
@@ -250,7 +265,7 @@ if (class_exists('GoldShop')):
     $__action   = htmlspecialchars($_SERVER['REQUEST_URI'] ?? 'plus.php?id=1', ENT_QUOTES, 'UTF-8');
 ?>
 <table class="plusFunctions" cellpadding="1" cellspacing="1">
-    <thead><tr><th colspan="5">Redeem a gold code</th></tr></thead>
+    <thead><tr><th colspan="5"><?php echo $plusText['code']; ?></th></tr></thead>
     <tbody>
         <tr>
             <td style="padding:10px 14px;">
@@ -258,8 +273,8 @@ if (class_exists('GoldShop')):
                     <div style="margin-bottom:8px;font-weight:bold;color:<?php echo $__promoOk ? '#2e7d32' : '#b3261e'; ?>;"><?php echo htmlspecialchars($__promoMsg, ENT_QUOTES, 'UTF-8'); ?></div>
                 <?php endif; ?>
                 <form method="post" action="<?php echo $__action; ?>" style="display:flex;gap:8px;align-items:center;max-width:460px;">
-                    <input type="text" name="redeem_code" maxlength="64" placeholder="Enter code" style="flex:1;padding:6px 8px;border:1px solid #b89968;border-radius:4px;text-transform:uppercase;" required>
-                    <input type="submit" value="Redeem" style="padding:6px 18px;background:#8a6d3b;color:#fff;border:0;border-radius:4px;cursor:pointer;font-weight:bold;">
+                    <input type="text" name="redeem_code" maxlength="64" placeholder="<?php echo $plusText['enter']; ?>" style="flex:1;padding:6px 8px;border:1px solid #b89968;border-radius:4px;text-transform:uppercase;" required>
+                    <input type="submit" value="<?php echo $plusText['redeem']; ?>" style="padding:6px 18px;background:#8a6d3b;color:#fff;border:0;border-radius:4px;cursor:pointer;font-weight:bold;">
                 </form>
             </td>
         </tr>
