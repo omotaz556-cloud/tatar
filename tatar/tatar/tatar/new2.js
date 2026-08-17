@@ -385,6 +385,18 @@ window.addEvent('domready', function() {
 					}
 				}
 
+				// BUG FIX (client-reported): the village map (building/
+				// field sprites + level numbers on dorf1.php/dorf2.php)
+				// used to keep showing the pre-upgrade state until a full
+				// page reload, even though the popup/resources/queue above
+				// already refreshed. #village_map_wrap (see dorf1.php,
+				// dorf2.php) wraps the exact same markup a full page load
+				// would render, so swap it in place the same way as #res.
+				var mapBox = $('village_map_wrap');
+				if (mapBox && data.map) {
+					mapBox.outerHTML = data.map;
+				}
+
 				bindPopupLinks();
 			},
 			onFailure: function() {

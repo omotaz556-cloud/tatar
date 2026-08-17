@@ -30,14 +30,19 @@ else {
 	<script src="mt-full.js?0faab" type="text/javascript"></script>
 	<script src="unx.js?f4b7h" type="text/javascript"></script>
 	<script src="new.js?0faab" type="text/javascript"></script>
-	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
-	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7i" rel="stylesheet" type="text/css" />
+	<?php
+	// lang/<LANG> css folder: use the active game language, falling back to
+	// "en" if that language has no CSS folder in this graphic pack yet.
+	$__css_lang = (is_dir(__DIR__ . "/" . GP_LOCATE . "lang/" . LANG)) ? LANG : "en";
+	?>
+	<link href="<?php echo GP_LOCATE; ?>lang/<?php echo $__css_lang; ?>/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>lang/<?php echo $__css_lang; ?>/compact.css?f4b7i" rel="stylesheet" type="text/css" />
 	<?php
 	// GP_LOCATE contine deja pachetul efectiv: alegerea jucatorului cand
 	// e permisa si valida, altfel pachetul serverului (vezi config.php).
 	echo "
 	<link href='".GP_LOCATE."novaterra.css?e21d2' rel='stylesheet' type='text/css' />
-	<link href='".GP_LOCATE."lang/en/lang.css?e21d2' rel='stylesheet' type='text/css' />";
+	<link href='".GP_LOCATE."lang/".$__css_lang."/lang.css?e21d2' rel='stylesheet' type='text/css' />";
 	?>
 	<script type="text/javascript">
 

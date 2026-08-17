@@ -397,12 +397,41 @@ if ($isAjaxFragment) {
     }
     $queueHtml = ob_get_clean();
 
+    // BUG FIX (client-reported): after an upgrade completes, the village
+    // map itself (the field/building sprites and level numbers under
+    // #village_map) kept showing the pre-upgrade state until a full page
+    // reload - even though the popup, resource bar and build queue above
+    // already refreshed correctly. Root cause: this AJAX branch never
+    // re-rendered #village_map, so the DOM node behind the popup was
+    // simply never touched.
+    //
+    // Fix: render the same map partial the full page load would have used
+    // - Templates/field.tpl for resource fields (id 1-18, shown on
+    // dorf1.php) or Templates/dorf2.tpl for village buildings (id >= 19,
+    // shown on dorf2.php) - using the exact boundary already used
+    // elsewhere in the project (see Building.php: "$fieldId >= 19 ?
+    // 'dorf2.php' : 'dorf1.php'"). Both templates only depend on
+    // $village/$database/$building/$session, which are already available
+    // here, so no extra queries are needed. Wrapped in the same
+    // #village_map_wrap container the pages themselves use (see
+    // dorf1.php/dorf2.php), so the client can do a single outerHTML swap.
+    ob_start();
+    echo '<div id="village_map_wrap">';
+    if ((int) $id >= 19) {
+        include("Templates/dorf2.tpl");
+    } else {
+        include("Templates/field.tpl");
+    }
+    echo '</div>';
+    $mapHtml = ob_get_clean();
+
     header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'error'   => false,
         'html'    => $fragmentHtml,
         'res'     => $resHtml,
         'queue'   => $queueHtml,
+        'map'     => $mapHtml,
         'checker' => $session->checker,
     ]);
     exit;
