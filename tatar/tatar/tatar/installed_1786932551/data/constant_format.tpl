@@ -615,7 +615,16 @@ if (!function_exists('tz_is_rtl_lang')) {
 if (!function_exists('tz_html_dir_attrs')) {
     function tz_html_dir_attrs($langCode = null) {
         $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
-        $dir = tz_is_rtl_lang($langCode) ? 'rtl' : 'ltr';
+        // The village layout (map, resource bar, sidebar) is built with
+        // absolute-positioned elements for LTR only. Setting dir="rtl"
+        // without matching RTL CSS makes those elements overlap/disappear.
+        // We keep dir="ltr" for every language until a real RTL stylesheet
+        // is written and tested - lang="" still reports correctly so
+        // translations, screen readers, etc. are unaffected.
+        // Once RTL CSS is ready, define('TZ_ENABLE_RTL_LAYOUT', true) to
+        // switch this back on.
+        $enableRtlLayout = defined('TZ_ENABLE_RTL_LAYOUT') ? TZ_ENABLE_RTL_LAYOUT : false;
+        $dir = ($enableRtlLayout && tz_is_rtl_lang($langCode)) ? 'rtl' : 'ltr';
         return 'lang="' . htmlspecialchars($langCode, ENT_QUOTES) . '" dir="' . $dir . '"';
     }
 }
