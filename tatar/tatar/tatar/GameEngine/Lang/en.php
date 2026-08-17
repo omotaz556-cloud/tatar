@@ -1120,6 +1120,20 @@ tz_def('NPC_TRADING', 'NPC trading');
 tz_def('SEND_RESOURCES', 'Send Resources');
 tz_def('BUY', 'Buy');
 tz_def('TRADE_ROUTES', 'Trade routes');
+
+// Gold -> Resources purchase (Marketplace "Buy Resources" tab, item 8).
+tz_def('GOLD_BUY_RESOURCES', 'Buy resources with gold');
+tz_def('GOLD_BUY_RESOURCES_DESC', 'Instantly add resources to this village, paid for with gold.');
+tz_def('GOLD_BUY_CHOOSE_RESOURCE', 'Resource');
+tz_def('GOLD_BUY_MIX', 'Even split (all 4 resources)');
+tz_def('GOLD_BUY_HOW_MUCH_GOLD', 'Gold to spend');
+tz_def('GOLD_BUY_RATE_NOTE_PREFIX', 'Rate:');
+tz_def('GOLD_BUY_RATE_NOTE_SUFFIX', 'resources.');
+tz_def('GOLD_BUY_COMPLETED', 'Resources purchased');
+tz_def('GOLD_BUY_ERR_GOLD', 'Not enough gold for this purchase.');
+tz_def('GOLD_BUY_ERR_AMOUNT', 'Please enter a valid amount of gold.');
+tz_def('GOLD_BUY_ERR_FULL', 'Your warehouse/granary is already full - nothing was charged.');
+tz_def('GOLD_BUY_ERR_DISABLED', 'This feature is currently disabled.');
 tz_def('DESCRIPTION', 'Description');
 tz_def('G_DESCR', 'General description');
 tz_def('TIME_LEFT', 'Time left');
@@ -3000,6 +3014,7 @@ tz_def('ADMIN_GOLD', 'Gold');
 tz_def('ADMIN_GIVE_ALL_FREE_GOLD', 'Give All Free Gold');
 tz_def('ADMIN_GIVE_FREE_GOLD_TO_SPECIFIC_USER', 'Give Free Gold To Specific User');
 tz_def('ADMIN_GOLD_SHOP_PROMO_CODES', 'Gold Shop &amp; Promo Codes');
+tz_def('ADMIN_FEATURE_FLAGS', 'Feature Flags');
 tz_def('ADMIN_RESET_GOLD', 'Reset Gold');
 tz_def('ADMIN_CENTRAL_GOLD', 'Central Gold (Cross-World)');
 tz_def('ADM_CG_NOT_CONFIGURED', 'Central Gold is not configured on this server. Set the CENTRAL_GOLD_* constants in config.php to enable cross-world paid gold.');

@@ -115,6 +115,7 @@ function admin_validated_page(string $raw): string
         'blockReg',
         'heatmap',
         'goldShop',
+        'featureFlags',
         'questEditor',
     ];
 
@@ -212,6 +213,10 @@ if ($page !== '') {
 
         case 'goldShop':
             $subpage = ADMIN_GOLD_SHOP_PROMO_CODES;
+            break;
+
+        case 'featureFlags':
+            $subpage = ADMIN_FEATURE_FLAGS;
             break;
 
         case 'questEditor':
@@ -932,6 +937,7 @@ body.app #menu li.sub ul li a:hover{color:#d97706!important}
                                 <li><a href="?p=heatmap"><font color="Red"><b><?php echo ADMIN_WORLD_MAP_HEATMAP; ?></b></font></a></li>
                                 <li><a href="?p=debug_log"><?php echo ADMIN_DEBUG_ERROR_LOG; ?></a></li>
                                 <li><a href="?p=config"><?php echo ADMIN_SERVER_SETTINGS; ?></a></li>
+                                <li><a href="?p=featureFlags"><?php echo ADMIN_FEATURE_FLAGS; ?></a></li>
                                 <li><a href="?p=maintenance"><?php echo ADMIN_SERVER_MAINTENANCE; ?></a></li>
                                 <li><a href="?p=resetServer"><?php echo ADMIN_SERVER_RESETTING; ?></a></li>
                             </ul>

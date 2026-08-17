@@ -1469,7 +1469,20 @@ class Building {
 	B-W2: spart in helpers; SQL-ul raw mutat in metode Database cu invalidare
 	*****************************************/
 
-	public function finishAll($redirect_url = '') {
+	/**
+	 * FEATURE (issue: "gold finish uses full-page navigation"): finishAll()
+	 * always ended with header('Location: ...'); exit; which is why the
+	 * "finish with gold" button could never be wired into the AJAX popup
+	 * flow used everywhere else in build.php (loadBuildFragment() in
+	 * new2.js expects a JSON body back, not a redirect).
+	 *
+	 * $ajax=true keeps 100% of the original logic (same loop, same gold
+	 * charge, same cache invalidation) but returns an array instead of
+	 * redirecting, so the caller (build.php) can fold the result into the
+	 * normal JSON fragment response. $ajax=false (default) preserves the
+	 * exact old behaviour for any caller that hasn't been updated.
+	 */
+	public function finishAll($redirect_url = '', $ajax = false) {
 
     global $technology;
 
@@ -1632,11 +1645,20 @@ class Building {
         $this->log->goldFinLog($this->vil->wid);
     }
 
-    $this->chargeFinishGold($countMasterGold, $countPlus2Gold);
+    $chargeResult = $this->chargeFinishGold($countMasterGold, $countPlus2Gold);
 
     $this->promotePendingLoopJob();
 
     self::recountCP($this->db, $this->vil->wid);
+
+    if ($ajax) {
+        // No redirect/exit here - the caller renders the JSON fragment
+        // response itself (see build.php's AJAX branch).
+        return [
+            'finished' => !empty($deletIDs) || $demolition > 0 || $tech > 0,
+            'charged'  => (bool) $chargeResult,
+        ];
+    }
 
     header('Location: '.(
         $redirect_url
@@ -1654,7 +1676,7 @@ class Building {
 	private function chargeFinishGold($countMasterGold, $countPlus2Gold) {
 
     if (!$countMasterGold && !$countPlus2Gold) {
-        return;
+        return false;
     }
 
     $spent = ($countMasterGold && $countPlus2Gold) ? 3 : 2;
@@ -1665,7 +1687,7 @@ class Building {
      */
     if (isset($this->sess) && method_exists($this->sess, 'sitterCan')
         && !$this->sess->sitterCan(SITTER_PERM_GOLD)) {
-        return;
+        return false;
     }
 
     /**
@@ -1674,7 +1696,7 @@ class Building {
      * (soldul din sesiune putea fi vechi de pana la 30 de secunde).
      */
     if (!$this->db->spendGold($this->sess->uid, $spent, 'Finish all constructions')) {
-        return;
+        return false;
     }
 
     $newgold = $this->sess->gold - $spent;
@@ -1694,6 +1716,8 @@ class Building {
     // write is absolute ($session->gold - $spent), so a stale cache would revert
     // the balance next request and could allow a double-spend.
     unset($_SESSION['cache_user_' . (isset($_SESSION['username']) ? $_SESSION['username'] : '')]);
+
+    return true;
 }
 
 	/**

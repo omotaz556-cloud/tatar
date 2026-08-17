@@ -139,7 +139,7 @@ $inProgress =!empty($Demolition)? $Demolition[0] : null;
         <?= DEMOLITION_OF?> <?= $building->procResType($VillageLevels['f'.$inProgress['buildnumber'].'t'])?>:
         <span id="timer1"><?= $generator->getTimeFormat($inProgress['timetofinish'] - time())?></span>
         <?php if ($session->gold >= 2):?>
-            <a href="?id=15&buildingFinish=1&ty=<?= $ty?>" onclick="return confirm('<?php echo addslashes(FINISH_GOLD); ?>');" title="<?= FINISH_GOLD?>">
+            <a href="build.php?id=15&buildingFinish=1&ty=<?= $ty?>" data-ajax-build="1" data-field-id="15" onclick="return confirm('<?php echo addslashes(FINISH_GOLD); ?>');" title="<?= FINISH_GOLD?>">
                 <img class="clock" alt="<?= TZ_FINISH?>" src="img/x.gif">
             </a>
         <?php endif;?>

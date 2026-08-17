@@ -45,8 +45,26 @@ if (!function_exists('safeHTML')) {
                 <?php
                 // Buton instant finish dacă jucătorul are minim 2 gold
                 if (isset($session->gold) && $session->gold >= 2) {
+
+                    /**
+                     * FEATURE: this table is included from 3 different
+                     * pages (build.php, dorf1.php, dorf2.php - see the
+                     * include() call sites), each with their own $_GET
+                     * context, so we can't rely on the current request's
+                     * ?id=. Build an absolute build.php URL from the first
+                     * queued job's field slot instead - same value the
+                     * "cancel" link's field column already resolves above.
+                     * The JS interceptor (new2.js bindPopupLinks) reads
+                     * data-field-id off this link the same way it does for
+                     * every other data-ajax-build link.
+                     */
+                    $finishFieldId = !empty($building->buildArray)
+                        ? (int) reset($building->buildArray)['field']
+                        : 1;
                 ?>
-                    <a href="?buildingFinish=1"
+                    <a href="build.php?id=<?php echo $finishFieldId; ?>&amp;buildingFinish=1"
+                       data-ajax-build="1"
+                       data-field-id="<?php echo $finishFieldId; ?>"
                        onclick="return confirm('<?php echo FINISH_GOLD; ?>');"
                        title="<?php echo FINISH_GOLD; ?>">
 

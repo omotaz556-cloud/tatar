@@ -1077,6 +1077,20 @@ tz_def('NPC_TRADING', 'Comerț NPC');
 tz_def('SEND_RESOURCES', 'Trimite resurse');
 tz_def('BUY', 'Cumpără');
 tz_def('TRADE_ROUTES', 'Rute comerciale');
+
+// Gold -> Resources purchase (item 8)
+tz_def('GOLD_BUY_RESOURCES', 'Cumpără resurse cu aur');
+tz_def('GOLD_BUY_RESOURCES_DESC', 'Adaugă instant resurse acestui sat, plătite cu aur.');
+tz_def('GOLD_BUY_CHOOSE_RESOURCE', 'Resursă');
+tz_def('GOLD_BUY_MIX', 'Împărțire egală (toate cele 4 resurse)');
+tz_def('GOLD_BUY_HOW_MUCH_GOLD', 'Aur de cheltuit');
+tz_def('GOLD_BUY_RATE_NOTE_PREFIX', 'Curs:');
+tz_def('GOLD_BUY_RATE_NOTE_SUFFIX', 'resurse.');
+tz_def('GOLD_BUY_COMPLETED', 'Resurse cumpărate');
+tz_def('GOLD_BUY_ERR_GOLD', 'Nu ai suficient aur pentru această achiziție.');
+tz_def('GOLD_BUY_ERR_AMOUNT', 'Te rugăm să introduci o cantitate de aur validă.');
+tz_def('GOLD_BUY_ERR_FULL', 'Depozitul/hambarul este deja plin - nu s-a perceput nimic.');
+tz_def('GOLD_BUY_ERR_DISABLED', 'Această funcție este momentan dezactivată.');
 tz_def('DESCRIPTION', 'Descriere');
 tz_def('G_DESCR', 'Descriere generală');
 tz_def('TIME_LEFT', 'Timp rămas');
@@ -2940,6 +2954,7 @@ tz_def('ADMIN_GOLD', 'Aur');
 tz_def('ADMIN_GIVE_ALL_FREE_GOLD', 'Ofera aur tuturor');
 tz_def('ADMIN_GIVE_FREE_GOLD_TO_SPECIFIC_USER', 'Ofera aur unui jucator');
 tz_def('ADMIN_GOLD_SHOP_PROMO_CODES', 'Magazin de aur si coduri promo');
+tz_def('ADMIN_FEATURE_FLAGS', 'Comutatoare de functii');
 tz_def('ADMIN_RESET_GOLD', 'Reseteaza aurul');
 tz_def('ADMIN_PLUS_RES_BONUS', 'Plus si bonus de resurse');
 tz_def('ADMIN_GIVE_ALL_PLUS', 'Ofera Plus tuturor');

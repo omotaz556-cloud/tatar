@@ -1425,6 +1425,27 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%gold_promo_redeem` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `%prefix%feature_flags`
+-- (Item 10: generic admin-managed on/off feature flags, see
+-- GameEngine/FeatureFlags.php. Self-created by the class as well, this
+-- entry is only here so a fresh install's struct.sql is complete.)
+--
+
+CREATE TABLE IF NOT EXISTS `%PREFIX%feature_flags` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `flag_key` varchar(80) NOT NULL,
+ `enabled` tinyint(1) NOT NULL DEFAULT 0,
+ `label` varchar(150) NOT NULL DEFAULT '',
+ `note` varchar(255) NOT NULL DEFAULT '',
+ `updated_by` int(11) NOT NULL DEFAULT 0,
+ `time` int(11) NOT NULL DEFAULT 0,
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `flag_key` (`flag_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `%prefix%quest_config`
 -- (Quest editor: editable per-variant quest rewards / requirements)
 --

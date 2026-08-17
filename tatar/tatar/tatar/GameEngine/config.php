@@ -96,6 +96,27 @@ define('HERO_SILVER_TO_GOLD', 25);
 define('HERO_RES_PER_POINT_ALL', 3);
 define('HERO_RES_PER_POINT_ONE', 10);
 
+// Gold -> Resources purchase (Marketplace, "Buy Resources with Gold" tab).
+//
+// Unlike NPC Trade (which only redistributes resources the village already
+// has, at a flat 3-gold fee), this actually INCREASES the village's total
+// stock, paid for with gold - the equivalent of TravianZ/Travian's "Buy
+// resources instantly" gold feature.
+//
+//   GOLD_RES_PURCHASE_ENABLED = master on/off switch for this feature
+//   GOLD_RES_UNIT             = how much of ONE resource 1 gold buys
+//   GOLD_RES_MIN_GOLD         = minimum gold that can be spent per purchase
+//   GOLD_RES_MAX_GOLD         = maximum gold that can be spent per purchase
+//                               (0 = no cap other than the player's balance)
+//
+// Example: with the defaults below, 1 gold buys 100 units of resource,
+// split across whichever resource(s) the player picks - capped by the
+// village's warehouse/granary capacity, same as every other resource gain.
+define('GOLD_RES_PURCHASE_ENABLED', true);
+define('GOLD_RES_UNIT', 100);
+define('GOLD_RES_MIN_GOLD', 1);
+define('GOLD_RES_MAX_GOLD', 500);
+
 //////////////////////////////////
 // *****  SERVER SETTINGS  *****//
 //////////////////////////////////

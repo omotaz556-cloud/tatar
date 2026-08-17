@@ -1119,6 +1119,20 @@ tz_def('NPC_TRADING', 'Comercio NPC');
 tz_def('SEND_RESOURCES', 'Enviar recursos');
 tz_def('BUY', 'Comprar');
 tz_def('TRADE_ROUTES', 'Rutas comerciales');
+
+// Gold -> Resources purchase (item 8)
+tz_def('GOLD_BUY_RESOURCES', 'Comprar recursos con oro');
+tz_def('GOLD_BUY_RESOURCES_DESC', 'Añade recursos al instante a esta aldea, pagados con oro.');
+tz_def('GOLD_BUY_CHOOSE_RESOURCE', 'Recurso');
+tz_def('GOLD_BUY_MIX', 'Reparto equitativo (los 4 recursos)');
+tz_def('GOLD_BUY_HOW_MUCH_GOLD', 'Oro a gastar');
+tz_def('GOLD_BUY_RATE_NOTE_PREFIX', 'Tasa:');
+tz_def('GOLD_BUY_RATE_NOTE_SUFFIX', 'recursos.');
+tz_def('GOLD_BUY_COMPLETED', 'Recursos comprados');
+tz_def('GOLD_BUY_ERR_GOLD', 'No tienes suficiente oro para esta compra.');
+tz_def('GOLD_BUY_ERR_AMOUNT', 'Introduce una cantidad de oro válida.');
+tz_def('GOLD_BUY_ERR_FULL', 'Tu almacén/granero ya está lleno - no se ha cobrado nada.');
+tz_def('GOLD_BUY_ERR_DISABLED', 'Esta función está desactivada actualmente.');
 tz_def('DESCRIPTION', 'Descripción');
 tz_def('G_DESCR', 'Descripción general');
 tz_def('TIME_LEFT', 'Tiempo restante');
@@ -2997,6 +3011,7 @@ tz_def('ADMIN_GOLD', 'Gold');
 tz_def('ADMIN_GIVE_ALL_FREE_GOLD', 'Give All Free Gold');
 tz_def('ADMIN_GIVE_FREE_GOLD_TO_SPECIFIC_USER', 'Give Free Gold To Specific User');
 tz_def('ADMIN_GOLD_SHOP_PROMO_CODES', 'Gold Shop &amp; Promo Codes');
+tz_def('ADMIN_FEATURE_FLAGS', 'Interruptores de Funciones');
 tz_def('ADMIN_RESET_GOLD', 'Reset Gold');
 tz_def('ADMIN_PLUS_RES_BONUS', 'Plus &amp; Res Bonus');
 tz_def('ADMIN_GIVE_ALL_PLUS', 'Give All Plus');

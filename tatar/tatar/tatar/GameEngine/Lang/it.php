@@ -2258,5 +2258,21 @@ tz_def('MANUAL_NEW_FEATURES_DESC', "Queste sono novità che non troverai nella v
 tz_def('MANUAL_FAQ', 'FAQ Novaterra');
 tz_def('MANUAL_FAQ_DESC', "Questo aiuto di gioco fornisce solo brevi informazioni. Maggiori informazioni sono disponibili sul");
 
+// Gold -> Resources purchase (item 8)
+tz_def('GOLD_BUY_RESOURCES', "Compra risorse con l'oro");
+tz_def('GOLD_BUY_RESOURCES_DESC', "Aggiungi risorse a questo villaggio istantaneamente, pagate con l'oro.");
+tz_def('GOLD_BUY_CHOOSE_RESOURCE', 'Risorsa');
+tz_def('GOLD_BUY_MIX', 'Ripartizione equa (tutte e 4 le risorse)');
+tz_def('GOLD_BUY_HOW_MUCH_GOLD', 'Oro da spendere');
+tz_def('GOLD_BUY_RATE_NOTE_PREFIX', 'Tasso:');
+tz_def('GOLD_BUY_RATE_NOTE_SUFFIX', 'risorse.');
+tz_def('GOLD_BUY_COMPLETED', 'Risorse acquistate');
+tz_def('GOLD_BUY_ERR_GOLD', "Oro insufficiente per questo acquisto.");
+tz_def('GOLD_BUY_ERR_AMOUNT', "Inserisci una quantità d'oro valida.");
+tz_def('GOLD_BUY_ERR_FULL', "Il tuo magazzino/granaio è già pieno - non è stato addebitato nulla.");
+tz_def('GOLD_BUY_ERR_DISABLED', 'Questa funzione è attualmente disabilitata.');
+
 ?>
 tz_def('ADM_SPANISH', 'Spagnolo');
+
+<?php

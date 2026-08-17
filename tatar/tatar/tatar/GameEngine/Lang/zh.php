@@ -972,6 +972,20 @@ tz_def('NPC_TRADING', '资源置换');
 tz_def('SEND_RESOURCES', '运送资源');
 tz_def('BUY', '购买');
 tz_def('TRADE_ROUTES', '贸易路线');
+
+// Gold -> Resources purchase (item 8)
+tz_def('GOLD_BUY_RESOURCES', '用金币购买资源');
+tz_def('GOLD_BUY_RESOURCES_DESC', '立即为该村庄增加资源，以金币支付。');
+tz_def('GOLD_BUY_CHOOSE_RESOURCE', '资源');
+tz_def('GOLD_BUY_MIX', '平均分配（全部四种资源）');
+tz_def('GOLD_BUY_HOW_MUCH_GOLD', '花费金币数量');
+tz_def('GOLD_BUY_RATE_NOTE_PREFIX', '兑换比例：');
+tz_def('GOLD_BUY_RATE_NOTE_SUFFIX', '资源。');
+tz_def('GOLD_BUY_COMPLETED', '资源购买成功');
+tz_def('GOLD_BUY_ERR_GOLD', '金币不足，无法完成此次购买。');
+tz_def('GOLD_BUY_ERR_AMOUNT', '请输入有效的金币数量。');
+tz_def('GOLD_BUY_ERR_FULL', '仓库/粮仓已满 - 未扣除任何金币。');
+tz_def('GOLD_BUY_ERR_DISABLED', '此功能当前已禁用。');
 tz_def('DESCRIPTION', '描述');
 tz_def('G_DESCR', 'General description');
 tz_def('TIME_LEFT', '剩余时间');

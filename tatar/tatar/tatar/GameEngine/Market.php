@@ -67,6 +67,10 @@ class Market
             case 'mk3':
                 $this->tradeResource($post);
                 break;
+
+            case 'mk4':
+                $this->buyResourcesWithGold($post);
+                break;
         }
     }
 
@@ -1037,6 +1041,161 @@ class Market
         $database->spendGold($session->uid, 3, 'NPC merchant');
 
         header('Location: build.php?id=' . $post['id'] . '&t=3&c');
+        exit;
+    }
+
+    /**
+     * FEATURE (item 8, "Gold -> Resources purchase"): unlike tradeResource()
+     * above (NPC Trade, which only redistributes resources the village
+     * already has), this actually GRANTS new resources paid for with gold -
+     * it increases the village's total stock rather than just reshuffling
+     * it. Kept as its own method/case (mk4) rather than folded into
+     * tradeResource() so the two stay auditable and independently
+     * toggleable.
+     */
+    private function buyResourcesWithGold($post)
+    {
+        global $session, $database, $village;
+
+        // Item 10 (Feature Flags): the master switch for this feature is now
+        // admin-controlled at runtime via FeatureFlags, not a config.php
+        // constant. GOLD_RES_PURCHASE_ENABLED still acts as the fallback
+        // default for servers where the flag row hasn't been created yet
+        // (e.g. right after upgrading) or if the feature_flags table is
+        // temporarily unreachable.
+        $goldResPurchaseOn = class_exists('FeatureFlags')
+            ? FeatureFlags::isEnabled('gold_res_purchase',
+                defined('GOLD_RES_PURCHASE_ENABLED') && GOLD_RES_PURCHASE_ENABLED)
+            : (defined('GOLD_RES_PURCHASE_ENABLED') && GOLD_RES_PURCHASE_ENABLED);
+
+        if (!$goldResPurchaseOn) {
+            header('Location: build.php?id=' . $post['id'] . '&t=5&e=disabled');
+            exit;
+        }
+
+        $wwvillage = $database->getResourceLevel($village->wid);
+
+        // Same anti-exploit guard as NPC Trade: no gold-powered resource
+        // gain while a World Wonder is being built in this village.
+        if ($wwvillage['f99t'] == 40) {
+            header('Location: build.php?id=' . $post['id'] . '&t=5');
+            exit;
+        }
+
+        // Sitter permission check BEFORE anything is granted or charged -
+        // same placement rationale as tradeResource() above: a guard placed
+        // only on the payment step would let a gold-restricted sitter get
+        // the resources for free if granting happened first.
+        if (isset($session) && method_exists($session, 'sitterCan')
+            && !$session->sitterCan(SITTER_PERM_GOLD)) {
+            header('Location: build.php?id=' . $post['id'] . '&t=5');
+            exit;
+        }
+
+        $unit    = defined('GOLD_RES_UNIT') ? max(1, (int) GOLD_RES_UNIT) : 100;
+        $minGold = defined('GOLD_RES_MIN_GOLD') ? max(1, (int) GOLD_RES_MIN_GOLD) : 1;
+        $maxGold = defined('GOLD_RES_MAX_GOLD') ? max(0, (int) GOLD_RES_MAX_GOLD) : 0;
+
+        $goldSpend = isset($post['goldamt']) ? (int) $post['goldamt'] : 0;
+        $goldSpend = max(0, $goldSpend);
+
+        if ($maxGold > 0) {
+            $goldSpend = min($goldSpend, $maxGold);
+        }
+
+        if ($goldSpend < $minGold) {
+            header('Location: build.php?id=' . $post['id'] . '&t=5&e=amount');
+            exit;
+        }
+
+        if ($session->userinfo['gold'] < $goldSpend) {
+            header('Location: build.php?id=' . $post['id'] . '&t=5&e=gold');
+            exit;
+        }
+
+        // Which resource(s) to grant: either a single resource ('w','c','i',
+        // 'r' - wood/clay/iron/crop) or an even split across all four when
+        // 'mix' is requested. Anything else falls back to an even split.
+        $resType = isset($post['restype']) ? (string) $post['restype'] : 'mix';
+
+        $totalUnits = $goldSpend * $unit;
+
+        $maxstore = (int) $village->maxstore;
+        $maxcrop  = (int) $village->maxcrop;
+
+        // Start from the village's current stock so the amounts granted can
+        // be clamped to warehouse/granary capacity exactly like tradeResource()
+        // does - resources purchased above capacity would simply vanish, so
+        // we cap the grant instead of overspending gold for nothing.
+        $current = [
+            'wood' => (int) round($village->awood),
+            'clay' => (int) round($village->aclay),
+            'iron' => (int) round($village->airon),
+            'crop' => (int) round($village->acrop),
+        ];
+
+        $add = ['wood' => 0, 'clay' => 0, 'iron' => 0, 'crop' => 0];
+
+        if (in_array($resType, ['w', 'c', 'i', 'r'], true)) {
+            $map = ['w' => 'wood', 'c' => 'clay', 'i' => 'iron', 'r' => 'crop'];
+            $add[$map[$resType]] = $totalUnits;
+        } else {
+            // Even split across all four (remainder goes to wood so the
+            // total granted always matches what was paid for).
+            $share = intdiv($totalUnits, 4);
+            $add['wood'] = $share + ($totalUnits - $share * 4);
+            $add['clay'] = $share;
+            $add['iron'] = $share;
+            $add['crop'] = $share;
+        }
+
+        // Clamp each resource to its cap (warehouse for wood/clay/iron,
+        // granary for crop) - never grant more than the village can hold.
+        $add['wood'] = max(0, min($add['wood'], $maxstore - $current['wood']));
+        $add['clay'] = max(0, min($add['clay'], $maxstore - $current['clay']));
+        $add['iron'] = max(0, min($add['iron'], $maxstore - $current['iron']));
+        $add['crop'] = max(0, min($add['crop'], $maxcrop  - $current['crop']));
+
+        if ($add['wood'] + $add['clay'] + $add['iron'] + $add['crop'] <= 0) {
+            // Nothing could be granted (warehouse/granary already full) -
+            // don't charge gold for zero resources.
+            header('Location: build.php?id=' . $post['id'] . '&t=5&e=full');
+            exit;
+        }
+
+        // Atomic, relative gold charge (see spendGold() doc-comment for why
+        // this is used instead of an absolute session-based write). Charged
+        // BEFORE the resources are granted, so a failed/raced charge can
+        // never grant resources for free.
+        if (!$database->spendGold($session->uid, $goldSpend, 'Gold resource purchase')) {
+            header('Location: build.php?id=' . $post['id'] . '&t=5&e=gold');
+            exit;
+        }
+
+        $database->setVillageField(
+            $village->wid,
+            ['wood', 'clay', 'iron', 'crop'],
+            [
+                $current['wood'] + $add['wood'],
+                $current['clay'] + $add['clay'],
+                $current['iron'] + $add['iron'],
+                $current['crop'] + $add['crop'],
+            ]
+        );
+        $this->forget();
+
+        $database->addGoldFinLog(
+            $village->wid,
+            $session->uid,
+            'Gold resource purchase',
+            -$goldSpend,
+            sprintf(
+                'wood +%d, clay +%d, iron +%d, crop +%d',
+                $add['wood'], $add['clay'], $add['iron'], $add['crop']
+            )
+        );
+
+        header('Location: build.php?id=' . $post['id'] . '&t=5&c');
         exit;
     }
 }

@@ -610,6 +610,20 @@ tz_def('NPC_TRADING', 'تجارة NPC');
 tz_def('SEND_RESOURCES', 'إرسال الموارد');
 tz_def('BUY', 'شراء');
 tz_def('TRADE_ROUTES', 'طرق التجارة');
+
+// شراء الموارد بالذهب (تبويب "شراء بالذهب" في السوق - بند 8)
+tz_def('GOLD_BUY_RESOURCES', 'شراء الموارد بالذهب');
+tz_def('GOLD_BUY_RESOURCES_DESC', 'أضف موارد فورًا لهذه القرية، مقابل الذهب.');
+tz_def('GOLD_BUY_CHOOSE_RESOURCE', 'المورد');
+tz_def('GOLD_BUY_MIX', 'توزيع متساوٍ (على المصادر الأربعة)');
+tz_def('GOLD_BUY_HOW_MUCH_GOLD', 'كمية الذهب');
+tz_def('GOLD_BUY_RATE_NOTE_PREFIX', 'سعر الصرف:');
+tz_def('GOLD_BUY_RATE_NOTE_SUFFIX', 'مورد.');
+tz_def('GOLD_BUY_COMPLETED', 'تم شراء الموارد');
+tz_def('GOLD_BUY_ERR_GOLD', 'لا يوجد ذهب كافٍ لإتمام هذه العملية.');
+tz_def('GOLD_BUY_ERR_AMOUNT', 'الرجاء إدخال كمية ذهب صحيحة.');
+tz_def('GOLD_BUY_ERR_FULL', 'المخزن/الحظيرة ممتلئة بالفعل - لم يتم خصم أي ذهب.');
+tz_def('GOLD_BUY_ERR_DISABLED', 'هذه الميزة معطّلة حاليًا.');
 tz_def('DESCRIPTION', 'الوصف');
 tz_def('G_DESCR', 'وصف عام');
 tz_def('TIME_LEFT', 'الوقت المتبقي');
@@ -3025,6 +3039,7 @@ tz_def('ADMIN_GOLD', 'الذهب');
 tz_def('ADMIN_GIVE_ALL_FREE_GOLD', 'منح الجميع ذهبًا مجانيًا');
 tz_def('ADMIN_GIVE_FREE_GOLD_TO_SPECIFIC_USER', 'منح ذهب مجاني لمستخدم محدد');
 tz_def('ADMIN_GOLD_SHOP_PROMO_CODES', 'متجر الذهب وأكواد العروض');
+tz_def('ADMIN_FEATURE_FLAGS', 'مفاتيح تفعيل الميزات');
 tz_def('ADMIN_RESET_GOLD', 'إعادة تعيين الذهب');
 tz_def('ADMIN_CENTRAL_GOLD', 'الذهب المركزي (عبر العوالم)');
 tz_def('ADM_CG_NOT_CONFIGURED', 'الذهب المركزي غير مُهيَّأ على هذا الخادم. اضبط ثوابت CENTRAL_GOLD_* في config.php لتفعيل الذهب المدفوع عبر العوالم.');

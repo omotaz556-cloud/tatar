@@ -376,12 +376,42 @@ if ($isAjaxFragment) {
         }
 
         if (isset($_GET['buildingFinish']) && $_GET['buildingFinish'] == 1 && $session->gold >= 2) {
-            // finishAll() face proprii ei redirect/exit - nu se potriveste cu
-            // modul fragment (nu poate intoarce JSON), asa ca il lasam sa
-            // curga pe fluxul normal (non-AJAX) in acest caz specific.
+            /**
+             * FEATURE (was: forced full-page navigation - see finishAll()'s
+             * $ajax parameter in GameEngine/Building.php for the other half
+             * of this fix). finishAll(..., true) now performs the exact
+             * same charge/finish logic but returns instead of redirecting,
+             * so we can discard this popup's now-stale fragment and
+             * re-render the SAME id/ty view fresh - identical to what a
+             * normal (non-finish) AJAX fragment load below already does -
+             * and fall through into the shared JSON response built further
+             * down in this file.
+             */
+            $building->finishAll("build.php?gid=".$_GET['id']."&ty=".$_GET['ty'], true);
+
+            // Re-load fresh state the same way a full page reload would
+            // have (finishAll() wrote directly to the DB; $village/
+            // $building were built at the top of this request, before the
+            // finish, so their in-memory arrays are now stale).
+            $village  = new Village;
+            $building = new Building;
+
             ob_end_clean();
-            $building->finishAll("build.php?gid=".$_GET['id']."&ty=".$_GET['ty']);
-            exit;
+            ob_start();
+
+            if ($_GET['id'] == 99 && $village->resarray['f99t'] == 40) {
+                include("Templates/Build/ww.tpl");
+            } elseif ($village->resarray['f'.$_GET['id'].'t'] == 0 && $_GET['id'] >= 19) {
+                include("Templates/Build/avaliable.tpl");
+            } else {
+                if (isset($_GET['t'])) {
+                    include("Templates/Build/".$village->resarray['f'.$_GET['id'].'t']."_".$_GET['t'].".tpl");
+                } elseif (isset($_GET['s'])) {
+                    include("Templates/Build/".$village->resarray['f'.$_GET['id'].'t']."_".$_GET['s'].".tpl");
+                } else {
+                    include("Templates/Build/".$village->resarray['f'.$_GET['id'].'t'].".tpl");
+                }
+            }
         }
     }
 
