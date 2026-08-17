@@ -86,7 +86,7 @@ function proceed() {
         e.disabled = "disabled";
     }, 200);
 
-    e.value = "Processing...";
+    e.value = "<?=install_is_rtl()?'جارٍ المعالجة...':'Processing...'?>";
 
     return true;
 }

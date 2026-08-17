@@ -46,7 +46,7 @@ define('CRON_TICK_SECONDS', 60);
 // Key used to access cron.php via HTTP (wget/curl or an external cron service).
 // Command-line execution (e.g. a cPanel cron job) does NOT require it.
 // Automatically generated during installation and preserved when saving configuration settings from the ACP.
-define('CRON_KEY', '26b6e3eb510170fc3d59ad92c46ff3f21abc8daaa2e27df9');
+define('CRON_KEY', '23e0a2700d7c795b16f23a0f4f589cae25f239fc858f6529');
 
 //////////////////////////////////
 // *****  DATABASE CLEANUP  *****//
@@ -110,11 +110,11 @@ date_default_timezone_set(TIMEZONE);
 
 // ***** Started
 // Defines when has server started.
-define("COMMENCE","1786897804");
+define("COMMENCE","1786936750");
 
 // ***** Server Start Date / Time
-define("START_DATE", "16.08.2026");
-define("START_TIME", "19:29");
+define("START_DATE", "17.08.2026");
+define("START_TIME", "06:19");
 
 // ***** Language
 // SERVER_LANG is the DEFAULT language of the server (chosen at install / in
@@ -443,7 +443,7 @@ define("SQL_PASS", "novaterrapass");
 define("SQL_DB", "novaterra");
 
 // ***** Database - Table Prefix
-define("TB_PREFIX", "sa969_");
+define("TB_PREFIX", "s2ab9_");
 
 // ***** Database type
 // 0 = MYSQL
@@ -493,7 +493,7 @@ define("LIMIT_MAILBOX",false);
 define("MAX_MAIL","30");
 
 // ***** Include administrator in statistics/rank
-define("INCLUDE_ADMIN", false);
+define("INCLUDE_ADMIN", true);
 
 ////////////////////////////////////
 //   ****  ADMIN SETTINGS  ****   //
@@ -628,3 +628,4 @@ if (!function_exists('tz_html_dir_attrs')) {
         return 'lang="' . htmlspecialchars($langCode, ENT_QUOTES) . '" dir="' . $dir . '"';
     }
 }
+?>
