@@ -1,4 +1,8 @@
-@CHARSET "UTF-8";body{background-color:#FFF;direction:ltr;font-size:13px;line-height:19px;margin:0;text-align:left;}
+@CHARSET "UTF-8";
+/* بند 15 — طبقة الاستجابة؛ مضافة هنا كمان (مش بس main.css) عشان لو
+   main_en.css اتحمّل لوحده يوم ما من غير main.css يفضل الريسبونسف شغال. */
+@import url("../_responsive/responsive.css");
+body{background-color:#FFF;direction:ltr;font-size:13px;line-height:19px;margin:0;text-align:left;}
 html{overflow-y:scroll;}html,body{margin:0;padding:0;height:100%;}.clear{clear:both;display:block;font-size:0;height:0;line-height:0;visibility:hidden;}
 ul.menu,div.menu ul{list-style-type:none;margin:0;padding:0;}.menu li{float:left;}
 .wrapper{height:auto!important;height:100%;min-height:100%;min-width:845px;position:relative;text-align:center;}
