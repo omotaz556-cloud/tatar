@@ -46,7 +46,7 @@ define('CRON_TICK_SECONDS', 60);
 // Key used to access cron.php via HTTP (wget/curl or an external cron service).
 // Command-line execution (e.g. a cPanel cron job) does NOT require it.
 // Automatically generated during installation and preserved when saving configuration settings from the ACP.
-define('CRON_KEY', '84a1ea091f764225ed26b7275441bbb900693a94512642e4');
+define('CRON_KEY', '0275f7eedd8ff167b222463de49fc9829faf90ed7e85f630');
 
 //////////////////////////////////
 // *****  DATABASE CLEANUP  *****//
@@ -110,11 +110,11 @@ date_default_timezone_set(TIMEZONE);
 
 // ***** Started
 // Defines when has server started.
-define("COMMENCE","1787020823");
+define("COMMENCE","1787021437");
 
 // ***** Server Start Date / Time
 define("START_DATE", "18.08.2026");
-define("START_TIME", "05:39");
+define("START_TIME", "05:50");
 
 // ***** Language
 // SERVER_LANG is the DEFAULT language of the server (chosen at install / in
@@ -142,7 +142,7 @@ define("SPEED", "1");
 
 // ***** World size
 // Defines world size. NOTICE: DO NOT EDIT!!
-define("WORLD_MAX", "100");
+define("WORLD_MAX", "250");
 
 // ***** Graphical statistics (Novaterra Plus)
 // The game periodically records each player's rank, population, villages, and
@@ -443,7 +443,7 @@ define("SQL_PASS", "novaterrapass");
 define("SQL_DB", "novaterra");
 
 // ***** Database - Table Prefix
-define("TB_PREFIX", "s6263_");
+define("TB_PREFIX", "sddf2_");
 
 // ***** Database type
 // 0 = MYSQL
