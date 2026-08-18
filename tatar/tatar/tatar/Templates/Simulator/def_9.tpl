@@ -11,7 +11,7 @@
 								</td>
 
 								<td class="desc">
-									Viking Raider
+									<?php echo U81; ?>
 								</td><td class="value">
 									<input class="text" type="text" name="a2_81" value="<?php echo $form->getValue('a2_81'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U81; ?>" />
 								</td>
@@ -23,7 +23,7 @@
 									<img src="img/x.gif" class="unit u82" title="<?php echo U82; ?>" alt="<?php echo U82; ?>" />
 								</td>
 								<td class="desc">
-									Viking Scout
+									<?php echo U82; ?>
 								</td><td class="value">
 									<input class="text" type="text" name="a2_82" value="<?php echo $form->getValue('a2_82'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U82; ?>" />
 								</td>
@@ -35,7 +35,7 @@
 									<img src="img/x.gif" class="unit u83" title="<?php echo U83; ?>" alt="<?php echo U83; ?>" />
 								</td>
 								<td class="desc">
-									Axeman
+									<?php echo U83; ?>
 								</td><td class="value">
 									<input class="text" type="text" name="a2_83" value="<?php echo $form->getValue('a2_83'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U83; ?>" />
 								</td>
@@ -47,7 +47,7 @@
 									<img src="img/x.gif" class="unit u84" title="<?php echo U84; ?>" alt="<?php echo U84; ?>" />
 								</td>
 								<td class="desc">
-									Berserker
+									<?php echo U84; ?>
 								</td><td class="value">
 
 									<input class="text" type="text" name="a2_84" value="<?php echo $form->getValue('a2_84'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U84; ?>" />
@@ -60,7 +60,7 @@
 								</td>
 								<td class="desc">
 
-									Viking Rider
+									<?php echo U85; ?>
 								</td><td class="value">
 									<input class="text" type="text" name="a2_85" value="<?php echo $form->getValue('a2_85'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U85; ?>" />
 								</td>
@@ -72,7 +72,7 @@
 
 								</td>
 								<td class="desc">
-									Huscarl
+									<?php echo U86; ?>
 								</td><td class="value">
 									<input class="text" type="text" name="a2_86" value="<?php echo $form->getValue('a2_86'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U86; ?>" />
 								</td>
@@ -84,7 +84,7 @@
 									<img src="img/x.gif" class="unit u87" title="<?php echo U87; ?>" alt="<?php echo U87; ?>" />
 								</td>
 								<td class="desc">
-									Ram
+									<?php echo U87; ?>
 								</td><td class="value">
 									<input class="text" type="text" name="a2_87" value="<?php echo $form->getValue('a2_87'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U87; ?>" />
 								</td>
@@ -96,7 +96,7 @@
 									<img src="img/x.gif" class="unit u88" title="<?php echo U88; ?>" alt="<?php echo U88; ?>" />
 								</td>
 								<td class="desc">
-									Catapult
+									<?php echo U88; ?>
 								</td><td class="value">
 									<input class="text" type="text" name="a2_88" value="<?php echo $form->getValue('a2_88'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U88; ?>" />
 
@@ -108,7 +108,7 @@
 									<img src="img/x.gif" class="unit u89" title="<?php echo U89; ?>" alt="<?php echo U89; ?>" />
 								</td>
 								<td class="desc">
-									Jarl
+									<?php echo U89; ?>
 								</td><td class="value">
 
 									<input class="text" type="text" name="a2_89" value="<?php echo $form->getValue('a2_89'); ?>" maxlength="6" title="<?php echo TZ_NUMBER; ?> <?php echo U89; ?>" />
@@ -118,7 +118,7 @@
 									<img src="img/x.gif" class="unit u90" title="<?php echo U90; ?>" alt="<?php echo U90; ?>" />
 								</td>
 								<td class="desc">
-									Viking Settler
+									<?php echo U90; ?>
 								</td><td class="value">
 
 									<input class="text" type="text" name="a2_90" value="<?php echo $form->getValue('a2_90'); ?>" maxlength="6" title="<?php echo TZ_NUMBER; ?> <?php echo U90; ?>" />

@@ -1799,6 +1799,12 @@ tz_def('MSG_NEWS_DIPLO_NAP', 'عرض %s اتفاقية عدم اعتداء عل�
 tz_def('MSG_NEWS_DIPLO_WAR', 'أعلن %s الحرب على %s.');
 tz_def('CARRY', 'حمل');
 tz_def('DEFENDER', 'المدافع');
+tz_def('TZ_WARSIM_TYPE_OF_ATTACK', 'نوع الهجوم');
+tz_def('TZ_WARSIM_NORMAL', 'عادي');
+tz_def('TZ_WARSIM_RAM_HINT', 'تلميح: الكبش لا يعمل أثناء الغارة.');
+tz_def('TZ_WARSIM_CATA_HINT', 'تلميح: المنجنيق لا يطلق أثناء الغارة.');
+tz_def('TZ_WARSIM_RAM_DAMAGE', 'الضرر الذي أحدثه الكبش: من المستوى <b>%s</b> إلى المستوى <b>%s</b>');
+tz_def('TZ_WARSIM_CATA_DAMAGE', 'الضرر الذي أحدثته المنجنيق: من المستوى <b>%s</b> إلى المستوى <b>%s</b>');
 tz_def('VISITED', 'زار');
 tz_def('HIS_TROOPS', ' قواته');
 tz_def('WISHES_YOU', 'يتمنى لك');

@@ -11,7 +11,7 @@
 								</td>
 
 								<td class="desc">
-									Spartan Hoplite
+									<?php echo U71; ?>
 								</td><td class="value">
 									<input class="text" type="text" name="a2_71" value="<?php echo $form->getValue('a2_71'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U71; ?>" />
 								</td>
@@ -23,7 +23,7 @@
 									<img src="img/x.gif" class="unit u72" title="<?php echo U72; ?>" alt="<?php echo U72; ?>" />
 								</td>
 								<td class="desc">
-									Agoge Warrior
+									<?php echo U72; ?>
 								</td><td class="value">
 									<input class="text" type="text" name="a2_72" value="<?php echo $form->getValue('a2_72'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U72; ?>" />
 								</td>
@@ -35,7 +35,7 @@
 									<img src="img/x.gif" class="unit u73" title="<?php echo U73; ?>" alt="<?php echo U73; ?>" />
 								</td>
 								<td class="desc">
-									Homoioi
+									<?php echo U73; ?>
 								</td><td class="value">
 									<input class="text" type="text" name="a2_73" value="<?php echo $form->getValue('a2_73'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U73; ?>" />
 								</td>
@@ -47,7 +47,7 @@
 									<img src="img/x.gif" class="unit u74" title="<?php echo U74; ?>" alt="<?php echo U74; ?>" />
 								</td>
 								<td class="desc">
-									Perioikoi Scout
+									<?php echo U74; ?>
 								</td><td class="value">
 
 									<input class="text" type="text" name="a2_74" value="<?php echo $form->getValue('a2_74'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U74; ?>" />
@@ -60,7 +60,7 @@
 								</td>
 								<td class="desc">
 
-									Spartan Rider
+									<?php echo U75; ?>
 								</td><td class="value">
 									<input class="text" type="text" name="a2_75" value="<?php echo $form->getValue('a2_75'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U75; ?>" />
 								</td>
@@ -72,7 +72,7 @@
 
 								</td>
 								<td class="desc">
-									Hippeis
+									<?php echo U76; ?>
 								</td><td class="value">
 									<input class="text" type="text" name="a2_76" value="<?php echo $form->getValue('a2_76'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U76; ?>" />
 								</td>
@@ -84,7 +84,7 @@
 									<img src="img/x.gif" class="unit u77" title="<?php echo U77; ?>" alt="<?php echo U77; ?>" />
 								</td>
 								<td class="desc">
-									Ram
+									<?php echo U77; ?>
 								</td><td class="value">
 									<input class="text" type="text" name="a2_77" value="<?php echo $form->getValue('a2_77'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U77; ?>" />
 								</td>
@@ -96,7 +96,7 @@
 									<img src="img/x.gif" class="unit u78" title="<?php echo U78; ?>" alt="<?php echo U78; ?>" />
 								</td>
 								<td class="desc">
-									Catapult
+									<?php echo U78; ?>
 								</td><td class="value">
 									<input class="text" type="text" name="a2_78" value="<?php echo $form->getValue('a2_78'); ?>" maxlength="10" title="<?php echo TZ_NUMBER; ?> <?php echo U78; ?>" />
 
@@ -108,7 +108,7 @@
 									<img src="img/x.gif" class="unit u79" title="<?php echo U79; ?>" alt="<?php echo U79; ?>" />
 								</td>
 								<td class="desc">
-									Ephor
+									<?php echo U79; ?>
 								</td><td class="value">
 
 									<input class="text" type="text" name="a2_79" value="<?php echo $form->getValue('a2_79'); ?>" maxlength="6" title="<?php echo TZ_NUMBER; ?> <?php echo U79; ?>" />
@@ -118,7 +118,7 @@
 									<img src="img/x.gif" class="unit u80" title="<?php echo U80; ?>" alt="<?php echo U80; ?>" />
 								</td>
 								<td class="desc">
-									Spartan Settler
+									<?php echo U80; ?>
 								</td><td class="value">
 
 									<input class="text" type="text" name="a2_80" value="<?php echo $form->getValue('a2_80'); ?>" maxlength="6" title="<?php echo TZ_NUMBER; ?> <?php echo U80; ?>" />

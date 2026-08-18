@@ -33,7 +33,7 @@ $battle->procSim($_POST);
 <html <?php echo tz_html_dir_attrs(); ?>>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title><?php echo SERVER_NAME ?> - Combat Simulator</title>
+	<title><?php echo SERVER_NAME ?> - <?php echo COMBAT_SIMULATOR; ?></title>
 	<link rel="shortcut icon" href="favicon.ico"/>
 	<meta http-equiv="cache-control" content="max-age=0" />
 	<meta http-equiv="pragma" content="no-cache" />
@@ -68,7 +68,7 @@ $battle->procSim($_POST);
 <div id="mid">
 <?php include("Templates/menu.tpl"); ?>
 <div id="content"  class="warsim">
-<h1>Combat simulator</h1>
+<h1><?php echo COMBAT_SIMULATOR; ?></h1>
 <form action="warsim.php" method="post">
 <?php
 if(isset($_POST['result'])) {
@@ -78,31 +78,31 @@ if(isset($_POST['result'])) {
     foreach($target as $tar) {
         include("Templates/Simulator/res_d".(int)$tar.".tpl");
     }
-    echo "<p>Type of attack: <b>";
-    echo $form->getValue('ktyp') == 0 ? "Normal" : "Raid";
+    echo "<p>".TZ_WARSIM_TYPE_OF_ATTACK.": <b>";
+    echo $form->getValue('ktyp') == 0 ? TZ_WARSIM_NORMAL : RAID;
     echo "</b></p>";
     echo "<p>";
 	if (isset($_POST['result'][7]) && isset($_POST['result'][8])){
 		if ($form->getValue('ktyp') == 1) {
-			echo "Hint: The ram does not work during a raid.<br>";
+			echo TZ_WARSIM_RAM_HINT."<br>";
 		}elseif ($_POST['result'][7] == 0){
-			echo "Damage done by ram: from level <b>".$form->getValue('walllevel')."</b> to level <b>0</b></p>";
+			echo sprintf(TZ_WARSIM_RAM_DAMAGE, $form->getValue('walllevel'), '0')."</p>";
 		}elseif ($_POST['result'][7] == $_POST['result'][8]){
-			echo "Damage done by ram: from level <b>".$form->getValue('walllevel')."</b> to level <b>".$form->getValue('walllevel')."</b></p>";
+			echo sprintf(TZ_WARSIM_RAM_DAMAGE, $form->getValue('walllevel'), $form->getValue('walllevel'))."</p>";
 		}else{
-			echo "Damage done by ram: from level <b>".$form->getValue('walllevel')."</b> to level <b>".(int)$_POST['result'][7]."</b></p>";
+			echo sprintf(TZ_WARSIM_RAM_DAMAGE, $form->getValue('walllevel'), (int)$_POST['result'][7])."</p>";
 		}
 	}
 
 	if (isset($_POST['result'][3]) && isset($_POST['result'][4])){
 		if ($form->getValue('ktyp') == 1) {
-			echo "Hint: The catapult does not shoot during a raid.</p>";
+			echo TZ_WARSIM_CATA_HINT."</p>";
 		}elseif ($_POST['result'][3] == 0){
-			echo "Damage done by catapult: from level <b>".$form->getValue('kata')."</b> to level <b>0</b></p>";
+			echo sprintf(TZ_WARSIM_CATA_DAMAGE, $form->getValue('kata'), '0')."</p>";
 		}elseif ($_POST['result'][3] == $_POST['result'][4]){
-			echo "Damage done by catapult: from level <b>".$form->getValue('kata')."</b> to level <b>".$form->getValue('kata')."</b></p></p>";
+			echo sprintf(TZ_WARSIM_CATA_DAMAGE, $form->getValue('kata'), $form->getValue('kata'))."</p></p>";
 		}else{
-			echo "Damage done by catapult: from level <b>".$form->getValue('kata')."</b> to level <b>".(int)$_POST['result'][3]."</b></p>";
+			echo sprintf(TZ_WARSIM_CATA_DAMAGE, $form->getValue('kata'), (int)$_POST['result'][3])."</p>";
 		}
 	}
 }
@@ -132,7 +132,7 @@ if(count($target) > 0) {
 	<thead>
 		<tr>
 			<th>
-				Defender <span class=\"small\"></span>
+				".DEFENDER." <span class=\"small\"></span>
 			</th>
 		</tr>
 	</thead>";
@@ -212,40 +212,40 @@ if ($wsLines) {
 ?>
 <table id="select" cellpadding="1" cellspacing="1">
 <thead><tr>
-	<td>Attacker</td>
-	<td>Defender</td>
-	<td>Type of attack</td>
+	<td><?php echo ATTACKER; ?></td>
+	<td><?php echo DEFENDER; ?></td>
+	<td><?php echo TZ_WARSIM_TYPE_OF_ATTACK; ?></td>
 </tr></thead>
 <tbody><tr>
 	<td>
-		<label><input class="radio" type="radio" name="a1_v" value="1" <?php if($tribe == 1) { echo "checked"; } ?>/> Romans</label><br/>
-		<label><input class="radio" type="radio" name="a1_v" value="2" <?php if($tribe == 2) { echo "checked"; } ?>/> Teutons</label><br/>
-		<label><input class="radio" type="radio" name="a1_v" value="3" <?php if($tribe == 3) { echo "checked"; } ?>/> Gauls</label><br/>
-		<?php if (defined('NEW_FUNCTION_TRIBE_HUNS') && NEW_FUNCTION_TRIBE_HUNS) { ?><label><input class="radio" type="radio" name="a1_v" value="6" <?php if($tribe == 6) { echo "checked"; } ?>/> Huns</label><br/><?php } ?>
-		<?php if (defined('NEW_FUNCTION_TRIBE_EGIPTEANS') && NEW_FUNCTION_TRIBE_EGIPTEANS) { ?><label><input class="radio" type="radio" name="a1_v" value="7" <?php if($tribe == 7) { echo "checked"; } ?>/> Egyptians</label><br/><?php } ?>
-		<?php if (defined('NEW_FUNCTION_TRIBE_SPARTANS') && NEW_FUNCTION_TRIBE_SPARTANS) { ?><label><input class="radio" type="radio" name="a1_v" value="8" <?php if($tribe == 8) { echo "checked"; } ?>/> Spartans</label><br/><?php } ?>
-		<?php if (defined('NEW_FUNCTION_TRIBE_VIKINGS') && NEW_FUNCTION_TRIBE_VIKINGS) { ?><label><input class="radio" type="radio" name="a1_v" value="9" <?php if($tribe == 9) { echo "checked"; } ?>/> Vikings</label><br/><?php } ?>
-		<label><input class="radio" type="radio" name="a1_v" value="5" <?php if($tribe == 5) { echo "checked"; } ?>/> Natars</label>
+		<label><input class="radio" type="radio" name="a1_v" value="1" <?php if($tribe == 1) { echo "checked"; } ?>/> <?php echo TRIBE1; ?></label><br/>
+		<label><input class="radio" type="radio" name="a1_v" value="2" <?php if($tribe == 2) { echo "checked"; } ?>/> <?php echo TRIBE2; ?></label><br/>
+		<label><input class="radio" type="radio" name="a1_v" value="3" <?php if($tribe == 3) { echo "checked"; } ?>/> <?php echo TRIBE3; ?></label><br/>
+		<?php if (defined('NEW_FUNCTION_TRIBE_HUNS') && NEW_FUNCTION_TRIBE_HUNS) { ?><label><input class="radio" type="radio" name="a1_v" value="6" <?php if($tribe == 6) { echo "checked"; } ?>/> <?php echo TRIBE6; ?></label><br/><?php } ?>
+		<?php if (defined('NEW_FUNCTION_TRIBE_EGIPTEANS') && NEW_FUNCTION_TRIBE_EGIPTEANS) { ?><label><input class="radio" type="radio" name="a1_v" value="7" <?php if($tribe == 7) { echo "checked"; } ?>/> <?php echo TRIBE7; ?></label><br/><?php } ?>
+		<?php if (defined('NEW_FUNCTION_TRIBE_SPARTANS') && NEW_FUNCTION_TRIBE_SPARTANS) { ?><label><input class="radio" type="radio" name="a1_v" value="8" <?php if($tribe == 8) { echo "checked"; } ?>/> <?php echo TRIBE8; ?></label><br/><?php } ?>
+		<?php if (defined('NEW_FUNCTION_TRIBE_VIKINGS') && NEW_FUNCTION_TRIBE_VIKINGS) { ?><label><input class="radio" type="radio" name="a1_v" value="9" <?php if($tribe == 9) { echo "checked"; } ?>/> <?php echo TRIBE9; ?></label><br/><?php } ?>
+		<label><input class="radio" type="radio" name="a1_v" value="5" <?php if($tribe == 5) { echo "checked"; } ?>/> <?php echo TRIBE5; ?></label>
 	</td><td>
-		<label><input class="check" type="checkbox" name="a2_v1" value="1" <?php if(in_array(1,$target)) { echo "checked"; } ?>/> Romans</label><br/>
-		<label><input class="check" type="checkbox" name="a2_v2" value="1" <?php if(in_array(2,$target)) { echo "checked"; } ?>/> Teutons</label><br/>
-		<label><input class="check" type="checkbox" name="a2_v3" value="1" <?php if(in_array(3,$target)) { echo "checked"; } ?>/> Gauls</label><br/>
-		<label><input class="check" type="checkbox" name="a2_v4" value="1" <?php if(in_array(4,$target)) { echo "checked"; } ?>/> Nature</label><br/>
-		<label><input class="check" type="checkbox" name="a2_v5" value="1" <?php if(in_array(5,$target)) { echo "checked"; } ?>/> Natars</label><br/>
-		<?php if (defined('NEW_FUNCTION_TRIBE_HUNS') && NEW_FUNCTION_TRIBE_HUNS) { ?><label><input class="check" type="checkbox" name="a2_v6" value="1" <?php if(in_array(6,$target)) { echo "checked"; } ?>/> Huns</label><?php } ?><br/>
-		<?php if (defined('NEW_FUNCTION_TRIBE_EGIPTEANS') && NEW_FUNCTION_TRIBE_EGIPTEANS) { ?><label><input class="check" type="checkbox" name="a2_v7" value="1" <?php if(in_array(7,$target)) { echo "checked"; } ?>/> Egyptians</label><?php } ?><br/>
-		<?php if (defined('NEW_FUNCTION_TRIBE_SPARTANS') && NEW_FUNCTION_TRIBE_SPARTANS) { ?><label><input class="check" type="checkbox" name="a2_v8" value="1" <?php if(in_array(8,$target)) { echo "checked"; } ?>/> Spartans</label><?php } ?><br/>
-		<?php if (defined('NEW_FUNCTION_TRIBE_VIKINGS') && NEW_FUNCTION_TRIBE_VIKINGS) { ?><label><input class="check" type="checkbox" name="a2_v9" value="1" <?php if(in_array(9,$target)) { echo "checked"; } ?>/> Vikings</label><?php } ?>
+		<label><input class="check" type="checkbox" name="a2_v1" value="1" <?php if(in_array(1,$target)) { echo "checked"; } ?>/> <?php echo TRIBE1; ?></label><br/>
+		<label><input class="check" type="checkbox" name="a2_v2" value="1" <?php if(in_array(2,$target)) { echo "checked"; } ?>/> <?php echo TRIBE2; ?></label><br/>
+		<label><input class="check" type="checkbox" name="a2_v3" value="1" <?php if(in_array(3,$target)) { echo "checked"; } ?>/> <?php echo TRIBE3; ?></label><br/>
+		<label><input class="check" type="checkbox" name="a2_v4" value="1" <?php if(in_array(4,$target)) { echo "checked"; } ?>/> <?php echo TRIBE4; ?></label><br/>
+		<label><input class="check" type="checkbox" name="a2_v5" value="1" <?php if(in_array(5,$target)) { echo "checked"; } ?>/> <?php echo TRIBE5; ?></label><br/>
+		<?php if (defined('NEW_FUNCTION_TRIBE_HUNS') && NEW_FUNCTION_TRIBE_HUNS) { ?><label><input class="check" type="checkbox" name="a2_v6" value="1" <?php if(in_array(6,$target)) { echo "checked"; } ?>/> <?php echo TRIBE6; ?></label><?php } ?><br/>
+		<?php if (defined('NEW_FUNCTION_TRIBE_EGIPTEANS') && NEW_FUNCTION_TRIBE_EGIPTEANS) { ?><label><input class="check" type="checkbox" name="a2_v7" value="1" <?php if(in_array(7,$target)) { echo "checked"; } ?>/> <?php echo TRIBE7; ?></label><?php } ?><br/>
+		<?php if (defined('NEW_FUNCTION_TRIBE_SPARTANS') && NEW_FUNCTION_TRIBE_SPARTANS) { ?><label><input class="check" type="checkbox" name="a2_v8" value="1" <?php if(in_array(8,$target)) { echo "checked"; } ?>/> <?php echo TRIBE8; ?></label><?php } ?><br/>
+		<?php if (defined('NEW_FUNCTION_TRIBE_VIKINGS') && NEW_FUNCTION_TRIBE_VIKINGS) { ?><label><input class="check" type="checkbox" name="a2_v9" value="1" <?php if(in_array(9,$target)) { echo "checked"; } ?>/> <?php echo TRIBE9; ?></label><?php } ?>
 		</td><td>
-		<label><input class="radio" type="radio" name="ktyp" value="0" <?php if($form->getValue('ktyp') == 0 || $form->getValue('ktyp') == "") { echo "checked"; } ?>/> normal</label><br/>
+		<label><input class="radio" type="radio" name="ktyp" value="0" <?php if($form->getValue('ktyp') == 0 || $form->getValue('ktyp') == "") { echo "checked"; } ?>/> <?php echo TZ_WARSIM_NORMAL; ?></label><br/>
 
-		<label><input class="radio" type="radio" name="ktyp" value="1" <?php if($form->getValue('ktyp') == 1) { echo "checked"; } ?>/> raid</label><br/>
+		<label><input class="radio" type="radio" name="ktyp" value="1" <?php if($form->getValue('ktyp') == 1) { echo "checked"; } ?>/> <?php echo RAID; ?></label><br/>
 		<label><input type="hidden" name="uid" value="<?php echo $session->uid; ?>" /></label>
 	</td>
 </tr></tbody>
 </table>
 
-<p class="btn"><button value="ok" name="s1" id="btn_ok" class="trav_buttons" alt="OK" /> OK </button></p>
+<p class="btn"><button value="ok" name="s1" id="btn_ok" class="trav_buttons" alt="<?php echo TZ_OK_2; ?>" /> <?php echo TZ_OK_2; ?> </button></p>
 </form>
 </div>
 <br /><br /><br /><br /><div id="side_info">

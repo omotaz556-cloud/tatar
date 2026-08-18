@@ -74,7 +74,14 @@ if (
 	<?php
 	// GP_LOCATE contine deja pachetul efectiv: alegerea jucatorului cand
 	// e permisa si valida, altfel pachetul serverului (vezi config.php).
+	// main.css / main_en.css are required here too: they're what defines
+	// .overlay / .overlay .mask / .overlay_content, which is what makes
+	// #buildPopup (Templates/BuildPopup.tpl, included below on this page
+	// as well) render as an actual floating modal instead of inline
+	// page content. See dorf1.php for the same fix.
 	echo "
+	<link href='".GP_LOCATE."main.css?e21d2' rel='stylesheet' type='text/css' />
+	<link href='".GP_LOCATE."main_en.css?e21d2' rel='stylesheet' type='text/css' />
 	<link href='".GP_LOCATE."novaterra.css?e21d2' rel='stylesheet' type='text/css' />
 	<link href='".GP_LOCATE."lang/en/lang.css?e21d2' rel='stylesheet' type='text/css' />";
 	?>
