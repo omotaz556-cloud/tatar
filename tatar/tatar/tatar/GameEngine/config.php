@@ -46,7 +46,7 @@ define('CRON_TICK_SECONDS', 60);
 // Key used to access cron.php via HTTP (wget/curl or an external cron service).
 // Command-line execution (e.g. a cPanel cron job) does NOT require it.
 // Automatically generated during installation and preserved when saving configuration settings from the ACP.
-define('CRON_KEY', '23e0a2700d7c795b16f23a0f4f589cae25f239fc858f6529');
+define('CRON_KEY', '84a1ea091f764225ed26b7275441bbb900693a94512642e4');
 
 //////////////////////////////////
 // *****  DATABASE CLEANUP  *****//
@@ -96,27 +96,6 @@ define('HERO_SILVER_TO_GOLD', 25);
 define('HERO_RES_PER_POINT_ALL', 3);
 define('HERO_RES_PER_POINT_ONE', 10);
 
-// Gold -> Resources purchase (Marketplace, "Buy Resources with Gold" tab).
-//
-// Unlike NPC Trade (which only redistributes resources the village already
-// has, at a flat 3-gold fee), this actually INCREASES the village's total
-// stock, paid for with gold - the equivalent of TravianZ/Travian's "Buy
-// resources instantly" gold feature.
-//
-//   GOLD_RES_PURCHASE_ENABLED = master on/off switch for this feature
-//   GOLD_RES_UNIT             = how much of ONE resource 1 gold buys
-//   GOLD_RES_MIN_GOLD         = minimum gold that can be spent per purchase
-//   GOLD_RES_MAX_GOLD         = maximum gold that can be spent per purchase
-//                               (0 = no cap other than the player's balance)
-//
-// Example: with the defaults below, 1 gold buys 100 units of resource,
-// split across whichever resource(s) the player picks - capped by the
-// village's warehouse/granary capacity, same as every other resource gain.
-define('GOLD_RES_PURCHASE_ENABLED', true);
-define('GOLD_RES_UNIT', 100);
-define('GOLD_RES_MIN_GOLD', 1);
-define('GOLD_RES_MAX_GOLD', 500);
-
 //////////////////////////////////
 // *****  SERVER SETTINGS  *****//
 //////////////////////////////////
@@ -131,11 +110,11 @@ date_default_timezone_set(TIMEZONE);
 
 // ***** Started
 // Defines when has server started.
-define("COMMENCE","1786936750");
+define("COMMENCE","1787020823");
 
 // ***** Server Start Date / Time
-define("START_DATE", "17.08.2026");
-define("START_TIME", "06:19");
+define("START_DATE", "18.08.2026");
+define("START_TIME", "05:39");
 
 // ***** Language
 // SERVER_LANG is the DEFAULT language of the server (chosen at install / in
@@ -464,7 +443,7 @@ define("SQL_PASS", "novaterrapass");
 define("SQL_DB", "novaterra");
 
 // ***** Database - Table Prefix
-define("TB_PREFIX", "s2ab9_");
+define("TB_PREFIX", "s6263_");
 
 // ***** Database type
 // 0 = MYSQL
@@ -514,7 +493,7 @@ define("LIMIT_MAILBOX",false);
 define("MAX_MAIL","30");
 
 // ***** Include administrator in statistics/rank
-define("INCLUDE_ADMIN", true);
+define("INCLUDE_ADMIN", false);
 
 ////////////////////////////////////
 //   ****  ADMIN SETTINGS  ****   //
