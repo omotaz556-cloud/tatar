@@ -88,6 +88,7 @@ if(isset($_GET['confirm']) && is_numeric($_GET['confirm'])){
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html <?php echo tz_html_dir_attrs(); ?>>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title><?php echo SERVER_NAME ?> - Messages</title>
    <link rel="shortcut icon" href="favicon.ico"/>
 	<meta http-equiv="cache-control" content="max-age=0" />

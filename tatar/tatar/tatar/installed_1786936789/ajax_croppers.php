@@ -2,6 +2,24 @@
 // install/ajax_croppers.php
 // Streams croppers build progress via SSE
 
+// بند 23 — هذا الملف كان بيشغّل truncate/rebuild كامل لجدول قطع
+// الخريطة (populateCroppers مع truncateFirst=true) من غير أي تحقق
+// إن التثبيت خلص أو لأ. أي حد يعرف/يلاقي مسار مجلد install (حتى لو
+// اتغير اسمه) كان يقدر يمسح ويعيد بناء خريطة سيرفر شغال فعليًا. لازم
+// نفس قفل var/installed اللي موجود في process.php و index.php.
+if (file_exists(__DIR__ . '/../var/installed')) {
+	header('Content-Type: text/event-stream; charset=utf-8');
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	echo "data: " . json_encode([
+		'pct' => 0,
+		'done' => 0,
+		'total' => 0,
+		'error' => true,
+		'msg' => 'Installation already completed. This endpoint is locked.',
+	], JSON_UNESCAPED_SLASHES) . "\n\n";
+	exit;
+}
+
 // --- Includes ---
 require_once __DIR__ . '/../GameEngine/config.php';
 require_once __DIR__ . '/../GameEngine/Database.php';

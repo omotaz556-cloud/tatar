@@ -1486,6 +1486,27 @@ class Building {
 
     global $technology;
 
+    // بند 17 — مفتاح إيقاف يتحكم فيه الأدمن لإنهاء البناء/البحث
+    // بالذهب. لو الأدمن قفله، الدالة بترجع/تعمل redirect من غير ما
+    // تخصم ذهب أو تنهي أي حاجة - نفس سلوك "معاك ذهب أقل من المطلوب"
+    // الحالي، آمن ومتوافق مع باقي المنطق من غير لمس صف الـ AJAX/JSON.
+    if (class_exists('FeatureFlags')) {
+        FeatureFlags::seed('gold_finish_building', true,
+            'Gold-finish building/research',
+            'Master on/off switch for paying gold to instantly finish a building or research job. '
+            . 'Turn this off to disable the "finish now with gold" action server-wide.');
+        if (!FeatureFlags::isEnabled('gold_finish_building', true)) {
+            if ($ajax) {
+                return [
+                    'finished' => false,
+                    'charged'  => false,
+                ];
+            }
+            header('Location: ' . ($redirect_url ? $redirect_url : $this->sess->referrer));
+            exit;
+        }
+    }
+
     $countPlus2Gold  = false;
     $countMasterGold = false;
 

@@ -28,6 +28,7 @@ tz_load_language(LANG);
 
 <html <?php echo tz_html_dir_attrs(); ?>>
 	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title><?php echo SERVER_NAME; ?> - Manual</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 	<meta name="content-language" content="en" />

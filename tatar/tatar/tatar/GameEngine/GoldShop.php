@@ -250,6 +250,20 @@ class GoldShop
         }
         self::ensureSchema();
 
+        // بند 17 — مفتاح إيقاف عام يتحكم فيه الأدمن من لوحة feature
+        // flags، منفصل عن حالة كل كود على حدة (active/expired/...).
+        // ده بيدي الأدمن قدرة يوقف قبول أي كود ذهب فورًا (مثلاً وقت
+        // اشتباه في إساءة استخدام) من غير ما يحتاج يعطّل كل كود لوحده.
+        if (class_exists('FeatureFlags')) {
+            FeatureFlags::seed('gold_promo_redeem', true,
+                'Gold promo code redemption',
+                'Master on/off switch for redeeming gold promo/voucher codes on the Plus page. '
+                . 'Turn this off to instantly stop all code redemptions without disabling individual codes.');
+            if (!FeatureFlags::isEnabled('gold_promo_redeem', true)) {
+                return [false, 'Gold code redemption is temporarily disabled.', 0];
+            }
+        }
+
         $code = self::normCode($code);
         if ($code === '') {
             return [false, 'Please enter a code.', 0];

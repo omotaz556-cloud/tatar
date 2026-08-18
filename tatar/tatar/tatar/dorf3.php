@@ -44,6 +44,7 @@ if(isset($_GET['newdid'])) {
 
 <html <?php echo tz_html_dir_attrs(); ?>>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title><?php echo SERVER_NAME ?> - Cross-Village Totals</title>
 	<link rel="shortcut icon" href="favicon.ico"/>
 	<meta http-equiv="cache-control" content="max-age=0" />

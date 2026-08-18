@@ -35,6 +35,7 @@ AccessLogger::logRequest();
 <html xmlns="http://www.w3.org/1999/xhtml" <?php echo tz_html_dir_attrs(); ?>>
 
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo SERVER_NAME; ?> - <?php echo PUBLIC_TERMS_TITLE; ?></title>
 
     <link rel="stylesheet" type="text/css" href="img/tutorial/main.css"/>

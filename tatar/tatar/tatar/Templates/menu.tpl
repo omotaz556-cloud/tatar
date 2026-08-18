@@ -44,6 +44,7 @@ $idUser      = isset($_SESSION['id_user']) ? (int)$_SESSION['id_user'] : 0;
 
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
 
     <style type="text/css">
