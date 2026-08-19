@@ -615,12 +615,31 @@ if (!function_exists('tz_is_rtl_lang')) {
 if (!function_exists('tz_html_dir_attrs')) {
     function tz_html_dir_attrs($langCode = null) {
         $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
-        return 'lang="' . htmlspecialchars($langCode, ENT_QUOTES) . '" dir="ltr"';
+        $dir = tz_is_rtl_lang($langCode) ? 'rtl' : 'ltr';
+        return 'lang="' . htmlspecialchars($langCode, ENT_QUOTES) . '" dir="' . $dir . '"';
     }
 }
 if (!function_exists('tz_rtl_stylesheet_tag')) {
-    function tz_rtl_stylesheet_tag($langCode = null, $relPath = 'css/') {
-        return '';
+    // $relPath is the prefix needed to get back to the site root from the
+    // calling script's own folder (e.g. '' for root-level pages like
+    // dorf1.php, '../' for one-level-deep pages like Admin/admin.php or
+    // notification/index.php), since GP_LOCATE itself is root-relative.
+    function tz_rtl_stylesheet_tag($langCode = null, $relPath = '') {
+        $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
+        if (!tz_is_rtl_lang($langCode)) {
+            return '';
+        }
+        $gp = defined('GP_LOCATE') ? GP_LOCATE : (defined('SERVER_GP') ? SERVER_GP : 'gpack/novaterra_classic/');
+        // project root is one level above GameEngine/, regardless of which
+        // folder the calling script itself lives in.
+        $diskPath = dirname(__DIR__) . '/' . $gp . 'lang/' . $langCode . '/lang.css';
+        // Only emit the tag if the override file actually exists on disk for
+        // the active gpack; some gpacks don't ship an RTL override yet.
+        if (!is_file($diskPath)) {
+            return '';
+        }
+        $href = $relPath . $gp . 'lang/' . $langCode . '/lang.css';
+        return "\n\t" . '<link href="' . htmlspecialchars($href, ENT_QUOTES) . '?rtl1" rel="stylesheet" type="text/css" />';
     }
 }
 ?>
