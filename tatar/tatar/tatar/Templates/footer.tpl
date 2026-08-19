@@ -63,7 +63,7 @@ $serverVersion = 'v.11 Full Refactor';
                 <div class="copyright">
                     &copy; 2010 - <?php echo (int)$currentYear; ?>
                     <?php echo safeHTML($serverName); ?>
-                    All rights reserved
+                    <?php echo defined('TZ_ALL_RIGHTS_RESERVED') ? TZ_ALL_RIGHTS_RESERVED : ''; ?>
                 </div>
 
                 <!-- Version -->

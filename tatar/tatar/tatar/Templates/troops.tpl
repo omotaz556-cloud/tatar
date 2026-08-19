@@ -128,7 +128,8 @@ if (!empty($troops['hero'])) {
  * ---------------------------------------------------------
  */
 if (!$troopsPresent) {
-    echo '<tr><td>none</td></tr>';
+    $rtlClass = (function_exists('tz_is_rtl_lang') && tz_is_rtl_lang()) ? ' class="arabic-text"' : '';
+    echo '<tr><td' . $rtlClass . '>' . NONE . '</td></tr>';
 }
 ?>
 

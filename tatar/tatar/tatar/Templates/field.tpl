@@ -63,10 +63,10 @@ $arrayVillage = $village->resarray;
  * Tipuri câmpuri resurse
  */
 $fieldNames = array(
-    1 => 'Woodcutter Level',
-    2 => 'Clay Pit Level',
-    3 => 'Iron Mine Level',
-    4 => 'Cropland Level'
+    1 => WOODCUTTER . ' ' . LEVEL,
+    2 => CLAYPIT . ' ' . LEVEL,
+    3 => IRONMINE . ' ' . LEVEL,
+    4 => CROPLAND . ' ' . LEVEL
 );
 ?>
 
@@ -131,11 +131,11 @@ for ($i = 1; $i <= 18; $i++) {
      * Tooltip
      */
     $title = $resourceName .
-             ' Level ' .
+             ' ' . LEVEL . ' ' .
              $fieldLevel;
 
     if ($isActive) {
-        $title .= ' (upgrade in progress)';
+        $title .= ' (' . strip_tags(UPGRADE_IN_PROGRESS) . ')';
     }
 
     echo '<area href="build.php?id=' . $i . '"
@@ -187,7 +187,7 @@ for ($i = 1; $i <= 18; $i++) {
      */
     $text = isset($fieldNames[$fieldType])
         ? $fieldNames[$fieldType]
-        : 'Resource Field Level';
+        : RESOURCES . ' ' . LEVEL;
 
     /**
      * Upgrade activ
@@ -212,7 +212,7 @@ for ($i = 1; $i <= 18; $i++) {
     $altText = $text . ' ' . $fieldLevel;
 
     if ($isActive) {
-        $altText .= ' (upgrade in progress)';
+        $altText .= ' (' . strip_tags(UPGRADE_IN_PROGRESS) . ')';
     }
 
     echo '<img src="img/x.gif"

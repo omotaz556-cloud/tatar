@@ -620,7 +620,29 @@ if (!function_exists('tz_html_dir_attrs')) {
 }
 if (!function_exists('tz_rtl_stylesheet_tag')) {
     function tz_rtl_stylesheet_tag($langCode = null, $relPath = 'css/') {
-        return '';
+        $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
+
+        // Only ever loads something for RTL languages (currently just 'ar').
+        // For English and every other language this returns '' exactly as
+        // before, so the LTR pages/CSS are completely untouched.
+        if (!tz_is_rtl_lang($langCode)) {
+            return '';
+        }
+
+        // Scoped, opt-in text styling only (see .arabic-text in that file).
+        // This is never a global RTL stylesheet: it does not set <html dir>,
+        // does not mirror layout, sprites, or coordinates, and does not
+        // touch global left/right positioning.
+        $gpLocate = defined('GP_LOCATE') ? GP_LOCATE : 'gpack/novaterra_classic/';
+        $relCss   = 'lang/' . $langCode . '/lang.css';
+        $diskPath = __DIR__ . '/../' . $gpLocate . $relCss;
+
+        if (!is_file($diskPath)) {
+            return '';
+        }
+
+        return '<link href="' . htmlspecialchars($gpLocate . $relCss, ENT_QUOTES) .
+               '?rtl1" rel="stylesheet" type="text/css" />';
     }
 }
 ?>

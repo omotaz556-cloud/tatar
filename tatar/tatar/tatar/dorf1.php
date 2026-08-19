@@ -73,7 +73,7 @@ if (
 <html <?php echo tz_html_dir_attrs(); ?>>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title><?php echo SERVER_NAME . ' - Village overview &raquo; ' . $village->vname; ?></title>
+	<title><?php echo SERVER_NAME . ' - ' . TZ_VILLAGE_OVERVIEW . ' &raquo; ' . $village->vname; ?></title>
 	<link rel="shortcut icon" href="favicon.ico"/>
 	<meta http-equiv="cache-control" content="max-age=0" />
 	<meta http-equiv="pragma" content="no-cache" />

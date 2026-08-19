@@ -42,6 +42,8 @@ if (!function_exists('renderMovementRow')) {
             return;
         }
 
+        $rtlClass = (function_exists('tz_is_rtl_lang') && tz_is_rtl_lang()) ? ' arabic-text' : '';
+
         echo '
         <tr>
             <td class="typ">
@@ -66,8 +68,8 @@ if (!function_exists('renderMovementRow')) {
                     </span>
                 </div>
 
-                <div class="dur_r">
-                    in&nbsp;
+                <div class="dur_r' . $rtlClass . '">
+                    ' . P_IN . '&nbsp;
                     <span id="timer' . ++$session->timer . '">
                         ' . $generator->getTimeFormat($arrivalTime - time()) . '
                     </span>

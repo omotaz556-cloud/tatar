@@ -2119,6 +2119,7 @@ tz_def('TZ_UNTIL_THE_NEXT_LEVEL', 'until the next level');
 tz_def('TZ_USER_ID', 'User ID');
 tz_def('TZ_VILLAGE', 'Village:');
 tz_def('TZ_VILLAGE_OVERVIEW', 'Village overview');
+tz_def('TZ_ALL_RIGHTS_RESERVED', 'All rights reserved');
 tz_def('TZ_WAIT_INSTANT', 'Wait: instant');
 tz_def('TZ_WARNING', 'Warning:');
 tz_def('TZ_WOOD', 'Wood');

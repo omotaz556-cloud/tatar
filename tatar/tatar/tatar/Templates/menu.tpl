@@ -18,6 +18,15 @@
 ##                                                                             ##
 #################################################################################
 
+/**
+ * Scoped RTL text helper for the sidebar nav link labels only. Never
+ * touches #side_navi's position, the logo, or the icons - just the
+ * text run inside the <p> link list, and only for RTL languages.
+ */
+$tzMenuRtlAttr = (function_exists('tz_is_rtl_lang') && tz_is_rtl_lang())
+    ? ' dir="rtl" class="arabic-text"'
+    : '';
+
 include_once("GameEngine/Generator.php");
 
 /**
@@ -80,7 +89,7 @@ $idUser      = isset($_SESSION['id_user']) ? (int)$_SESSION['id_user'] : 0;
 
 <?php } else { ?>
 
-<div id="side_navi">
+<div id="side_navi"<?php echo $tzMenuRtlAttr; ?>>
 
     <!-- Logo -->
     <a id="logo" href="<?php echo HOMEPAGE; ?>" name="logo">

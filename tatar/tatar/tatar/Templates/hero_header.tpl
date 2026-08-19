@@ -432,6 +432,15 @@ $tzTxtAdventures = defined('HERO_T4_TAB_ADVENTURES') ? HERO_T4_TAB_ADVENTURES : 
 $tzHeroNameSafe    = htmlspecialchars($tzHeroName,    ENT_QUOTES, 'UTF-8');
 $tzHeroVillageSafe = htmlspecialchars($tzHeroVillage, ENT_QUOTES, 'UTF-8');
 
+/**
+ * Scoped RTL text helper for hero tooltip content only. Never touches
+ * .tzHeroSlot (icon anchors) or #tzHeroBox (absolute positioning) -
+ * just the text inside the tooltip bubbles, and only for RTL languages.
+ */
+$tzRtlAttrs = (function_exists('tz_is_rtl_lang') && tz_is_rtl_lang())
+    ? ' dir="rtl" class="arabic-text"'
+    : '';
+
 ?>
 <?php
 /**
@@ -541,7 +550,7 @@ $tzCssVer = @filemtime('css/hero_header.css');
 
         <?php } ?>
 
-        <span class="tzHeroTip tzHeroTipHome">
+        <span class="tzHeroTip tzHeroTipHome"<?php echo $tzRtlAttrs; ?>>
             <?php
             /**
              * Prima linie = starea, a doua = satul de bastina al eroului
@@ -628,7 +637,7 @@ $tzCssVer = @filemtime('css/hero_header.css');
             </svg>
         <?php } ?>
 
-        <span class="tzHeroTip tzHeroTipCenter">
+        <span class="tzHeroTip tzHeroTipCenter"<?php echo $tzRtlAttrs; ?>>
             <?php if (!$tzHeroExists) { ?>
                 <b><?php echo $tzTxtNoHero; ?></b>
             <?php } else { ?>
@@ -648,7 +657,7 @@ $tzCssVer = @filemtime('css/hero_header.css');
     <!-- ============ DREAPTA SUS: aventuri -> 37_adventures.tpl ============ -->
     <?php echo tzHeroSlotOpen($tzLinkAdv, 'tzHeroSlot tzHeroAdv ' . ($tzHeroAdv > 0 ? 'tzHeroAdvOn' : 'tzHeroAdvOff'), $tzHeroClickable); ?>
         <span class="tzHeroAdvNum"><?php echo (int) $tzHeroAdv; ?></span>
-        <span class="tzHeroTip tzHeroTipAdv">
+        <span class="tzHeroTip tzHeroTipAdv"<?php echo $tzRtlAttrs; ?>>
             <b><?php echo $tzTxtAdventures; ?>: <?php echo (int) $tzHeroAdv; ?></b>
         </span>
     <?php echo $tzHeroClickable ? '</a>' : '</span>'; ?>
@@ -671,7 +680,7 @@ $tzCssVer = @filemtime('css/hero_header.css');
         }
         ?>
 
-        <span class="tzHeroTip tzHeroTipRes">
+        <span class="tzHeroTip tzHeroTipRes"<?php echo $tzRtlAttrs; ?>>
             <?php if ($tzResPoints <= 0) { ?>
                 <b><?php echo $tzTxtResources; ?>: 0</b>
             <?php } elseif ($tzResSingle) { ?>
@@ -704,7 +713,7 @@ $tzCssVer = @filemtime('css/hero_header.css');
             <ellipse cx="12" cy="10.1" rx="6.2" ry="2.3" class="tzHeroCoin" />
             <ellipse cx="12" cy="10.1" rx="2.6" ry="0.9" class="tzHeroCoinTop" />
         </svg>
-        <span class="tzHeroTip tzHeroTipSilver">
+        <span class="tzHeroTip tzHeroTipSilver"<?php echo $tzRtlAttrs; ?>>
             <b><?php echo $tzTxtSilver; ?>: <?php echo number_format($tzHeroSilver); ?></b>
         </span>
     <?php echo $tzHeroClickable ? '</a>' : '</span>'; ?>

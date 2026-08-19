@@ -2115,6 +2115,7 @@ tz_def('TZ_UNTIL_THE_NEXT_LEVEL', 'حتى المستوى التالي');
 tz_def('TZ_USER_ID', 'رقم المستخدم');
 tz_def('TZ_VILLAGE', 'القرية:');
 tz_def('TZ_VILLAGE_OVERVIEW', 'نظرة عامة على القرية');
+tz_def('TZ_ALL_RIGHTS_RESERVED', 'جميع الحقوق محفوظة');
 tz_def('TZ_WAIT_INSTANT', 'الانتظار: فوري');
 tz_def('TZ_WARNING', 'تحذير:');
 tz_def('TZ_WOOD', 'خشب');

@@ -1,0 +1,13 @@
+/*
+ * Arabic text styling (scoped only)
+ * -----------------------------------------------------------------
+ * This file does NOT set global RTL, does not touch <html>, does not
+ * mirror layout, sprites, coordinates, or resource/tab positioning.
+ * It only provides an opt-in class for elements that hold Arabic
+ * text and need right-to-left rendering.
+ */
+
+.arabic-text {
+    direction: rtl;
+    text-align: right;
+}
