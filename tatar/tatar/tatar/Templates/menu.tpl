@@ -19,9 +19,10 @@
 #################################################################################
 
 /**
- * Scoped RTL text helper for the sidebar nav link labels only. Never
- * touches #side_navi's position, the logo, or the icons - just the
- * text run inside the <p> link list, and only for RTL languages.
+ * RTL helper for the sidebar nav (#side_navi). Column mirroring (which
+ * side the menu sits on) is handled by gpack/novaterra_classic/lang/ar/lang.css;
+ * this just marks the container itself as RTL so its own text/icons flow
+ * correctly for RTL languages.
  */
 $tzMenuRtlAttr = (function_exists('tz_is_rtl_lang') && tz_is_rtl_lang())
     ? ' dir="rtl" class="arabic-text"'
@@ -65,7 +66,7 @@ $idUser      = isset($_SESSION['id_user']) ? (int)$_SESSION['id_user'] : 0;
 
 <body>
 
-<div id="side_navi">
+<div id="side_navi"<?php echo $tzMenuRtlAttr; ?>>
 
     <a id="logo" href="<?php echo HOMEPAGE; ?>" name="logo">
         <img src="img/x.gif" alt="<?php echo TZ_NOVATERRA_NAME; ?>">

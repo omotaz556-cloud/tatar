@@ -46,7 +46,7 @@ define('CRON_TICK_SECONDS', 60);
 // Key used to access cron.php via HTTP (wget/curl or an external cron service).
 // Command-line execution (e.g. a cPanel cron job) does NOT require it.
 // Automatically generated during installation and preserved when saving configuration settings from the ACP.
-define('CRON_KEY', '8698241188501478cfdce4ff616966be7c69e7b25324b070');
+define('CRON_KEY', '0baa2561b5b60282ba79be21f457e12ef130d46e5aa7beb0');
 
 //////////////////////////////////
 // *****  DATABASE CLEANUP  *****//
@@ -110,11 +110,11 @@ date_default_timezone_set(TIMEZONE);
 
 // ***** Started
 // Defines when has server started.
-define("COMMENCE","1787160720");
+define("COMMENCE","1787175000");
 
 // ***** Server Start Date / Time
-define("START_DATE", "19.08.2026");
-define("START_TIME", "20:31");
+define("START_DATE", "20.08.2026");
+define("START_TIME", "00:29");
 
 // ***** Language
 // SERVER_LANG is the DEFAULT language of the server (chosen at install / in
@@ -443,7 +443,7 @@ define("SQL_PASS", "novaterrapass");
 define("SQL_DB", "novaterra");
 
 // ***** Database - Table Prefix
-define("TB_PREFIX", "sd054_");
+define("TB_PREFIX", "se656_");
 
 // ***** Database type
 // 0 = MYSQL
@@ -500,7 +500,7 @@ define("INCLUDE_ADMIN", false);
 ////////////////////////////////////
 
 // ***** Admin Email
-define("ADMIN_EMAIL", "omotaz323@gmail.com");
+define("ADMIN_EMAIL", "omotaz32311@gmail.com");
 
 // ***** Admin Name
 define("ADMIN_NAME", "admin");
@@ -620,29 +620,7 @@ if (!function_exists('tz_html_dir_attrs')) {
 }
 if (!function_exists('tz_rtl_stylesheet_tag')) {
     function tz_rtl_stylesheet_tag($langCode = null, $relPath = 'css/') {
-        $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
-
-        // Only ever loads something for RTL languages (currently just 'ar').
-        // For English and every other language this returns '' exactly as
-        // before, so the LTR pages/CSS are completely untouched.
-        if (!tz_is_rtl_lang($langCode)) {
-            return '';
-        }
-
-        // Scoped, opt-in text styling only (see .arabic-text in that file).
-        // This is never a global RTL stylesheet: it does not set <html dir>,
-        // does not mirror layout, sprites, or coordinates, and does not
-        // touch global left/right positioning.
-        $gpLocate = defined('GP_LOCATE') ? GP_LOCATE : 'gpack/novaterra_classic/';
-        $relCss   = 'lang/' . $langCode . '/lang.css';
-        $diskPath = __DIR__ . '/../' . $gpLocate . $relCss;
-
-        if (!is_file($diskPath)) {
-            return '';
-        }
-
-        return '<link href="' . htmlspecialchars($gpLocate . $relCss, ENT_QUOTES) .
-               '?rtl1" rel="stylesheet" type="text/css" />';
+        return '';
     }
 }
 ?>
