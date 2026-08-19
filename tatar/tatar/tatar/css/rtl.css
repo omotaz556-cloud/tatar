@@ -1,0 +1,127 @@
+/* Arabic (RTL) layout overrides for the in-game village views
+   (dorf1.php / dorf2.php / dorf3.php).
+
+   Scoped strictly to html[dir="rtl"] - has ZERO effect on the English
+   (LTR) layout, does not touch templates, does not touch village/map
+   coordinates or sprites. Only repositions the three existing
+   top-level layout columns using CSS floats. */
+
+/* ---------------------------------------------------------------------
+ * Pixel-coordinate / fixed-layout regions: keep them internally LTR so
+ * the top nav icons, resource bar and the village map are not mirrored
+ * or shoved off-screen by the inherited RTL direction.
+ * --------------------------------------------------------------------- */
+html[dir="rtl"] #header,
+html[dir="rtl"] #mtop,
+html[dir="rtl"] #village_map_wrap,
+html[dir="rtl"] div#village_map,
+html[dir="rtl"] #container,
+html[dir="rtl"] #stime,
+html[dir="rtl"] #ltime,
+html[dir="rtl"] #res,
+html[dir="rtl"] #resWrap,
+html[dir="rtl"] #footer,
+html[dir="rtl"] #mbig {
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
+/* ---------------------------------------------------------------------
+ * Three main columns:
+ *   #side_navi  (Templates/menu.tpl   - character portrait + village list)
+ *   #content    (dorf1.php            - village map / village1)
+ *   #side_info  (dorf1.php, nested in #content - quests/news/multivillage)
+ *
+ * Source (DOM) order is always: #side_navi, #content, #side_info - all
+ * float:left in lang/en/compact.css, sized so their widths sum exactly
+ * to #mid's width with no slack.
+ *
+ * To get [Character/Menu] [Village] [Sidebar] reading right-to-left
+ * without touching that width math or any template markup, all three
+ * columns are flipped to float:right. DOM order is untouched, so
+ * side_navi renders on the right, content in the middle, and side_info
+ * on the left - the target Arabic layout.
+ * --------------------------------------------------------------------- */
+html[dir="rtl"] #side_navi {
+    float: right;
+}
+html[dir="rtl"] #side_navi p a {
+    padding-left: 0;
+    padding-right: 12px;
+}
+html[dir="rtl"] #side_navi table {
+    padding-left: 0;
+    padding-right: 12px;
+}
+html[dir="rtl"] #side_navi td.link {
+    padding-right: 0;
+    padding-left: 10px;
+}
+
+html[dir="rtl"] #content {
+    float: right;
+    text-align: right;
+}
+
+html[dir="rtl"] #side_info {
+    float: right;
+    padding-left: 0;
+    padding-right: 10px;
+    text-align: right;
+}
+html[dir="rtl"] #side_info h5,
+html[dir="rtl"] #side_info div.news {
+    margin-left: 0;
+    margin-right: 10px;
+}
+html[dir="rtl"] #side_info td.link {
+    padding-right: 0;
+    padding-left: 10px;
+}
+
+/* ---------------------------------------------------------------------
+ * Arabic typography.
+ * lang/en/compact.css hardcodes "Verdana, Arial, Helvetica, sans-serif"
+ * on BODY - those have no proper Arabic glyphs, so the browser falls
+ * back to whatever default Arabic font it has, at the base size/
+ * line-height tuned for Latin text (too cramped for Arabic script).
+ * This swaps in a standard Arabic-friendly stack and loosens size/
+ * line-height slightly, matching the reference screenshot. Does not
+ * touch #header/#mtop/#village_map/#res (kept LTR/isolated above).
+ * --------------------------------------------------------------------- */
+html[dir="rtl"] body {
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+html[dir="rtl"] #mid,
+html[dir="rtl"] #side_navi,
+html[dir="rtl"] #side_info {
+    font-size: 11pt;
+    line-height: 22px;
+}
+html[dir="rtl"] #content h1 {
+    text-align: right;
+}
+
+/* ---------------------------------------------------------------------
+ * Production table (Templates/production.tpl - #production, and the
+ * other div.village1 tables sharing the same td.ico/td.num classes).
+ * Column DOM order is icon, resource-name, number, "per hour" - under
+ * dir="rtl" the browser already renders table columns in mirrored
+ * (right-to-left) order on its own, so icon+name correctly end up on
+ * the right and "per hour" on the left with NO markup changes needed.
+ * What's left is that lang/en/compact.css hardcodes physical
+ * left/right on individual cells (thead text-align:left, td.ico
+ * padding-left, td.num text-align:right), which fight the mirrored
+ * column order instead of following it. Flipping just those keeps
+ * every column mirrored consistently, matching the reference spacing.
+ * --------------------------------------------------------------------- */
+html[dir="rtl"] div.village1 table thead th {
+    text-align: right;
+}
+html[dir="rtl"] div.village1 table td.ico {
+    padding-left: 0;
+    padding-right: 4px;
+}
+html[dir="rtl"] div.village1 table td.num {
+    text-align: left;
+}

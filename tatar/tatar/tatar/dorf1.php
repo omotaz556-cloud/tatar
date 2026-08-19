@@ -73,7 +73,7 @@ if (
 <html <?php echo tz_html_dir_attrs(); ?>>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title><?php echo SERVER_NAME . ' - ' . TZ_VILLAGE_OVERVIEW . ' &raquo; ' . $village->vname; ?></title>
+	<title><?php echo SERVER_NAME . ' - ' . TZ_VILLAGE_OVERVIEW . ' &raquo; ' . tz_display_village_name($village->vname, $session->username ?? null); ?></title>
 	<link rel="shortcut icon" href="favicon.ico"/>
 	<meta http-equiv="cache-control" content="max-age=0" />
 	<meta http-equiv="pragma" content="no-cache" />
@@ -103,6 +103,9 @@ if (
 	window.addEvent('domready', start);
 	</script>
 	<?php echo tz_rtl_stylesheet_tag(); ?>
+	<?php if (function_exists('tz_is_rtl_lang') && tz_is_rtl_lang()): ?>
+	<link href="css/rtl.css?rtl2" rel="stylesheet" type="text/css" />
+	<?php endif; ?>
 </head>
 
 
@@ -115,7 +118,7 @@ if (
 <div id="mid">
 <?php include("Templates/menu.tpl"); ?>
 <div id="content"  class="village1">
-<h1><?php echo $village->vname; if($village->loyalty!='100'){ if($village->loyalty>'33'){ $color="gr"; }else{ $color="re"; } ?><div id="loyality" class="<?php echo $color; ?>"><?php echo LOYALTY; ?> <?php echo floor($village->loyalty); ?>%</div><?php } ?></h1>
+<h1><?php echo tz_display_village_name($village->vname, $session->username ?? null); if($village->loyalty!='100'){ if($village->loyalty>'33'){ $color="gr"; }else{ $color="re"; } ?><div id="loyality" class="<?php echo $color; ?>"><?php echo LOYALTY; ?> <?php echo floor($village->loyalty); ?>%</div><?php } ?></h1>
 <div id="cap" align="left"><?php if($village->capital!='0') { echo "<font color=gray>(".CAPITAL1.")</font>"; } ?></div>
 <div id="village_map_wrap">
 <?php include("Templates/field.tpl"); ?>

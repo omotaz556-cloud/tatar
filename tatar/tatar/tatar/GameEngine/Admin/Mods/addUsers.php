@@ -187,7 +187,12 @@ if ($mode === 'many_accounts') {
         $database->updateUserField($uid,"act","",1);
 
         // One capital village (legacy)
-        $villageName = $userName . "'s village";
+        // Language-aware default name (see tz_default_village_name in
+        // GameEngine/config.php): English keeps "{username}'s village",
+        // Arabic becomes "قرية {username}".
+        $villageName = function_exists('tz_default_village_name')
+            ? tz_default_village_name($userName)
+            : ($userName . "'s village");
         $wid = $createVillage($uid, $villageName, $tribe, true);
 
         $database->addUnits([$wid]);

@@ -201,7 +201,9 @@ class adm_DB {
         /* ---------------- Admin log ---------------- */
         $villageName = $database->getVillageField($wid, 'name');
         if (empty($villageName) || $villageName == '?') {
-            $villageName = $username . "'s village";
+            $villageName = function_exists('tz_default_village_name')
+                ? tz_default_village_name($username)
+                : ($username . "'s village");
         }
 
         $villageNameSafe = htmlspecialchars($villageName, ENT_QUOTES, 'UTF-8');

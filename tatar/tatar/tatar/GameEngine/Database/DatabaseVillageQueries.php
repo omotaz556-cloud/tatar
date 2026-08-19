@@ -340,7 +340,13 @@ trait DatabaseVillageQueries {
     $total = count($this->getVillagesID($uid));
     if (empty($villageName)) {
         // fără backslash, fără htmlentities – doar text curat
-        $villageName = $username . "'s village" . ($total >= 1 ? " " . ($total + 1) : "");
+        // Language-aware default name: "{username}'s village" in English,
+        // "قرية {username}" in Arabic (see tz_default_village_name in
+        // GameEngine/config.php). Falls back to the original English
+        // pattern if that helper isn't loaded for some reason.
+        $villageName = function_exists('tz_default_village_name')
+            ? tz_default_village_name($username, $total >= 1 ? ($total + 1) : 0)
+            : ($username . "'s village" . ($total >= 1 ? " " . ($total + 1) : ""));
     }
 
     $time = time();
