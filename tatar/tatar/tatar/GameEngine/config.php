@@ -46,7 +46,7 @@ define('CRON_TICK_SECONDS', 60);
 // Key used to access cron.php via HTTP (wget/curl or an external cron service).
 // Command-line execution (e.g. a cPanel cron job) does NOT require it.
 // Automatically generated during installation and preserved when saving configuration settings from the ACP.
-define('CRON_KEY', 'c0b6d0916480e59aa5fb24d9afb67aadbd16997c27832d5b');
+define('CRON_KEY', 'd1caa558591e575b3ac567e4dc79314253c235becfa9ea27');
 
 //////////////////////////////////
 // *****  DATABASE CLEANUP  *****//
@@ -110,11 +110,11 @@ date_default_timezone_set(TIMEZONE);
 
 // ***** Started
 // Defines when has server started.
-define("COMMENCE","1787113843");
+define("COMMENCE","1787118482");
 
 // ***** Server Start Date / Time
 define("START_DATE", "19.08.2026");
-define("START_TIME", "07:30");
+define("START_TIME", "08:47");
 
 // ***** Language
 // SERVER_LANG is the DEFAULT language of the server (chosen at install / in
@@ -443,7 +443,7 @@ define("SQL_PASS", "novaterrapass");
 define("SQL_DB", "novaterra");
 
 // ***** Database - Table Prefix
-define("TB_PREFIX", "s94cc_");
+define("TB_PREFIX", "sd515_");
 
 // ***** Database type
 // 0 = MYSQL
@@ -615,17 +615,37 @@ if (!function_exists('tz_is_rtl_lang')) {
 if (!function_exists('tz_html_dir_attrs')) {
     function tz_html_dir_attrs($langCode = null) {
         $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
-        // The village layout (map, resource bar, sidebar) is built with
-        // absolute-positioned elements for LTR only. Setting dir="rtl"
-        // without matching RTL CSS makes those elements overlap/disappear.
-        // We keep dir="ltr" for every language until a real RTL stylesheet
-        // is written and tested - lang="" still reports correctly so
-        // translations, screen readers, etc. are unaffected.
-        // Once RTL CSS is ready, define('TZ_ENABLE_RTL_LAYOUT', true) to
-        // switch this back on.
-        $enableRtlLayout = defined('TZ_ENABLE_RTL_LAYOUT') ? TZ_ENABLE_RTL_LAYOUT : false;
+        // css/rtl.css now provides the RTL layout (header/nav order,
+        // sidebars, tables, forms, popups, footer) and explicitly keeps
+        // the absolute-positioned graphics (village map, hero widget,
+        // resource bar) LTR, so it is safe to switch dir="rtl" on for
+        // real. TZ_ENABLE_RTL_LAYOUT stays available as a kill switch:
+        // define('TZ_ENABLE_RTL_LAYOUT', false) anywhere before this
+        // file loads to force every language back to dir="ltr".
+        $enableRtlLayout = defined('TZ_ENABLE_RTL_LAYOUT') ? TZ_ENABLE_RTL_LAYOUT : true;
         $dir = ($enableRtlLayout && tz_is_rtl_lang($langCode)) ? 'rtl' : 'ltr';
         return 'lang="' . htmlspecialchars($langCode, ENT_QUOTES) . '" dir="' . $dir . '"';
+    }
+}
+if (!function_exists('tz_rtl_stylesheet_tag')) {
+    /**
+     * <link> tag for the shared RTL stylesheet (css/rtl.css). Emits
+     * nothing for LTR languages, so it is safe to echo unconditionally
+     * right before every page's </head>.
+     *
+     * $relPath lets pages outside the project root (Admin/, notification/)
+     * pass the correct relative path back to /css/rtl.css.
+     */
+    function tz_rtl_stylesheet_tag($langCode = null, $relPath = 'css/') {
+        $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
+        if (!tz_is_rtl_lang($langCode)) {
+            return '';
+        }
+        $enableRtlLayout = defined('TZ_ENABLE_RTL_LAYOUT') ? TZ_ENABLE_RTL_LAYOUT : true;
+        if (!$enableRtlLayout) {
+            return '';
+        }
+        return "\n\t" . '<link href="' . htmlspecialchars($relPath, ENT_QUOTES) . 'rtl.css?v2" rel="stylesheet" type="text/css" />' . "\n";
     }
 }
 ?>
