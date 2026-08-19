@@ -45,6 +45,7 @@ if($session->plus){
 	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
 	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7i" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">window.addEvent('domready', start);</script>
+	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 <body onload="start()"><?php
 	include("Templates/Map/mapviewlarge.tpl");?>

@@ -132,9 +132,10 @@ function send_data() {
                            style="width:415px;" />
                 </td>
                 <td>
+                    <?php $tzChatRtl = function_exists('tz_is_rtl_lang') && tz_is_rtl_lang(); ?>
                     <input type="button"
                            id="btn_ok"
-                           style="border:0; float:left;"
+                           style="border:0; float:<?php echo $tzChatRtl ? 'right' : 'left'; ?>;"
                            alt="<?php echo TZ_OK_3; ?>"
                            onclick="send_data();" />
                 </td>

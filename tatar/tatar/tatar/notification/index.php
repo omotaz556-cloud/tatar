@@ -118,6 +118,7 @@ if (T4_COMING == true) {
 		}
 		.nv-back:hover { text-decoration: underline; }
 	</style>
+	<?php echo tz_rtl_stylesheet_tag(null, '../css/'); ?>
 </head>
 <body>
 	<div class="nv-card">

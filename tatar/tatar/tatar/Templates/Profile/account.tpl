@@ -268,6 +268,24 @@ if (!empty($emailError)) {
 #sitter .addSitter .name { font-weight: normal; color: #8a877f; }
 
 #sitter span.none { color: #a5a19a; }
+
+/* RTL: sitter (account manager) cards and the permission grid hold
+   real text (names, permission labels) and should read from the
+   right edge like the rest of the profile page. */
+html[dir="rtl"] #sitter .sitterCard,
+html[dir="rtl"] #sitter .permGrid {
+    text-align: right;
+}
+/* Delete icon and permission-state marker each sit to the left of a
+   text label in the LTR source; mirror the gap to the right side. */
+html[dir="rtl"] #sitter .sitterHead .del {
+    margin-right: 0;
+    margin-left: 6px;
+}
+html[dir="rtl"] #sitter .permMark {
+    margin-right: 0;
+    margin-left: 5px;
+}
 </style>
 
 <!-- =========================

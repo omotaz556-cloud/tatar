@@ -308,7 +308,7 @@ $renderAddLink = function ($action) use ($hero_info, $id, $heroStatColumns) {
     <?php } ?>
     <div id="t4PointsBar" style="display:none;">
         <button type="submit" id="t4PointsSave"><b>&#10003;</b> <?php echo defined('HERO_POINTS_SAVE') ? HERO_POINTS_SAVE : 'Save points'; ?> (<span id="t4PointsCount">0</span>)</button>
-        <a href="#" id="t4PointsCancel" style="margin-left:8px;"><?php echo defined('HERO_POINTS_CANCEL') ? HERO_POINTS_CANCEL : 'Cancel'; ?></a>
+        <a href="#" id="t4PointsCancel" style="<?php echo (function_exists('tz_is_rtl_lang') && tz_is_rtl_lang()) ? 'margin-right:8px;' : 'margin-left:8px;'; ?>"><?php echo defined('HERO_POINTS_CANCEL') ? HERO_POINTS_CANCEL : 'Cancel'; ?></a>
     </div>
 </form>
 

@@ -63,6 +63,11 @@ tr.ww-natars td{background:#fdf1e0 !important;font-weight:bold}
 tr.ww-natars td:first-child{border-left:3px solid #c0392b}
 .ww-natars-tag{display:inline-block;margin-left:6px;padding:0 5px;border-radius:3px;
     background:#c0392b;color:#fff;font-size:10px;font-weight:bold;vertical-align:middle}
+
+/* RTL: the highlighted-row edge marker and the trailing "Natars" tag
+   gap both need to sit on the row's reading-start side in Arabic. */
+html[dir="rtl"] tr.ww-natars td:first-child{border-left:none;border-right:3px solid #c0392b}
+html[dir="rtl"] .ww-natars-tag{margin-left:0;margin-right:6px}
 </style>
 <table cellpadding="1" cellspacing="1" id="villages" class="row_table_data">
     <thead>

@@ -143,6 +143,7 @@ $fsCanAddMore = $fsSettings['enabled'] && $fsCount < $fsSettings['max_linked_per
 	.fs-p-add button[disabled]{background:#c8b78e;cursor:not-allowed;}
 	.fs-p-table{width:100%;border-collapse:collapse;margin-top:12px;}
 	.fs-p-table th{text-align:left;padding:6px 7px;font-size:9px;text-transform:uppercase;color:#8a7754;border-bottom:1px solid #e2d5b8;}
+	html[dir="rtl"] .fs-p-table th{text-align:right;}
 	.fs-p-table td{padding:6px 7px;border-bottom:1px solid #eee0c4;font-size:11px;}
 	.fs-p-remove{background:#b91c1c;color:#fff;border:0;border-radius:4px;padding:4px 10px;font-size:10px;cursor:pointer;}
 	.fs-p-empty{color:#8a7754;font-size:11px;padding:10px 0;}
@@ -150,6 +151,7 @@ $fsCanAddMore = $fsSettings['enabled'] && $fsCount < $fsSettings['max_linked_per
 	<script type="text/javascript">
 		window.addEvent('domready', start);
 	</script>
+	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 
 <body class="v35 ie ie8">

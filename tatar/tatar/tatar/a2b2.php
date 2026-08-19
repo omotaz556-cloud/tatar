@@ -93,6 +93,7 @@ if (isset($packages[$amount]) && $amount > 0) {
     echo '<link href="' . GP_LOCATE . 'lang/en/lang.css?e21d2" rel="stylesheet" type="text/css" />';
     ?>
     <script type="text/javascript">window.addEvent('domready', start);</script>
+	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 <body class="v35">
 <div class="wrapper">

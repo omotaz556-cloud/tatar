@@ -81,6 +81,7 @@ AccessLogger::logRequest();
         }
     </style>
 
+	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 
 <body class="webkit contentPage">

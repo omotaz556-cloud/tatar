@@ -48,6 +48,7 @@ $id = $_GET['id'];
 	<script type="text/javascript">
 	window.addEvent('domready', start);
 	</script>
+	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 
 

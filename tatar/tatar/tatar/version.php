@@ -62,6 +62,7 @@ else $building->procBuild($_GET);
 
 		window.addEvent('domready', start);
 	</script>
+	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 <body class="v35 ie ie8">
 <div class="wrapper">
@@ -163,7 +164,7 @@ echo '<div class="developer-card" style="
         grid-column: span 3;
     " onmouseover="this.style.transform=\'translateY(-8px) scale(1.03)\'; this.style.boxShadow=\'6px 6px 20px rgba(0,0,0,0.3)\';" onmouseout="this.style.transform=\'translateY(0) scale(1)\'; this.style.boxShadow=\'3px 3px 10px rgba(0,0,0,0.2)\';">
         <div class="developer-name" style="font-weight:bold; font-size:1.2em; color:#004080;">+ '.count($others).' Others</div>
-        <div class="developer-role" style="margin-top:8px; font-size:1em; color:#003366; text-align:left; max-height:250px; overflow-y:auto;">'.$others_text.'</div>
+        <div class="developer-role" style="margin-top:8px; font-size:1em; color:#003366; text-align:'.((function_exists('tz_is_rtl_lang') && tz_is_rtl_lang()) ? 'right' : 'left').'; max-height:250px; overflow-y:auto;">'.$others_text.'</div>
     </div>';
 ?>
 </div>

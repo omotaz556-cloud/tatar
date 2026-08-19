@@ -113,6 +113,7 @@ if(isset($_GET['confirm']) && is_numeric($_GET['confirm'])){
 
 		window.addEvent('domready', start);
 	</script>
+	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 
 

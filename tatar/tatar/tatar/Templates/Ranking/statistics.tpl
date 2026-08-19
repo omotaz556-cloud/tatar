@@ -137,6 +137,13 @@ function ps_line_chart(array $points, $title, $color = '#7db72f', $invert = fals
 .ps-sum th{background:#f2f2f2;text-align:left}
 .ps-delta-up{color:#1f7a1f;font-weight:bold}
 .ps-delta-down{color:#a33;font-weight:bold}
+/* RTL: only the "Metric" label column (name text) flips; the date/
+   value/change columns keep their explicit inline text-align:right -
+   those are numbers/dates, correctly right-aligned in either direction. */
+html[dir="rtl"] .ps-sum th:first-child,
+html[dir="rtl"] .ps-sum td:first-child {
+    text-align: right;
+}
 </style>
 
 <div class="ps-wrap">

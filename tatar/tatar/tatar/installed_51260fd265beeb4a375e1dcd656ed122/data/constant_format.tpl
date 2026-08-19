@@ -615,17 +615,37 @@ if (!function_exists('tz_is_rtl_lang')) {
 if (!function_exists('tz_html_dir_attrs')) {
     function tz_html_dir_attrs($langCode = null) {
         $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
-        // The village layout (map, resource bar, sidebar) is built with
-        // absolute-positioned elements for LTR only. Setting dir="rtl"
-        // without matching RTL CSS makes those elements overlap/disappear.
-        // We keep dir="ltr" for every language until a real RTL stylesheet
-        // is written and tested - lang="" still reports correctly so
-        // translations, screen readers, etc. are unaffected.
-        // Once RTL CSS is ready, define('TZ_ENABLE_RTL_LAYOUT', true) to
-        // switch this back on.
-        $enableRtlLayout = defined('TZ_ENABLE_RTL_LAYOUT') ? TZ_ENABLE_RTL_LAYOUT : false;
+        // css/rtl.css now provides the RTL layout (header/nav order,
+        // sidebars, tables, forms, popups, footer) and explicitly keeps
+        // the absolute-positioned graphics (village map, hero widget,
+        // resource bar) LTR, so it is safe to switch dir="rtl" on for
+        // real. TZ_ENABLE_RTL_LAYOUT stays available as a kill switch:
+        // define('TZ_ENABLE_RTL_LAYOUT', false) anywhere before this
+        // file loads to force every language back to dir="ltr".
+        $enableRtlLayout = defined('TZ_ENABLE_RTL_LAYOUT') ? TZ_ENABLE_RTL_LAYOUT : true;
         $dir = ($enableRtlLayout && tz_is_rtl_lang($langCode)) ? 'rtl' : 'ltr';
         return 'lang="' . htmlspecialchars($langCode, ENT_QUOTES) . '" dir="' . $dir . '"';
+    }
+}
+if (!function_exists('tz_rtl_stylesheet_tag')) {
+    /**
+     * <link> tag for the shared RTL stylesheet (css/rtl.css). Emits
+     * nothing for LTR languages, so it is safe to echo unconditionally
+     * right before every page's </head>.
+     *
+     * $relPath lets pages outside the project root (Admin/, notification/)
+     * pass the correct relative path back to /css/rtl.css.
+     */
+    function tz_rtl_stylesheet_tag($langCode = null, $relPath = 'css/') {
+        $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
+        if (!tz_is_rtl_lang($langCode)) {
+            return '';
+        }
+        $enableRtlLayout = defined('TZ_ENABLE_RTL_LAYOUT') ? TZ_ENABLE_RTL_LAYOUT : true;
+        if (!$enableRtlLayout) {
+            return '';
+        }
+        return "\n\t" . '<link href="' . htmlspecialchars($relPath, ENT_QUOTES) . 'rtl.css?v2" rel="stylesheet" type="text/css" />' . "\n";
     }
 }
 ?>

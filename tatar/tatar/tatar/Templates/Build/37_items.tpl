@@ -208,6 +208,15 @@ table.t4items .t4qtynum {
 }
 
 table.t4items .t4none { color: #a5a19a; }
+
+/* RTL: item type + item name are real translated text, so they read
+   from the right edge in Arabic. Everything else in this table
+   (image, tier badge, quantity, buttons) stays as designed - only
+   these two text columns flip. */
+html[dir="rtl"] table.t4items td.t4slot,
+html[dir="rtl"] table.t4items td.t4name {
+    text-align: right;
+}
 </style>
 <table id="distribution" class="t4items" cellpadding="1" cellspacing="1">
     <thead>

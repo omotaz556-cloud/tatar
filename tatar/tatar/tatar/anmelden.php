@@ -182,6 +182,7 @@ $regStep = $regErrors ? 3 : 1;
 /* ======================================================================== */
 #regwiz{position:relative;width:100%;max-width:520px;margin:0 auto 10px;text-align:left;
         font-family:Arial,Helvetica,sans-serif;-webkit-box-sizing:border-box;box-sizing:border-box}
+html[dir="rtl"] #regwiz{text-align:right;}
 #regwiz *{-webkit-box-sizing:border-box;box-sizing:border-box}
 
 /* --- window chrome (sliced from the original artwork) ------------------- */
@@ -285,7 +286,8 @@ ul.rw-err{margin:0 0 6px;padding:0 0 0 16px;color:#c0392b;font:bold 12px/17px Ar
 .rw-back:hover{text-decoration:underline}
 .rw-foot{margin:2px 0 0;text-align:center;font:11px Arial;color:#8a7a63}
 </style>
-	   </head>
+	   	<?php echo tz_rtl_stylesheet_tag(); ?>
+</head>
 
 <body class="v35 ie ie7" onload="initCounter()">
 

@@ -31,16 +31,25 @@ $t4Tabs = [
     'adventures' => ['label' => HERO_T4_TAB_ADVENTURES, 'url' => 'build.php?id=' . $id . '&t4tab=adventures'],
     'auction'    => ['label' => HERO_T4_TAB_AUCTION,    'url' => 'build.php?id=' . $id . '&t4tab=auction'],
 ];
+$t4NavRtl = function_exists('tz_is_rtl_lang') && tz_is_rtl_lang();
+// Tab spacing and the silver counter's float side are written inline
+// (no shared class) so we mirror them here rather than in CSS: in
+// RTL the tab row reads right-to-left, so the gap moves to the start
+// side of each tab (margin-left) and the counter floats to the
+// opposite edge (left) instead of the far edge (right).
+$t4NavGapStyle    = $t4NavRtl ? 'margin-left:14px;'  : 'margin-right:14px;';
+$t4NavGapStyleB   = $t4NavRtl ? 'font-weight:bold;margin-left:14px;' : 'font-weight:bold;margin-right:14px;';
+$t4NavFloatStyle  = $t4NavRtl ? 'float:left;' : 'float:right;';
 ?>
 <link rel="stylesheet" href="css/hero_items.css" type="text/css">
 <div class="heroT4Nav" style="margin:6px 0 10px 0;">
     <?php foreach ($t4Tabs as $key => $tab) { ?>
         <?php if ($key === $t4tab) { ?>
-            <span style="font-weight:bold;margin-right:14px;"><?php echo $tab['label']; ?></span>
+            <span style="<?php echo $t4NavGapStyleB; ?>"><?php echo $tab['label']; ?></span>
         <?php } else { ?>
-            <a href="<?php echo $tab['url']; ?>" style="margin-right:14px;"><?php echo $tab['label']; ?></a>
+            <a href="<?php echo $tab['url']; ?>" style="<?php echo $t4NavGapStyle; ?>"><?php echo $tab['label']; ?></a>
         <?php } ?>
     <?php } ?>
-    <span style="float:right;"><b><?php echo HERO_SILVER; ?>:</b> <?php echo number_format($t4Silver); ?></span>
+    <span style="<?php echo $t4NavFloatStyle; ?>"><b><?php echo HERO_SILVER; ?>:</b> <?php echo number_format($t4Silver); ?></span>
     <div style="clear:both;"></div>
 </div>

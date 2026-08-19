@@ -227,7 +227,8 @@ if ($winner) {
 		 border-width: 0px;
 		}
 		</style>
-	</head>
+		<?php echo tz_rtl_stylesheet_tag(); ?>
+</head>
 	<body class="v35 ie ie8">
 		<div class="wrapper">
 			<img style="filter: chroma();" src="img/x.gif" id="msfilter" alt="" />

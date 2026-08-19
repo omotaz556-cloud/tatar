@@ -83,7 +83,8 @@ function chkFormular () {
  
 }
 </script>
-	   </head>
+	   	<?php echo tz_rtl_stylesheet_tag(); ?>
+</head>
 
 <body class="v35 ie ie8">
 <div class="wrapper">

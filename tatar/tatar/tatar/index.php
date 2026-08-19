@@ -75,6 +75,7 @@ AccessLogger::logRequest();
 		div.c2 {left:237px;}
 		ul.c1 {position:absolute; left:0px; width: 686px;}
 	</style>
+	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 
 <body class="presto indexPage">

@@ -113,6 +113,7 @@ $process = $units->procUnits($_POST);
 	<script type="text/javascript">
 		window.addEvent('domready', start);
 	</script>
+	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 
 

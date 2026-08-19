@@ -234,6 +234,7 @@ $worldLabel = worldSizeLabel();
         @media (max-width: 900px){ .cb-grid{ grid-template-columns:1fr; } }
         pre#log { margin-top:14px; }
     </style>
+	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 
 <body class="v35 ie ie8">

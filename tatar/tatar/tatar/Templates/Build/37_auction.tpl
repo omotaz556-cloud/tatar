@@ -314,6 +314,13 @@ foreach ($t4HeroItems->getInventory($session->uid) as $t4Row) {
 }
 
 .t4auc-bidform .t4auc-btn { padding: 3px 9px; }
+
+/* RTL: the resource-exchange panel text (labels, rates) reads from
+   the right edge. Bid amount / price fields stay right-aligned as
+   numbers regardless of direction - that part is unchanged. */
+html[dir="rtl"] .t4auc-ex-inner {
+    text-align: right;
+}
 </style>
 
 <?php if ($t4Msg !== '') { ?>

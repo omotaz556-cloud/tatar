@@ -83,6 +83,13 @@ if (empty($GLOBALS['tbCssDone'])) {
 .trainBonus .tbFinal { color: #4a7a24; }        /* verde: rezultatul care conteaza */
 .trainBonus .tbFinal b { color: #3f6b1c; }
 .trainBonus .tbFinal .clock { vertical-align: -2px; margin-right: 2px; }
+
+/* RTL: these are inline-block text badges/labels read left-to-right in a
+   row; in Arabic the row reads right-to-left, so the trailing gap after
+   each item needs to move to its start side (margin-left) instead. */
+html[dir="rtl"] .trainBonus .tbLine { margin-right: 0; margin-left: 10px; }
+html[dir="rtl"] .trainBonus .tbTag { margin-right: 0; margin-left: 3px; }
+html[dir="rtl"] .trainBonus .tbFinal .clock { margin-right: 0; margin-left: 2px; }
 </style>
 <?php
 }

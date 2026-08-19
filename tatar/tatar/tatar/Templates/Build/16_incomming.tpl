@@ -36,6 +36,7 @@ $rpLevel = (int) $database->getFieldLevelInVillage($village->wid, 16);
 .atk_marker.marker2{background:#f2c200}
 .atk_marker.marker3{background:#e23b3b}
 .atk_marker:hover{box-shadow:inset 0 0 0 2px rgba(255,255,255,.55),0 0 0 1px #333}
+html[dir="rtl"] .atk_marker{float:left;margin:0 6px 0 0;}
 </style>
 <script type="text/javascript">
 function cycleMarker(moveid, el){

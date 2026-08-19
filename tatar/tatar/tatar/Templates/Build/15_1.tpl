@@ -148,7 +148,8 @@ $inProgress =!empty($Demolition)? $Demolition[0] : null;
 <?php else:?>
 
     <?php if (isset($_GET['nodemolish']) && $_GET['nodemolish'] == 18):?>
-        <p style="color:#ff0000; text-align:left">
+        <?php $t4WarnRtl = function_exists('tz_is_rtl_lang') && tz_is_rtl_lang(); ?>
+        <p style="color:#ff0000; text-align:<?php echo $t4WarnRtl ? 'right' : 'left'; ?>">
             <?= TZ_ML_LEADER_DEMOLITION_EMBASSY?> <b><?= $memberCount?></b> <?= TZ_ALLIANCE_MEMBERS?>
         </p>
     <?php endif;?>

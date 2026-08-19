@@ -135,6 +135,10 @@ $abGpack   = defined('GP_LOCATE') ? GP_LOCATE : 'gpack/novaterra_classic/';
 .ab-desc{flex:1;color:#666;font-size:11px;line-height:1.35;padding-left:4px}
 .ab-eff{color:#1f7a1f;font-weight:bold}
 .ab-wait{color:#a60;font-size:10px}
+
+/* RTL: description sits to the reading-start side of the icon/level
+   column, so the gap moves from padding-left to padding-right. */
+html[dir="rtl"] .ab-desc{padding-left:0;padding-right:4px}
 .ab-bar{background:#fff;border:1px solid #c9c9c9;height:13px;overflow:hidden;margin:4px 0}
 .ab-bar i{display:block;height:100%;background:#7db72f}
 .ab-num{font-size:11px;color:#555}

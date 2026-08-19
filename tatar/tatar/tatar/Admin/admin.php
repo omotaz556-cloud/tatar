@@ -711,7 +711,8 @@ body.app #menu li.sub ul{background:#f9fafb}
 body.app #menu li.sub ul li a{display:block;padding:8px 16px 8px 34px;font-size:11px;color:#6b7280!important}
 body.app #menu li.sub ul li a:hover{color:#d97706!important}
 </style>
-    </head>
+    	<?php echo tz_rtl_stylesheet_tag(null, '../css/'); ?>
+</head>
     <body class="<?php echo $funct->CheckLogin() ? 'app' : 'login'; ?>">
 
     <script type="text/javascript">

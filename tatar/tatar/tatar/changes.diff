@@ -1,0 +1,1218 @@
+diff --git a/tatar/tatar/tatar/Admin/admin.php b/tatar/tatar/tatar/Admin/admin.php
+index 199d759..2dd8c4c 100644
+--- a/tatar/tatar/tatar/Admin/admin.php
++++ b/tatar/tatar/tatar/Admin/admin.php
+@@ -711,7 +711,8 @@ body.app #menu li.sub ul{background:#f9fafb}
+ body.app #menu li.sub ul li a{display:block;padding:8px 16px 8px 34px;font-size:11px;color:#6b7280!important}
+ body.app #menu li.sub ul li a:hover{color:#d97706!important}
+ </style>
+-    </head>
++    	<?php echo tz_rtl_stylesheet_tag(null, '../css/'); ?>
++</head>
+     <body class="<?php echo $funct->CheckLogin() ? 'app' : 'login'; ?>">
+ 
+     <script type="text/javascript">
+diff --git a/tatar/tatar/tatar/GameEngine/config.php b/tatar/tatar/tatar/GameEngine/config.php
+index 59c4193..87ddf60 100644
+--- a/tatar/tatar/tatar/GameEngine/config.php
++++ b/tatar/tatar/tatar/GameEngine/config.php
+@@ -615,17 +615,37 @@ if (!function_exists('tz_is_rtl_lang')) {
+ if (!function_exists('tz_html_dir_attrs')) {
+     function tz_html_dir_attrs($langCode = null) {
+         $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
+-        // The village layout (map, resource bar, sidebar) is built with
+-        // absolute-positioned elements for LTR only. Setting dir="rtl"
+-        // without matching RTL CSS makes those elements overlap/disappear.
+-        // We keep dir="ltr" for every language until a real RTL stylesheet
+-        // is written and tested - lang="" still reports correctly so
+-        // translations, screen readers, etc. are unaffected.
+-        // Once RTL CSS is ready, define('TZ_ENABLE_RTL_LAYOUT', true) to
+-        // switch this back on.
+-        $enableRtlLayout = defined('TZ_ENABLE_RTL_LAYOUT') ? TZ_ENABLE_RTL_LAYOUT : false;
++        // css/rtl.css now provides the RTL layout (header/nav order,
++        // sidebars, tables, forms, popups, footer) and explicitly keeps
++        // the absolute-positioned graphics (village map, hero widget,
++        // resource bar) LTR, so it is safe to switch dir="rtl" on for
++        // real. TZ_ENABLE_RTL_LAYOUT stays available as a kill switch:
++        // define('TZ_ENABLE_RTL_LAYOUT', false) anywhere before this
++        // file loads to force every language back to dir="ltr".
++        $enableRtlLayout = defined('TZ_ENABLE_RTL_LAYOUT') ? TZ_ENABLE_RTL_LAYOUT : true;
+         $dir = ($enableRtlLayout && tz_is_rtl_lang($langCode)) ? 'rtl' : 'ltr';
+         return 'lang="' . htmlspecialchars($langCode, ENT_QUOTES) . '" dir="' . $dir . '"';
+     }
+ }
++if (!function_exists('tz_rtl_stylesheet_tag')) {
++    /**
++     * <link> tag for the shared RTL stylesheet (css/rtl.css). Emits
++     * nothing for LTR languages, so it is safe to echo unconditionally
++     * right before every page's </head>.
++     *
++     * $relPath lets pages outside the project root (Admin/, notification/)
++     * pass the correct relative path back to /css/rtl.css.
++     */
++    function tz_rtl_stylesheet_tag($langCode = null, $relPath = 'css/') {
++        $langCode = $langCode ?? (defined('LANG') ? LANG : 'en');
++        if (!tz_is_rtl_lang($langCode)) {
++            return '';
++        }
++        $enableRtlLayout = defined('TZ_ENABLE_RTL_LAYOUT') ? TZ_ENABLE_RTL_LAYOUT : true;
++        if (!$enableRtlLayout) {
++            return '';
++        }
++        return "\n\t" . '<link href="' . htmlspecialchars($relPath, ENT_QUOTES) . 'rtl.css?v2" rel="stylesheet" type="text/css" />' . "\n";
++    }
++}
+ ?>
+diff --git a/tatar/tatar/tatar/Templates/Alliance/bonuses.tpl b/tatar/tatar/tatar/Templates/Alliance/bonuses.tpl
+index dac3331..0e5c5ac 100644
+--- a/tatar/tatar/tatar/Templates/Alliance/bonuses.tpl
++++ b/tatar/tatar/tatar/Templates/Alliance/bonuses.tpl
+@@ -135,6 +135,10 @@ $abGpack   = defined('GP_LOCATE') ? GP_LOCATE : 'gpack/novaterra_classic/';
+ .ab-desc{flex:1;color:#666;font-size:11px;line-height:1.35;padding-left:4px}
+ .ab-eff{color:#1f7a1f;font-weight:bold}
+ .ab-wait{color:#a60;font-size:10px}
++
++/* RTL: description sits to the reading-start side of the icon/level
++   column, so the gap moves from padding-left to padding-right. */
++html[dir="rtl"] .ab-desc{padding-left:0;padding-right:4px}
+ .ab-bar{background:#fff;border:1px solid #c9c9c9;height:13px;overflow:hidden;margin:4px 0}
+ .ab-bar i{display:block;height:100%;background:#7db72f}
+ .ab-num{font-size:11px;color:#555}
+diff --git a/tatar/tatar/tatar/Templates/Alliance/chat.tpl b/tatar/tatar/tatar/Templates/Alliance/chat.tpl
+index a470c89..8baa594 100644
+--- a/tatar/tatar/tatar/Templates/Alliance/chat.tpl
++++ b/tatar/tatar/tatar/Templates/Alliance/chat.tpl
+@@ -132,9 +132,10 @@ function send_data() {
+                            style="width:415px;" />
+                 </td>
+                 <td>
++                    <?php $tzChatRtl = function_exists('tz_is_rtl_lang') && tz_is_rtl_lang(); ?>
+                     <input type="button"
+                            id="btn_ok"
+-                           style="border:0; float:left;"
++                           style="border:0; float:<?php echo $tzChatRtl ? 'right' : 'left'; ?>;"
+                            alt="<?php echo TZ_OK_3; ?>"
+                            onclick="send_data();" />
+                 </td>
+diff --git a/tatar/tatar/tatar/Templates/Build/15_1.tpl b/tatar/tatar/tatar/Templates/Build/15_1.tpl
+index b462282..feb98b4 100644
+--- a/tatar/tatar/tatar/Templates/Build/15_1.tpl
++++ b/tatar/tatar/tatar/Templates/Build/15_1.tpl
+@@ -148,7 +148,8 @@ $inProgress =!empty($Demolition)? $Demolition[0] : null;
+ <?php else:?>
+ 
+     <?php if (isset($_GET['nodemolish']) && $_GET['nodemolish'] == 18):?>
+-        <p style="color:#ff0000; text-align:left">
++        <?php $t4WarnRtl = function_exists('tz_is_rtl_lang') && tz_is_rtl_lang(); ?>
++        <p style="color:#ff0000; text-align:<?php echo $t4WarnRtl ? 'right' : 'left'; ?>">
+             <?= TZ_ML_LEADER_DEMOLITION_EMBASSY?> <b><?= $memberCount?></b> <?= TZ_ALLIANCE_MEMBERS?>
+         </p>
+     <?php endif;?>
+diff --git a/tatar/tatar/tatar/Templates/Build/16_incomming.tpl b/tatar/tatar/tatar/Templates/Build/16_incomming.tpl
+index 2ddb068..740f034 100644
+--- a/tatar/tatar/tatar/Templates/Build/16_incomming.tpl
++++ b/tatar/tatar/tatar/Templates/Build/16_incomming.tpl
+@@ -36,6 +36,7 @@ $rpLevel = (int) $database->getFieldLevelInVillage($village->wid, 16);
+ .atk_marker.marker2{background:#f2c200}
+ .atk_marker.marker3{background:#e23b3b}
+ .atk_marker:hover{box-shadow:inset 0 0 0 2px rgba(255,255,255,.55),0 0 0 1px #333}
++html[dir="rtl"] .atk_marker{float:left;margin:0 6px 0 0;}
+ </style>
+ <script type="text/javascript">
+ function cycleMarker(moveid, el){
+diff --git a/tatar/tatar/tatar/Templates/Build/37_adventures.tpl b/tatar/tatar/tatar/Templates/Build/37_adventures.tpl
+index 91a3f9f..e1acd39 100644
+--- a/tatar/tatar/tatar/Templates/Build/37_adventures.tpl
++++ b/tatar/tatar/tatar/Templates/Build/37_adventures.tpl
+@@ -171,6 +171,17 @@ table.t4adv td.t4empty { color: #a5a19a; text-align: center; }
+     font-weight: bold;
+     font-variant-numeric: tabular-nums;
+ }
++
++/* RTL: the adventure location name is real translated text and should
++   read from the right edge. The countdown clock stays LTR - it's a
++   HH:MM:SS number, not text. */
++html[dir="rtl"] table.t4adv td.t4place {
++    text-align: right;
++}
++html[dir="rtl"] .t4advRunning .t4advClock {
++    direction: ltr;
++    unicode-bidi: isolate;
++}
+ </style>
+ 
+ <?php if ($t4Msg !== '') { ?>
+diff --git a/tatar/tatar/tatar/Templates/Build/37_auction.tpl b/tatar/tatar/tatar/Templates/Build/37_auction.tpl
+index 2eda6e1..a4bbbf3 100644
+--- a/tatar/tatar/tatar/Templates/Build/37_auction.tpl
++++ b/tatar/tatar/tatar/Templates/Build/37_auction.tpl
+@@ -314,6 +314,13 @@ foreach ($t4HeroItems->getInventory($session->uid) as $t4Row) {
+ }
+ 
+ .t4auc-bidform .t4auc-btn { padding: 3px 9px; }
++
++/* RTL: the resource-exchange panel text (labels, rates) reads from
++   the right edge. Bid amount / price fields stay right-aligned as
++   numbers regardless of direction - that part is unchanged. */
++html[dir="rtl"] .t4auc-ex-inner {
++    text-align: right;
++}
+ </style>
+ 
+ <?php if ($t4Msg !== '') { ?>
+diff --git a/tatar/tatar/tatar/Templates/Build/37_hero.tpl b/tatar/tatar/tatar/Templates/Build/37_hero.tpl
+index cbecad9..3099087 100644
+--- a/tatar/tatar/tatar/Templates/Build/37_hero.tpl
++++ b/tatar/tatar/tatar/Templates/Build/37_hero.tpl
+@@ -308,7 +308,7 @@ $renderAddLink = function ($action) use ($hero_info, $id, $heroStatColumns) {
+     <?php } ?>
+     <div id="t4PointsBar" style="display:none;">
+         <button type="submit" id="t4PointsSave"><b>&#10003;</b> <?php echo defined('HERO_POINTS_SAVE') ? HERO_POINTS_SAVE : 'Save points'; ?> (<span id="t4PointsCount">0</span>)</button>
+-        <a href="#" id="t4PointsCancel" style="margin-left:8px;"><?php echo defined('HERO_POINTS_CANCEL') ? HERO_POINTS_CANCEL : 'Cancel'; ?></a>
++        <a href="#" id="t4PointsCancel" style="<?php echo (function_exists('tz_is_rtl_lang') && tz_is_rtl_lang()) ? 'margin-right:8px;' : 'margin-left:8px;'; ?>"><?php echo defined('HERO_POINTS_CANCEL') ? HERO_POINTS_CANCEL : 'Cancel'; ?></a>
+     </div>
+ </form>
+ 
+diff --git a/tatar/tatar/tatar/Templates/Build/37_items.tpl b/tatar/tatar/tatar/Templates/Build/37_items.tpl
+index 597e932..f6b9585 100644
+--- a/tatar/tatar/tatar/Templates/Build/37_items.tpl
++++ b/tatar/tatar/tatar/Templates/Build/37_items.tpl
+@@ -208,6 +208,15 @@ table.t4items .t4qtynum {
+ }
+ 
+ table.t4items .t4none { color: #a5a19a; }
++
++/* RTL: item type + item name are real translated text, so they read
++   from the right edge in Arabic. Everything else in this table
++   (image, tier badge, quantity, buttons) stays as designed - only
++   these two text columns flip. */
++html[dir="rtl"] table.t4items td.t4slot,
++html[dir="rtl"] table.t4items td.t4name {
++    text-align: right;
++}
+ </style>
+ <table id="distribution" class="t4items" cellpadding="1" cellspacing="1">
+     <thead>
+diff --git a/tatar/tatar/tatar/Templates/Build/37_t4nav.tpl b/tatar/tatar/tatar/Templates/Build/37_t4nav.tpl
+index ffb2578..2b37bf4 100644
+--- a/tatar/tatar/tatar/Templates/Build/37_t4nav.tpl
++++ b/tatar/tatar/tatar/Templates/Build/37_t4nav.tpl
+@@ -31,16 +31,25 @@ $t4Tabs = [
+     'adventures' => ['label' => HERO_T4_TAB_ADVENTURES, 'url' => 'build.php?id=' . $id . '&t4tab=adventures'],
+     'auction'    => ['label' => HERO_T4_TAB_AUCTION,    'url' => 'build.php?id=' . $id . '&t4tab=auction'],
+ ];
++$t4NavRtl = function_exists('tz_is_rtl_lang') && tz_is_rtl_lang();
++// Tab spacing and the silver counter's float side are written inline
++// (no shared class) so we mirror them here rather than in CSS: in
++// RTL the tab row reads right-to-left, so the gap moves to the start
++// side of each tab (margin-left) and the counter floats to the
++// opposite edge (left) instead of the far edge (right).
++$t4NavGapStyle    = $t4NavRtl ? 'margin-left:14px;'  : 'margin-right:14px;';
++$t4NavGapStyleB   = $t4NavRtl ? 'font-weight:bold;margin-left:14px;' : 'font-weight:bold;margin-right:14px;';
++$t4NavFloatStyle  = $t4NavRtl ? 'float:left;' : 'float:right;';
+ ?>
+ <link rel="stylesheet" href="css/hero_items.css" type="text/css">
+ <div class="heroT4Nav" style="margin:6px 0 10px 0;">
+     <?php foreach ($t4Tabs as $key => $tab) { ?>
+         <?php if ($key === $t4tab) { ?>
+-            <span style="font-weight:bold;margin-right:14px;"><?php echo $tab['label']; ?></span>
++            <span style="<?php echo $t4NavGapStyleB; ?>"><?php echo $tab['label']; ?></span>
+         <?php } else { ?>
+-            <a href="<?php echo $tab['url']; ?>" style="margin-right:14px;"><?php echo $tab['label']; ?></a>
++            <a href="<?php echo $tab['url']; ?>" style="<?php echo $t4NavGapStyle; ?>"><?php echo $tab['label']; ?></a>
+         <?php } ?>
+     <?php } ?>
+-    <span style="float:right;"><b><?php echo HERO_SILVER; ?>:</b> <?php echo number_format($t4Silver); ?></span>
++    <span style="<?php echo $t4NavFloatStyle; ?>"><b><?php echo HERO_SILVER; ?>:</b> <?php echo number_format($t4Silver); ?></span>
+     <div style="clear:both;"></div>
+ </div>
+diff --git a/tatar/tatar/tatar/Templates/Build/train_bonus.tpl b/tatar/tatar/tatar/Templates/Build/train_bonus.tpl
+index 94912ae..3fdf92d 100644
+--- a/tatar/tatar/tatar/Templates/Build/train_bonus.tpl
++++ b/tatar/tatar/tatar/Templates/Build/train_bonus.tpl
+@@ -83,6 +83,13 @@ if (empty($GLOBALS['tbCssDone'])) {
+ .trainBonus .tbFinal { color: #4a7a24; }        /* verde: rezultatul care conteaza */
+ .trainBonus .tbFinal b { color: #3f6b1c; }
+ .trainBonus .tbFinal .clock { vertical-align: -2px; margin-right: 2px; }
++
++/* RTL: these are inline-block text badges/labels read left-to-right in a
++   row; in Arabic the row reads right-to-left, so the trailing gap after
++   each item needs to move to its start side (margin-left) instead. */
++html[dir="rtl"] .trainBonus .tbLine { margin-right: 0; margin-left: 10px; }
++html[dir="rtl"] .trainBonus .tbTag { margin-right: 0; margin-left: 3px; }
++html[dir="rtl"] .trainBonus .tbFinal .clock { margin-right: 0; margin-left: 2px; }
+ </style>
+ <?php
+ }
+diff --git a/tatar/tatar/tatar/Templates/Notice/26.tpl b/tatar/tatar/tatar/Templates/Notice/26.tpl
+index 7c443c6..6fcbc53 100644
+--- a/tatar/tatar/tatar/Templates/Notice/26.tpl
++++ b/tatar/tatar/tatar/Templates/Notice/26.tpl
+@@ -79,9 +79,10 @@ $diffLabel = $difficulty === 1
+ 
+     <p><?php echo tz_hero_adv('HERO_ADV_RETURNED', 'Your hero has returned from'); ?> <b><?php echo $diffLabel; ?></b>.</p>
+ 
++    <?php $tzAdvRtl = function_exists('tz_is_rtl_lang') && tz_is_rtl_lang(); ?>
+     <table class="adventureReward" cellpadding="1" cellspacing="1" style="width:100%;margin-top:8px;">
+         <tr>
+-            <th style="text-align:left;"><?php echo tz_hero_adv('HERO_ADV_REWARD', 'Reward'); ?></th>
++            <th style="text-align:<?php echo $tzAdvRtl ? 'right' : 'left'; ?>;"><?php echo tz_hero_adv('HERO_ADV_REWARD', 'Reward'); ?></th>
+             <th style="text-align:right;"><?php echo tz_hero_adv('HERO_ADV_AMOUNT', 'Amount'); ?></th>
+         </tr>
+         <tr>
+diff --git a/tatar/tatar/tatar/Templates/Profile/account.tpl b/tatar/tatar/tatar/Templates/Profile/account.tpl
+index 7ffc62c..2a327c6 100644
+--- a/tatar/tatar/tatar/Templates/Profile/account.tpl
++++ b/tatar/tatar/tatar/Templates/Profile/account.tpl
+@@ -268,6 +268,24 @@ if (!empty($emailError)) {
+ #sitter .addSitter .name { font-weight: normal; color: #8a877f; }
+ 
+ #sitter span.none { color: #a5a19a; }
++
++/* RTL: sitter (account manager) cards and the permission grid hold
++   real text (names, permission labels) and should read from the
++   right edge like the rest of the profile page. */
++html[dir="rtl"] #sitter .sitterCard,
++html[dir="rtl"] #sitter .permGrid {
++    text-align: right;
++}
++/* Delete icon and permission-state marker each sit to the left of a
++   text label in the LTR source; mirror the gap to the right side. */
++html[dir="rtl"] #sitter .sitterHead .del {
++    margin-right: 0;
++    margin-left: 6px;
++}
++html[dir="rtl"] #sitter .permMark {
++    margin-right: 0;
++    margin-left: 5px;
++}
+ </style>
+ 
+ <!-- =========================
+diff --git a/tatar/tatar/tatar/Templates/Ranking/milestones.tpl b/tatar/tatar/tatar/Templates/Ranking/milestones.tpl
+index 216089b..9677768 100644
+--- a/tatar/tatar/tatar/Templates/Ranking/milestones.tpl
++++ b/tatar/tatar/tatar/Templates/Ranking/milestones.tpl
+@@ -157,6 +157,7 @@ $milestoneDefs = [
+ .tzms-tooltip{display:none;position:fixed;z-index:99999;background:#1b1b1b;color:#fff;padding:8px 12px;border-radius:5px;font-size:12px;line-height:1.55;box-shadow:0 3px 10px rgba(0,0,0,0.4);max-width:260px;text-align:left;pointer-events:none;white-space:pre-line;}
+ .tzms-tip-title{font-weight:bold;color:#fff;}
+ .tzms-tip-meta{color:#b7b7b7;font-size:11px;margin-top:3px;white-space:pre-line;}
++html[dir="rtl"] .tzms-tooltip{text-align:right;}
+ </style>
+ <script type="text/javascript">
+ function tzmsShow(el) {
+diff --git a/tatar/tatar/tatar/Templates/Ranking/statistics.tpl b/tatar/tatar/tatar/Templates/Ranking/statistics.tpl
+index 81a3fc6..83af5b7 100644
+--- a/tatar/tatar/tatar/Templates/Ranking/statistics.tpl
++++ b/tatar/tatar/tatar/Templates/Ranking/statistics.tpl
+@@ -137,6 +137,13 @@ function ps_line_chart(array $points, $title, $color = '#7db72f', $invert = fals
+ .ps-sum th{background:#f2f2f2;text-align:left}
+ .ps-delta-up{color:#1f7a1f;font-weight:bold}
+ .ps-delta-down{color:#a33;font-weight:bold}
++/* RTL: only the "Metric" label column (name text) flips; the date/
++   value/change columns keep their explicit inline text-align:right -
++   those are numbers/dates, correctly right-aligned in either direction. */
++html[dir="rtl"] .ps-sum th:first-child,
++html[dir="rtl"] .ps-sum td:first-child {
++    text-align: right;
++}
+ </style>
+ 
+ <div class="ps-wrap">
+diff --git a/tatar/tatar/tatar/Templates/Ranking/ww.tpl b/tatar/tatar/tatar/Templates/Ranking/ww.tpl
+index 8b2c76a..e29fe5a 100644
+--- a/tatar/tatar/tatar/Templates/Ranking/ww.tpl
++++ b/tatar/tatar/tatar/Templates/Ranking/ww.tpl
+@@ -63,6 +63,11 @@ tr.ww-natars td{background:#fdf1e0 !important;font-weight:bold}
+ tr.ww-natars td:first-child{border-left:3px solid #c0392b}
+ .ww-natars-tag{display:inline-block;margin-left:6px;padding:0 5px;border-radius:3px;
+     background:#c0392b;color:#fff;font-size:10px;font-weight:bold;vertical-align:middle}
++
++/* RTL: the highlighted-row edge marker and the trailing "Natars" tag
++   gap both need to sit on the row's reading-start side in Arabic. */
++html[dir="rtl"] tr.ww-natars td:first-child{border-left:none;border-right:3px solid #c0392b}
++html[dir="rtl"] .ww-natars-tag{margin-left:0;margin-right:6px}
+ </style>
+ <table cellpadding="1" cellspacing="1" id="villages" class="row_table_data">
+     <thead>
+diff --git a/tatar/tatar/tatar/a2b.php b/tatar/tatar/tatar/a2b.php
+index 4c564ea..876ee38 100644
+--- a/tatar/tatar/tatar/a2b.php
++++ b/tatar/tatar/tatar/a2b.php
+@@ -113,6 +113,7 @@ $process = $units->procUnits($_POST);
+ 	<script type="text/javascript">
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/a2b2.php b/tatar/tatar/tatar/a2b2.php
+index 4d3dcaf..6a4ee55 100644
+--- a/tatar/tatar/tatar/a2b2.php
++++ b/tatar/tatar/tatar/a2b2.php
+@@ -93,6 +93,7 @@ if (isset($packages[$amount]) && $amount > 0) {
+     echo '<link href="' . GP_LOCATE . 'lang/en/lang.css?e21d2" rel="stylesheet" type="text/css" />';
+     ?>
+     <script type="text/javascript">window.addEvent('domready', start);</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ <body class="v35">
+ <div class="wrapper">
+diff --git a/tatar/tatar/tatar/activate.php b/tatar/tatar/tatar/activate.php
+index 71ba6ec..8fda90d 100644
+--- a/tatar/tatar/tatar/activate.php
++++ b/tatar/tatar/tatar/activate.php
+@@ -44,7 +44,8 @@ AccessLogger::logRequest();
+ 	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+ 	<link href="<?php echo GP_LOCATE ?>novaterra.css?f4b7d" rel="stylesheet" type="text/css" />
+ 	<link href="<?php echo GP_LOCATE ?>lang/en/lang.css" rel="stylesheet" type="text/css" />
+-	</head>
++		<?php echo tz_rtl_stylesheet_tag(); ?>
++</head>
+ 
+ <body class="v35 ie ie7" onload="initCounter()">
+ 
+diff --git a/tatar/tatar/tatar/allianz.php b/tatar/tatar/tatar/allianz.php
+index 03a0c38..d9b3b4a 100644
+--- a/tatar/tatar/tatar/allianz.php
++++ b/tatar/tatar/tatar/allianz.php
+@@ -189,6 +189,7 @@ if(isset($_GET['aid']) || isset($_GET['fid']) || isset($_GET['fid2']) ||
+ 					layer.innerHTML = desc_string;
+ 				}
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/anleitung.php b/tatar/tatar/tatar/anleitung.php
+index ff39f01..5674585 100644
+--- a/tatar/tatar/tatar/anleitung.php
++++ b/tatar/tatar/tatar/anleitung.php
+@@ -42,6 +42,7 @@ AccessLogger::logRequest();
+ 	<style type="text/css" media="screen">
+ 
+ 	</style>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ <body class="webkit contentPage">
+ <div class="wrapper">
+diff --git a/tatar/tatar/tatar/anmelden.php b/tatar/tatar/tatar/anmelden.php
+index 6a9add3..423c424 100644
+--- a/tatar/tatar/tatar/anmelden.php
++++ b/tatar/tatar/tatar/anmelden.php
+@@ -182,6 +182,7 @@ $regStep = $regErrors ? 3 : 1;
+ /* ======================================================================== */
+ #regwiz{position:relative;width:100%;max-width:520px;margin:0 auto 10px;text-align:left;
+         font-family:Arial,Helvetica,sans-serif;-webkit-box-sizing:border-box;box-sizing:border-box}
++html[dir="rtl"] #regwiz{text-align:right;}
+ #regwiz *{-webkit-box-sizing:border-box;box-sizing:border-box}
+ 
+ /* --- window chrome (sliced from the original artwork) ------------------- */
+@@ -285,7 +286,8 @@ ul.rw-err{margin:0 0 6px;padding:0 0 0 16px;color:#c0392b;font:bold 12px/17px Ar
+ .rw-back:hover{text-decoration:underline}
+ .rw-foot{margin:2px 0 0;text-align:center;font:11px Arial;color:#8a7a63}
+ </style>
+-	   </head>
++	   	<?php echo tz_rtl_stylesheet_tag(); ?>
++</head>
+ 
+ <body class="v35 ie ie7" onload="initCounter()">
+ 
+diff --git a/tatar/tatar/tatar/banned.php b/tatar/tatar/tatar/banned.php
+index adcc99c..ef63bb4 100644
+--- a/tatar/tatar/tatar/banned.php
++++ b/tatar/tatar/tatar/banned.php
+@@ -55,6 +55,7 @@ if($session->access == BANNED){
+ 	<script type="text/javascript">
+ 	window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/berichte.php b/tatar/tatar/tatar/berichte.php
+index d4c07df..c99e8a7 100644
+--- a/tatar/tatar/tatar/berichte.php
++++ b/tatar/tatar/tatar/berichte.php
+@@ -73,6 +73,7 @@ if(isset($_GET['newdid'])) {
+ 
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/build.php b/tatar/tatar/tatar/build.php
+index fa0e4e6..3b69aad 100644
+--- a/tatar/tatar/tatar/build.php
++++ b/tatar/tatar/tatar/build.php
+@@ -496,6 +496,7 @@ if ($isAjaxFragment) {
+ 
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/build_croppers.php b/tatar/tatar/tatar/build_croppers.php
+index 57078ea..3ea613d 100644
+--- a/tatar/tatar/tatar/build_croppers.php
++++ b/tatar/tatar/tatar/build_croppers.php
+@@ -234,6 +234,7 @@ $worldLabel = worldSizeLabel();
+         @media (max-width: 900px){ .cb-grid{ grid-template-columns:1fr; } }
+         pre#log { margin-top:14px; }
+     </style>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ <body class="v35 ie ie8">
+diff --git a/tatar/tatar/tatar/crop_finder.php b/tatar/tatar/tatar/crop_finder.php
+index 72d8c1c..3d27491 100644
+--- a/tatar/tatar/tatar/crop_finder.php
++++ b/tatar/tatar/tatar/crop_finder.php
+@@ -190,6 +190,7 @@ if ($wrefs) {
+ 	echo " <link href='".GP_LOCATE."novaterra.css?e21d2' rel='stylesheet' type='text/css' />";
+     echo " <link href='".GP_LOCATE."lang/en/lang.css?e21d2' rel='stylesheet' type='text/css' />"; ?>
+ <script type="text/javascript">window.addEvent('domready', start);</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ <body class="v35 ie ie8">
+ <div class="wrapper">
+diff --git a/tatar/tatar/tatar/dorf1.php b/tatar/tatar/tatar/dorf1.php
+index 9819d38..dd1842b 100644
+--- a/tatar/tatar/tatar/dorf1.php
++++ b/tatar/tatar/tatar/dorf1.php
+@@ -102,6 +102,7 @@ if (
+ 	<script type="text/javascript">
+ 	window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/dorf2.php b/tatar/tatar/tatar/dorf2.php
+index 7dacecd..42615b9 100644
+--- a/tatar/tatar/tatar/dorf2.php
++++ b/tatar/tatar/tatar/dorf2.php
+@@ -89,6 +89,7 @@ if (
+ 
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/dorf3.php b/tatar/tatar/tatar/dorf3.php
+index fbc32fb..8d0c28c 100644
+--- a/tatar/tatar/tatar/dorf3.php
++++ b/tatar/tatar/tatar/dorf3.php
+@@ -68,6 +68,7 @@ if(isset($_GET['newdid'])) {
+ 
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/feeding.php b/tatar/tatar/tatar/feeding.php
+index f01ac49..9cc4d9c 100644
+--- a/tatar/tatar/tatar/feeding.php
++++ b/tatar/tatar/tatar/feeding.php
+@@ -143,6 +143,7 @@ $fsCanAddMore = $fsSettings['enabled'] && $fsCount < $fsSettings['max_linked_per
+ 	.fs-p-add button[disabled]{background:#c8b78e;cursor:not-allowed;}
+ 	.fs-p-table{width:100%;border-collapse:collapse;margin-top:12px;}
+ 	.fs-p-table th{text-align:left;padding:6px 7px;font-size:9px;text-transform:uppercase;color:#8a7754;border-bottom:1px solid #e2d5b8;}
++	html[dir="rtl"] .fs-p-table th{text-align:right;}
+ 	.fs-p-table td{padding:6px 7px;border-bottom:1px solid #eee0c4;font-size:11px;}
+ 	.fs-p-remove{background:#b91c1c;color:#fff;border:0;border-radius:4px;padding:4px 10px;font-size:10px;cursor:pointer;}
+ 	.fs-p-empty{color:#8a7754;font-size:11px;padding:10px 0;}
+@@ -150,6 +151,7 @@ $fsCanAddMore = $fsSettings['enabled'] && $fsCount < $fsSettings['max_linked_per
+ 	<script type="text/javascript">
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ <body class="v35 ie ie8">
+diff --git a/tatar/tatar/tatar/impressum.php b/tatar/tatar/tatar/impressum.php
+index 3148843..61163bc 100644
+--- a/tatar/tatar/tatar/impressum.php
++++ b/tatar/tatar/tatar/impressum.php
+@@ -87,6 +87,7 @@ AccessLogger::logRequest();
+ 
+     </style>
+ 
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ <body class="webkit contentPage">
+diff --git a/tatar/tatar/tatar/index.php b/tatar/tatar/tatar/index.php
+index 811f674..d926fad 100644
+--- a/tatar/tatar/tatar/index.php
++++ b/tatar/tatar/tatar/index.php
+@@ -75,6 +75,7 @@ AccessLogger::logRequest();
+ 		div.c2 {left:237px;}
+ 		ul.c1 {position:absolute; left:0px; width: 686px;}
+ 	</style>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ <body class="presto indexPage">
+diff --git a/tatar/tatar/tatar/karte.php b/tatar/tatar/tatar/karte.php
+index b0a6e7e..60df25a 100644
+--- a/tatar/tatar/tatar/karte.php
++++ b/tatar/tatar/tatar/karte.php
+@@ -74,6 +74,7 @@ else{
+ 
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/karte2.php b/tatar/tatar/tatar/karte2.php
+index 125b904..bd0bff1 100644
+--- a/tatar/tatar/tatar/karte2.php
++++ b/tatar/tatar/tatar/karte2.php
+@@ -45,6 +45,7 @@ if($session->plus){
+ 	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+ 	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7i" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript">window.addEvent('domready', start);</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ <body onload="start()"><?php
+ 	include("Templates/Map/mapviewlarge.tpl");?>
+diff --git a/tatar/tatar/tatar/login.php b/tatar/tatar/tatar/login.php
+index 4bc6be9..04912ae 100644
+--- a/tatar/tatar/tatar/login.php
++++ b/tatar/tatar/tatar/login.php
+@@ -65,7 +65,8 @@ $_SESSION[ 'csrf' ] = $key;
+ 	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+ 	<link href="<?php echo GP_LOCATE ?>novaterra.css?f4b7d" rel="stylesheet" type="text/css" />
+ 		<link href="<?php echo GP_LOCATE ?>lang/en/lang.css" rel="stylesheet" type="text/css" />
+-	   </head>
++	   	<?php echo tz_rtl_stylesheet_tag(); ?>
++</head>
+ 
+ <body class="v35 ie ie7" onload="initCounter()">
+ 
+diff --git a/tatar/tatar/tatar/logout.php b/tatar/tatar/tatar/logout.php
+index 9c8e95c..d1e1eb4 100644
+--- a/tatar/tatar/tatar/logout.php
++++ b/tatar/tatar/tatar/logout.php
+@@ -55,6 +55,7 @@ AccessLogger::logRequest();
+ 
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/maintenance.php b/tatar/tatar/tatar/maintenance.php
+index c86677e..893a3bd 100644
+--- a/tatar/tatar/tatar/maintenance.php
++++ b/tatar/tatar/tatar/maintenance.php
+@@ -77,7 +77,8 @@ if($maintenance['active'] == 1 && $session->access < 9){
+ 		 border-width: 0px;
+ 		}
+ 		</style>
+-	</head>
++		<?php echo tz_rtl_stylesheet_tag(); ?>
++</head>
+ 	<body class="v35 ie ie8">
+ 		<div class="wrapper">
+ 			<img style="filter: chroma();" src="img/x.gif" id="msfilter" alt="" />
+diff --git a/tatar/tatar/tatar/manual.php b/tatar/tatar/tatar/manual.php
+index f3e8a0a..a6d7ecd 100644
+--- a/tatar/tatar/tatar/manual.php
++++ b/tatar/tatar/tatar/manual.php
+@@ -43,7 +43,8 @@ tz_load_language(LANG);
+ 	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+ 	<link href="<?php echo GP_LOCATE; ?>novaterra.css?f4b7d" rel="stylesheet" type="text/css" />
+ 		<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css" rel="stylesheet" type="text/css" />
+-	   </head>
++	   	<?php echo tz_rtl_stylesheet_tag(); ?>
++</head>
+ 	<body class="manual">
+ <?php
+ 
+diff --git a/tatar/tatar/tatar/nachrichten.php b/tatar/tatar/tatar/nachrichten.php
+index f14f545..a71f47a 100644
+--- a/tatar/tatar/tatar/nachrichten.php
++++ b/tatar/tatar/tatar/nachrichten.php
+@@ -113,6 +113,7 @@ if(isset($_GET['confirm']) && is_numeric($_GET['confirm'])){
+ 
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/notification/index.php b/tatar/tatar/tatar/notification/index.php
+index 8dffb42..8ef50b7 100644
+--- a/tatar/tatar/tatar/notification/index.php
++++ b/tatar/tatar/tatar/notification/index.php
+@@ -118,6 +118,7 @@ if (T4_COMING == true) {
+ 		}
+ 		.nv-back:hover { text-decoration: underline; }
+ 	</style>
++	<?php echo tz_rtl_stylesheet_tag(null, '../css/'); ?>
+ </head>
+ <body>
+ 	<div class="nv-card">
+diff --git a/tatar/tatar/tatar/packages.php b/tatar/tatar/tatar/packages.php
+index a980165..e9a65f0 100644
+--- a/tatar/tatar/tatar/packages.php
++++ b/tatar/tatar/tatar/packages.php
+@@ -48,6 +48,7 @@ $id = $_GET['id'];
+ 	<script type="text/javascript">
+ 	window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/password.php b/tatar/tatar/tatar/password.php
+index e0e8098..1d793b1 100644
+--- a/tatar/tatar/tatar/password.php
++++ b/tatar/tatar/tatar/password.php
+@@ -62,6 +62,7 @@ if (!isset($_REQUEST['npw'])) {
+     <link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+     <link href="<?php echo GP_LOCATE; ?>novaterra.css?f4b7d" rel="stylesheet" type="text/css" />
+     <link href="<?php echo GP_LOCATE; ?>lang/en/lang.css" rel="stylesheet" type="text/css" />
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ <body class="v35 ie ie7" onload="initCounter()">
+diff --git a/tatar/tatar/tatar/plus.php b/tatar/tatar/tatar/plus.php
+index 00942fb..b9c43b5 100644
+--- a/tatar/tatar/tatar/plus.php
++++ b/tatar/tatar/tatar/plus.php
+@@ -104,6 +104,7 @@ if (isset($_POST['redeem_code']) && class_exists('GoldShop')) {
+ 
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/plus1.php b/tatar/tatar/tatar/plus1.php
+index b1f84b8..4dc8060 100644
+--- a/tatar/tatar/tatar/plus1.php
++++ b/tatar/tatar/tatar/plus1.php
+@@ -49,6 +49,7 @@ else {
+ 
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/rules.php b/tatar/tatar/tatar/rules.php
+index 8ed3155..f3eba34 100644
+--- a/tatar/tatar/tatar/rules.php
++++ b/tatar/tatar/tatar/rules.php
+@@ -62,6 +62,7 @@ if(isset($_GET['newdid'])) {
+ 
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/spieler.php b/tatar/tatar/tatar/spieler.php
+index 728af74..67a1b69 100644
+--- a/tatar/tatar/tatar/spieler.php
++++ b/tatar/tatar/tatar/spieler.php
+@@ -97,6 +97,7 @@ else $building->procBuild($_GET);
+ 
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/spielregeln.php b/tatar/tatar/tatar/spielregeln.php
+index bfe7703..9585b1c 100644
+--- a/tatar/tatar/tatar/spielregeln.php
++++ b/tatar/tatar/tatar/spielregeln.php
+@@ -35,6 +35,7 @@ AccessLogger::logRequest();
+ 	<style type="text/css" media="screen">
+ 
+ 	</style>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ <body class="webkit contentPage">
+ <div class="wrapper">
+diff --git a/tatar/tatar/tatar/statistiken.php b/tatar/tatar/tatar/statistiken.php
+index 9391617..523a301 100644
+--- a/tatar/tatar/tatar/statistiken.php
++++ b/tatar/tatar/tatar/statistiken.php
+@@ -118,6 +118,7 @@ if (!empty($_GET['id'])) {
+ 
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/support.php b/tatar/tatar/tatar/support.php
+index d4c4f26..8ec0e57 100644
+--- a/tatar/tatar/tatar/support.php
++++ b/tatar/tatar/tatar/support.php
+@@ -83,7 +83,8 @@ function chkFormular () {
+  
+ }
+ </script>
+-	   </head>
++	   	<?php echo tz_rtl_stylesheet_tag(); ?>
++</head>
+ 
+ <body class="v35 ie ie8">
+ <div class="wrapper">
+diff --git a/tatar/tatar/tatar/terms.php b/tatar/tatar/tatar/terms.php
+index dd6cb09..665f8a7 100644
+--- a/tatar/tatar/tatar/terms.php
++++ b/tatar/tatar/tatar/terms.php
+@@ -81,6 +81,7 @@ AccessLogger::logRequest();
+         }
+     </style>
+ 
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ <body class="webkit contentPage">
+diff --git a/tatar/tatar/tatar/tutorial.php b/tatar/tatar/tatar/tutorial.php
+index 8b012e6..5411aa6 100644
+--- a/tatar/tatar/tatar/tutorial.php
++++ b/tatar/tatar/tatar/tutorial.php
+@@ -42,6 +42,7 @@ AccessLogger::logRequest();
+ 	<style type="text/css" media="screen">
+ 
+ 	</style>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ <body class="webkit contentPage">
+ <div class="wrapper">
+diff --git a/tatar/tatar/tatar/version.php b/tatar/tatar/tatar/version.php
+index f15678e..62333bf 100644
+--- a/tatar/tatar/tatar/version.php
++++ b/tatar/tatar/tatar/version.php
+@@ -62,6 +62,7 @@ else $building->procBuild($_GET);
+ 
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ <body class="v35 ie ie8">
+ <div class="wrapper">
+@@ -163,7 +164,7 @@ echo '<div class="developer-card" style="
+         grid-column: span 3;
+     " onmouseover="this.style.transform=\'translateY(-8px) scale(1.03)\'; this.style.boxShadow=\'6px 6px 20px rgba(0,0,0,0.3)\';" onmouseout="this.style.transform=\'translateY(0) scale(1)\'; this.style.boxShadow=\'3px 3px 10px rgba(0,0,0,0.2)\';">
+         <div class="developer-name" style="font-weight:bold; font-size:1.2em; color:#004080;">+ '.count($others).' Others</div>
+-        <div class="developer-role" style="margin-top:8px; font-size:1em; color:#003366; text-align:left; max-height:250px; overflow-y:auto;">'.$others_text.'</div>
++        <div class="developer-role" style="margin-top:8px; font-size:1em; color:#003366; text-align:'.((function_exists('tz_is_rtl_lang') && tz_is_rtl_lang()) ? 'right' : 'left').'; max-height:250px; overflow-y:auto;">'.$others_text.'</div>
+     </div>';
+ ?>
+ </div>
+diff --git a/tatar/tatar/tatar/warsim.php b/tatar/tatar/tatar/warsim.php
+index 8da54f7..707ce6c 100644
+--- a/tatar/tatar/tatar/warsim.php
++++ b/tatar/tatar/tatar/warsim.php
+@@ -56,6 +56,7 @@ $battle->procSim($_POST);
+ 
+ 		window.addEvent('domready', start);
+ 	</script>
++	<?php echo tz_rtl_stylesheet_tag(); ?>
+ </head>
+ 
+ 
+diff --git a/tatar/tatar/tatar/winner.php b/tatar/tatar/tatar/winner.php
+index 71d574f..a50a2fd 100644
+--- a/tatar/tatar/tatar/winner.php
++++ b/tatar/tatar/tatar/winner.php
+@@ -227,7 +227,8 @@ if ($winner) {
+ 		 border-width: 0px;
+ 		}
+ 		</style>
+-	</head>
++		<?php echo tz_rtl_stylesheet_tag(); ?>
++</head>
+ 	<body class="v35 ie ie8">
+ 		<div class="wrapper">
+ 			<img style="filter: chroma();" src="img/x.gif" id="msfilter" alt="" />
+--- new file: tatar/tatar/tatar/css/rtl.css (not in diff, included in full below) ---
+
+@CHARSET "UTF-8";
+
+/* =====================================================================
+ * Shared Arabic / RTL stylesheet
+ * ---------------------------------------------------------------------
+ * Loaded ONLY when the active interface language is RTL (Arabic, and
+ * any other RTL language later added to tz_is_rtl_lang() in
+ * GameEngine/config.php). See tz_rtl_stylesheet_tag() in that file for
+ * the loading logic and tz_html_dir_attrs() for the <html dir="..">
+ * attribute this file assumes is present.
+ *
+ * Scope: this file only touches TEXT-FLOW chrome - navigation order,
+ * sidebars, tables, forms, popups, footer. It intentionally does NOT
+ * touch:
+ *   - the village map / resource field overlay (Templates/field.tpl,
+ *     #map, #village_map, #resfeld) - these are pixel-coordinate
+ *     image maps, not text layout, and are explicitly kept LTR below.
+ *   - the hero header widget (css/hero_header.css, #tzHeroBox and
+ *     friends) - a hand-tuned absolutely-positioned icon cluster
+ *     inside #mtop, kept LTR below.
+ *   - any sprite/background-position values in compact.css /
+ *     new_images.css - those are graphic-pack artwork, not layout.
+ *   - numeric/coordinate/URL/ID strings - isolated with
+ *     unicode-bidi/direction where they appear in shared markup.
+ *
+ * Everything here prefers CSS logical properties (margin-inline-*,
+ * padding-inline-*, inset-inline-*, text-align:start/end) so it keeps
+ * working if a second RTL language is ever added without edits.
+ * ===================================================================== */
+
+html[dir="rtl"] body {
+    text-align: right;
+}
+
+/* ---------------------------------------------------------------------
+ * 1) Protected LTR islands
+ * ---------------------------------------------------------------------
+ * Absolutely-positioned graphics that must keep their original x/y
+ * math regardless of document direction. Forcing direction:ltr here
+ * stops them from inheriting dir="rtl" from <html> and re-flowing.
+ * unicode-bidi:isolate keeps their internal number/text runs from
+ * being reordered by any RTL text that happens to sit near them.
+ */
+html[dir="rtl"] #mtop,
+html[dir="rtl"] #village_map_wrap,
+html[dir="rtl"] div#village_map,
+html[dir="rtl"] div#map,
+html[dir="rtl"] img#resfeld,
+html[dir="rtl"] #wrapper,
+html[dir="rtl"] #container,
+html[dir="rtl"] #stime,
+html[dir="rtl"] #ltime,
+html[dir="rtl"] #res,
+html[dir="rtl"] #resWrap {
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
+/* #mtop's own children (village/map/report/message nav icons, gold,
+   plus button, day/night icon) keep their left-to-right reading order
+   and pixel offsets exactly as designed. */
+html[dir="rtl"] #mtop * {
+    direction: ltr;
+}
+
+/* Resource bar values ("120/800" etc.) and the header gold/silver
+   counters are numeric ratios - always LTR, never mirrored, wherever
+   they appear outside #mtop/#res too (e.g. inside tables). */
+html[dir="rtl"] .tzCoinValue,
+html[dir="rtl"] td[id^="l"],
+html[dir="rtl"] span.num,
+html[dir="rtl"] td.num,
+html[dir="rtl"] span.value,
+html[dir="rtl"] .coord,
+html[dir="rtl"] span.coordinates {
+    direction: ltr;
+    unicode-bidi: isolate;
+    display: inline-block;
+}
+
+/* ---------------------------------------------------------------------
+ * 2) Header navigation (#header / #mtop icon row)
+ * ---------------------------------------------------------------------
+ * #mtop itself stays LTR (see above) because its icons are matched to
+ * fixed sprite offsets from compact.css. What DOES need to flip is
+ * everything OUTSIDE that icon cluster: the overall page reads RTL,
+ * so #header should sit correctly, and any header content that later
+ * uses flexbox/grid in this codebase should read end-to-start.
+ */
+html[dir="rtl"] #header {
+    text-align: right;
+}
+
+/* ---------------------------------------------------------------------
+ * 3) Main 3-column layout: side_navi (left menu) / content / side_info
+ * ---------------------------------------------------------------------
+ * Original LTR order (document order, all float:left):
+ *   #side_navi -> #content -> #side_info
+ * In RTL reading order the player menu should be the column closest
+ * to the reading start (right edge) and the village-list/quests/news
+ * column should sit at the reading end (left edge) - i.e. their
+ * FLOATS swap, not their DOM order (we do not touch the templates).
+ */
+html[dir="rtl"] #side_navi {
+    float: right;
+    text-align: right;
+}
+html[dir="rtl"] #side_navi p a {
+    padding-left: 0;
+    padding-right: 12px;
+}
+html[dir="rtl"] #side_navi td.link {
+    padding-right: 0;
+    padding-left: 10px;
+}
+
+html[dir="rtl"] #side_info {
+    float: left;
+    padding-left: 0;
+    padding-right: 10px;
+    text-align: right;
+}
+html[dir="rtl"] #side_info h5,
+html[dir="rtl"] #side_info div.news {
+    margin-left: 0;
+    margin-right: 10px;
+}
+html[dir="rtl"] #side_info div.news h5 {
+    margin-right: 0;
+}
+html[dir="rtl"] #side_info div.news ul {
+    margin-left: 0;
+    margin-right: 15px;
+}
+html[dir="rtl"] #side_info td.dot {
+    text-align: right;
+}
+html[dir="rtl"] #side_info td.link {
+    padding-right: 0;
+    padding-left: 10px;
+}
+
+/* #content keeps float:left in the source (compact.css); it sits
+   naturally between the two flipped side columns either way, so no
+   change needed there - only its internal text alignment. */
+html[dir="rtl"] #content {
+    text-align: right;
+}
+html[dir="rtl"] #content h1,
+html[dir="rtl"] #content h2,
+html[dir="rtl"] #content h3 {
+    text-align: right;
+}
+
+/* Village name heading has an absolutely-positioned loyalty badge
+   (div#loyality) anchored with the game's own left/right; leave its
+   own positioning alone but make sure the heading text reads RTL. */
+html[dir="rtl"] div.village1 h1 {
+    text-align: right;
+}
+
+/* ---------------------------------------------------------------------
+ * 4) Tables (reports, messages, rankings, movements, production)
+ * ---------------------------------------------------------------------
+ * Logical text-align so header/body cells read from the correct edge.
+ * We do not touch column DOM order - browsers already right-align
+ * table flow correctly once dir="rtl" is set on an ancestor; this
+ * just fixes explicit left/center overrides already baked into the
+ * markup/CSS.
+ */
+html[dir="rtl"] table {
+    direction: rtl;
+}
+html[dir="rtl"] table th,
+html[dir="rtl"] table td {
+    text-align: right;
+}
+/* Numeric / icon-only columns stay centered or LTR-isolated instead
+   of flipping to right, since a single icon or number does not read
+   as RTL text. */
+html[dir="rtl"] table td.ico,
+html[dir="rtl"] table td.num,
+html[dir="rtl"] table td.sel,
+html[dir="rtl"] table td.dot {
+    text-align: center;
+    direction: ltr;
+}
+html[dir="rtl"] div.village1 table#movements td.dur_l,
+html[dir="rtl"] div.village1 table#movements div.dur_r,
+html[dir="rtl"] div.village1 table#movements div.dur_l {
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
+/* Timestamps and durations anywhere in tables (reports, messages,
+   movements) - keep numbers/colons in their natural order. */
+html[dir="rtl"] td.dat,
+html[dir="rtl"] td.sent,
+html[dir="rtl"] .time,
+html[dir="rtl"] span.time {
+    direction: ltr;
+    unicode-bidi: isolate;
+    text-align: right;
+}
+
+/* Message list pagination arrows (&laquo;/&raquo;) are typographic
+   quote marks whose "next/prev" meaning flips with reading direction;
+   CSS alone can't swap the glyphs safely without touching the PHP
+   that prints them, so we leave the glyphs untouched here and only
+   fix the surrounding cell alignment. */
+html[dir="rtl"] th.navi {
+    text-align: left;
+}
+
+/* ---------------------------------------------------------------------
+ * 5) Forms
+ * ---------------------------------------------------------------------
+ */
+html[dir="rtl"] form {
+    text-align: right;
+}
+html[dir="rtl"] input[type="text"],
+html[dir="rtl"] input[type="password"],
+html[dir="rtl"] input[type="email"],
+html[dir="rtl"] input[type="search"],
+html[dir="rtl"] textarea,
+html[dir="rtl"] select {
+    text-align: right;
+    direction: rtl;
+}
+/* Fields that only ever hold LTR technical content keep reading LTR
+   even inside an RTL form (coordinates, e-mail-like usernames, world
+   speed numbers, search-by-id boxes). */
+html[dir="rtl"] input[type="text"].coordinatesInput,
+html[dir="rtl"] input#xCoordInput,
+html[dir="rtl"] input#yCoordInput,
+html[dir="rtl"] div#map_coords input.text,
+html[dir="rtl"] input[name="email"],
+html[dir="rtl"] input[type="email"],
+html[dir="rtl"] input[type="url"],
+html[dir="rtl"] input.ltr-field {
+    direction: ltr;
+    text-align: right;
+    unicode-bidi: isolate;
+}
+html[dir="rtl"] label {
+    text-align: right;
+}
+html[dir="rtl"] input.check,
+html[dir="rtl"] input[type="checkbox"],
+html[dir="rtl"] input[type="radio"] {
+    margin-left: 4px;
+    margin-right: 0;
+}
+html[dir="rtl"] .trav_buttons,
+html[dir="rtl"] button {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* ---------------------------------------------------------------------
+ * 6) Popups / dialogs (build popup overlay, generic .overlay pattern)
+ * ---------------------------------------------------------------------
+ */
+html[dir="rtl"] .overlay_content {
+    text-align: right;
+    direction: rtl;
+}
+html[dir="rtl"] .overlay_content .closer {
+    left: 8px;
+    right: auto;
+}
+html[dir="rtl"] #buildPopupBody {
+    text-align: right;
+}
+html[dir="rtl"] div.popup3 {
+    text-align: right;
+}
+
+/* ---------------------------------------------------------------------
+ * 7) Footer
+ * ---------------------------------------------------------------------
+ */
+html[dir="rtl"] #footer div.footer-menu,
+html[dir="rtl"] #footer div#mfoot,
+html[dir="rtl"] #footer div#mfoot div.copyright {
+    text-align: center;
+}
+html[dir="rtl"] #footer ul.menu {
+    right: auto;
+}
+html[dir="rtl"] #footer ul.menu.menu2 {
+    right: auto;
+    left: 210px;
+}
+html[dir="rtl"] #footer ul.menu li {
+    float: right;
+}
+/* Copyright line mixes a Latin server name/version with punctuation;
+   keep it a single isolated LTR run so the year/name don't reorder. */
+html[dir="rtl"] #footer div#mfoot div.copyright {
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
+/* ---------------------------------------------------------------------
+ * 8) Plus / Gold Club - extend the .lang_rtl pattern already started
+ * in Templates/Plus/*.tpl to the rest of that section consistently.
+ * ---------------------------------------------------------------------
+ */
+html[dir="rtl"] div.plus table.lang_rtl {
+    direction: rtl;
+}
+html[dir="rtl"] div.plus div#products table.lang_rtl {
+    float: right;
+}
+html[dir="rtl"] div.plus p#product_selection,
+html[dir="rtl"] div.plus p#orders_link {
+    text-align: left;
+}
+
+/* ---------------------------------------------------------------------
+ * 9) Alliance / forum, ranking pages - generic left/right utility
+ * classes used throughout many .tpl files without IDs of their own.
+ * ---------------------------------------------------------------------
+ */
+html[dir="rtl"] .left {
+    text-align: right;
+}
+html[dir="rtl"] .right {
+    text-align: left;
+}
+html[dir="rtl"] div.c1 {
+    text-align: center;
+}
+
+/* ---------------------------------------------------------------------
+ * 9b) Building interior pages (Templates/Build/*.tpl)
+ * ---------------------------------------------------------------------
+ * A handful of building templates (wall buildings: CityWall/EarthWall/
+ * Palisade/StoneWall/MakeshiftWall/DefensiveWall/Barricade) float their
+ * illustration image to one side with the description text wrapping
+ * around it, using an INLINE style attribute. Inline styles win over
+ * normal stylesheet rules, so this needs !important to actually mirror
+ * the image to the opposite side in RTL - scoped to this one class only,
+ * nothing else in the game is affected.
+ */
+html[dir="rtl"] img.wall-model {
+    float: left !important;
+    margin: 2px 14px 10px 0 !important;
+}
+html[dir="rtl"] p.build_desc {
+    text-align: right;
+}
+
+/* ---------------------------------------------------------------------
+ * 10) Responsive / mobile
+ * ---------------------------------------------------------------------
+ * The mobile strategy in gpack/_responsive/responsive.css scales the
+ * whole absolutely-positioned game with `transform: scale(...)` rather
+ * than reflowing it, specifically to avoid breaking the map/village
+ * pixel coordinates. That strategy is direction-agnostic (it scales
+ * whatever is already laid out) so it needs no RTL-specific change;
+ * we only make sure text-flow chrome still reads correctly at small
+ * sizes, same as desktop.
+ */
+@media screen and (max-width: 640px) {
+    html[dir="rtl"] #side_navi,
+    html[dir="rtl"] #side_info {
+        text-align: right;
+    }
+}

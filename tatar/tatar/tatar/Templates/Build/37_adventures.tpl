@@ -171,6 +171,17 @@ table.t4adv td.t4empty { color: #a5a19a; text-align: center; }
     font-weight: bold;
     font-variant-numeric: tabular-nums;
 }
+
+/* RTL: the adventure location name is real translated text and should
+   read from the right edge. The countdown clock stays LTR - it's a
+   HH:MM:SS number, not text. */
+html[dir="rtl"] table.t4adv td.t4place {
+    text-align: right;
+}
+html[dir="rtl"] .t4advRunning .t4advClock {
+    direction: ltr;
+    unicode-bidi: isolate;
+}
 </style>
 
 <?php if ($t4Msg !== '') { ?>

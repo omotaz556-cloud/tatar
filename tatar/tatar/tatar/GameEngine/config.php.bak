@@ -46,7 +46,7 @@ define('CRON_TICK_SECONDS', 60);
 // Key used to access cron.php via HTTP (wget/curl or an external cron service).
 // Command-line execution (e.g. a cPanel cron job) does NOT require it.
 // Automatically generated during installation and preserved when saving configuration settings from the ACP.
-define('CRON_KEY', 'c0b6d0916480e59aa5fb24d9afb67aadbd16997c27832d5b');
+define('CRON_KEY', 'ccb7d2cf59b58c93499784aeb48007422e93e18c98e4a873');
 
 //////////////////////////////////
 // *****  DATABASE CLEANUP  *****//
@@ -110,11 +110,11 @@ date_default_timezone_set(TIMEZONE);
 
 // ***** Started
 // Defines when has server started.
-define("COMMENCE","1787113843");
+define("COMMENCE","1787075713");
 
 // ***** Server Start Date / Time
-define("START_DATE", "19.08.2026");
-define("START_TIME", "07:30");
+define("START_DATE", "18.08.2026");
+define("START_TIME", "20:23");
 
 // ***** Language
 // SERVER_LANG is the DEFAULT language of the server (chosen at install / in
@@ -138,7 +138,7 @@ define("LANG", ($__user_lang !== '' && is_file(__DIR__ . "/Lang/" . $__user_lang
 // Choose your server speed. NOTICE: Higher speed, more likely
 // to have some bugs. Lower speed, most likely no major bugs.
 // Values: 1 (normal), 3 (3x speed) etc...
-define("SPEED", "1");
+define("SPEED", "100");
 
 // ***** World size
 // Defines world size. NOTICE: DO NOT EDIT!!
@@ -183,7 +183,7 @@ define("AUTH_EMAIL",false);
 
 // ***** Troop Speed
 // Values: 1 (normal), 3 (3x speed) etc...
-define("INCREASE_SPEED","1");
+define("INCREASE_SPEED","10");
 
 // ***** Evasion Speed
 define("EVASION_SPEED","1");
@@ -265,7 +265,7 @@ define("OASIS_IRON_PRODUCTION",OASIS_IRON_MULTIPLIER*SPEED);
 define("OASIS_CROP_PRODUCTION",OASIS_CROP_MULTIPLIER*SPEED); 
 
 // ***** Medal Interval check
-define("MEDALINTERVAL",(3600*24*7));
+define("MEDALINTERVAL",604800);
 // ***** Great Workshop
 define("GREAT_WKS",false);
 // ***** Tourn threshold
@@ -385,9 +385,9 @@ define("PLUS_PACKAGE_E_PRICE","49,99");
 //Plus Package E Gold
 define("PLUS_PACKAGE_E_GOLD","2000");
 //Plus account lenght
-define("PLUS_TIME",(3600*24*7));
+define("PLUS_TIME",604800);
 //+25% production lenght
-define("PLUS_PRODUCTION",(3600*24*7));
+define("PLUS_PRODUCTION",604800);
 
 //////////////////////////////////
 //    **** LOG SETTINGS  ****   //
@@ -404,20 +404,20 @@ define("LOG_GOLD_FIN",false);
 // LOG ADMIN
 define("LOG_ADMIN",false);
 // LOG ATTACK REPORTS
-define("LOG_WAR",false);
+define("LOG_WAR",true);
 // LOG MARKET REPORTS
 define("LOG_MARKET",false);
 // LOG ILLEGAL ACTIONS
-define("LOG_ILLEGAL",false);
+define("LOG_ILLEGAL",true);
 
 //////////////////////////////////
 // ****  NEWSBOX SETTINGS  **** //
 //////////////////////////////////
 //true = enabled
 //false = disabled
-define("NEWSBOX1",false);
-define("NEWSBOX2",false);
-define("NEWSBOX3",false);
+define("NEWSBOX1",true);
+define("NEWSBOX2",true);
+define("NEWSBOX3",true);
 
 //////////////////////////////////
 //   ****  SQL SETTINGS  ****   //
@@ -443,7 +443,7 @@ define("SQL_PASS", "novaterrapass");
 define("SQL_DB", "novaterra");
 
 // ***** Database - Table Prefix
-define("TB_PREFIX", "s94cc_");
+define("TB_PREFIX", "s9c1e_");
 
 // ***** Database type
 // 0 = MYSQL
@@ -493,14 +493,14 @@ define("LIMIT_MAILBOX",false);
 define("MAX_MAIL","30");
 
 // ***** Include administrator in statistics/rank
-define("INCLUDE_ADMIN", false);
+define("INCLUDE_ADMIN", true);
 
 ////////////////////////////////////
 //   ****  ADMIN SETTINGS  ****   //
 ////////////////////////////////////
 
 // ***** Admin Email
-define("ADMIN_EMAIL", "omotaz323@gmail.com");
+define("ADMIN_EMAIL", "admin@admin.com");
 
 // ***** Admin Name
 define("ADMIN_NAME", "admin");
@@ -509,7 +509,7 @@ define("ADMIN_NAME", "admin");
 define("ADMIN_RECEIVE_SUPPORT_MESSAGES", true);
 
 // ***** Allow Admin accounts to be raided and attacked
-define("ADMIN_ALLOW_INCOMING_RAIDS", true);
+define("ADMIN_ALLOW_INCOMING_RAIDS", false);
 
 /////////////////////////////////////////////////
 //   ****  NEW MECHANICS AND FUNCTIONS  ****   //
@@ -523,23 +523,23 @@ define("NEW_FUNCTIONS_TRIBE_IMAGES", false);
 define("NEW_FUNCTIONS_MHS_IMAGES", false);
 define("NEW_FUNCTIONS_DISPLAY_ARTIFACT", false);
 define("NEW_FUNCTIONS_DISPLAY_WONDER", false);
-define("NEW_FUNCTIONS_VACATION", false);
-define("NEW_FUNCTIONS_DISPLAY_CATAPULT_TARGET", false);
-define("NEW_FUNCTIONS_MANUAL_NATURENATARS", false);
-define("NEW_FUNCTIONS_DISPLAY_LINKS", false);
-define("NEW_FUNCTIONS_MEDAL_3YEAR", false);
-define("NEW_FUNCTIONS_MEDAL_5YEAR", false);
-define("NEW_FUNCTIONS_MEDAL_10YEAR", false);
-define("NEW_FUNCTIONS_SPECIAL_MEDALS_SYSTEM", false);
+define("NEW_FUNCTIONS_VACATION", true);
+define("NEW_FUNCTIONS_DISPLAY_CATAPULT_TARGET", true);
+define("NEW_FUNCTIONS_MANUAL_NATURENATARS", true);
+define("NEW_FUNCTIONS_DISPLAY_LINKS", true);
+define("NEW_FUNCTIONS_MEDAL_3YEAR", true);
+define("NEW_FUNCTIONS_MEDAL_5YEAR", true);
+define("NEW_FUNCTIONS_MEDAL_10YEAR", true);
+define("NEW_FUNCTIONS_SPECIAL_MEDALS_SYSTEM", true);
 define("NEW_FUNCTIONS_MILESTONES", false);
-define("NEW_FUNCTIONS_MEDAL_RESET", false);
-define("NEW_FUNCTIONS_HERO_T4", false);
+define("NEW_FUNCTIONS_MEDAL_RESET", true);
+define("NEW_FUNCTIONS_HERO_T4", true);
 define("NEW_FUNCTION_TRIBE_HUNS", false);
 define("NEW_FUNCTION_TRIBE_EGIPTEANS", false);
 define("NEW_FUNCTION_TRIBE_SPARTANS", false);
 define("NEW_FUNCTION_TRIBE_VIKINGS", false);
-define("NEW_FUNCTION_REGISTRATION_GOLD", false);
-define("NEW_FUNCTION_REGISTRATION_GOLD_VALUE", 200);
+define("NEW_FUNCTION_REGISTRATION_GOLD", true);
+define("NEW_FUNCTION_REGISTRATION_GOLD_VALUE", 5000);
 
 //////////////////////////////////////////
 //   ****  DO NOT EDIT SETTINGS  ****   //
@@ -584,9 +584,9 @@ define("PAGE_ACCESS_LOG_FILENAME", 'access.log'); // filename ONLY, no path!
 ////////////////////////////////////////////
 //   ****  DOMAIN/SERVER SETTINGS  ****   //
 ////////////////////////////////////////////
-define("DOMAIN", "http://localhost:8080/");
-define("HOMEPAGE", "http://localhost:8080/");
-define("SERVER", "http://localhost:8080/");
+define("DOMAIN", "http://eye-clause-austin-balance.trycloudflare.com/");
+define("HOMEPAGE", "http://eye-clause-austin-balance.trycloudflare.com/");
+define("SERVER", "http://eye-clause-austin-balance.trycloudflare.com/");
 
 $requse = 0;
 

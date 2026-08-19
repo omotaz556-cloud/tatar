@@ -104,6 +104,7 @@ if (isset($_POST['redeem_code']) && class_exists('GoldShop')) {
 
 		window.addEvent('domready', start);
 	</script>
+	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 
 

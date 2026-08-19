@@ -35,6 +35,7 @@ AccessLogger::logRequest();
 	<style type="text/css" media="screen">
 
 	</style>
+	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 <body class="webkit contentPage">
 <div class="wrapper">

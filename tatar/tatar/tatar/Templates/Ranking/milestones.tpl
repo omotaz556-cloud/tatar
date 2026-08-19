@@ -157,6 +157,7 @@ $milestoneDefs = [
 .tzms-tooltip{display:none;position:fixed;z-index:99999;background:#1b1b1b;color:#fff;padding:8px 12px;border-radius:5px;font-size:12px;line-height:1.55;box-shadow:0 3px 10px rgba(0,0,0,0.4);max-width:260px;text-align:left;pointer-events:none;white-space:pre-line;}
 .tzms-tip-title{font-weight:bold;color:#fff;}
 .tzms-tip-meta{color:#b7b7b7;font-size:11px;margin-top:3px;white-space:pre-line;}
+html[dir="rtl"] .tzms-tooltip{text-align:right;}
 </style>
 <script type="text/javascript">
 function tzmsShow(el) {

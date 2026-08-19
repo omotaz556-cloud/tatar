@@ -189,6 +189,7 @@ if(isset($_GET['aid']) || isset($_GET['fid']) || isset($_GET['fid2']) ||
 					layer.innerHTML = desc_string;
 				}
 	</script>
+	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 
 

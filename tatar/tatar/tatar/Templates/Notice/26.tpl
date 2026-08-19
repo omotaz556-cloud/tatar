@@ -79,9 +79,10 @@ $diffLabel = $difficulty === 1
 
     <p><?php echo tz_hero_adv('HERO_ADV_RETURNED', 'Your hero has returned from'); ?> <b><?php echo $diffLabel; ?></b>.</p>
 
+    <?php $tzAdvRtl = function_exists('tz_is_rtl_lang') && tz_is_rtl_lang(); ?>
     <table class="adventureReward" cellpadding="1" cellspacing="1" style="width:100%;margin-top:8px;">
         <tr>
-            <th style="text-align:left;"><?php echo tz_hero_adv('HERO_ADV_REWARD', 'Reward'); ?></th>
+            <th style="text-align:<?php echo $tzAdvRtl ? 'right' : 'left'; ?>;"><?php echo tz_hero_adv('HERO_ADV_REWARD', 'Reward'); ?></th>
             <th style="text-align:right;"><?php echo tz_hero_adv('HERO_ADV_AMOUNT', 'Amount'); ?></th>
         </tr>
         <tr>
