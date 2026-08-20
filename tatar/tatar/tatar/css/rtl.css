@@ -3,8 +3,10 @@
 
    Scoped strictly to html[dir="rtl"] - has ZERO effect on the English
    (LTR) layout, does not touch templates, does not touch village/map
-   coordinates or sprites. Only repositions the three existing
-   top-level layout columns using CSS floats. */
+   coordinates or sprites. Repositions the three existing top-level
+   layout columns and the map/production sub-pair using CSS floats,
+   and fixes the village-title clipping caused by a leftover LTR
+   position offset - see the rule comments below for each. */
 
 /* ---------------------------------------------------------------------
  * Pixel-coordinate / fixed-layout regions: keep them internally LTR so
@@ -77,6 +79,56 @@ html[dir="rtl"] #side_info div.news {
 html[dir="rtl"] #side_info td.link {
     padding-right: 0;
     padding-left: 10px;
+}
+
+/* ---------------------------------------------------------------------
+ * Village title (h1, dorf1.php / dorf2.php / dorf3.php).
+ * lang/en/compact.css nudges the title with
+ * "div.village1 h1 { position:relative; left:10px }" - a cosmetic 10px
+ * offset from its own static position. #content (div.village1) clips
+ * overflow ("overflow:hidden"), and the title's static box already
+ * spans #content's full inner width, so that +10px offset pushes the
+ * title's right edge 10px past #content's real (clipped) right edge.
+ * In English this is invisible: text-align is left by default, so the
+ * title hugs the LEFT side of its box and never reaches that clipped
+ * right edge. Under RTL, "#content h1 { text-align:right }" (above)
+ * hugs the title against that same box - now 10px inside the clipped
+ * zone - so the start of the Arabic title (its rightmost glyphs, read
+ * first in RTL) was being cut off by the fixed container.
+ * Mirroring the offset to "right:10px" keeps the same 10px cosmetic
+ * inset, on the correct side for RTL, but pulls the box back inside
+ * #content's visible bounds instead of past them, so the full title
+ * (e.g. "قرية <username>") renders without clipping. Village naming
+ * logic itself (tz_display_village_name() in GameEngine/config.php)
+ * is untouched - this is a display-only CSS position fix.
+ * --------------------------------------------------------------------- */
+html[dir="rtl"] div.village1 h1 {
+    left: auto;
+    right: 10px;
+}
+
+/* ---------------------------------------------------------------------
+ * Map / production pane (dorf1.php: #village_map inside
+ * #village_map_wrap, and #map_details - movement/production/troops -
+ * a sibling of #village_map_wrap, pulled up next to it with a negative
+ * margin-top). In English these sit map on the left, production info
+ * on the right (lang/en/compact.css: village_map float:left,
+ * map_details float:right). The Arabic reference mirrors this pair:
+ * production/movement/troops on the LEFT, village map on the RIGHT.
+ * Only the float side of these two boxes flips here - #village_map's
+ * own internal pixel coordinates (resource field icons etc.) stay
+ * LTR/isolated via the direction:ltr rule above, so no sprite or
+ * coordinate is touched, just which side of the row each box renders
+ * on. margin-right/-left swap for the same reason td.ico padding was
+ * swapped below: keep the existing 1px visual gap, on the new side.
+ * --------------------------------------------------------------------- */
+html[dir="rtl"] div.village1 div#village_map {
+    float: right;
+}
+html[dir="rtl"] div.village1 div#map_details {
+    float: left;
+    margin-right: 0;
+    margin-left: 1px;
 }
 
 /* ---------------------------------------------------------------------
