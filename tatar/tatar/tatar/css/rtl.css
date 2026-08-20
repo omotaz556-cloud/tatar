@@ -47,6 +47,16 @@ html[dir="rtl"] #mbig {
 html[dir="rtl"] #side_navi {
     float: right;
 }
+/* Templates/menu.tpl groups the nav links into separate <p> blocks
+ * (main links / Forum / Discord / Plus+Support). compact.css puts
+ * 28px margin-bottom on every "#side_navi p", which reads as large
+ * empty gaps between groups. Tightening it stacks all the links
+ * (Home/Guide/Profile/Logout/Forum/Discord/Plus/Support) close under
+ * each other, matching the reference; #side_navi's own position
+ * (float:right, outside #content) above is untouched. */
+html[dir="rtl"] #side_navi p {
+    margin: 0 0 2px;
+}
 html[dir="rtl"] #side_navi p a {
     padding-left: 0;
     padding-right: 12px;
@@ -145,14 +155,116 @@ html[dir="rtl"] body {
     font-family: "Segoe UI", Tahoma, Arial, sans-serif;
 }
 html[dir="rtl"] #mid,
+html[dir="rtl"] #content,
 html[dir="rtl"] #side_navi,
 html[dir="rtl"] #side_info {
-    font-size: 11pt;
-    line-height: 22px;
+    font-size: 13pt;
+    line-height: 26px;
 }
 html[dir="rtl"] #content h1 {
     text-align: right;
 }
+
+/* ---------------------------------------------------------------------
+ * Typography-only pass (no positioning/structure touched below).
+ *
+ * The 11pt -> 13pt / 22px -> 26px bump above (~+18%) covers ordinary
+ * flowed text under #mid/#content/#side_navi/#side_info (nav links,
+ * news, quest text, etc). It does NOT reach table cells: compact.css
+ * sets "table td, table th { font-size:13px }" directly on the
+ * elements (production/troops/movement rows, td.ico/td.res/td.num/
+ * td.per, td.un), which is a same-or-higher-specificity sibling rule
+ * that the ancestor font-size bump can't override through inheritance
+ * alone. Those are sized/weighted explicitly below instead, each
+ * scoped to div.village1 table so English (div.village1 with no
+ * html[dir="rtl"] ancestor) is untouched. No width/height/float/
+ * position property appears in this block - text metrics only, so
+ * table column layout and cell positions are unaffected.
+ * --------------------------------------------------------------------- */
+html[dir="rtl"] div.village1 table thead th {
+    font-size: 15px;
+    font-weight: 700;
+}
+html[dir="rtl"] div.village1 table td.res {
+    font-size: 14px;
+    font-weight: 600;
+}
+html[dir="rtl"] div.village1 table td.un {
+    font-size: 14px;
+    font-weight: 600;
+}
+html[dir="rtl"] div.village1 table td.num {
+    font-size: 15px;
+    font-weight: 700;
+}
+html[dir="rtl"] div.village1 table td.per {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Village title: bold + moderately larger, but kept inside the exact
+ * 29px height the map/production alignment above depends on
+ * ("#map_details { margin-top:-29px }" pulls production up to sit
+ * flush with the title row) - height/left-right position are left
+ * untouched from the fix above, only font metrics change, and
+ * line-height is set to the box's own 29px so the larger bold glyphs
+ * still fit with no vertical clipping under #content's overflow:hidden. */
+html[dir="rtl"] div.village1 h1 {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 29px;
+}
+
+/* Sidebar / navigation links (Home, Guide, Profile, Logout, Forum,
+ * Discord, Plus, Support) and the left "hero" sidebar's own headings
+ * and village-list links - bold only, no size/position change to the
+ * links themselves (padding/float already fixed above). */
+html[dir="rtl"] #side_navi p a {
+    font-weight: 600;
+}
+html[dir="rtl"] #side_info h5 {
+    font-weight: 700;
+}
+html[dir="rtl"] #side_info table#vlist td.link a {
+    font-weight: 600;
+}
+
+/* "في الساعة" - Templates/production.tpl td.per, already sized/bolded
+ * above; this adds a touch more visual weight (slightly muted color
+ * kept as-is, no color change requested) via letter-spacing so it
+ * reads clearly next to the bold resource numbers beside it. */
+html[dir="rtl"] div.village1 table td.per {
+    letter-spacing: 0.2px;
+}
+
+/* Hero/character image (Templates/quest.tpl #qge img - the tribe
+ * guide illustration inside #side_info, the left "hero" sidebar).
+ * The template sets a fixed inline "style=height:174px", which beats
+ * any external stylesheet rule regardless of selector specificity, so
+ * !important is required here to size it up at all; scoped to
+ * html[dir="rtl"] #side_info #qge img only, so the English page (no
+ * html[dir="rtl"] ancestor) keeps the original inline 174px untouched.
+ * +12% (174px -> 195px) is inside the requested 10-15% range. Width is
+ * left auto so the image's own aspect ratio scales it proportionally -
+ * no crop, no distortion, no change to #qge's own left position. */
+html[dir="rtl"] #side_info #qge img {
+    height: 195px !important;
+    width: auto !important;
+}
+
+/* ---------------------------------------------------------------------
+ * Village map image: intentionally NOT resized.
+ * div.village1 div#village_map is fixed at 300x264px, and every
+ * resource-field icon inside it (img.rf1 .. img.rf18) is positioned
+ * with absolute left/top pixel offsets tuned to exactly that box. The
+ * map already sits directly beside #map_details (production, 229px)
+ * inside #content's fixed 537px width, floated right/left above with
+ * only a few px of spare room. Enlarging the map 10-15% (~330-345px)
+ * would either overlap #map_details or get cut by #content's
+ * overflow:hidden - i.e. exactly the "breaks the game's coordinate
+ * system / map layout" case flagged as a do-not-resize condition, so
+ * per that instruction its original dimensions are kept unchanged.
+ * --------------------------------------------------------------------- */
 
 /* ---------------------------------------------------------------------
  * Production table (Templates/production.tpl - #production, and the
