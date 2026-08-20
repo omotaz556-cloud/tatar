@@ -32,23 +32,36 @@ else {
 	<script src="unx.js?f4b7h" type="text/javascript"></script>
 	<script src="new.js?0faab" type="text/javascript"></script>
 	<?php
-	// lang/<LANG> css folder: use the active game language, falling back to
-	// "en" if that language has no CSS folder in this graphic pack yet.
-	$__css_lang = (is_dir(__DIR__ . "/" . GP_LOCATE . "lang/" . LANG)) ? LANG : "en";
+	// Base game CSS: always load the English/base files here, exactly like
+	// every other page (dorf1.php, karte.php, plus.php, ...). Arabic/RTL is
+	// layered on top afterwards via the single shared tz_rtl_stylesheet_tag()
+	// call below - never by swapping out these base links.
+	//
+	// BUG FIXED (same one plus.php had): this used to pick a per-language
+	// folder ($__css_lang = "ar" whenever gpack/.../lang/ar/ exists) and load
+	// "lang/ar/lang.css" + "lang/ar/compact.css" instead of the English
+	// ones. The "ar" folder only ships a small RTL OVERRIDE stylesheet
+	// (lang.css) meant to sit on top of the English base - it has no
+	// compact.css of its own, so that second link 404'd and the page's
+	// entire base stylesheet silently failed to load for Arabic players.
 	?>
-	<link href="<?php echo GP_LOCATE; ?>lang/<?php echo $__css_lang; ?>/lang.css?f4b7d" rel="stylesheet" type="text/css" />
-	<link href="<?php echo GP_LOCATE; ?>lang/<?php echo $__css_lang; ?>/compact.css?f4b7i" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7i" rel="stylesheet" type="text/css" />
 	<?php
 	// GP_LOCATE contine deja pachetul efectiv: alegerea jucatorului cand
 	// e permisa si valida, altfel pachetul serverului (vezi config.php).
 	echo "
 	<link href='".GP_LOCATE."novaterra.css?e21d2' rel='stylesheet' type='text/css' />
-	<link href='".GP_LOCATE."lang/".$__css_lang."/lang.css?e21d2' rel='stylesheet' type='text/css' />";
+	<link href='".GP_LOCATE."lang/en/lang.css?e21d2' rel='stylesheet' type='text/css' />";
 	?>
 	<script type="text/javascript">
 
 		window.addEvent('domready', start);
 	</script>
+	<?php // Arabic/RTL CSS is loaded through the single shared
+	// tz_rtl_stylesheet_tag() mechanism below - see GameEngine/config.php -
+	// on top of the English base links above, exactly like every other
+	// game page. ?>
 	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 

@@ -135,7 +135,7 @@ div#footer ul.menu li {
 div#footer div.footer-menu,
 div#footer div#mfoot,
 div#footer div#mfoot div.copyright {
-    text-align: left;
+    text-align: right;
 }
 div#footer ul.menu li.copyright {
     direction: ltr;

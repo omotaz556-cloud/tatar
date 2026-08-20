@@ -87,23 +87,51 @@ if (isset($_POST['redeem_code']) && class_exists('GoldShop')) {
 	<script src="unx.js?f4b7h" type="text/javascript"></script>
 	<script src="new.js?0faab" type="text/javascript"></script>
 	<?php
-	// lang/<LANG> css folder: use the active game language, falling back to
-	// "en" if that language has no CSS folder in this graphic pack yet.
-	$__css_lang = (is_dir(__DIR__ . "/" . GP_LOCATE . "lang/" . LANG)) ? LANG : "en";
+	// Base game CSS: ALWAYS load the English/base files here, exactly like
+	// every other page (dorf1.php, dorf2.php, karte.php, build.php,
+	// berichte.php, nachrichten.php, allianz.php, spieler.php,
+	// statistiken.php, ...). Arabic/RTL is layered on top afterwards via the
+	// single shared tz_rtl_stylesheet_tag() call below - never by swapping
+	// out these base links.
+	//
+	// BUG FIXED: this page used to pick a per-language folder here
+	// ($__css_lang = "ar" whenever gpack/.../lang/ar/ exists) and load
+	// "lang/ar/lang.css" + "lang/ar/compact.css" instead of the English
+	// ones. The "ar" folder only ships a small RTL OVERRIDE stylesheet
+	// (lang.css) meant to sit on top of the English base - it has no
+	// compact.css of its own, so that second link 404'd and the entire
+	// base stylesheet (all of #content/#side_navi/#side_info's widths and
+	// floats, table styling, fonts, etc.) silently failed to load for
+	// Arabic players. It also skipped lang/en/lang.css, which is what
+	// @imports modules/new_layout_ltr.css (the #mid/#side_navi/#side_info
+	// column widths) - so the three-column layout had no widths to lay
+	// out against at all.
+	//
+	// That's why the layout looked broken for Arabic on this page only:
+	// #side_navi and #side_info floats were being set (by
+	// gpack/.../lang/ar/lang.css and by css/rtl.css) but had no base
+	// widths/columns to float within, so #side_info (menu.tpl's "hero"
+	// column - multivillage list, quest character image, news) wrapped
+	// onto its own line instead of sitting beside #content as the left
+	// column, which is also why the character image looked misplaced.
 	?>
-	<link href="<?php echo GP_LOCATE; ?>lang/<?php echo $__css_lang; ?>/lang.css?f4b7d" rel="stylesheet" type="text/css" />
-	<link href="<?php echo GP_LOCATE; ?>lang/<?php echo $__css_lang; ?>/compact.css?f4b7i" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7i" rel="stylesheet" type="text/css" />
 	<?php
 	// GP_LOCATE contine deja pachetul efectiv: alegerea jucatorului cand
 	// e permisa si valida, altfel pachetul serverului (vezi config.php).
 	echo "
 	<link href='".GP_LOCATE."novaterra.css?e21d2' rel='stylesheet' type='text/css' />
-	<link href='".GP_LOCATE."lang/".$__css_lang."/lang.css?e21d2' rel='stylesheet' type='text/css' />";
+	<link href='".GP_LOCATE."lang/en/lang.css?e21d2' rel='stylesheet' type='text/css' />";
 	?>
 	<script type="text/javascript">
 
 		window.addEvent('domready', start);
 	</script>
+	<?php // Arabic/RTL CSS (css/rtl.css, plus any per-gpack lang/ar/lang.css
+	// override) is loaded through the single shared tz_rtl_stylesheet_tag()
+	// mechanism below - see GameEngine/config.php - on top of the English
+	// base links above, exactly like every other game page. ?>
 	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 

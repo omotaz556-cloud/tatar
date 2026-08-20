@@ -5751,7 +5751,7 @@ div.plus table.plusFunctions td.man {
     width: 4%;
 }
 div.plus table.plusFunctions td.desc {
-    text-align: left;
+    text-align: right;
 }
 div.plus table.plusFunctions td.dur {
     width: 15%;
