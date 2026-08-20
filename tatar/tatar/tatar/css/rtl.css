@@ -115,6 +115,7 @@ html[dir="rtl"] #side_navi {
  * so English is untouched. */
 html[dir="rtl"] #side_navi {
     margin-top: 150px;
+    margin-right: 100px;
 }
 /* Templates/menu.tpl groups the nav links into separate <p> blocks
  * (main links / Forum / Discord / Plus+Support). compact.css puts
@@ -142,7 +143,6 @@ html[dir="rtl"] #side_navi td.link {
 html[dir="rtl"] #content {
     float: right;
     text-align: right;
-    margin-right: 120px;
 }
 
 html[dir="rtl"] #side_info {
