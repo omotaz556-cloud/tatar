@@ -145,6 +145,26 @@ if (isset($_POST['redeem_code']) && class_exists('GoldShop')) {
 <div id="mid">
 <?php include("Templates/menu.tpl"); ?>
 <?php
+/**
+ * BUG FIXED: this page never wrapped its Plus/*.tpl includes in a
+ * <div id="content"> the way every other page with this same
+ * #side_navi / #content / #side_info layout does (spieler.php,
+ * statistiken.php, karte.php via mapview.tpl/vilview.tpl,
+ * dorf1.php/dorf2.php via menu.tpl). menu.tpl only opens #side_navi
+ * here (its own #content/#side_info block is guarded by
+ * if($sessionOk) and is only used for the post-registration
+ * announcement screen), so without this wrapper #side_info - opened
+ * a few lines below - had no #content sibling to float beside.
+ * lang/en/compact.css floats #side_navi, #content and #side_info as
+ * three siblings; missing the middle one broke that chain and
+ * #side_info (menu.tpl's "hero" column, which is where
+ * Templates/quest.tpl's #qge character image lives) fell out of the
+ * column layout and rendered loose in the page's whitespace instead
+ * of sitting in its normal spot in the sidebar.
+ */
+?>
+<div id="content" class="plus">
+<?php
 if(isset($_GET['id'])){
 	$id = preg_replace("/[^a-zA-Z0-9_-]/", "", $_GET['id']);
 } 
@@ -210,6 +230,9 @@ if($id == 15){
 if($id > 15){
 	include ("Templates/Plus/3.tpl");
 }
+?>
+</div>
+<?php
 if (isset($_POST['mail'])) {
 
 	$email = trim($_POST['mail']);

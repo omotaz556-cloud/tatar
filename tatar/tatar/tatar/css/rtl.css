@@ -108,6 +108,7 @@ html[dir="rtl"] #mbig {
  * --------------------------------------------------------------------- */
 html[dir="rtl"] #side_navi {
     float: right;
+    margin-right: 100px;
 }
 /* gpack/novaterra_classic/modules/new_images.css sets
  * "#side_navi { margin-top: 30px; }" (shared by LTR and RTL). Nudging
@@ -115,7 +116,6 @@ html[dir="rtl"] #side_navi {
  * so English is untouched. */
 html[dir="rtl"] #side_navi {
     margin-top: 150px;
-    margin-right: 100px;
 }
 /* Templates/menu.tpl groups the nav links into separate <p> blocks
  * (main links / Forum / Discord / Plus+Support). compact.css puts
@@ -377,6 +377,31 @@ html[dir="rtl"] div.village1 table td.ico {
 }
 html[dir="rtl"] div.village1 table td.num {
     text-align: left;
+}
+
+/* ---------------------------------------------------------------------
+ * Plus page feature table (Templates/Plus/3.tpl, table.plusFunctions,
+ * inside div.plus - fixed 502px content width). The table has no width
+ * of its own in compact.css (auto layout), which is fine in English at
+ * 11pt/no zoom - the row text fits inside 502px without help. Under
+ * Arabic's larger 13pt font and the page-wide zoom:1.5 above, the same
+ * row content (especially the long "desc" cell text) no longer fits at
+ * its natural (shrink-to-fit) width, so the table grows wider than its
+ * 502px container. Because div.plus/#content is "overflow:hidden" and
+ * text-align:right, that extra width overflows to the LEFT - and since
+ * dir="rtl" also mirrors the table's column order (man rightmost, then
+ * desc, dur, cost, act running right-to-left), it is exactly the dur/
+ * cost/act columns - the ones mirrored onto the left - that end up
+ * pushed past the clipped left edge and disappear, leaving only the
+ * "؟" (man) and description columns visible.
+ * Giving the table an explicit width:100% (of its 502px parent) makes
+ * the browser fit the auto-layout column widths inside that box instead
+ * of growing past it - long cell text wraps onto multiple lines instead
+ * of forcing the table wider, so every column (including the ones that
+ * were being clipped) stays inside the visible area. Scoped narrowly to
+ * this table only; English (no html[dir="rtl"] ancestor) is untouched. */
+html[dir="rtl"] div.plus table.plusFunctions {
+    width: 100%;
 }
 
 /* ---------------------------------------------------------------------
