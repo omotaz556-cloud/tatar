@@ -230,7 +230,7 @@ html[dir="rtl"] #regwiz{text-align:right;}
          text-transform:uppercase;letter-spacing:1px}
 .rw-lines{margin:0;padding:0;list-style:none;position:relative;z-index:2}
 .rw-lines li{min-height:24px;padding:3px 0 3px 30px;font:bold 12px/18px Arial,Helvetica,sans-serif;color:#5b4a36;
-             background-repeat:no-repeat;background-position:0 50%;background-size:20px auto}
+             background-repeat:no-repeat;text-align:left;background-position:0 50%;background-size:20px auto}
 .rw-portrait{position:absolute;right:0;bottom:0;height:100%;width:auto;z-index:1;border:0}
 .rw-badge{position:absolute;top:-2px;right:38%;width:150px;max-width:31%;z-index:3;border:0}
 

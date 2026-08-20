@@ -40,8 +40,8 @@ body.indexPage #content .grit{width:830px;background:transparent none;}body.cont
 .grit .infobox{float:left;margin-right:9px;margin-left:15px;min-height:391px;width:378px;}
 .grit .infobox div{padding-left:43px;padding-right:30px;}#what_is_travian{padding-top:5px;}
 #what_is_travian p{margin:0;}#what_is_travian h2{font-size:18px;font-weight:normal;color:#71d000;line-height:20px;margin-bottom:10px;text-shadow:0 2px 1px #fff;}
-#what_is_travian .play_now{margin:10px 0;}#player_counter{position:relative;padding:0;left:23px;height:98px;width:330px;}
-#player_counter table{position:absolute;left:135px;top:20px;width:165px;border-spacing:0;}
+#what_is_travian .play_now{margin:10px 0;}#player_counter{position:relative;padding:0;left:23px;height:98px;width:380px;}
+#player_counter table{position:absolute;left:122px;top:8px;width:150px;border-spacing:0;}
 #player_counter table th{font-weight:normal;}#player_counter table td{font-weight:bold;}
 #about_the_game h2{font-size:15px;line-height:20px;margin-bottom:5px;}#about_the_game ul{margin:0;padding:0;margin-top:5px;margin-left:15px;}
 #about_the_game li{line-height:19px;}#news_from_forum h2{font-size:15px;line-height:20px;margin-bottom:5px;cursor:pointer;}
@@ -55,7 +55,7 @@ body.indexPage #content .grit{width:830px;background:transparent none;}body.cont
 #screenshot_list img{width:98px;height:73px;}#newsbox{padding-bottom:25px;}#newsbox h2{display:block;padding:7px 15px 0;height:30px;margin:0;font-size:17px;color:#4c4c4c;}
 #newsbox .news{width:397px;padding-bottom:0;padding-left:15px;}#newsbox .news h4{margin:0;margin-top:3px;}
 #newsbox .news p.date{font-size:11px;color:#999;padding-bottom:0;}#newsbox .news p{margin:0;padding-bottom:10px;padding-right:30px;}
-#footer{position:absolute;margin:0 auto;right:0;left:0;bottom:0;height:90px;z-index:80;}
+#footer{position:absolute;margin:-380px auto;right:0;left:0;bottom:0;height:90px;z-index:80;}
 #footer .logo_traviangames{height:34px;width:182px;}#footer .logo{position:absolute;top:20px;left:6px;}
 #footer li,#footer a{color:#787878;font-size:11px;line-height:20px;}#footer .menu{position:absolute;top:18px;right:9px;}
 #footer .container{margin:0 auto;position:relative;width:840px;}#footer .copyright{direction:ltr;clear:left;position:absolute;right:3px;top:20px;}
