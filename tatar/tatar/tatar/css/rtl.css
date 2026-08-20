@@ -1,12 +1,23 @@
-/* Arabic (RTL) layout overrides for the in-game village views
-   (dorf1.php / dorf2.php / dorf3.php).
+/* Arabic (RTL) layout overrides - the ONE shared RTL stylesheet for the
+   whole game.
+
+   Loaded on EVERY game page (dorf1.php, dorf2.php, dorf3.php, karte.php,
+   karte2.php, build.php, berichte.php, nachrichten.php, allianz.php,
+   spieler.php, and every other page that renders the standard
+   #side_navi / #content / #side_info layout via Templates/menu.tpl) through
+   the single shared tz_rtl_stylesheet_tag() function in
+   GameEngine/config.php - never linked directly by an individual page. This
+   is what keeps the RTL layout intact when navigating between pages: fix it
+   here once and every page that calls tz_rtl_stylesheet_tag() picks it up.
 
    Scoped strictly to html[dir="rtl"] - has ZERO effect on the English
    (LTR) layout, does not touch templates, does not touch village/map
-   coordinates or sprites. Repositions the three existing top-level
-   layout columns and the map/production sub-pair using CSS floats,
-   and fixes the village-title clipping caused by a leftover LTR
-   position offset - see the rule comments below for each. */
+   coordinates or sprites. The #side_navi / #content / #side_info column
+   repositioning below (float side only, via CSS) applies site-wide since
+   those three IDs are shared by every page. The village-map-specific rules
+   (map/production sub-pair, village title offset, resource table
+   typography) are scoped under "div.village1" and so only ever match on
+   dorf1.php, the one page that actually renders that markup. */
 
 /* ---------------------------------------------------------------------
  * Pixel-coordinate / fixed-layout regions: keep them internally LTR so

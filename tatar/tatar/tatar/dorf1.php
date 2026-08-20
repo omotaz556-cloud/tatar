@@ -102,10 +102,11 @@ if (
 	<script type="text/javascript">
 	window.addEvent('domready', start);
 	</script>
+	<?php // Arabic/RTL CSS (css/rtl.css) is now loaded through the shared
+	// tz_rtl_stylesheet_tag() mechanism below - see GameEngine/config.php -
+	// so it is no longer linked here directly. This makes dorf1.php use the
+	// exact same RTL loading path as every other game page. ?>
 	<?php echo tz_rtl_stylesheet_tag(); ?>
-	<?php if (function_exists('tz_is_rtl_lang') && tz_is_rtl_lang()): ?>
-	<link href="css/rtl.css?rtl2" rel="stylesheet" type="text/css" />
-	<?php endif; ?>
 </head>
 
 
