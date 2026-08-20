@@ -29,12 +29,19 @@ div#footer {
     font-family: Tahoma, Arial, "Segoe UI", sans-serif;
 }
 
-/* --- village overview (dorf1.php): tighten the gap between the resource
+/* --- village overview (dorf1.php): remove the gap between the resource
    bar above and the village title + map below. Base rule in
    lang/en/compact.css sets padding: 43px 0 0 15px on div.village1 - only
-   the top value is overridden here, right/bottom/left stay as they are. */
+   the top value is overridden here, right/bottom/left stay as they are.
+   padding-top is 0 (was 8px) and the title's own bottom margin (8px,
+   from the global "h1 { margin-bottom: 8px; }" rule in compact.css) is
+   zeroed here too, so nothing separates the resource bar from the
+   village title/map under the RTL zoom. */
 div.village1 {
-    padding-top: 8px;
+    padding-top: 0;
+}
+div.village1 h1 {
+    margin-bottom: 0;
 }
 
 /* --- swap the 3-column layout: menu (side_navi) / map (content) / hero (side_info) --- */

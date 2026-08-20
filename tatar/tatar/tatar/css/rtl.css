@@ -142,6 +142,7 @@ html[dir="rtl"] #side_navi td.link {
 html[dir="rtl"] #content {
     float: right;
     text-align: right;
+    margin-right: 120px;
 }
 
 html[dir="rtl"] #side_info {
@@ -184,6 +185,24 @@ html[dir="rtl"] #side_info td.link {
 html[dir="rtl"] div.village1 h1 {
     left: auto;
     right: 10px;
+}
+
+/* ---------------------------------------------------------------------
+ * "(العاصمة)" capital label (div#cap, dorf1.php) sits between the title
+ * and #village_map_wrap with no CSS of its own anywhere in the gpacks,
+ * so it inherits "line-height: 26px" from the html[dir="rtl"] #content
+ * typography rule above. That 26px line-box (39px once the page's
+ * zoom:1.5 is applied) was rendering as dead vertical space between the
+ * title/capital line and the top of the village map, even though the
+ * capital text itself is short. Collapsing its line-height and margin
+ * pulls the map back up flush under the title, matching the reference
+ * layout, without touching the div's content or the English page (no
+ * html[dir="rtl"] ancestor there, so #cap keeps its old default box).
+ * --------------------------------------------------------------------- */
+html[dir="rtl"] div.village1 div#cap {
+    line-height: 14px;
+    margin: 0;
+    min-height: 0;
 }
 
 /* ---------------------------------------------------------------------
@@ -282,6 +301,7 @@ html[dir="rtl"] div.village1 h1 {
     font-size: 26px;
     font-weight: 700;
     line-height: 29px;
+    margin-top: 30px;
 }
 
 /* Sidebar / navigation links (Home, Guide, Profile, Logout, Forum,
