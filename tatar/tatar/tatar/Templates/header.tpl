@@ -353,6 +353,7 @@ if ($hour > 1759 || $hour < 500) {
 			width: 18px;
 			height: 18px;
 			display: inline-block;
+            margin-left:114px;
 	}
 
         /* GOLD IN DREPTUNGHIUL ALBASTRU (RELOCARE_GOLD_LOCATIE_EROU.png)

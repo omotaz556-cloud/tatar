@@ -55,6 +55,43 @@ if (!empty($village)) {
 <div id="resWrap">
 
     <!-- ================= RESOURCES ================= -->
+    <?php $tzResRtl = function_exists('tz_is_rtl_lang') && tz_is_rtl_lang(); ?>
+    <?php if ($tzResRtl) { ?>
+    <!-- Arabic/RTL: icon + number share one <td> ("respill" class,
+         styled in css/rtl.css) so each resource renders as a single
+         green pill instead of two separate cells. IDs (#l1-#l4) move
+         from the old <td> onto an inner <span> - unx.js's mb("l1") etc
+         only calls getElementById()+reads innerHTML/title, so this is
+         a transparent swap. English/LTR markup below is untouched. -->
+    <table cellpadding="1" cellspacing="1">
+        <tr>
+            <td class="respill">
+                <span id="l4" title="<?php echo $wood; ?>"><?php echo $woodStore . "/" . $maxStore; ?></span>
+                <img src="img/x.gif" class="r1" alt="<?php echo LUMBER; ?>" title="<?php echo LUMBER; ?>" />
+            </td>
+            <td class="respill">
+                <span id="l3" title="<?php echo $clay; ?>"><?php echo $clayStore . "/" . $maxStore; ?></span>
+                <img src="img/x.gif" class="r2" alt="<?php echo CLAY; ?>" title="<?php echo CLAY; ?>" />
+            </td>
+            <td class="respill">
+                <span id="l2" title="<?php echo $iron; ?>"><?php echo $ironStore . "/" . $maxStore; ?></span>
+                <img src="img/x.gif" class="r3" alt="<?php echo IRON; ?>" title="<?php echo IRON; ?>" />
+            </td>
+            <td class="respill">
+                <?php if ($village->acrop > 0) { ?>
+                    <span id="l1" title="<?php echo $crop; ?>"><?php echo $cropStore . "/" . $maxCrop; ?></span>
+                <?php } else { ?>
+                    <span title="<?php echo $crop; ?>">0/<?php echo $maxCrop; ?></span>
+                <?php } ?>
+                <img src="img/x.gif" class="r4" alt="<?php echo CROP; ?>" title="<?php echo CROP; ?>" />
+            </td>
+            <td class="respill">
+                <span><?php echo ($village->pop + $technology->getUpkeep($village->unitall, 0)) . "/" . $totalproduction; ?></span>
+                <img src="img/x.gif" class="r5" alt="<?php echo CROP_COM; ?>" title="<?php echo CROP_COM; ?>" />
+            </td>
+        </tr>
+    </table>
+    <?php } else { ?>
     <table cellpadding="1" cellspacing="1">
         <tr>
 
@@ -111,6 +148,7 @@ if (!empty($village)) {
 
         </tr>
     </table>
+    <?php } ?>
 
 </div>
 </div>
