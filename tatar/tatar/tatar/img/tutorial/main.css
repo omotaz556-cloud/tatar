@@ -85,7 +85,7 @@ body.contentPage h1 {
 	font-size: 26px;
 }
 body.contentPage #content .characteristics, body.contentPage #content p, body.contentPage #content table, body.contentPage form {
-	margin: 15px 160px;
+	margin: 0px 0px;
 }
 
 body.contentPage .rules {
@@ -191,8 +191,8 @@ body.contentPage .tutorial-step__visuals img {
 }
 
 body.contentPage .tutorial-step__text {
-	text-align: left;
-	padding-top: 50px;
+	text-align: right;
+	padding-top: 25px;
 }
 
 body.contentPage .tutorial-nav-legend {
@@ -520,7 +520,7 @@ body.contentPage #content .grit {width: 840px; min-height: 400px; background: tr
 
 
 /* Footer */
-#footer {position: absolute; margin: 0 auto;right: 0; left: 0;bottom: 0; height: 90px;z-index: 80;}
+#footer {position: absolute; margin: -350px auto;right: 0; left: 0;bottom: 0; height: 90px;z-index: 80;}
 #footer {background: #F1F1F1 url("images/footer_background.jpg") repeat-x top;}
 #footer .logo_gamebrand {background-image: url("images/logo_gamebrand.jpg");height: 34px; width: 182px;}
 #footer .logo {position: absolute;top:20px;left:6px;}
