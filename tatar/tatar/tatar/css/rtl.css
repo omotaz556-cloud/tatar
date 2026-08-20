@@ -11,13 +11,29 @@
    here once and every page that calls tz_rtl_stylesheet_tag() picks it up.
 
    Scoped strictly to html[dir="rtl"] - has ZERO effect on the English
-   (LTR) layout, does not touch templates, does not touch village/map
-   coordinates or sprites. The #side_navi / #content / #side_info column
-   repositioning below (float side only, via CSS) applies site-wide since
-   those three IDs are shared by every page. The village-map-specific rules
-   (map/production sub-pair, village title offset, resource table
-   typography) are scoped under "div.village1" and so only ever match on
-   dorf1.php, the one page that actually renders that markup. */
+   (LTR) layout, does not touch village/map coordinates or sprites, and
+   does NOT change the central container's original width. The
+   #side_navi / #content / #side_info column repositioning below (float
+   side only, via CSS) applies site-wide since those three IDs are shared
+   by every page. The village-map-specific rules (map/production
+   sub-pair, village title offset, resource table typography) are scoped
+   under "div.village1" and so only ever match on dorf1.php, the one page
+   that actually renders that markup.
+
+   One small template change accompanies this stylesheet: dorf1.php had a
+   bug where #side_info (the "Hero" column: character portrait + village
+   list) was left NESTED inside #content (div.village1: fixed 537px
+   width, overflow:hidden) instead of being #content's sibling under
+   #mid, unlike every other page with this same layout (dorf2.php,
+   dorf3.php, ...), which already close #content before #side_info opens.
+   A nested, floated #side_info can never become a real third column -
+   it just wraps or gets clipped inside the 537px box - which is why an
+   earlier fix attempt widened the container to force it to fit instead
+   of fixing the actual bug. dorf1.php now closes #content one div early,
+   ONLY when tz_is_rtl_lang() is true, so #side_info renders as an actual
+   sibling for Arabic; the English branch emits the exact same markup in
+   the exact same order as before, byte-for-byte, so English is
+   unaffected. See the comment in dorf1.php itself for the full diff. */
 
 /* ---------------------------------------------------------------------
  * Pixel-coordinate / fixed-layout regions: keep them internally LTR so
@@ -40,20 +56,27 @@ html[dir="rtl"] #mbig {
 }
 
 /* ---------------------------------------------------------------------
- * Three main columns:
- *   #side_navi  (Templates/menu.tpl   - character portrait + village list)
- *   #content    (dorf1.php            - village map / village1)
- *   #side_info  (dorf1.php, nested in #content - quests/news/multivillage)
+ * Three main columns, DOM order #side_navi, #content, #side_info,
+ * all siblings under #mid (980px, untouched):
+ *   #side_navi  (Templates/menu.tpl - nav: Home/Guide/Profile/Logout/
+ *                Forum/Discord/Plus/Support)      - 155px
+ *   #content    (village map / production / title / page content,
+ *                div.village1 on dorf1.php)        - 537px
+ *   #side_info  ("Hero": character portrait + village list)  - 257px
+ * 155 + 537 + 257 = 949px, comfortably under #mid's 980px, so all
+ * three sit on one row with no width changes anywhere.
  *
- * Source (DOM) order is always: #side_navi, #content, #side_info - all
- * float:left in lang/en/compact.css, sized so their widths sum exactly
- * to #mid's width with no slack.
- *
- * To get [Character/Menu] [Village] [Sidebar] reading right-to-left
- * without touching that width math or any template markup, all three
- * columns are flipped to float:right. DOM order is untouched, so
- * side_navi renders on the right, content in the middle, and side_info
- * on the left - the target Arabic layout.
+ * lang/en/compact.css floats all three float:left (reading order:
+ * menu, village, hero). To mirror that into RTL reading order
+ * [Hero] [Village] [Menu] without touching any width or the template
+ * markup, all three are flipped to float:right instead. DOM order is
+ * untouched; floating every column the same direction just stacks
+ * them right-to-left in source order, so side_navi (first in DOM)
+ * lands rightmost, #content lands in the middle, and side_info
+ * (last in DOM) lands on the left - the target Arabic layout. This
+ * only works because #side_info is an actual sibling of #content -
+ * see the dorf1.php note above for the one-page DOM fix that makes
+ * that true.
  * --------------------------------------------------------------------- */
 html[dir="rtl"] #side_navi {
     float: right;

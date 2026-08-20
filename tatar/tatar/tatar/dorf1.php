@@ -137,6 +137,34 @@ include("Templates/troops.tpl");
 if($building->NewBuilding) include("Templates/Building.tpl");
 ?>
 </div>
+<?php
+/**
+ * Structural fix (RTL only - see css/rtl.css for the full explanation).
+ *
+ * Every other page with this same #side_navi / #content / #side_info
+ * layout (dorf2.php, dorf3.php, ...) closes #content BEFORE #side_info
+ * opens, so #side_info is a sibling of #content under #mid. dorf1.php was
+ * the one page where that closing </div> was left until after #side_info
+ * instead - which nests the hero sidebar (#side_info: character portrait +
+ * village list) INSIDE #content (div.village1: fixed 537px width,
+ * overflow:hidden). Floating a nested #side_info can never place it as a
+ * real third column outside that box - it just wraps/gets clipped inside
+ * the 537px column. That was the actual cause of the Hero/Sidebar being
+ * constrained by the central container; the earlier (reverted) fix worked
+ * around it by widening the container instead of fixing this.
+ *
+ * We only reorder these two closing/opening tags, and only when the
+ * language is RTL, by closing #content here (matching dorf2.php/dorf3.php)
+ * and re-opening the exact same #side_info markup as a sibling. English
+ * keeps the original (unchanged) nested structure below - same markup,
+ * same order, byte-for-bit identical to before this fix - so its layout
+ * cannot be affected by this change.
+ */
+$__tz_rtl_dorf1 = function_exists('tz_is_rtl_lang') && tz_is_rtl_lang();
+if ($__tz_rtl_dorf1) {
+	echo "</div>\n"; // close #content early, so #side_info below is a sibling
+}
+?>
 <br /><br /><br /><br /><div id="side_info">
 <?php
 include("Templates/multivillage.tpl");
@@ -149,7 +177,9 @@ if(!NEW_FUNCTIONS_DISPLAY_LINKS) {
 ?>
 </div>
 <div class="clear"></div>
+<?php if (!$__tz_rtl_dorf1) { ?>
 </div>
+<?php } ?>
 <div class="footer-stopper"></div>
 <div class="clear"></div>
 
