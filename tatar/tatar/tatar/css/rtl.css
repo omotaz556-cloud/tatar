@@ -506,6 +506,41 @@ html[dir="rtl"] #goldHeader .tzCoinRow {
  * own horizontal position or the Plus button layout around it. */
 html[dir="rtl"] .dayNightIcon {
     margin-top: 22px;
-    padding-left: 100 px;
+    padding-left: 100px;
+}
 
+/* ---------------------------------------------------------------------
+ * Hero/character image sits ~150px lower than #content/#side_navi on
+ * EVERY page that uses this shared layout (statiskiten.php, spieler.php,
+ * dorf1/2/3.php, karte.php, berichte.php, etc.) - not a bug in this
+ * stylesheet's positioning rules, but a side effect of them combined
+ * with markup those pages already share.
+ *
+ * Each of those pages hardcodes the exact same four stray line breaks
+ * directly between #content and #side_info in its own markup:
+ *   </div>
+ *   <br /><br /><br /><br /><div id="side_info">
+ * These four <br /> are plain, non-floated content, so before this fix
+ * they render as an ordinary paragraph of blank lines *inside #mid*,
+ * pushing everything after them - #side_info, i.e. the hero image -
+ * down by 4 line-heights. In English that is a modest, mostly-hidden
+ * gap (4 x ~20px). Under Arabic's zoom:1.5 and the 26px line-height
+ * set on #mid above, the same four <br /> expand to roughly 4 x 26px
+ * x 1.5 =~ 156px of dead space - which is the empty gap that shows up
+ * above the character image in every page (confirmed by rendering the
+ * real markup: #content/#side_navi start at the same top offset, but
+ * #side_info was measured ~156px further down, matching that math).
+ *
+ * Fixing the four <br /> tags themselves means editing markup on 21
+ * different PHP files. Since this stylesheet is the single shared file
+ * already loaded on every one of those pages, neutralizing them here
+ * fixes every page at once and keeps the change contained to RTL only:
+ * any <br> that is a direct sibling immediately following #content
+ * (i.e. exactly these spacer tags, not the "<br><br><br><br>" that
+ * some pages print *inside* #side_info before Templates/links.tpl -
+ * those are descendants, not siblings, and are untouched by this
+ * selector) is collapsed to zero height. #side_info then floats up
+ * flush with #content/#side_navi, same as the English layout. */
+html[dir="rtl"] #content ~ br {
+    display: none;
 }

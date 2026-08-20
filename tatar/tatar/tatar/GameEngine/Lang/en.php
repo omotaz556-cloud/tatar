@@ -4737,3 +4737,18 @@ tz_def('TZ_MEDAL_WALL_MASTER', 'Wall Master');
 tz_def('TZ_QUEST_PALACE_LABEL', 'Palace ');
 tz_def('TZ_QUEST_RESIDENCE_LABEL', 'Residence ');
 tz_def('TZ_MANUAL_PLUS_TITLE', 'Plus account');
+
+// --- quest_core.tpl (banned-branch quest log) — Phase 1 hardcoded-text fix ---
+tz_def('TZ_TASKS_TITLE', 'Tasks');
+tz_def('TZ_NOT_LOADED', 'Not loaded!');
+tz_def('TZ_WELCOME_TO', 'Welcome to');
+tz_def('TZ_WELCOME_STORY', 'As I see you have been made chieftain of this little village. I will be your counselor for the first few days and never leave your (right hand) side.');
+tz_def('TZ_LOOK_AROUND_OWN', 'Look around on your own.');
+
+// --- quest_core.tpl (banned-branch quest log) — Phase 2: quests 1-12 headers ---
+tz_def('TZ_TASK_1_WOODCUTTER', 'Task 1: Woodcutter');
+tz_def('TZ_TASK_2_CROP', 'Task 2: Crop');
+tz_def('TZ_TASK_4_OTHER_PLAYERS', 'Task 4: Other Players');
+tz_def('TZ_TASK_5_TWO_BUILDING_ORDERS', 'Task 5: Two Building Orders');
+tz_def('TZ_TASK_6_MESSAGES', 'Task 6: Messages');
+tz_def('TZ_Q8_STORY_BEFORE', 'Now we should increase your resource production a bit. Extend all your resource tiles to level 1.');

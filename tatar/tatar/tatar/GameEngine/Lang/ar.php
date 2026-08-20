@@ -4820,3 +4820,18 @@ tz_def('TZ_MEDAL_WALL_MASTER', 'سيد الأسوار');
 tz_def('TZ_QUEST_PALACE_LABEL', 'القصر ');
 tz_def('TZ_QUEST_RESIDENCE_LABEL', 'المقر ');
 tz_def('TZ_MANUAL_PLUS_TITLE', 'حساب بلس');
+
+// --- quest_core.tpl (banned-branch quest log) — Phase 1 hardcoded-text fix ---
+tz_def('TZ_TASKS_TITLE', 'المهام');
+tz_def('TZ_NOT_LOADED', 'لم يتم التحميل!');
+tz_def('TZ_WELCOME_TO', 'أهلاً بك في');
+tz_def('TZ_WELCOME_STORY', 'كما ترى، لقد أصبحت زعيمًا لهذه القرية الصغيرة. سأكون مستشارك خلال الأيام القليلة الأولى، ولن أفارق جانبك (اليمين).');
+tz_def('TZ_LOOK_AROUND_OWN', 'تجوّل بمفردك.');
+
+// --- quest_core.tpl (banned-branch quest log) — Phase 2: quests 1-12 headers ---
+tz_def('TZ_TASK_1_WOODCUTTER', 'المهمة 1: الحطّاب');
+tz_def('TZ_TASK_2_CROP', 'المهمة 2: المحصول');
+tz_def('TZ_TASK_4_OTHER_PLAYERS', 'المهمة 4: اللاعبون الآخرون');
+tz_def('TZ_TASK_5_TWO_BUILDING_ORDERS', 'المهمة 5: أمران بالبناء');
+tz_def('TZ_TASK_6_MESSAGES', 'المهمة 6: الرسائل');
+tz_def('TZ_Q8_STORY_BEFORE', 'علينا الآن زيادة إنتاج مواردك قليلًا. طوّر جميع حقول الموارد لديك إلى المستوى 1.');
