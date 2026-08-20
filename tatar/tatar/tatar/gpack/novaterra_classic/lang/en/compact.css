@@ -1072,6 +1072,7 @@ div#map table#map_infobox {
 div.map div#map table#map_infobox {
     right: 20px;
     top: -7px;
+    margin-right: 360px;
 }
 div#mbig div#map table#map_infobox {
     right: 50px;
@@ -3340,7 +3341,7 @@ table thead td, table tfoot td {
 }
 table tbody th, table tbody td {
     background-color: #FFFFFF;
-    text-align: left;
+    text-align: right;
 }
 table tr.hl th, table tr.hl td {
     background-color: #F0FFF0;
@@ -4024,7 +4025,7 @@ div.player table.set td.sel {
     width: 5%;
 }
 div.player table.set td {
-    text-align: left;
+    text-align: right;
 }
 div.player table.set input.radio {
     position: relative;
