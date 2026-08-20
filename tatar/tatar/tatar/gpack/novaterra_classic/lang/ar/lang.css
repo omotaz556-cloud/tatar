@@ -32,6 +32,13 @@ div#footer {
 /* --- swap the 3-column layout: menu (side_navi) / map (content) / hero (side_info) --- */
 div#side_navi {
     float: right;
+    /* the base LTR stylesheet paints this shadow at the box's right edge,
+       which used to be the edge touching #content. Now that the column is
+       mirrored to float:right, that same right edge is the outer page edge
+       instead - so swap in the mirrored asset and flip the anchor to the
+       left edge (now the one touching #content). */
+    background-image: url(../../images/shadow-a-rtl.png);
+    background-position: left top;
 }
 div#side_navi p a {
     padding-left: 0;
@@ -61,6 +68,25 @@ div#side_info {
     float: right;
     padding-left: 0;
     padding-right: 10px;
+}
+/* same mirroring fix as #side_navi above. The base rule in
+   modules/new_images.css is actually a GROUPED selector:
+       div#side_info,
+       body.mod1 div#side_info,
+       body.mod2 div#side_info,
+       body.mod3 div#side_info { background: ... shadow-b-ltr.png ... left top; }
+   The bare "div#side_info" (no body class needed) is what paints the
+   shadow on every page regardless of mod state - only overriding the
+   "body.mod3" variant (as an earlier version of this file did) misses
+   every page that isn't in mod3 and leaves the unmirrored LTR shadow
+   showing on the left. All four selectors must be repeated here so the
+   override wins in every case, same as the base rule does. */
+div#side_info,
+body.mod1 div#side_info,
+body.mod2 div#side_info,
+body.mod3 div#side_info {
+    background-image: url(../../images/shadow-b-rtl.png);
+    background-position: right top;
 }
 div#side_info h5 {
     margin-left: 0;
