@@ -29,6 +29,14 @@ div#footer {
     font-family: Tahoma, Arial, "Segoe UI", sans-serif;
 }
 
+/* --- village overview (dorf1.php): tighten the gap between the resource
+   bar above and the village title + map below. Base rule in
+   lang/en/compact.css sets padding: 43px 0 0 15px on div.village1 - only
+   the top value is overridden here, right/bottom/left stay as they are. */
+div.village1 {
+    padding-top: 8px;
+}
+
 /* --- swap the 3-column layout: menu (side_navi) / map (content) / hero (side_info) --- */
 div#side_navi {
     float: right;

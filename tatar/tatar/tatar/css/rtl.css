@@ -114,7 +114,7 @@ html[dir="rtl"] #side_navi {
  * it down a bit further for Arabic only - scoped to html[dir="rtl"],
  * so English is untouched. */
 html[dir="rtl"] #side_navi {
-    margin-top: 50px;
+    margin-top: 150px;
 }
 /* Templates/menu.tpl groups the nav links into separate <p> blocks
  * (main links / Forum / Discord / Plus+Support). compact.css puts
