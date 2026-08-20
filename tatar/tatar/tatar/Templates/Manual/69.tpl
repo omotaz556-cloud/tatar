@@ -4,18 +4,18 @@
 }
 </style>
 <h1><?php echo GOLD_CLUB; ?></h1>
-You will only be charged once for entry into Gold   club. Afterwards you have access to various exclusive features. Some of   the exclusive features are free, others cost a defined amount of gold   per use.<br>
+<?php echo TZ_MANUAL_GOLDCLUB_INTRO; ?><br>
 <br>
-<strong>Free Gold club features:</strong>
+<strong><?php echo TZ_MANUAL_GOLDCLUB_FREE_HEADER; ?></strong>
 <ul>
-    <li>Raid   list</li>
-    <li>Raid statistics</li>
-    <li>Let merchants go thrice</li>
-    <li>Search   for 9 and 15 croppers including oases</li>
+    <li><?php echo TZ_MANUAL_RAID_LIST; ?></li>
+    <li><?php echo TZ_MANUAL_RAID_STATS; ?></li>
+    <li><?php echo TZ_MANUAL_MERCHANTS_THRICE; ?></li>
+    <li><?php echo TZ_MANUAL_SEARCH_CROPPERS; ?></li>
 </ul>
-<strong>Priced Gold club   features:</strong>
+<strong><?php echo TZ_MANUAL_GOLDCLUB_PRICED_HEADER; ?></strong>
 <ul>
-    <li>Assign master builder up to 3   construction orders</li>
-    <li>Automated trade routes between your own   villages</li>
-    <li>Hide troops from attacks in the forest<br><span class="hall">(only possible if in the last <strong>10</strong> seconds no troops   came home)</span></li>
+    <li><?php echo TZ_MANUAL_MASTER_BUILDER_3; ?></li>
+    <li><?php echo TZ_MANUAL_AUTO_TRADE; ?></li>
+    <li><?php echo TZ_MANUAL_HIDE_TROOPS; ?><br><span class="hall"><?php echo TZ_MANUAL_HIDE_TROOPS_NOTE; ?></span></li>
 </ul>

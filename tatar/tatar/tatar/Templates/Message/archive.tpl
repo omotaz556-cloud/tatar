@@ -146,7 +146,7 @@
             // EMPTY STATE
             // ======================================================
             if ($totalMessages == 0) {
-                echo "<td colspan=\"4\" class=\"none\">There are no messages available in the archive.</td></tr>";
+                echo "<td colspan=\"4\" class=\"none\">".TZ_NO_MESSAGES_ARCHIVE."</td></tr>";
             }
             ?>
 

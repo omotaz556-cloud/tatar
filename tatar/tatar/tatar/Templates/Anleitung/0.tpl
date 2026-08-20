@@ -82,9 +82,7 @@
 
 	</th>
 
-	<th title="fields/hour">
-
-	    Speed	</th>
+	<th title="fields/hour"><?php echo ANL_UNIT_SPEED_HEADER; ?></th>
 
 </tr>
 
@@ -390,9 +388,9 @@
 
 <li><?php echo ANL_ROMAN_MERCHANT; ?></li>
 
-<li>Very powerful infantry, average cavalry</li>
+<li><?php echo ANL_ROMAN_TRAIT_INFANTRY; ?></li>
 
-<li>Development is expensive and takes a long time.</li></ul>
+<li><?php echo ANL_ROMAN_TRAIT_DEV; ?></li></ul>
 
 
 
@@ -476,9 +474,7 @@
 
 	</th>
 
-	<th title="fields/hour">
-
-	    Speed	</th>
+	<th title="fields/hour"><?php echo ANL_UNIT_SPEED_HEADER; ?></th>
 
 </tr>
 
@@ -786,9 +782,9 @@
 
 <li><?php echo ANL_CRANNY_DOUBLE; ?></li>
 
-<li>Expensive siege weapons</li>
+<li><?php echo ANL_GAUL_TRAIT_SIEGE; ?></li>
 
-<li>Cheap settlers</li></ul>
+<li><?php echo ANL_GAUL_TRAIT_SETTLERS; ?></li></ul>
 
 
 
@@ -874,9 +870,7 @@
 
 	</th>
 
-	<th title="fields/hour">
-
-	    Speed	</th>
+	<th title="fields/hour"><?php echo ANL_UNIT_SPEED_HEADER; ?></th>
 
 </tr>
 

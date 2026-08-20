@@ -27,9 +27,9 @@
 					$wall1 = 0;
 					}
                     echo "<tr>
-						    <td class=\"ico\"><img src=\"img/x.gif\" class=\"unit uwall\" alt=\"City Wall\" title=\"City Wall\" /></td>
-						    <td class=\"desc\">City Wall</td>
-						    <td class=\"value\"><input class=\"text\" type=\"text\" name=\"wall1\" value=\"$wall1\" maxlength=\"2\" title=\"level City Wall\" /></td>
+						    <td class=\"ico\"><img src=\"img/x.gif\" class=\"unit uwall\" alt=\"".CITYWALL."\" title=\"".CITYWALL."\" /></td>
+						    <td class=\"desc\">".CITYWALL."</td>
+						    <td class=\"value\"><input class=\"text\" type=\"text\" name=\"wall1\" value=\"$wall1\" maxlength=\"2\" title=\"".LEVEL." ".CITYWALL."\" /></td>
 						    <td class=\"research\"></td>
 				    	</tr>";
                     }
@@ -40,10 +40,10 @@
 					$wall2 = 0;
 					}
                     echo "<tr>
-						    <td class=\"ico\"><img src=\"img/x.gif\" class=\"unit ubarr\" alt=\"Earth Wall\" title=\"Earth Wall\" /></td>
+						    <td class=\"ico\"><img src=\"img/x.gif\" class=\"unit ubarr\" alt=\"".EARTHWALL."\" title=\"".EARTHWALL."\" /></td>
 
-						    <td class=\"desc\">Earth Wall</td>
-						    <td class=\"value\"><input class=\"text\" type=\"text\" name=\"wall2\" value=\"$wall2\" maxlength=\"2\" title=\"level Earth Wall\" /></td>
+						    <td class=\"desc\">".EARTHWALL."</td>
+						    <td class=\"value\"><input class=\"text\" type=\"text\" name=\"wall2\" value=\"$wall2\" maxlength=\"2\" title=\"".LEVEL." ".EARTHWALL."\" /></td>
 						    <td class=\"research\"></td>
 					    </tr>";
                     }
@@ -54,9 +54,9 @@
 					$wall3 = 0;
 					}
                     echo "<tr>
-						    <td class=\"ico\"><img src=\"img/x.gif\" class=\"unit ustock\" alt=\"Palisade\" title=\"Palisade\" /></td>
-						    <td class=\"desc\">Palisade</td>
-						    <td class=\"value\"><input class=\"text\" type=\"text\" name=\"wall3\" value=\"$wall3\" maxlength=\"2\" title=\"level Palisade\" /></td>
+						    <td class=\"ico\"><img src=\"img/x.gif\" class=\"unit ustock\" alt=\"".PALISADE."\" title=\"".PALISADE."\" /></td>
+						    <td class=\"desc\">".PALISADE."</td>
+						    <td class=\"value\"><input class=\"text\" type=\"text\" name=\"wall3\" value=\"$wall3\" maxlength=\"2\" title=\"".LEVEL." ".PALISADE."\" /></td>
 						    <td class=\"research\"></td>
 
 					    </tr>";
@@ -68,9 +68,9 @@
 					$wall6 = 0;
 					}
                     echo "<tr>
-						    <td class=\"ico\"><img src=\"img/x.gif\" class=\"unit uwall\" alt=\"Makeshift Wall\" title=\"Makeshift Wall\" /></td>
-						    <td class=\"desc\">Makeshift Wall</td>
-						    <td class=\"value\"><input class=\"text\" type=\"text\" name=\"wall6\" value=\"$wall6\" maxlength=\"2\" title=\"level Makeshift Wall\" /></td>
+						    <td class=\"ico\"><img src=\"img/x.gif\" class=\"unit uwall\" alt=\"".MAKESHIFTWALL."\" title=\"".MAKESHIFTWALL."\" /></td>
+						    <td class=\"desc\">".MAKESHIFTWALL."</td>
+						    <td class=\"value\"><input class=\"text\" type=\"text\" name=\"wall6\" value=\"$wall6\" maxlength=\"2\" title=\"".LEVEL." ".MAKESHIFTWALL."\" /></td>
 						    <td class=\"research\"></td>
 				    	</tr>";
                     }
@@ -81,9 +81,9 @@
 					$wall7 = 0;
 					}
                     echo "<tr>
-						    <td class=\"ico\"><img src=\"img/x.gif\" class=\"unit uwall\" alt=\"Stone Wall\" title=\"Stone Wall\" /></td>
-						    <td class=\"desc\">Stone Wall</td>
-						    <td class=\"value\"><input class=\"text\" type=\"text\" name=\"wall7\" value=\"$wall7\" maxlength=\"2\" title=\"level Stone Wall\" /></td>
+						    <td class=\"ico\"><img src=\"img/x.gif\" class=\"unit uwall\" alt=\"".STONEWALL."\" title=\"".STONEWALL."\" /></td>
+						    <td class=\"desc\">".STONEWALL."</td>
+						    <td class=\"value\"><input class=\"text\" type=\"text\" name=\"wall7\" value=\"$wall7\" maxlength=\"2\" title=\"".LEVEL." ".STONEWALL."\" /></td>
 						    <td class=\"research\"></td>
 				    	</tr>";
                     }
@@ -94,9 +94,9 @@
 					$wall8 = 0;
 					}
                     echo "<tr>
-						    <td class=\"ico\"><img src=\"img/x.gif\" class=\"unit uwall\" alt=\"Defensive Wall\" title=\"Defensive Wall\" /></td>
-						    <td class=\"desc\">Defensive Wall</td>
-						    <td class=\"value\"><input class=\"text\" type=\"text\" name=\"wall8\" value=\"$wall8\" maxlength=\"2\" title=\"level Defensive Wall\" /></td>
+						    <td class=\"ico\"><img src=\"img/x.gif\" class=\"unit uwall\" alt=\"".DEFENSIVEWALL."\" title=\"".DEFENSIVEWALL."\" /></td>
+						    <td class=\"desc\">".DEFENSIVEWALL."</td>
+						    <td class=\"value\"><input class=\"text\" type=\"text\" name=\"wall8\" value=\"$wall8\" maxlength=\"2\" title=\"".LEVEL." ".DEFENSIVEWALL."\" /></td>
 						    <td class=\"research\"></td>
 				    	</tr>";
                     }
@@ -107,9 +107,9 @@
 					$wall9 = 0;
 					}
                     echo "<tr>
-						    <td class=\"ico\"><img src=\"img/x.gif\" class=\"unit uwall\" alt=\"Barricade\" title=\"Barricade\" /></td>
-						    <td class=\"desc\">Barricade</td>
-						    <td class=\"value\"><input class=\"text\" type=\"text\" name=\"wall9\" value=\"$wall9\" maxlength=\"2\" title=\"level Barricade\" /></td>
+						    <td class=\"ico\"><img src=\"img/x.gif\" class=\"unit uwall\" alt=\"".BARRICADE."\" title=\"".BARRICADE."\" /></td>
+						    <td class=\"desc\">".BARRICADE."</td>
+						    <td class=\"value\"><input class=\"text\" type=\"text\" name=\"wall9\" value=\"$wall9\" maxlength=\"2\" title=\"".LEVEL." ".BARRICADE."\" /></td>
 						    <td class=\"research\"></td>
 				    	</tr>";
                     }

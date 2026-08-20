@@ -3,9 +3,9 @@
 	color: #F00;
 }
 </style>
-<h1>Complete construction orders &amp; research immediately.</h1>
-In the   current village all construction orders and research in the academy as   well as the blacksmith and armoury will be completed immediately. <br>
+<h1><?php echo TZ_MANUAL_INSTANT_TITLE; ?></h1>
+<?php echo TZ_MANUAL_INSTANT_DESC; ?> <br>
 <br>
-However, the <em>buildings</em> Residence and Palace and <em><?php echo VILLAGES; ?></em> with a wonder of the world inside them are excluded. <br>
+<?php echo TZ_MANUAL_INSTANT_EXCLUDE_PREFIX; ?> <em><?php echo VILLAGES; ?></em> <?php echo TZ_MANUAL_INSTANT_EXCLUDE_SUFFIX; ?> <br>
 <br>
-<span class="red">This feature is NOT included in the   gold club!</span>
+<span class="red"><?php echo TZ_MANUAL_GOLD_CLUB_EXCLUDED; ?></span>

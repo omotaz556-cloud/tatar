@@ -1211,9 +1211,9 @@ $residence = $building->getTypeLevel(25);
 $palace = $building->getTypeLevel(26);
 $commandcenter = $building->getTypeLevel(44);
 if($palace >= 10){
-$text = "Palace ";
+$text = TZ_QUEST_PALACE_LABEL;
 }else if($residence >= 10){
-$text = "Residence ";
+$text = TZ_QUEST_RESIDENCE_LABEL;
 }else if($commandcenter >= 10){
 $text = COMMANDCENTER." ";
 }

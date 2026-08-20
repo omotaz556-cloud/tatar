@@ -195,7 +195,7 @@ if (count($rankArray) > 1) {
     }
 
 } else {
-    echo "<tr><td class=\"none\" colspan=\"5\">No users found</td></tr>";
+    echo "<tr><td class=\"none\" colspan=\"5\">".TZ_NO_USERS_FOUND."</td></tr>";
 }
 ?>
     </tbody>

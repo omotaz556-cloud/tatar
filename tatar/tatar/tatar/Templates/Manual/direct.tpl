@@ -1,9 +1,9 @@
 <h1><img class="point" src="img/x.gif" alt="" title="" /> <?php echo DIRECT_LINKS; ?></h1>
 
-		<p>With the direct links one can set links to any target and speed up the navigation.</p>
+		<p><?php echo TZ_MANUAL_DIRECT_LINKS_DESC; ?></p>
 		<table id="examples" cellpadding="1" cellspacing="1">
 			<thead><tr>
-				<th colspan="2">example for direct links</th>
+				<th colspan="2"><?php echo TZ_MANUAL_DIRECT_LINKS_EXAMPLE_HEADER; ?></th>
 			</tr>
 			<tr>
 				<td><?php echo LINK_NAME; ?></td>
@@ -26,10 +26,10 @@
 				<td>nachrichten.php?t=4*</td>
 			</tr></tbody>
 		</table>
-		<p>Adding an * to the URL will cause the direct link to open in a new window.</p>
+		<p><?php echo TZ_MANUAL_DIRECT_LINKS_STAR_NOTE; ?></p>
 <map id="nav" name="nav">
     <area href="manual.php?s=1" title="<?php echo BACK; ?>" coords="0,0,45,18" shape="rect" alt="" />
     <area href="manual.php?s=1" title="<?php echo OVERVIEW; ?>" coords="46,0,70,18" shape="rect" alt="" />
-    <area href="manual.php?s=1" title="forward" coords="71,0,116,18" shape="rect" alt="" />
+    <area href="manual.php?s=1" title="<?php echo FORWARD; ?>" coords="71,0,116,18" shape="rect" alt="" />
 </map>
 <img usemap="#nav" src="img/x.gif" class="navi" alt="" />

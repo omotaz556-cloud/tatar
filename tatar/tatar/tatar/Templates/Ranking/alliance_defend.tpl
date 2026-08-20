@@ -113,7 +113,7 @@ if (!isset($_SESSION['search']) || !is_numeric($_SESSION['search'])) {
         }
 
     } else {
-        echo '<tr><td class="none" colspan="5">No alliances found</td></tr>';
+        echo '<tr><td class="none" colspan="5">'.TZ_NO_ALLIANCES_FOUND.'</td></tr>';
     }
     ?>
     </tbody>

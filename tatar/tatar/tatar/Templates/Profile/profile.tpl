@@ -180,25 +180,25 @@ maxlength="30" class="text">
 // =========================
 foreach ($varmedal as $medal) {
 
-    $titel = "Bonus";
+    $titel = TZ_MEDAL_BONUS_DEFAULT;
 
     switch ($medal['categorie']) {
-        case "1": $titel="Attacker of the Week"; break;
-        case "2": $titel="Defender of the Week"; break;
-        case "3": $titel="Pop Climber of the week"; break;
-        case "4": $titel="Robber of the week"; break;
-        case "5": $titel="Top 10 Attack+Def"; break;
-        case "6": $titel="Top Attack streak ".$medal['points']; break;
-        case "7": $titel="Top Def streak ".$medal['points']; break;
-        case "8": $titel="Top Pop streak ".$medal['points']; break;
-        case "9": $titel="Top Rob streak ".$medal['points']; break;
-        case "10": $titel="Rank Climber"; break;
-        case "11": $titel="Rank streak ".$medal['points']; break;
-        case "12": $titel="Top 10 Attack"; break;
-        case "13": $titel="Top 10 Def"; break;
-        case "14": $titel="Top 10 Pop"; break;
-        case "15": $titel="Top 10 Rob"; break;
-        case "16": $titel="Top 10 Rank"; break;
+        case "1": $titel=TZ_MEDAL_ATTACKER_WEEK; break;
+        case "2": $titel=TZ_MEDAL_DEFENDER_WEEK; break;
+        case "3": $titel=TZ_MEDAL_POP_CLIMBER_WEEK; break;
+        case "4": $titel=TZ_MEDAL_ROBBER_WEEK; break;
+        case "5": $titel=TZ_MEDAL_TOP10_ATT_DEF; break;
+        case "6": $titel=TZ_MEDAL_TOP_ATTACK_STREAK." ".$medal['points']; break;
+        case "7": $titel=TZ_MEDAL_TOP_DEF_STREAK." ".$medal['points']; break;
+        case "8": $titel=TZ_MEDAL_TOP_POP_STREAK." ".$medal['points']; break;
+        case "9": $titel=TZ_MEDAL_TOP_ROB_STREAK." ".$medal['points']; break;
+        case "10": $titel=TZ_MEDAL_RANK_CLIMBER; break;
+        case "11": $titel=TZ_MEDAL_RANK_STREAK." ".$medal['points']; break;
+        case "12": $titel=TZ_MEDAL_TOP10_ATTACK; break;
+        case "13": $titel=TZ_MEDAL_TOP10_DEF; break;
+        case "14": $titel=TZ_MEDAL_TOP10_POP; break;
+        case "15": $titel=TZ_MEDAL_TOP10_ROB; break;
+        case "16": $titel=TZ_MEDAL_TOP10_RANK; break;
     }
 
     echo "<tr>
@@ -322,7 +322,7 @@ if(defined('NEW_FUNCTIONS_SPECIAL_MEDALS_SYSTEM') && NEW_FUNCTIONS_SPECIAL_MEDAL
     $arte = $database->query("SELECT 1 FROM ".TB_PREFIX."artefacts WHERE owner = $uid LIMIT 1");
     if($arte && $arte->num_rows > 0){
         echo "<tr>
-                <td>Artefact Holder</td>
+                <td>".TZ_MEDAL_ARTEFACT_HOLDER."</td>
                 <td></td>
                 <td></td>
                 <td><a href='#' onclick=\"insertMedal('[#ARTEFACT]'); return false;\">[#ARTEFACT]</a></td>
@@ -335,7 +335,7 @@ if(defined('NEW_FUNCTIONS_SPECIAL_MEDALS_SYSTEM') && NEW_FUNCTIONS_SPECIAL_MEDAL
         WHERE v.owner = $uid AND f.f99t = 40 AND f.f99 > 0 LIMIT 1");
     if($ww && $ww->num_rows > 0){
         echo "<tr>
-                <td>WW Builder</td>
+                <td>".TZ_MEDAL_WW_BUILDER."</td>
                 <td></td>
                 <td></td>
                 <td><a href='#' onclick=\"insertMedal('[#WWBUILDER]'); return false;\">[#WWBUILDER]</a></td>
@@ -344,7 +344,7 @@ if(defined('NEW_FUNCTIONS_SPECIAL_MEDALS_SYSTEM') && NEW_FUNCTIONS_SPECIAL_MEDAL
         $lvl = (int)$ww->fetch_assoc()['f99'];
         if($lvl >= 100){
             echo "<tr>
-                    <td>WW Winner</td>
+                    <td>".TZ_MEDAL_WW_WINNER."</td>
                     <td></td>
                     <td></td>
                     <td><a href='#' onclick=\"insertMedal('[#WINNERWW]'); return false;\">[#WINNERWW]</a></td>
@@ -372,7 +372,7 @@ if(defined('NEW_FUNCTIONS_SPECIAL_MEDALS_SYSTEM') && NEW_FUNCTIONS_SPECIAL_MEDAL
     }
     if($hasGreatStore){
         echo "<tr>
-                <td>Great Store</td>
+                <td>".TZ_MEDAL_GREAT_STORE."</td>
                 <td></td>
                 <td></td>
                 <td><a href='#' onclick=\"insertMedal('[#GREATSTORE]'); return false;\">[#GREATSTORE]</a></td>
@@ -394,7 +394,7 @@ if(defined('NEW_FUNCTIONS_SPECIAL_MEDALS_SYSTEM') && NEW_FUNCTIONS_SPECIAL_MEDAL
 	}
 	if($wallCount >= 3){
     echo "<tr>
-            <td>Wall Master</td>
+            <td>".TZ_MEDAL_WALL_MASTER."</td>
             <td></td>
             <td></td>
             <td><a href='#' onclick=\"insertMedal('[#WALLMASTER]'); return false;\">[#WALLMASTER]</a></td>

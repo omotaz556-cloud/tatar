@@ -35,7 +35,7 @@
 
 
 
-<p class="question">Help, my crop production sinks more and more!</p>
+<p class="question"><?php echo ANL_FAQ_CROP_SINK_Q; ?></p>
 
 <p class="answer"><?php echo ANL_CROP_EXPLAIN_HTML; ?> <img src="img/un/res/5.gif" width="18" height="12" border="0" alt="<?php echo ANL_USE_OF_CROP; ?>" title="<?php echo ANL_USE_OF_CROP; ?>"> 5/15
 

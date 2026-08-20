@@ -192,20 +192,20 @@ $isStaff = isset($session) && $session->access >= 8; // MH si Admin
 <tbody>
 <tr><th><?php echo TZ_REGISTERED_PLAYERS;?></th><td><?= $users?></td></tr>
 <tr><th><?php echo ACTIVE_PLAYERS;?></th><td><?= $active?></td></tr>
-<tr><th>Players online</th><td><?= $online?></td></tr>
+<tr><th><?php echo TZ_PLAYERS_ONLINE;?></th><td><?= $online?></td></tr>
 </tbody>
 </table>
 <br />
 
 <!-- ================= SERVER 2026 ================= -->
 <table cellpadding="1" cellspacing="1" class="world">
-<thead><tr><th colspan="2">Server Information</th></tr></thead>
+<thead><tr><th colspan="2"><?php echo TZ_SERVER_INFO;?></th></tr></thead>
 <tbody>
-<tr><th>Days Since Start</th><td><?= $daysSinceStart?></td></tr>
-<tr><th>Active Alliance</th><td><?= $alliCount?></td></tr>
-<tr><th>Natars Villages</th><td><?= $natars?></td></tr>
-<tr><th>Conquered Oasis</th><td><?= $oasis?></td></tr>
-<tr><th>New Players Today</th><td><?= $newToday?></td></tr>
+<tr><th><?php echo TZ_DAYS_SINCE_START;?></th><td><?= $daysSinceStart?></td></tr>
+<tr><th><?php echo TZ_ACTIVE_ALLIANCE;?></th><td><?= $alliCount?></td></tr>
+<tr><th><?php echo TZ_NATARS_VILLAGES;?></th><td><?= $natars?></td></tr>
+<tr><th><?php echo TZ_CONQUERED_OASIS;?></th><td><?= $oasis?></td></tr>
+<tr><th><?php echo TZ_NEW_PLAYERS_TODAY;?></th><td><?= $newToday?></td></tr>
 </tbody>
 </table>
 <br />
@@ -229,7 +229,7 @@ $isStaff = isset($session) && $session->access >= 8; // MH si Admin
 <?php if($isStaff): ?>
 <!-- ================= GOLD ================= -->
 <table cellpadding="1" cellspacing="1" class="world">
-<thead><tr><th colspan="2">Total <?= SERVER_NAME?> <img src="./<?= GP_LOCATE?>img/a/gold.gif"> Gold</th></tr></thead>
+<thead><tr><th colspan="2"><?php echo TZ_TOTAL;?> <?= SERVER_NAME?> <img src="./<?= GP_LOCATE?>img/a/gold.gif"> <?php echo GOLD;?></th></tr></thead>
 <tbody><tr><td><?php echo GOLD;?></td><td><?= $total_gold?></td></tr></tbody>
 </table>
 <br />
@@ -237,8 +237,8 @@ $isStaff = isset($session) && $session->access >= 8; // MH si Admin
 
 <!-- ================= TOP ALLIANCES ================= -->
 <table cellpadding="1" cellspacing="1" class="world">
-<thead><tr><th colspan="3">Top 5 Alliances</th></tr>
-<tr><td>Tag</td><td>Nume</td><td>Members</td></tr></thead>
+<thead><tr><th colspan="3"><?php echo TZ_TOP_5_ALLIANCES;?></th></tr>
+<tr><td><?php echo TAG;?></td><td><?php echo NAME;?></td><td><?php echo TZ_MEMBERS;?></td></tr></thead>
 <tbody>
 <?php foreach($topAlliances as $a):?>
 <tr><td><?=htmlspecialchars($a['tag'])?></td><td><?=htmlspecialchars($a['name'])?></td><td><?=(int)$a['members']?></td></tr>
@@ -295,11 +295,11 @@ foreach ($troopChunks as $chunk):
 <!-- ================= TOP PLAYERS ================= -->
 <table cellpadding="1" cellspacing="1" class="world">
 <thead>
-<tr><th colspan="6">Top Players</th></tr>
+<tr><th colspan="6"><?php echo TZ_TOP_PLAYERS;?></th></tr>
 <tr>
-    <td>Population</td><td>Pct</td>
-    <td>Attackers</td><td>Pct</td>
-    <td>Defenders</td><td>Pct</td>
+    <td><?php echo POP;?></td><td><?php echo PERCENT;?></td>
+    <td><?php echo TZ_ATTACKERS;?></td><td><?php echo PERCENT;?></td>
+    <td><?php echo TZ_DEFENDERS;?></td><td><?php echo PERCENT;?></td>
 </tr>
 </thead>
 <tbody>
@@ -329,8 +329,8 @@ foreach ($troopChunks as $chunk):
 
 <!-- ================= ENDGAME ================= -->
 <table cellpadding="1" cellspacing="1" class="world">
-<thead><tr><th colspan="3">Endgame</th></tr>
-<tr><td>WW</td><td>Level</td><td>Artefacts</td></tr></thead>
+<thead><tr><th colspan="3"><?php echo TZ_ENDGAME;?></th></tr>
+<tr><td><?php echo TZ_WW_SHORT;?></td><td><?php echo LEVEL;?></td><td><?php echo TZ_ARTEFACTS_LABEL;?></td></tr></thead>
 <tbody><tr>
 <td valign="top"><?php foreach($wonders as $w) echo htmlspecialchars($w['village'])." (".$w['level'].")<br>"; if(empty($wonders)) echo "-";?></td>
 <td valign="top"><?php foreach($wonders as $w) echo $w['level']."<br>"; if(empty($wonders)) echo "-";?></td>

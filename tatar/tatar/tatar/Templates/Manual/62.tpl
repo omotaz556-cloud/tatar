@@ -3,9 +3,9 @@
 	color: #F00;
 }
 </style>
-<h1>Production bonus for clay</h1>
-With this Gold advantage all your   villages' clay production will be increased by 25%. <br>
+<h1><?php echo TZ_MANUAL_BONUS_TITLE_CLAY; ?></h1>
+<?php echo TZ_MANUAL_BONUS_INTRO_CLAY; ?> <br>
 <br>
-The bonus will not be added to the single resource fields but to the sum   of the production. <br>
+<?php echo TZ_MANUAL_BONUS_NOTE; ?> <br>
 <br>
-<span class="red">This feature is NOT included in the   gold club!</span>
+<span class="red"><?php echo TZ_MANUAL_GOLD_CLUB_EXCLUDED; ?></span>

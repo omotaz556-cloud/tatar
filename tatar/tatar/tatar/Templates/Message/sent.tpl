@@ -187,7 +187,7 @@ for ($i = (1 + $s); $i <= (10 + $s); $i++) {
 // EMPTY STATE
 // ======================================================
 if ($totalMessages == 0) {
-    echo "<td colspan=\"4\" class=\"none\">There are no sent messages available.</td></tr>";
+    echo "<td colspan=\"4\" class=\"none\">".TZ_NO_MESSAGES_SENT."</td></tr>";
 }
 ?>
 

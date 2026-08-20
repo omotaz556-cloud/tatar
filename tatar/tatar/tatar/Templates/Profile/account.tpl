@@ -368,7 +368,7 @@ foreach ($sitSlots as $type => $key) {
         echo "<div class=\"sitterCard\">";
         echo "<div class=\"sitterHead\">";
         echo "<a href=\"spieler.php?s=3&e=3&id=".$uid."&a=".$session->checker."&type=".$type."\">";
-        echo "<img class=\"del\" src=\"img/x.gif\" title=\"Remove sitters\" alt=\"Remove sitters\" />";
+        echo "<img class=\"del\" src=\"img/x.gif\" title=\"".TZ_REMOVE_SITTER."\" alt=\"".TZ_REMOVE_SITTER."\" />";
         echo "</a>";
         echo "<a class=\"name\" href=\"spieler.php?uid=".$uid."\">".$uname."</a>";
         echo "</div>";
@@ -426,7 +426,7 @@ if (count($sitee) == 0) {
         echo "<div class=\"sitterCard\">";
         echo "<div class=\"sitterHead\">";
         echo "<a href=\"spieler.php?s=3&e=2&id=".$sit['id']."&a=".$session->checker."\">";
-        echo "<img class=\"del\" src=\"img/x.gif\" title=\"Remove sitters\" alt=\"Remove sitters\" />";
+        echo "<img class=\"del\" src=\"img/x.gif\" title=\"".TZ_REMOVE_SITTER."\" alt=\"".TZ_REMOVE_SITTER."\" />";
         echo "</a>";
         echo "<a class=\"name\" href=\"spieler.php?uid=".$sit['id']."\">"
            . $database->getUserField($sit['id'], "username", 0)."</a>";
@@ -476,11 +476,11 @@ $timestamp = $database->isDeleting($session->uid);
 if ($timestamp) {
     echo "<td colspan=\"2\" class=\"count\">";
     echo "<a href=\"spieler.php?s=3&id=".$session->uid."&a=1&e=4\">";
-    echo "<img class=\"del\" src=\"img/x.gif\" alt=\"Cancel process\" title=\"Cancel process\" />";
+    echo "<img class=\"del\" src=\"img/x.gif\" alt=\"".CANCEL_PROCESS."\" title=\"".CANCEL_PROCESS."\" />";
     echo "</a>";
 
     $time = $generator->getTimeFormat(($timestamp - time()));
-    echo "The account will be deleted in <span id=\"timer".++$session->timer."\">".$time."</span> .</td>";
+    echo TZ_ACCOUNT_DELETE_TIMER_PREFIX." <span id=\"timer".++$session->timer."\">".$time."</span> .</td>";
 } else {
 ?>
     <th><?php echo TZ_DELETE_ACCOUNT; ?></th>
