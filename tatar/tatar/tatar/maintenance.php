@@ -66,6 +66,7 @@ if($maintenance['active'] == 1 && $session->access < 9){
 	// e permisa si valida, altfel pachetul serverului (vezi config.php).
 	echo "
 			<link href='".GP_LOCATE."novaterra.css?e21d2' rel='stylesheet' type='text/css' />
+			<link href='".GP_LOCATE."lang/en/maintenance.override.css?e21d2' rel='stylesheet' type='text/css' />
 			<link href='".GP_LOCATE."lang/en/lang.css?e21d2' rel='stylesheet' type='text/css' />";
 		?>
 		<script type="text/javascript">window.addEvent('domready', start);</script>
@@ -79,7 +80,7 @@ if($maintenance['active'] == 1 && $session->access < 9){
 		</style>
 		<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
-	<body class="v35 ie ie8">
+	<body class="v35 ie ie8 pg-maintenance">
 		<div class="wrapper">
 			<img style="filter: chroma();" src="img/x.gif" id="msfilter" alt="" />
 			<div id="dynamic_header"></div>

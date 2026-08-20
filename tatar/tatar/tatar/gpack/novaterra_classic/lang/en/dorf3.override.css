@@ -1,0 +1,18 @@
+/* ============================================================
+ * dorf3.override.css
+ * Page-specific stylesheet for dorf3.php ONLY.
+ *
+ * Loaded LAST (after compact.css / novaterra.css / lang.css) on
+ * this page only, and every rule here is scoped with the prefix
+ * "body.pg-dorf3" (the dorf3.php <body> tag now carries a
+ * "pg-dorf3" class).
+ *
+ * Put any new CSS change meant for this page in here - it can
+ * never leak onto another page, even if a class name collides
+ * with one used elsewhere, because the rule only matches when
+ * body.pg-dorf3 is present.
+ *
+ * Example:
+ *   body.pg-dorf3 .someBox { ... }
+ * ============================================================ */
+

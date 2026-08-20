@@ -1,0 +1,18 @@
+/* ============================================================
+ * login.override.css
+ * Page-specific stylesheet for login.php ONLY.
+ *
+ * Loaded LAST (after compact.css / novaterra.css / lang.css) on
+ * this page only, and every rule here is scoped with the prefix
+ * "body.pg-login" (the login.php <body> tag now carries a
+ * "pg-login" class).
+ *
+ * Put any new CSS change meant for this page in here - it can
+ * never leak onto another page, even if a class name collides
+ * with one used elsewhere, because the rule only matches when
+ * body.pg-login is present.
+ *
+ * Example:
+ *   body.pg-login .someBox { ... }
+ * ============================================================ */
+

@@ -52,6 +52,7 @@ else $building->procBuild($_GET);
 	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7i" rel="stylesheet" type="text/css" />
 	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
 	<link href="<?php echo GP_LOCATE ?>novaterra.css?f4b7d" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE ?>lang/en/support.override.css?f4b7d" rel="stylesheet" type="text/css" />
 		<link href="<?php echo GP_LOCATE ?>lang/en/lang.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript">
 function chkFormular () {
@@ -86,7 +87,7 @@ function chkFormular () {
 	   	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
 
-<body class="v35 ie ie8">
+<body class="v35 ie ie8 pg-support">
 <div class="wrapper">
 <img style="filter:chroma();" src="img/x.gif" id="msfilter" alt="" />
 <div id="dynamic_header">

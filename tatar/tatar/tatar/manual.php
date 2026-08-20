@@ -42,10 +42,11 @@ tz_load_language(LANG);
 	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7i" rel="stylesheet" type="text/css" />
 	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
 	<link href="<?php echo GP_LOCATE; ?>novaterra.css?f4b7d" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>lang/en/manual.override.css?f4b7d" rel="stylesheet" type="text/css" />
 		<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css" rel="stylesheet" type="text/css" />
 	   	<?php echo tz_rtl_stylesheet_tag(); ?>
 </head>
-	<body class="manual">
+	<body class="manual pg-manual">
 <?php
 
 if (isset($_GET['s']) && !ctype_digit($_GET['s'])) {
